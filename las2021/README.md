@@ -38,8 +38,8 @@ Linux Application Summit, May 13, 2021
 ## Introduction
 
 - I maintain [GJS](https://gitlab.gnome.org/GNOME/gjs/) (GNOME JavaScript)
-* This talk is a bit of an experiment for me
-* Can web JS programmers ramp up quickly on writing a desktop app?
+- This talk is a bit of an experiment for me
+- Can web JS programmers ramp up quickly on writing a desktop app?
 
 <!--
   I'm the maintainer of GJS, which is the JavaScript bindings to the GNOME platform. GJS is something that people can (and do) use to write apps for the Linux desktop in JavaScript. The most famous one is probably Polari, the IRC client, but there's also Flatseal the permissions manager, and Foliate the e-book reader, etc. Many of these apps are available on Flathub, which means that even though they use the GNOME platform libraries, they work anywhere Flatpak is available.
@@ -57,9 +57,9 @@ Linux Application Summit, May 13, 2021
 
 - For JavaScript developers and enthusiasts
   - who are curious about writing a desktop app
-* A walk through creating and publishing a desktop app in JS
+- A walk through creating and publishing a desktop app in JS
   - Technologies: GJS, GTK, Flatpak, Flathub
-* A slide deck that you can read later
+- A slide deck that you can read later
   - https://ptomato.name/talks/las2021/
 
 <!--
@@ -78,12 +78,12 @@ Linux Application Summit, May 13, 2021
 
 - A step-by-step tutorial on how to write an app
   - There's already a good one on [gjs.guide](https://gjs.guide/guides/gtk/3/)
-* Presented by an experienced web developer
+- Presented by an experienced web developer
 
 <!--
   This is not going to be a tutorial on how to code a desktop app. There are plenty of these already.
 
-  Another thing this talk is not, is presented by an experienced web developer. I do know some things about web development in JavaScript, but I am not really familiar with the latest tools and best practices for developing apps. I'm a Linux desktop programmer at heart, and in my day job I work on JavaScript engines in browsers. Like I said, this talk is an experiment for me! So I might get some of these things wrong.
+  Another thing this talk is not. This talk is not presented by an experienced web developer. I do know some things about web development in JavaScript, but I am not really familiar with the latest tools and best practices for developing apps. I'm a Linux desktop programmer at heart, and in my day job at Igalia I work on JavaScript engines in browsers. Like I said, this talk is an experiment for me! So I might get some of these things wrong.
 -->
 
 ---
@@ -113,7 +113,7 @@ _footer: <a href="https://www.pexels.com/photo/short-fur-black-orange-and-gray-c
 <!--
   We need an app to build, though!
 
-  I didn't make up this pun. There's a long tradition of having an example app in the GTK documentation called "Bloatpad", so I stole that name. You can see my horrible sketches in the background here. The tag line of this app is going to be "Unnecessary note-taking app" because really, there are plenty of these, and Bloatpad is not going to shatter any paradigms.
+  There's a long tradition of having an example app in the GTK documentation called "Bloatpad", so I stole that name. Sadly, I did not make up this pun. You can see my sketches in the background here. The tag line of this app is going to be "Unnecessary note-taking app" because really, there are plenty of good note-taking apps already, and Bloatpad is not going to shatter any paradigms.
 -->
 
 ---
@@ -174,11 +174,11 @@ $ yarn init
 
   The build system included in the project skeleton is Meson, which is popular for compiled languages. I'd say it's a pretty unfamiliar system for JavaScript.
 
-  Meson is great, and you'll definitely need it if your app is going to include any native code that gets imported into JavaScript, as many desktop apps eventually end up doing.
+  Meson is great, and you'll definitely need it if your app is going to include any native code that gets imported into JavaScript, as many desktop apps eventually end up doing. So I'd recommend keeping it.
 
   But if you know the JavaScript ecosystem, you'll be familiar with Yarn. Yarn will allow you to easily install popular JavaScript development tools like eslint. NPM would work for this as well.
 
-  I've put this snippet into my package.json in order to wrap the most important Meson commands.
+  I've created a package.json with yarn init, and put this snippet into it, in order to wrap the most important Meson commands.
 -->
 
 ---
@@ -193,7 +193,7 @@ $ yarn start
 ![](hello-world-skeleton.png)
 
 <!--
-  With that, we can see the skeleton app run.
+  With that added, we can do yarn start and see the skeleton app run.
 -->
 
 ---
@@ -230,7 +230,7 @@ $ yarn add --dev prettier eslint eslint-config-prettier
 <!--
   TypeScript is another prominent part of the excellent JavaScript tooling ecosystem.
 
-  It mostly works thanks to the hard work of Evan Welsh. It does require a little bit of manual setup.
+  It mostly works on GJS thanks to the hard work of Evan Welsh. It does require a little bit of manual setup.
 
   You can use it in two ways. The simplest way is to write regular JavaScript, and use the TypeScript compiler as a linter. This requires writing some type annotations in doc comments.
 
@@ -242,10 +242,10 @@ $ yarn add --dev prettier eslint eslint-config-prettier
 ## Other build tools
 
 - Bundlers are probably not needed
-  * Tree shaking can be useful
-  * use e.g. [find-unused-exports](https://www.npmjs.com/package/find-unused-exports)
-* Minifiers are probably not needed
-* Babel probably works
+  - Tree shaking can be useful
+  - use e.g. [find-unused-exports](https://www.npmjs.com/package/find-unused-exports)
+- Minifiers are probably not needed
+- Babel probably works
 
 <!--
   A lot of the JavaScript build tool ecosystem revolves around bundling. Bundlers are probably not needed when writing a native desktop app. The default project skeleton that I mentioned before includes build code to put all of the sources and data files into a GResource bundle, which is loaded into memory at startup, making module imports lightning-fast, unlike the web.
@@ -279,12 +279,12 @@ _footer: Photo by <a href="https://www.pexels.com/@shvetsa">Anna Shvets</a> from
 ## XML UI files or no?
 
 - XML-CSS-JS is like the trinity of HTML-CSS-JS
-* Alternative is to build your UI in code
+- Alternative is to build your UI in code
 
 <!--
-  GTK has an XML format for UI description files. This plays roughly the same role as HTML does in the web trinity of HTML, CSS, and JavaScript.
+  GTK has an XML format for UI description files. This plays roughly the same role as HTML does in the web trinity of HTML, CSS, and JavaScript. Unlike HTML, there is an alternative that is actually widely used.
 
-  A widely used alternative is to assemble your UI in code. If you come from web development, building your UI in code is roughly the same thing as assembling an HTML DOM using document.createElement() in your code. That would be pretty ridiculous and is not really a feasible alternative in web development. This is different with GJS, because of the GNOME platform's C heritage, where originally building in code was the only option.
+  This alternative is to assemble your UI in code. If you come from web development, building your UI in code is roughly the same thing as building up a whole web page's DOM using document.createElement() in your code. That would be pretty ridiculous and is not really a feasible alternative in web development. This is different with GJS, because of the GNOME platform's C heritage, where originally building in code was the only option.
 
   On the other hand, in web development we have tooling like JSX, which we do not have in GJS.
 -->
@@ -308,7 +308,7 @@ this._notesList.connect("activate", this._onNotesListActivate.bind(this));
 ```
 
 <!--
-  Here's an example of what each option looks like.
+  Here's an example of what each option looks like: XML file versus building in code.
 -->
 
 ---
@@ -318,9 +318,9 @@ this._notesList.connect("activate", this._onNotesListActivate.bind(this));
 ![bg right fit](glade.png)
 
 - Tedious to write by hand
-* [Glade UI Designer](https://glade.gnome.org/)
-  * GTK 3 only
-  * GTK 4 alternative [underway](https://blogs.gnome.org/xjuan/2021/02/28/cambalache/)
+- [Glade UI Designer](https://glade.gnome.org/)
+  - GTK 3 only
+  - GTK 4 alternative [underway](https://blogs.gnome.org/xjuan/2021/02/28/cambalache/)
 
 <!--
   As you can see the XML files are pretty tedious to write by hand.
@@ -359,7 +359,7 @@ this._notesList.connect("activate", this._onNotesListActivate.bind(this));
 <!--
   You can give your UI widgets particular CSS classes in Glade (or in the XML file by hand) and reference them in your CSS file.
 
-  There's a fairly big difference between CSS on the web and CSS in a GTK application. It's the same syntax, for sure, same box model for margin and padding, and largely the same properties, but the positioning model (which I personally find the most confusing part of CSS) is completely different. GTK and other associated UI libraries (like libhandy) has a much more flexible design language of layout containers to work with than just HTML's <div> and <span>, which means that the responsibility for positioning mostly shifts to the UI file. So there is no position: absolute or float: left in CSS.
+  There's a fairly big difference between CSS on the web and CSS in a GTK application. It's the same syntax, for sure, same box model for margin and padding, and largely the same properties, but the positioning model (which I personally find the most confusing part of CSS) is completely different. GTK and other associated UI libraries (like libhandy) has a much more flexible design language of layout containers to work with than just HTML's <div> and <span>, which means that the responsibility for positioning mostly shifts to the UI file. So there is no position-absolute or float-left in CSS.
 -->
 
 ---
@@ -409,12 +409,12 @@ _footer: Image <a href="https://www.pexels.com/photo/adorable-animal-animal-worl
 ## About the API
 
 - Every UI element is based on `Gtk.Widget`
-* Roughly equivalent to a HTML DOM element
+- Roughly equivalent to a HTML DOM element
   - Methods
   - Properties
   - Signals (events)
   - CSS element name and classes
-* Things that are not UI elements are based on `GObject.Object`
+- Things that are not UI elements are based on `GObject.Object`
 
 <!--
   These exist because UI elements inherit from Gtk.Widget, which provides things such as properties, signals, and CSS element names.
@@ -507,7 +507,7 @@ import './vendor/my-library.js';
 ```
 
 <!--
-  Here's how to do this Browserify trick. You can import the UMD module for its side effect, which is to install the library as a global object.
+  Here's how to do this Browserify trick. You add the -s option to build a UMD module. You can then import the UMD module for its side effect, which is to install the library as a global object.
 
   This is the best way that I've found to do this. It works okay, but isn't ideal. It would be cool if someone would write a Rollup plugin for GJS modules or something! Or there might be a better way that already exists that I haven't found yet.
 -->
@@ -629,10 +629,10 @@ if (options.pizzaType) print(`pizza flavour: ${options.pizzaType}`);
 
 - Not applicable
 
-<span style="font-size: 55%">P.S. Although it would be cool if React Native worked with GTK</span>
+<span style="font-size: 65%">P.S. Although it would be cool if React Native worked with GTK</span>
 
 <!--
-  The final of the top 5 libraries is React, which is its own thing. It doesn't really apply to writing desktop apps, as it's a library for making user interfaces in the HTML DOM.
+  The final of the top 5 libraries is React, which is a browser-specific thing. It doesn't really apply to writing desktop apps, as it's a library for making user interfaces in the HTML DOM.
 
   Although there is a library React Native which abstracts over different mobile platforms, allowing you to write native iOS and Android apps in JavaScript; it would be really cool if this worked for the Linux desktop as well!
 -->
@@ -682,7 +682,7 @@ _footer: Image by <a href="https://pixabay.com/users/acebrand-129789/">acebrand<
 # Distributing your app to users
 
 <!--
-  Now that the app is finished, you have to actually get users. This is one place where the desktop really has the potential to outshine the web, because with a desktop app, once your user has downloaded it, they don't need to keep using your bandwidth and computing resources to run it, so you don't need to run a server that has to scale quite so hard, or pay someone else to do it.
+  Now that the app is finished, you have to actually get users. This is one place where the desktop really has the potential to outshine the web, because with a desktop app, once your user has downloaded it, they don't need to keep using your bandwidth and computing resources to run it, so you don't need to run a server that has to scale quite so hard, or pay someone else to do it. You can concentrate on answering bug reports like this cat is doing.
 -->
 
 ---
@@ -690,7 +690,7 @@ _footer: Image by <a href="https://pixabay.com/users/acebrand-129789/">acebrand<
 ## How?
 
 - [Flathub](https://flathub.org/home)
-* [Requirements](https://github.com/flathub/flathub/wiki/App-Requirements)
+- [Requirements](https://github.com/flathub/flathub/wiki/App-Requirements)
   - Luckily, the generated project skeleton meets all of these
   - Only need to fill in a few things
 
@@ -788,12 +788,12 @@ StartupNotify=true
 
 - Gettext is built-in to the platform
   - Venerable framework for UI translations
-* Use a website like Transifex
-* Recruit volunteer translators
-* Or translate the UI yourself in whatever languages you speak
+- Use a website like Transifex
+- Recruit volunteer translators
+- Or translate the UI yourself in whatever languages you speak
 
 <!--
-  Another thing you might want to do is translate your UI into different languages.
+  Once your app is released, and you get users, something you might want to do is translate your UI into the languages that your users speak.
 
   To make your app available in other languages, you need a translation framework. The platform comes with one built-in! It's called Gettext. It's been around a _long_ time and is _very_ well supported.
 
@@ -809,8 +809,8 @@ StartupNotify=true
 # Conclusion
 
 - Some things might seem familiar to JS developers, others might not
-* We should reduce the friction for these developers
-* But not everything from the web or Node.js applies well to the desktop
+- We should reduce the friction for these developers
+- But not everything from the web or Node.js applies well to the desktop
 
 <!--
   We've gotten to the end. I think the conclusion is that it's quite possible, if you know JavaScript from some other context, to use that knowledge to develop apps for the Linux desktop. Some things might be quite familiar, and even better, like targetting one environment instead of a million different browsers, but other things are worse or more confusing, like the situation with XML UI files.
@@ -848,4 +848,4 @@ _footer: Image by <a href="https://pixabay.com/users/ircat-10981235/">IRCat</a> 
 ## License
 
 - Presentation licensed under Creative Commons BY-NC-ND 4.0
-- Bloatpad code, permissive MIT license
+- [Bloatpad code](https://gitlab.gnome.org/ptomato/bloatpad), permissive MIT license
