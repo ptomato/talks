@@ -98,7 +98,7 @@ _footer: <a href="https://www.pexels.com/photo/short-fur-black-orange-and-gray-c
 # Let's get started!
 
 <!--
-  So let's go! I'm going to talk first about the process of setting up your project and how you might want to organize your development tools.
+  So let's go! I'm going to talk first about the process of setting up your project and how you might want to organize your development tools. This cat wants us to get on with it already!
 -->
 
 ---
