@@ -56,8 +56,17 @@ TC39 July 2021
 
 ---
 
-# Asking the plenary for
+# Asking the plenary for (1/2)
 
-- Consensus on the decision on the previous slide?
+- Consensus on the point**s** on the previous slide?
+  - ✅ @@toStringTag equal to the fully qualified name
+  - ❓ capitalization
+    + Definition of namespace? "I know it when I see it"?
+    + _"The convention for how they are capitalized or spelled usually is derived from the kind of thing they are, not where they are put."_ — Shu
+
+---
+
+# Asking the plenary for (2/2)
+
 - Consensus on making this change in any current proposals?
-* A volunteer to write this up in how-we-work?
+- A volunteer to write this up in how-we-work?
