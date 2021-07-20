@@ -101,7 +101,7 @@ GUADEC Online, July 25, 2020
 
 - <span class="hat">Shout-outs</span> are a thank-you to someone who contributed a feature
 - Presentation is full of [links](https://www.youtube.com/watch?v=dQw4w9WgXcQ) if you want to click through later
-- If you want to follow along: **ptomato.name/guadec2020**
+- If you want to follow along: **ptomato.name/talks/guadec2020**
 
 <!--
   This presentation is also meant to be a resource that you can consult later. So I will be running pretty quickly through things like the new APIs, because they're not really that interesting to talk about; but you can go back and read them later and click through the links.
