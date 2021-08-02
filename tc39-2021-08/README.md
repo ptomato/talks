@@ -37,15 +37,24 @@ TC39 August/September 2021
 
 # Temporal update
 
+- IETF string format standardization update
 - Asking for consensus on several minor normative changes
   - Changes originally intended by the champions but incorrectly expressed in the spec text ("bugs")
   - Changes suggested by implementors ("adjustments")
 
 ---
 
-<!--
-_class: invert lead
--->
+<!-- _class: invert lead -->
+
+# IETF string format standardization
+
+---
+
+TODO
+
+---
+
+<!-- _class: invert lead -->
 
 # Bugs
 
@@ -91,9 +100,9 @@ called === 2
 ### Accidental observable property access (PR [#1616](https://github.com/tc39/proposal-temporal/pulls/1616))
 
 ```js
-d = Temporal.Duration.from({ months: 12 });
+d = Temporal.Duration.from('P12M');
 Object.defineProperty(d, 'months', { get() { return Infinity; }});
-d.total({ unit: "days", relativeTo: Temporal.Now.plainDateTimeISO() });
+d.total({ unit: 'days', relativeTo: Temporal.Now.plainDateTimeISO() });
 // Throws according to current spec text. Not intended
 ```
 
@@ -107,7 +116,7 @@ An accidental <span style="color: darkred;">Get(_duration_, **"months"**)</span>
 
 ```js
 instant = Temporal.Now.instant();
-instant.round();
+instant.round();  // missing a unit to round to
 
 // Intended: throws TypeError
 // Actual, according to current spec text: throws RangeError
@@ -214,9 +223,7 @@ Temporal.Duration.from({ years: 5 });
 
 ---
 
-<!--
-_class: invert lead
--->
+<!-- _class: invert lead -->
 
 # Adjustments
 
@@ -238,10 +245,12 @@ _class: invert lead
 
 ### No sub-minute time zone offsets ([#1544](https://github.com/tc39/proposal-temporal/issues/1544))
 
-- IETF standardization of the time zone and calendar string annotations blocked on this
+- IETF standardization of the time zone and calendar string annotations blocked on this (FIXME: change)
 - 2021-03: Temporal must remain behind a feature flag until these annotations are standardized
 
 ---
+
+### No sub-minute time zone offsets (cont'd)
 
 - Change ZonedDateTime.toString and Instant.toString to output time zone offsets only with minutes precision
 - Change ZonedDateTime.from to accept HH:MM precision for non-minute-offset time zones, even with `{ offset: 'reject' }`.
