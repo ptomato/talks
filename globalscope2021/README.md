@@ -39,21 +39,6 @@ Don't introduce self; the MC will do that
 I'm speaking today about the Temporal proposal, which adds modern date and time handling to JavaScript. In this presentation, I'll give a tour through the API, and show you what you can do with Temporal by means of an easy, medium, and complicated programming task.
 -->
 
-<!--
-##_footer: Photo by <a href="https://unsplash.com/@kylethacker">Kyle Thacker</a> on <a href="https://unsplash.com/s/photos/stanley-park">Unsplash</a>
-
-# About the speaker
-
-- Vancouver, Canada
-- Igalia S.L.
-- TC39 delegate
-
-![bg right](stanley-park.jpg)
-
-I'm one of many TC39 delegates
-One of the "champions" of the Temporal proposal
--->
-
 ---
 
 # What is Temporal?
