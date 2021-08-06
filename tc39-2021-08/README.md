@@ -60,7 +60,7 @@ TODO
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ✅ spec text ✅ tests -->
 
 ### Double seconds (PR [#1592](https://github.com/tc39/proposal-temporal/pull/1592))
 
@@ -107,6 +107,29 @@ d.total({ unit: 'days', relativeTo: Temporal.Now.plainDateTimeISO() });
 ```
 
 An accidental <span style="color: darkred;">Get(_duration_, **"months"**)</span> instead of <span style="color: darkred;">_duration_.[[Months]]</span>
+
+---
+
+<!-- _footer: ✅ spec text ✅ tests -->
+
+### Accidental duplicate call in ZDT.with (PR [#1688](https://github.com/tc39/proposal-temporal/pull/1688))
+
+```js
+class T extends Temporal.TimeZone {
+  constructor() { super('America/Vancouver'); }
+  getPossibleInstantsFor(plainDateTime) {
+    console.log(`${plainDateTime}`);
+    return super.getPossibleInstantsFor(plainDateTime);
+  }
+}
+const datetime = new Temporal.ZonedDateTime(1615708800_000_000_000n, new T());
+datetime.with({ hour: 2 }, { offset: 'prefer', disambiguation: 'earlier' });
+// According to current spec text: logs 2021-03-14T02:00:00, 2021-03-14T02:00:00, 2021-03-14T01:00:00
+// Intended: logs 2021-03-14T02:00:00, 2021-03-14T01:00:00
+//   (no duplicate call)
+```
+
+- Algorithm was unnecessarily fetching the same information twice, potentially from user code.
 
 ---
 
@@ -223,6 +246,36 @@ Temporal.Duration.from({ years: 5 });
 
 ---
 
+<!-- _footer: ✅ spec text ✅ tests -->
+
+### Adjust grammar of Duration strings (PR [#1683](https://github.com/tc39/proposal-temporal/pull/1683))
+
+- Valid ISO strings were inadvertently rejected by the grammar
+- Examples:
+  - `"PT1H1S"` - minutes absent in between two other time units
+  - `"P1Y1D"` - months/weeks absent in between two other calendar units
+
+---
+
+<!-- _footer: ❌ spec text ❌ tests -->
+
+### Consistent default options (PR #TODO)
+
+- When Temporal invokes a calendar operation with the default options:
+  - Sometimes passed `undefined` as the options argument
+  - Sometimes passed `Object.create(null)` as the options argument
+- This should be consistent, because it is observable in userland calendars
+
+---
+
+<!-- _footer: ✅ spec text ✅ tests -->
+
+### Undefined variable (PR [#1687](https://github.com/tc39/proposal-temporal/pull/1687))
+
+- Fix spec algorithm that was nonsensical due to a missing variable definition
+
+---
+
 <!-- _class: invert lead -->
 
 # Adjustments
@@ -283,12 +336,7 @@ Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:45[Africa/Monrovia]').equals
 
 <!-- _footer: ✅ spec text ❌ tests -->
 
-### Optimization in PlainDateTime calendar accessors (PR [#1613](https://github.com/tc39/proposal-temporal/pull/1613))
-
-- `PlainDateTime` can now be passed to `Calendar` methods.
-- Prevents creation of an extra `PlainDate` object.
-
----
+### Optimize PDT calendar accessors (PR [#1613](https://github.com/tc39/proposal-temporal/pull/1613))
 
 ```js
 class C extends Temporal.Calendar {
@@ -303,6 +351,8 @@ plain.year
 // Before: logs "Temporal.PlainDate"
 // After: logs "Temporal.PlainDateTime"
 ```
+- `PlainDateTime` can now be passed to `Calendar` methods.
+- Prevents creation of an extra `PlainDate` object.
 
 ---
 
@@ -315,6 +365,8 @@ plain.year
   - Will now throw if the iterable yields any values that are not `'year'`, `'month'`, `'monthCode'`, `'day'`, `'hour'`, `'minute'`, `'second'`, `'millisecond'`, `'microsecond'`, `'nanosecond'`
 
 ---
+
+### Guard against garbage (cont'd)
 
 ```js
 Temporal.Calendar.from('iso8601').fields({
