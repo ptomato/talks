@@ -1,0 +1,33 @@
+{
+  "name": "globalscope2021",
+  "version": "1.0.0",
+  "description": "Slides for Philip Chimento's GlobalScope 2021 talk",
+  "main": "index.html",
+  "scripts": {
+    "build": "marp --html README.md -o index.html",
+    "watch": "marp --watch --html README.md -o index.html",
+    "pdf": "marp --html README.md -o 'slides-Chimento-globalscope2021.pdf'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gitlab.gnome.org/ptomato/talks"
+  },
+  "keywords": [
+    "globalscope",
+    "slide",
+    "deck",
+    "temporal",
+    "date",
+    "calendar",
+    "time zone"
+  ],
+  "author": "Philip Chimento <philip.chimento@gmail.com>",
+  "license": "CC-BY-ND-4.0",
+  "dependencies": {
+    "@marp-team/marp-cli": "^1.1.1"
+  },
+  "devDependencies": {},
+  "marp": {
+    "allowLocalFiles": true
+  }
+}

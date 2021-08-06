@@ -1,0 +1,1153 @@
+<!DOCTYPE html><html lang="en-CA"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"><meta name="apple-mobile-web-app-capable" content="yes"><meta http-equiv="X-UA-Compatible" content="ie=edge"><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><style>@media screen{body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button{-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;background-color:transparent;border:0;color:inherit;cursor:pointer;font-size:inherit;opacity:.8;outline:none;padding:0;transition:opacity .2s linear}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:disabled,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:disabled,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:disabled{cursor:not-allowed;opacity:.15!important}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:hover,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:hover,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:hover{opacity:1}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:active,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:active,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:hover:active{opacity:.6}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:not(:disabled),body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:not(:disabled),body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:hover:not(:disabled){transition:none}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev],body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button.bespoke-marp-presenter-info-page-prev{background:transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJNNjggOTAgMjggNTBsNDAtNDAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button.bespoke-marp-presenter-info-page-next{background:transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJtMzIgOTAgNDAtNDAtNDAtNDAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen]{background:transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6NXB4fTwvc3R5bGU+PC9kZWZzPjxyZWN0IGNsYXNzPSJhIiB4PSIxMCIgeT0iMjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgcng9IjUuNjciLz48cGF0aCBjbGFzcz0iYSIgZD0iTTQwIDcwSDIwVjUwbTIwIDBMMjAgNzBtNDAtNDBoMjB2MjBtLTIwIDAgMjAtMjAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button.exit[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button.exit[data-bespoke-marp-osc=fullscreen]{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6NXB4fTwvc3R5bGU+PC9kZWZzPjxyZWN0IGNsYXNzPSJhIiB4PSIxMCIgeT0iMjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgcng9IjUuNjciLz48cGF0aCBjbGFzcz0iYSIgZD0iTTIwIDUwaDIwdjIwbS0yMCAwIDIwLTIwbTQwIDBINjBWMzBtMjAgMEw2MCA1MCIvPjwvc3ZnPg==")}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter]{background:transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS13aWR0aDo1cHh9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImEiIGQ9Ik0yMCA2MGgtNWE1IDUgMCAwIDEtNS01VjIwYTUgNSAwIDAgMSA1LTVoNjBhNSA1IDAgMCAxIDUgNXY1TTMwIDg1aDYwIi8+PHJlY3QgeD0iMzAiIHk9IjM1IiB3aWR0aD0iNjAiIGhlaWdodD0iNDAiIHJ4PSI1IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiLz48cmVjdCBjbGFzcz0iYSIgeD0iMzAiIHk9IjM1IiB3aWR0aD0iNjAiIGhlaWdodD0iNDAiIHJ4PSI1Ii8+PHBhdGggY2xhc3M9ImEiIGQ9Ik00MCA1MGg0ME00MCA2MGgzMCIvPjwvc3ZnPg==") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}}.bespoke-marp-note,.bespoke-marp-osc,.bespoke-progress-parent{display:none;transition:none}@media screen{body,html{height:100%;margin:0}body{background:#000;overflow:hidden}svg.bespoke-marp-slide{content-visibility:hidden;opacity:0;pointer-events:none;z-index:-1}svg.bespoke-marp-slide.bespoke-marp-active{content-visibility:visible;opacity:1;pointer-events:auto;z-index:0}svg.bespoke-marp-slide.bespoke-marp-active.bespoke-marp-active-ready *{-webkit-animation-name:__bespoke_marp__!important;animation-name:__bespoke_marp__!important}@supports not (content-visibility:hidden){svg.bespoke-marp-slide[data-bespoke-marp-load=hideable]{display:none}svg.bespoke-marp-slide[data-bespoke-marp-load=hideable].bespoke-marp-active{display:block}}[data-bespoke-marp-fragment=inactive]{visibility:hidden}body[data-bespoke-view=""] .bespoke-marp-parent,body[data-bespoke-view=next] .bespoke-marp-parent{bottom:0;left:0;position:absolute;right:0;top:0}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc{background:rgba(0,0,0,.65);border-radius:7px;bottom:50px;color:#fff;display:block;font-family:Helvetica,Arial,sans-serif;font-size:16px;left:50%;line-height:0;opacity:1;padding:12px;position:absolute;touch-action:manipulation;transform:translateX(-50%);transition:opacity .2s linear;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap;will-change:transform;z-index:1}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>*,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>*{margin-left:6px}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>:first-child,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>:first-child{margin-left:0}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>span,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>span{opacity:.8}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>span[data-bespoke-marp-osc=page],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>span[data-bespoke-marp-osc=page]{display:inline-block;min-width:140px;text-align:center}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter],body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev]{height:32px;line-height:32px;width:32px}body[data-bespoke-view=""] .bespoke-marp-parent.bespoke-marp-inactive,body[data-bespoke-view=next] .bespoke-marp-parent.bespoke-marp-inactive{cursor:none}body[data-bespoke-view=""] .bespoke-marp-parent.bespoke-marp-inactive>.bespoke-marp-osc,body[data-bespoke-view=next] .bespoke-marp-parent.bespoke-marp-inactive>.bespoke-marp-osc{opacity:0;pointer-events:none}body[data-bespoke-view=""] svg.bespoke-marp-slide,body[data-bespoke-view=next] svg.bespoke-marp-slide{height:100%;left:0;position:absolute;top:0;width:100%}body[data-bespoke-view=""] .bespoke-progress-parent{background:#222;display:flex;height:5px;width:100%}body[data-bespoke-view=""] .bespoke-progress-parent+.bespoke-marp-parent{top:5px}body[data-bespoke-view=""] .bespoke-progress-parent .bespoke-progress-bar{background:#0288d1;flex:0 0 0;transition:flex-basis .2s cubic-bezier(0,1,1,1)}body[data-bespoke-view=next]{background:transparent}body[data-bespoke-view=presenter]{background:#161616}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container{display:grid;font-family:Helvetica,Arial,sans-serif;grid-template-areas:"current next" "current note" "info    note";grid-template-columns:2fr 1fr;grid-template-rows:minmax(140px,1fr) 2fr 3em;height:100%;left:0;position:absolute;top:0;width:100%}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-parent{grid-area:current;overflow:hidden;position:relative}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-parent svg.bespoke-marp-slide{height:calc(100% - 40px);left:20px;pointer-events:none;position:absolute;top:20px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:calc(100% - 40px)}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-parent svg.bespoke-marp-slide.bespoke-marp-active{filter:drop-shadow(0 3px 10px rgba(0,0,0,.5))}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-next-container{background:#222;cursor:pointer;display:none;grid-area:next;overflow:hidden;position:relative}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-next-container.active{display:block}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-next-container iframe.bespoke-marp-presenter-next{background:transparent;border:0;display:block;filter:drop-shadow(0 3px 10px rgba(0,0,0,.5));height:calc(100% - 40px);left:20px;pointer-events:none;position:absolute;top:20px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:calc(100% - 40px)}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container{background:#222;color:#eee;grid-area:note}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note{word-wrap:break-word;scrollbar-width:thin;scrollbar-color:hsla(0,0%,93.3%,.5) transparent;box-sizing:border-box;font-size:1.1em;height:calc(100% - 40px);margin:20px;overflow:auto;padding-right:3px;white-space:pre-wrap;width:calc(100% - 40px)}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note::-webkit-scrollbar{width:6px}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note::-webkit-scrollbar-track{background:transparent}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note::-webkit-scrollbar-thumb{background:hsla(0,0%,93.3%,.5);border-radius:6px}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note:empty{pointer-events:none}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note.active{display:block}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note p:first-child{margin-top:0}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note p:last-child{margin-bottom:0}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container{align-items:center;box-sizing:border-box;color:#eee;display:flex;flex-wrap:nowrap;grid-area:info;justify-content:center;padding:0 10px}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-page,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-time,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-timer{box-sizing:border-box;display:block;padding:0 10px;white-space:nowrap;width:100%}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button{height:1.5em;line-height:1.5em;width:1.5em}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-page{order:2;text-align:center}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-page .bespoke-marp-presenter-info-page-text{display:inline-block;min-width:120px;text-align:center}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-time{color:#999;order:1;text-align:left}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-timer{color:#999;order:3;text-align:right}}@media print{.bespoke-marp-presenter-info-container,.bespoke-marp-presenter-next-container,.bespoke-marp-presenter-note-container{display:none}}</style><style>@charset "UTF-8";@import url("https://fonts.googleapis.com/css?family=Lato:400,900|Roboto+Mono:400,700&display=swap");@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');div#p>svg>foreignObject>section{width:1280px;height:720px;box-sizing:border-box;overflow:hidden;position:relative;scroll-snap-align:center center}div#p>svg>foreignObject>section:after{bottom:0;content:attr(data-marpit-pagination);padding:inherit;pointer-events:none;position:absolute;right:0}div#p>svg>foreignObject>section:not([data-marpit-pagination]):after{display:none}/* Normalization */div#p>svg>foreignObject>section h1{font-size:2em;margin:0.67em 0}div#p>svg>foreignObject>section video::-webkit-media-controls{will-change:transform}@page{size:1280px 720px;margin:0}@media print{body,html{background-color:#fff;margin:0;page-break-inside:avoid;break-inside:avoid-page}div#p>svg>foreignObject>section{page-break-before:always;break-before:page}div#p>svg>foreignObject>section,div#p>svg>foreignObject>section *{-webkit-print-color-adjust:exact!important;animation-delay:0s!important;animation-duration:0s!important;color-adjust:exact!important;transition:none!important}div#p>svg[data-marpit-svg]{display:block;height:100vh;width:100vw}}div#p>svg>foreignObject>section svg[data-marp-fitting=svg]{display:block;height:auto;width:100%}@supports (-ms-ime-align:auto){div#p>svg>foreignObject>section svg[data-marp-fitting=svg]{position:static}}div#p>svg>foreignObject>section svg[data-marp-fitting=svg].__reflow__{content:""}@supports (-ms-ime-align:auto){div#p>svg>foreignObject>section svg[data-marp-fitting=svg].__reflow__{position:relative}}div#p>svg>foreignObject>section [data-marp-fitting-svg-content]{display:table;white-space:nowrap;width:-webkit-max-content;width:-moz-max-content;width:max-content}div#p>svg>foreignObject>section [data-marp-fitting-svg-content-wrap]{white-space:pre}div#p>svg>foreignObject>section img[data-marp-twemoji]{background:transparent;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em;width:1em}
+/*!
+ * Marp / Marpit Gaia theme.
+ *
+ * @theme gaia
+ * @author Yuki Hattori
+ *
+ * @auto-scaling true
+ * @size 4:3 960px 720px
+ */div#p>svg>foreignObject>section .hljs{background:#000;color:#f8f8f8;display:block;overflow-x:auto;padding:.5em}div#p>svg>foreignObject>section .hljs-comment,div#p>svg>foreignObject>section .hljs-quote{color:#aeaeae;font-style:italic}div#p>svg>foreignObject>section .hljs-keyword,div#p>svg>foreignObject>section .hljs-selector-tag,div#p>svg>foreignObject>section .hljs-type{color:#e28964}div#p>svg>foreignObject>section .hljs-string{color:#65b042}div#p>svg>foreignObject>section .hljs-subst{color:#daefa3}div#p>svg>foreignObject>section .hljs-link,div#p>svg>foreignObject>section .hljs-regexp{color:#e9c062}div#p>svg>foreignObject>section .hljs-name,div#p>svg>foreignObject>section .hljs-section,div#p>svg>foreignObject>section .hljs-tag,div#p>svg>foreignObject>section .hljs-title{color:#89bdff}div#p>svg>foreignObject>section .hljs-class .hljs-title,div#p>svg>foreignObject>section .hljs-doctag{text-decoration:underline}div#p>svg>foreignObject>section .hljs-bullet,div#p>svg>foreignObject>section .hljs-number,div#p>svg>foreignObject>section .hljs-symbol{color:#3387cc}div#p>svg>foreignObject>section .hljs-params,div#p>svg>foreignObject>section .hljs-template-variable,div#p>svg>foreignObject>section .hljs-variable{color:#3e87e3}div#p>svg>foreignObject>section .hljs-attribute{color:#cda869}div#p>svg>foreignObject>section .hljs-meta{color:#8996a8}div#p>svg>foreignObject>section .hljs-formula{background-color:#0e2231;color:#f8f8f8;font-style:italic}div#p>svg>foreignObject>section .hljs-addition{background-color:#253b22;color:#f8f8f8}div#p>svg>foreignObject>section .hljs-deletion{background-color:#420e09;color:#f8f8f8}div#p>svg>foreignObject>section .hljs-selector-class{color:#9b703f}div#p>svg>foreignObject>section .hljs-selector-id{color:#8b98ab}div#p>svg>foreignObject>section .hljs-emphasis{font-style:italic}div#p>svg>foreignObject>section .hljs-strong{font-weight:700}div#p>svg>foreignObject>section svg[data-marp-fitting=svg]{max-height:580px}div#p>svg>foreignObject>section h1,div#p>svg>foreignObject>section h2,div#p>svg>foreignObject>section h3,div#p>svg>foreignObject>section h4,div#p>svg>foreignObject>section h5,div#p>svg>foreignObject>section h6{margin:.5em 0 0}div#p>svg>foreignObject>section h1 strong,div#p>svg>foreignObject>section h2 strong,div#p>svg>foreignObject>section h3 strong,div#p>svg>foreignObject>section h4 strong,div#p>svg>foreignObject>section h5 strong,div#p>svg>foreignObject>section h6 strong{font-weight:inherit}div#p>svg>foreignObject>section h1{font-size:1.8em}div#p>svg>foreignObject>section h2{font-size:1.5em}div#p>svg>foreignObject>section h3{font-size:1.3em}div#p>svg>foreignObject>section h4{font-size:1.1em}div#p>svg>foreignObject>section h5{font-size:1em}div#p>svg>foreignObject>section h6{font-size:.9em}div#p>svg>foreignObject>section blockquote,div#p>svg>foreignObject>section p{margin:1em 0 0}div#p>svg>foreignObject>section ol>li,div#p>svg>foreignObject>section ul>li{margin:.3em 0 0}div#p>svg>foreignObject>section ol>li>p,div#p>svg>foreignObject>section ul>li>p{margin:.6em 0 0}div#p>svg>foreignObject>section code{display:inline-block;font-family:Roboto Mono,monospace;font-size:.8em;letter-spacing:0;margin:-.1em .15em;padding:.1em .2em;vertical-align:baseline}div#p>svg>foreignObject>section pre{display:block;margin:1em 0 0;min-height:1em;overflow:visible}div#p>svg>foreignObject>section pre code{box-sizing:border-box;font-size:.7em;margin:0;min-width:100%;padding:.5em}div#p>svg>foreignObject>section pre code svg[data-marp-fitting=svg]{max-height:calc(580px - 1em)}div#p>svg>foreignObject>section blockquote{margin:1em 0 0;padding:0 1em;position:relative}div#p>svg>foreignObject>section blockquote:after,div#p>svg>foreignObject>section blockquote:before{content:"“";display:block;font-family:Times New Roman,serif;font-weight:700;position:absolute}div#p>svg>foreignObject>section blockquote:before{left:0;top:0}div#p>svg>foreignObject>section blockquote:after{bottom:0;right:0;transform:rotate(180deg)}div#p>svg>foreignObject>section blockquote>:first-child{margin-top:0}div#p>svg>foreignObject>section mark{background:transparent}div#p>svg>foreignObject>section table{border-collapse:collapse;border-spacing:0;margin:1em 0 0}div#p>svg>foreignObject>section table td,div#p>svg>foreignObject>section table th{border-style:solid;border-width:1px;padding:.2em .4em}div#p>svg>foreignObject>section:after,div#p>svg>foreignObject>section footer,div#p>svg>foreignObject>section header{box-sizing:border-box;font-size:66%;height:70px;line-height:50px;overflow:hidden;padding:10px 25px;position:absolute}div#p>svg>foreignObject>section:after{--marpit-root-font-size:66%}div#p>svg>foreignObject>section header{top:0}div#p>svg>foreignObject>section footer,div#p>svg>foreignObject>section header{left:0;right:0}div#p>svg>foreignObject>section footer{bottom:0}div#p>svg>foreignObject>section{word-wrap:break-word;--color-background:#fff8e1;--color-background-stripe:rgba(69,90,100,0.1);--color-foreground:#455a64;--color-dimmed:#6a7a7d;--color-highlight:#0288d1;background-color:var(--color-background);background-image:linear-gradient(135deg,hsla(0,0%,53.3%,0),hsla(0,0%,53.3%,.02) 50%,hsla(0,0%,100%,0) 0,hsla(0,0%,100%,.05));color:var(--color-foreground);font-family:Lato,Avenir Next,Avenir,Trebuchet MS,Segoe UI,sans-serif;font-size:35px;height:720px;letter-spacing:1.25px;line-height:1.35;padding:70px;width:1280px}div#p>svg>foreignObject>section{--marpit-root-font-size:35px}div#p>svg>foreignObject>section:after{bottom:0;font-size:80%;right:0}div#p>svg>foreignObject>section:after{--marpit-root-font-size:80%}div#p>svg>foreignObject>section a,div#p>svg>foreignObject>section mark{color:var(--color-highlight)}div#p>svg>foreignObject>section code{background:var(--color-dimmed);color:var(--color-background)}div#p>svg>foreignObject>section h1 strong,div#p>svg>foreignObject>section h2 strong,div#p>svg>foreignObject>section h3 strong,div#p>svg>foreignObject>section h4 strong,div#p>svg>foreignObject>section h5 strong,div#p>svg>foreignObject>section h6 strong{color:var(--color-highlight)}div#p>svg>foreignObject>section pre>code{background:var(--color-foreground)}div#p>svg>foreignObject>section blockquote:after,div#p>svg>foreignObject>section blockquote:before,div#p>svg>foreignObject>section footer,div#p>svg>foreignObject>section header,div#p>svg>foreignObject>section section:after{color:var(--color-dimmed)}div#p>svg>foreignObject>section table td,div#p>svg>foreignObject>section table th{border-color:var(--color-foreground)}div#p>svg>foreignObject>section table thead th{background:var(--color-foreground);color:var(--color-background)}div#p>svg>foreignObject>section table tbody>tr:nth-child(odd) td,div#p>svg>foreignObject>section table tbody>tr:nth-child(odd) th{background:var(--color-background-stripe,transparent)}div#p>svg>foreignObject>section>:first-child,div#p>svg>foreignObject>section>header:first-child+*{margin-top:0}div#p>svg>foreignObject>section.invert{--color-background:#455a64;--color-background-stripe:rgba(255,248,225,0.1);--color-foreground:#fff8e1;--color-dimmed:#dad8c8;--color-highlight:#81d4fa}div#p>svg>foreignObject>section.gaia{--color-background:#0288d1;--color-background-stripe:rgba(255,248,225,0.1);--color-foreground:#fff8e1;--color-dimmed:#cce2de;--color-highlight:#81d4fa}div#p>svg>foreignObject>section.lead{display:flex;flex-direction:column;flex-wrap:nowrap;justify-content:center}div#p>svg>foreignObject>section.lead h1,div#p>svg>foreignObject>section.lead h2,div#p>svg>foreignObject>section.lead h3,div#p>svg>foreignObject>section.lead h4,div#p>svg>foreignObject>section.lead h5,div#p>svg>foreignObject>section.lead h6{text-align:center}div#p>svg>foreignObject>section.lead h1 svg[data-marp-fitting=svg],div#p>svg>foreignObject>section.lead h2 svg[data-marp-fitting=svg],div#p>svg>foreignObject>section.lead h3 svg[data-marp-fitting=svg],div#p>svg>foreignObject>section.lead h4 svg[data-marp-fitting=svg],div#p>svg>foreignObject>section.lead h5 svg[data-marp-fitting=svg],div#p>svg>foreignObject>section.lead h6 svg[data-marp-fitting=svg]{--preserve-aspect-ratio:xMidYMid meet}div#p>svg>foreignObject>section.lead p{text-align:center}div#p>svg>foreignObject>section.lead blockquote>h1,div#p>svg>foreignObject>section.lead blockquote>h2,div#p>svg>foreignObject>section.lead blockquote>h3,div#p>svg>foreignObject>section.lead blockquote>h4,div#p>svg>foreignObject>section.lead blockquote>h5,div#p>svg>foreignObject>section.lead blockquote>h6,div#p>svg>foreignObject>section.lead blockquote>p{text-align:left}div#p>svg>foreignObject>section.lead blockquote svg[data-marp-fitting=svg]:not([data-marp-fitting-math]){--preserve-aspect-ratio:xMinYMin meet}div#p>svg>foreignObject>section.lead ol>li>p,div#p>svg>foreignObject>section.lead ul>li>p{text-align:left}div#p>svg>foreignObject>section.lead table{margin-left:auto;margin-right:auto}div#p>svg>foreignObject>section code{font-family:Hack}div#p>svg>foreignObject>section{font-family:Rubik,sans-serif;letter-spacing:0}div#p>svg>foreignObject>section.lead.invert{text-shadow:0 0 10px black,0 0 20px black}div#p>svg>foreignObject>section pre code{background-color:#042029}div#p>svg>foreignObject>section .hljs-string{color:#8ae234}div#p>svg>foreignObject>section .hljs-number{color:#729fcf}div#p>svg>foreignObject>section .hljs-params{color:#e9b96e;font-style:italic}div#p>svg>foreignObject>section .hljs-built_in{color:#fce94f;font-weight:bold}div#p>svg>foreignObject>section .hljs-keyword{color:#fcaf3e;font-weight:bold}div#p>svg>foreignObject>section .hljs-attr{color:#e9b96e}div#p>svg>foreignObject>section .hljs-variable{color:red;font-weight:bold}
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */div#p>svg>foreignObject>section[data-marpit-advanced-background=background]{columns:initial!important;display:block!important;padding:0!important}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]:after,div#p>svg>foreignObject>section[data-marpit-advanced-background=background]:before,div#p>svg>foreignObject>section[data-marpit-advanced-background=content]:after,div#p>svg>foreignObject>section[data-marpit-advanced-background=content]:before{display:none!important}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]>div[data-marpit-advanced-background-container]{all:initial;display:flex;flex-direction:row;height:100%;overflow:hidden;width:100%}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]>div[data-marpit-advanced-background-container][data-marpit-advanced-background-direction=vertical]{flex-direction:column}div#p>svg>foreignObject>section[data-marpit-advanced-background=background][data-marpit-advanced-background-split]>div[data-marpit-advanced-background-container]{width:var(--marpit-advanced-background-split,50%)}div#p>svg>foreignObject>section[data-marpit-advanced-background=background][data-marpit-advanced-background-split=right]>div[data-marpit-advanced-background-container]{margin-left:calc(100% - var(--marpit-advanced-background-split, 50%))}div#p>svg>foreignObject>section[data-marpit-advanced-background=background]>div[data-marpit-advanced-background-container]>figure{all:initial;background-position:center;background-repeat:no-repeat;background-size:cover;flex:auto;margin:0}div#p>svg>foreignObject>section[data-marpit-advanced-background=content],div#p>svg>foreignObject>section[data-marpit-advanced-background=pseudo]{background:transparent!important}div#p>svg>foreignObject>section[data-marpit-advanced-background=pseudo],div#p>svg[data-marpit-svg]>foreignObject[data-marpit-advanced-background=pseudo]{pointer-events:none!important}div#p>svg>foreignObject>section[data-marpit-advanced-background-split]{width:100%;height:100%}</style></head><body><div class="bespoke-marp-osc"><button data-bespoke-marp-osc="prev" tabindex="-1" title="Previous slide">Previous slide</button><span data-bespoke-marp-osc="page"></span><button data-bespoke-marp-osc="next" tabindex="-1" title="Next slide">Next slide</button><button data-bespoke-marp-osc="fullscreen" tabindex="-1" title="Toggle fullscreen (f)">Toggle fullscreen</button><button data-bespoke-marp-osc="presenter" tabindex="-1" title="Open presenter view (p)">Open presenter view</button></div><div id="p"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-class="invert lead" data-footer="Photo by &lt;a href=&quot;https://unsplash.com/@cblanco_31&quot;&gt;Carlos Blanco&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/gastown-clock&quot;&gt;Unsplash&lt;/a&gt;" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="invert lead" style="--class:invert lead;--footer:Photo by &lt;a href=&quot;https://unsplash.com/@cblanco_31&quot;&gt;Carlos Blanco&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/gastown-clock&quot;&gt;Unsplash&lt;/a&gt;;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;" data-marpit-advanced-background="background"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;gastown-clock.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="1280" height="720"><section id="1" data-class="invert lead" data-footer="Photo by &lt;a href=&quot;https://unsplash.com/@cblanco_31&quot;&gt;Carlos Blanco&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/gastown-clock&quot;&gt;Unsplash&lt;/a&gt;" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="invert lead" style="--class:invert lead;--footer:Photo by &lt;a href=&quot;https://unsplash.com/@cblanco_31&quot;&gt;Carlos Blanco&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/gastown-clock&quot;&gt;Unsplash&lt;/a&gt;;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;" data-marpit-advanced-background="content">
+<h1><strong>Temporal</strong></h1>
+<h2>Modern dates and times in JavaScript</h2>
+<p><strong>Philip Chimento</strong> • <i class="fab fa-github"></i> ptomato • <i class="fab fa-twitter"></i> @therealptomato<br />
+Igalia, in partnership with Bloomberg<br />
+Global Scope, 6 August 2021</p>
+<footer>Photo by <a href="https://unsplash.com/@cblanco_31">Carlos Blanco</a> on <a href="https://unsplash.com/s/photos/gastown-clock">Unsplash</a></footer>
+</section>
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="invert lead" style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>What is Temporal?</h1>
+<ul>
+<li>A proposal for enhancing JavaScript</li>
+<li>A new, built-in, date-time library</li>
+<li>Strongly typed</li>
+<li>Immutable</li>
+<li>Strong support for internationalization</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-class="lead gaia" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="lead gaia" style="--class:lead gaia;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1><img class="emoji" draggable="false" alt="🤔" src="https://twemoji.maxcdn.com/2/svg/1f914.svg" data-marp-twemoji=""/> But we already have <code>Date</code>!</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1><code>Date</code> is <em>not</em> a good API</h1>
+<p>Source: <a href="https://maggiepint.com/2017/04/09/fixing-javascript-date-getting-started/">Maggie Johnson-Pint</a></p>
+<ol>
+<li>No support for time zones other than the user’s local time and UTC</li>
+<li>Parser behavior so unreliable it is unusable</li>
+<li><code>Date</code> object is mutable</li>
+<li>DST behavior is unpredictable</li>
+<li>Computation APIs are unwieldy</li>
+<li>No support for non-Gregorian calendars</li>
+</ol>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-class="lead invert" data-footer="Photo by &lt;a href=&quot;https://unsplash.com/@pratiksha_mohanty&quot;&gt;Pratiksha Mohanty&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/spices&quot;&gt;Unsplash&lt;/a&gt;" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="lead invert" style="--class:lead invert;--footer:Photo by &lt;a href=&quot;https://unsplash.com/@pratiksha_mohanty&quot;&gt;Pratiksha Mohanty&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/spices&quot;&gt;Unsplash&lt;/a&gt;;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;" data-marpit-advanced-background="background"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;spices.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="1280" height="720"><section id="5" data-class="lead invert" data-footer="Photo by &lt;a href=&quot;https://unsplash.com/@pratiksha_mohanty&quot;&gt;Pratiksha Mohanty&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/spices&quot;&gt;Unsplash&lt;/a&gt;" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="lead invert" style="--class:lead invert;--footer:Photo by &lt;a href=&quot;https://unsplash.com/@pratiksha_mohanty&quot;&gt;Pratiksha Mohanty&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/spices&quot;&gt;Unsplash&lt;/a&gt;;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;" data-marpit-advanced-background="content">
+<h1>The selection of types</h1>
+<footer>Photo by <a href="https://unsplash.com/@pratiksha_mohanty">Pratiksha Mohanty</a> on <a href="https://unsplash.com/s/photos/spices">Unsplash</a></footer>
+</section>
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="lead invert" style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-footer="\*disregarding leap seconds, though" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--footer:\*disregarding leap seconds, though;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1><code>Temporal.Instant</code></h1>
+<ul>
+<li>An exact moment in time*</li>
+<li>No time zone, no daylight saving</li>
+<li>No calendar</li>
+<li>Data model: elapsed nanoseconds since midnight UTC, Jan. 1, 1970</li>
+</ul>
+<footer>*disregarding leap seconds, though</footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Plain types</h1>
+<ul>
+<li>‘Wall’ time</li>
+<li>No time zone, no daylight saving</li>
+<li>Several types in this family with progressively less information</li>
+</ul>
+<div class="mermaid">
+%%{init: {'themeVariables': {'fontFamily': 'Rubik', 'fontSize': 24}}}%%
+graph LR
+  PDT(PlainDateTime) ==&gt; PD(PlainDate)
+  PDT ==&gt; PT(PlainTime)
+  PD ==&gt; PYM(PlainYearMonth)
+  PD ==&gt; PMD(PlainMonthDay)
+</div>
+<script src="https://unpkg.com/mermaid@8.10.2/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Plain types</h1>
+<ul>
+<li>Represent the information you have</li>
+<li>Avoid buggy pattern of filling in 0 or UTC for missing info</li>
+<li>Do appropriate calculations based on type</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Plain types</h1>
+<ul>
+<li><code>Temporal.PlainDate</code>: “The conference session on August 6th, 2021”</li>
+<li><code>Temporal.PlainTime</code>: “The break is at 12:05”</li>
+<li><code>Temporal.PlainYearMonth</code>: “The September 2021 board meeting”</li>
+<li><code>Temporal.PlainMonthDay</code>: “My birthday is December 15th”</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1><code>Temporal.ZonedDateTime</code></h1>
+<ul>
+<li>Like <code>Temporal.Instant</code>, an exact time</li>
+<li>But also with a calendar and time zone</li>
+<li>Correctly accounts for the time zone's daylight saving rules</li>
+<li>“The Global Scope session is on Friday, August 13th, 2021, at 11 AM, Australian Eastern Standard Time”</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Other types</h1>
+<ul>
+<li><code>Temporal.Duration</code>
+<ul>
+<li>returned from other types' <code>since()</code> and <code>until()</code> methods</li>
+<li>passed to their <code>add()</code> and <code>subtract()</code> methods</li>
+</ul>
+</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Other types</h1>
+<ul>
+<li><code>Temporal.TimeZone</code>
+<ul>
+<li>contains rules for UTC offset changes in a particular time zone</li>
+<li>converts between Instant and PlainDateTime</li>
+</ul>
+</li>
+<li><code>Temporal.Calendar</code>
+<ul>
+<li>contains rules for converting dates from a particular calendar to ISO 8601 and back</li>
+</ul>
+</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Type relationships</h1>
+<svg viewBox="113 540 4042 1484" width="100%" height="100%" fill="none" stroke-width="3.8" style="background-color: transparent;" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text {
+      font-family: 'Rubik', sans-serif;
+      font-size: 70px;
+      font-weight: 500;
+    }
+  </style>
+  <rect x="116" y="544" width="841" height="1350" fill="#FFFCE4" stroke="#B7B7B7" rx="20" />
+  <text x="218" y="658" style="font-size: 80px; fill: #737373; white-space: pre;" >Exact Time Types</text>
+  <rect x="1707" y="544" width="2445" height="1350" fill="#FFFCE4" stroke="#B7B7B7" rx="20" />
+  <path stroke="#595959" d="M 1365 1491 L 1819 1491 L 1819 1367 L 2117 1367" />
+  <path stroke="#595959" d="M 2407 1374 L 2593 1374 L 2593 929 L 2779 929" />
+  <text x="2220" y="658" style="font-size: 80px; fill: #737373; white-space: pre;" >Calendar Date / Wall-Clock Time Types</text>
+  <path stroke="#595959" d="M 1365 1214 L 1819 1214 L 1819 1367 L 2117 1367" />
+  <path stroke="#595959" d="M 722 1336 L 874 1336 L 874 1214 L 1110 1214" />
+  <path stroke="#595959" d="M 1338 1150 V 1005" />
+  <rect x="1050" y="1133" fill="#F0EDF7" width="560" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="1172" y="1250">TimeZone</text>
+  <path stroke="#595959" d="M 722 1336 L 875 1336 L 875 1491 L 1110 1491" />
+  <path stroke="#595959" d="M 521 988 L 521 1126 L 522 1250 C 525 1371 521 1264 523 1264" transform="matrix(-1, 0, 0, -1, 10, 22)" />
+  <rect x="250" y="1250" fill="#F0EDF7" width="560" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="430" y="1370">Instant</text>
+  <path stroke="#595959" d="M 2407 1374 L 2593 1374 L 2593 1595 L 2779 1595" />
+  <rect x="1930" y="1280" fill="#F0EDF7" width="560" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="1970" y="1390">PlainDateTime</text>
+  <path stroke="#595959" d="M 3167 928 L 3338 928 L 3338 824 L 3508 824" />
+  <rect x="3420" y="730" fill="#F0EDF7" width="590" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="3475" y="845">PlainMonthDay</text>
+  <path stroke="#595959" d="M 3167 928 L 3338 928 L 3338 1148 L 3508 1148" />
+  <rect x="2700" y="840" fill="#F0EDF7" width="560" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="2825" y="955">PlainDate</text>
+  <rect x="3420" y="1060" fill="#F0EDF7" width="590" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="3460" y="1175">PlainYearMonth</text>
+  <rect x="2700" y="1500" fill="#F0EDF7" width="560" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="2815" y="1615">PlainTime</text>
+  <rect x="250" y="835" fill="#F0EDF7" width="2250" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="1072" y="950">ZonedDateTime</text>
+  <text x="1800" y="1840" style="font-size: 72px; fill: #737373; white-space: pre;" >These have a calendar (except PlainTime) &amp; know wall-clock time</text>
+  <path d="M 156 1648 L 861 1648 861 1800 156 1800 Z" />
+  <text x="200" y="1740" style="font-size: 80px; fill: #737373; white-space: pre;" >These types know</text>
+  <text x="215" y="1840" style="font-size: 80px; fill: #737373; white-space: pre;" >time since Epoch</text>
+  <rect x="1050" y="1670" fill="#F0EDF7" width="560" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="1185" y="1790">Duration</text>
+  <rect x="1050" y="1400" fill="#F0EDF7" width="560" height="180" stroke="#B4A7D6" rx="35" />
+  <text style="fill: #000; white-space: pre;" x="1185" y="1520">Calendar</text>
+</svg>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-class="invert lead" data-footer="Photo by &lt;a href=&quot;https://unsplash.com/@lordarcadius&quot;&gt;Vipul Jha&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/code&quot;&gt;Unsplash&lt;/a&gt;" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="invert lead" style="--class:invert lead;--footer:Photo by &lt;a href=&quot;https://unsplash.com/@lordarcadius&quot;&gt;Vipul Jha&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/code&quot;&gt;Unsplash&lt;/a&gt;;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;" data-marpit-advanced-background="background"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;keyboard.jpg&quot;);"></figure></div></section></foreignObject><foreignObject width="1280" height="720"><section id="14" data-class="invert lead" data-footer="Photo by &lt;a href=&quot;https://unsplash.com/@lordarcadius&quot;&gt;Vipul Jha&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/code&quot;&gt;Unsplash&lt;/a&gt;" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="invert lead" style="--class:invert lead;--footer:Photo by &lt;a href=&quot;https://unsplash.com/@lordarcadius&quot;&gt;Vipul Jha&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/code&quot;&gt;Unsplash&lt;/a&gt;;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;" data-marpit-advanced-background="content">
+<h1>Show me the code!</h1>
+<footer>Photo by <a href="https://unsplash.com/@lordarcadius">Vipul Jha</a> on <a href="https://unsplash.com/s/photos/code">Unsplash</a></footer>
+</section>
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="invert lead" style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-class="lead" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="lead" style="--class:lead;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>An easy one</h1>
+<p>Get a Unix timestamp in ms</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1><code>Temporal.Now</code></h1>
+<ul>
+<li>A namespace with functions that give you Temporal objects representing the <em>current</em> date, time, or time zone</li>
+<li>Shortcuts if you are using the ISO 8601 calendar</li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>Temporal.Now.instant()
+Temporal.Now.timeZone()
+Temporal.Now.zonedDateTime(calendar)
+Temporal.Now.zonedDateTimeISO()
+Temporal.Now.plainDateTime(calendar)
+Temporal.Now.plainDateTimeISO()
+Temporal.Now.plainDate(calendar)
+Temporal.Now.plainDateISO()
+Temporal.Now.plainTimeISO()
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Properties</h1>
+<ul>
+<li>Each Temporal object has read-only properties</li>
+<li><small><code>year</code>, <code>month</code>, <code>monthCode</code>, <code>day</code>, <code>hour</code>, <code>minute</code>, <code>second</code>, <code>millisecond</code>, <code>microsecond</code>, <code>nanosecond</code>, <code>calendar</code>, <code>timeZone</code>, <code>offset</code>, <code>era</code>, <code>eraYear</code>, <code>dayOfWeek</code>, <code>dayOfYear</code>, <code>weekOfYear</code>, <code>daysInWeek</code>, <code>daysInMonth</code>, <code>daysInYear</code>, <code>monthsInYear</code>, <code>inLeapYear</code>, <code>hoursInDay</code>, <code>startOfDay</code>, <code>offsetNanoseconds</code>, <code>epochSeconds</code>, <code>epochMilliseconds</code>, <code>epochMicroseconds</code>, <code>epochNanoseconds</code></small></li>
+<li>Only ZonedDateTime has all these at once, the others have subsets</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Get a Unix timestamp in ms</h1>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&gt; Temporal.Now.instant().epochMilliseconds
+<span class="hljs-number">1627682409993</span>
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-class="lead" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="lead" style="--class:lead;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>A medium one</h1>
+<p>What is the date one month from today?</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Arithmetic</h1>
+<ul>
+<li><code>add()</code>/<code>subtract()</code> take a <code>Temporal.Duration</code> and return a new Temporal object of the same type, that far in the future or the past</li>
+<li><code>since()</code>/<code>until()</code> take another Temporal object of the same type and return a <code>Temporal.Duration</code> representing the amount of time that elapsed from one to the other</li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> monthLater = date.add({ <span class="hljs-attr">months</span>: <span class="hljs-number">1</span> })
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Calendar support</h1>
+<ul>
+<li>The standard &quot;machine&quot; calendar is the ISO 8601 calendar</li>
+<li>&quot;Human&quot; readable calendars are common in user-facing use cases</li>
+<li>Much of the world uses the Gregorian calendar</li>
+<li>Can print non-ISO dates with <code>toLocaleString()</code>, but that is not good enough</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>What is the date, one month from today?</h1>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&gt; d1 = Temporal.Now.plainDateISO();
+&gt; d1.toLocaleString(<span class="hljs-string">&#x27;en&#x27;</span>, { <span class="hljs-attr">calendar</span>: <span class="hljs-string">&#x27;hebrew&#x27;</span> });
+<span class="hljs-string">&#x27;28 Av 5781&#x27;</span>
+
+&gt; d2 = d1.add({ <span class="hljs-attr">months</span>: <span class="hljs-number">1</span> });
+&gt; d2.toLocaleString(<span class="hljs-string">&#x27;en&#x27;</span>, { <span class="hljs-attr">calendar</span>: <span class="hljs-string">&#x27;hebrew&#x27;</span> });
+<span class="hljs-string">&#x27;29 Elul 5781&#x27;</span>  <span class="hljs-comment">// WRONG!</span>
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>What is the date, one month from today?</h1>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> calendar = ... <span class="hljs-comment">// choose the appropriate calendar</span>
+<span class="hljs-keyword">const</span> date = Temporal.Now.plainDate(calendar);
+<span class="hljs-built_in">console</span>.log(date.add({ <span class="hljs-attr">months</span>: <span class="hljs-number">1</span> }).toLocaleString());
+<span class="hljs-comment">// example in my locale: &quot;2021-09-06&quot;</span>
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-class="lead" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="lead" style="--class:lead;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>A complicated one</h1>
+<p>What time is Global Scope for me?</p>
+<p><img src="sessions.png" alt="" /></p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>What time is Global Scope for me?</h1>
+<p>What we know:</p>
+<ul>
+<li>The two calendar dates that the sessions occur on (August 6 &amp; 13)</li>
+<li>The start times of the sessions and their time zones (11 AM AEST, noon BST, 1 PM EDT)</li>
+<li>My time zone</li>
+<li>The hours (in my local time) at which I am willing to be at my computer</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>What time is Global Scope for me?</h1>
+<ul>
+<li>For each session date,
+<ul>
+<li>For each session,
+<ul>
+<li>Calculate the exact time of that session start and end on that date;</li>
+<li>If the local time of the session in my time zone falls within the hours that I'm willing to be at my computer,
+<ul>
+<li>Print the local time of the session in my time zone.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h2>What time is Global Scope for me?</h2>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> dates = [
+  Temporal.PlainDate.from({ <span class="hljs-attr">year</span>: <span class="hljs-number">2021</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">6</span> }),
+  Temporal.PlainDate.from({ <span class="hljs-attr">year</span>: <span class="hljs-number">2021</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">13</span> })
+];
+<span class="hljs-keyword">const</span> sessions = [
+  { <span class="hljs-attr">timeZone</span>: <span class="hljs-string">&#x27;Australia/Brisbane&#x27;</span>, <span class="hljs-attr">hour</span>: <span class="hljs-number">11</span> },
+  { <span class="hljs-attr">timeZone</span>: <span class="hljs-string">&#x27;Europe/London&#x27;</span>, <span class="hljs-attr">hour</span>: <span class="hljs-number">12</span> },
+  { <span class="hljs-attr">timeZone</span>: <span class="hljs-string">&#x27;America/New_York&#x27;</span>, <span class="hljs-attr">hour</span>: <span class="hljs-number">13</span> }
+];
+<span class="hljs-keyword">const</span> sessionLength = Temporal.Duration.from({ <span class="hljs-attr">hours</span>: <span class="hljs-number">4</span> });
+<span class="hljs-keyword">const</span> myTimeZone = Temporal.Now.timeZone();
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Construction</h1>
+<ul>
+<li>Constructors are low-level</li>
+<li>Accept numerical arguments for the date/time data</li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">new</span> Temporal.PlainTime(<span class="hljs-number">13</span>, <span class="hljs-number">37</span>)  <span class="hljs-comment">// ⇒ 13:37:00</span>
+<span class="hljs-keyword">new</span> Temporal.Instant(<span class="hljs-number">946684860000000000n</span>)  <span class="hljs-comment">// ⇒ 2000-01-01T00:01:00Z</span>
+<span class="hljs-keyword">new</span> Temporal.PlainDate(<span class="hljs-number">2019</span>, <span class="hljs-number">6</span>, <span class="hljs-number">24</span>);  <span class="hljs-comment">// ⇒ 2019-06-24</span>
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Construction</h1>
+<ul>
+<li><code>from()</code> static methods are high-level and friendly</li>
+<li>Accept property bags, ISO strings, instances</li>
+<li>Recommended in most cases</li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>Temporal.PlainYearMonth.from({ <span class="hljs-attr">year</span>: <span class="hljs-number">2019</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">6</span> });
+Temporal.PlainYearMonth.from(<span class="hljs-string">&#x27;2019-06-24T15:43:27&#x27;</span>);
+Temporal.PlainYearMonth.from(myPlainDate);
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Comparison</h1>
+<ul>
+<li><code>equals()</code> lets you know whether two Temporal objects of the same type are exactly equal (including their calendars and time zones, if applicable)</li>
+<li><code>Temporal.{type}.compare(obj1, obj2)</code> is for sorting and ordering</li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>dates.sort(Temporal.PlainDate.compare);
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h2>What time is Global Scope for me?</h2>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> myCoffeeTime = Temporal.PlainTime.from(<span class="hljs-string">&#x27;08:00&#x27;</span>);
+<span class="hljs-keyword">const</span> myBedtime = Temporal.PlainTime.from(<span class="hljs-string">&#x27;23:00&#x27;</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iCanBeOnlineAt</span>(<span class="hljs-params">time</span>) </span>{
+  <span class="hljs-keyword">return</span> Temporal.PlainTime.compare(myCoffeeTime, time) &lt;= <span class="hljs-number">0</span> &amp;&amp;
+         Temporal.PlainTime.compare(time, myBedtime) &lt;= <span class="hljs-number">0</span>;
+}
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h2>What time is Global Scope for me?</h2>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Intl</span>.DateTimeFormat(<span class="hljs-comment">/* your preferred format here */</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Put Global Scope in your calendar:&#x27;</span>);
+dates.forEach(<span class="hljs-function">(<span class="hljs-params">date</span>) =&gt;</span> {
+  sessions.forEach(<span class="hljs-function">(<span class="hljs-params">{ timeZone, hour }</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> sessionStart = date.toZonedDateTime({ timeZone, <span class="hljs-attr">plainTime</span>: { hour } });
+    <span class="hljs-keyword">const</span> mySessionStart = sessionStart.withTimeZone(myTimeZone);
+    <span class="hljs-keyword">const</span> mySessionEnd = mySessionStart.add(sessionLength);
+    <span class="hljs-keyword">if</span> (iCanBeOnlineAt(mySessionStart) &amp;&amp; iCanBeOnlineAt(mySessionEnd)) {
+      <span class="hljs-built_in">console</span>.log(formatter.formatRange(
+        mySessionStart.toPlainDateTime(), mySessionEnd.toPlainDateTime()));
+    }
+  });
+});
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="33" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Conversion</h1>
+<ul>
+<li>Conversion methods can remove or add information</li>
+<li>Argument: any information that needs to be added</li>
+<li>Some types contain all the information of some other types</li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> date = Temporal.PlainDate.from(<span class="hljs-string">&#x27;2006-08-24&#x27;</span>);
+<span class="hljs-keyword">const</span> time = Temporal.PlainTime.from(<span class="hljs-string">&#x27;15:23:30.003&#x27;</span>);
+date.toPlainDateTime(time);  <span class="hljs-comment">// ⇒ 2006-08-24T15:23:30.003</span>
+date.toPlainMonthDay();  <span class="hljs-comment">// ⇒ 08-24</span>
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="34" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Modification</h1>
+<ul>
+<li><code>with()</code> methods</li>
+<li>Argument: a property bag with some components of the same type</li>
+<li>Returns a new Temporal object with the provided fields replaced</li>
+<li>Remember, Temporal objects are immutable!</li>
+<li>Separate <code>withCalendar()</code> and <code>withTimeZone()</code> methods</li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> date = Temporal.PlainDate.from(<span class="hljs-string">&#x27;2006-01-24&#x27;</span>);
+<span class="hljs-comment">// What&#x27;s the last day of this month?</span>
+date.with({ <span class="hljs-attr">day</span>: date.daysInMonth });  <span class="hljs-comment">// ⇒ 2006-01-31</span>
+date.withCalendar(<span class="hljs-string">&#x27;islamic-civil&#x27;</span>);  <span class="hljs-comment">// ⇒ 1426-12-24 AH</span>
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="35" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h2>What time is Global Scope for me?</h2>
+<pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>Put Global Scope in your calendar:
+Thursday, August 5, 6:00 – 10:00 p.m.
+Friday, August 6, 10:00 a.m. – 2:00 p.m.
+Thursday, August 12, 6:00 – 10:00 p.m.
+Friday, August 13, 10:00 a.m. – 2:00 p.m.
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="36" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;">
+<h1>Learning more</h1>
+<ul>
+<li><a href="https://tc39.es/proposal-temporal/docs/">https://tc39.es/proposal-temporal/docs/</a> (to appear on MDN)</li>
+<li><a href="https://yourcalendricalfallacyis.com/">https://yourcalendricalfallacyis.com/</a></li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-class="invert" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+pre code { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+" class="invert" style="--class:invert;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+;"></section>
+<script>!function(){"use strict";const t="marpitSVGPolyfill:setZoomFactor,",e=Symbol();let r,o;function n(n){const i="object"==typeof n&&n.target||document,a="object"==typeof n?n.zoom:n;window[e]||(Object.defineProperty(window,e,{configurable:!0,value:!0}),window.addEventListener("message",(({data:e,origin:r})=>{if(r===window.origin)try{if(e&&"string"==typeof e&&e.startsWith(t)){const[,t]=e.split(","),r=Number.parseFloat(t);Number.isNaN(r)||(o=r)}}catch(t){console.error(t)}})));let l=!1;Array.from(i.querySelectorAll("svg[data-marpit-svg]"),(t=>{var e,n,i,s;t.style.transform||(t.style.transform="translateZ(0)");const c=a||o||t.currentScale||1;r!==c&&(r=c,l=c);const d=t.getBoundingClientRect(),{length:u}=t.children;for(let r=0;r<u;r+=1){const o=t.children[r],a=o.getScreenCTM();if(a){const t=null!==(n=null===(e=o.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==n?n:0,r=null!==(s=null===(i=o.y)||void 0===i?void 0:i.baseVal.value)&&void 0!==s?s:0,l=o.firstElementChild,{style:u}=l;u.transformOrigin||(u.transformOrigin=`${-t}px ${-r}px`),u.transform=`scale(${c}) matrix(${a.a}, ${a.b}, ${a.c}, ${a.d}, ${a.e-d.left}, ${a.f-d.top}) translateZ(0.0001px)`}}})),!1!==l&&Array.from(i.querySelectorAll("iframe"),(({contentWindow:e})=>{null==e||e.postMessage(`${t}${l}`,"null"===window.origin?"*":window.origin)}))}r=1,o=void 0;const i=(t,e,r)=>{if(t.getAttribute(e)!==r)return t.setAttribute(e,r),!0};function a({once:t=!1,target:e=document}={}){const r="Apple Computer, Inc."===navigator.vendor?[n]:[];let o=!t;const a=()=>{for(const t of r)t({target:e});!function(t=document){Array.from(t.querySelectorAll('svg[data-marp-fitting="svg"]'),(t=>{var e;const r=t.firstChild,o=r.firstChild,{scrollWidth:n,scrollHeight:a}=o;let l,s=1;if(t.hasAttribute("data-marp-fitting-code")&&(l=null===(e=t.parentElement)||void 0===e?void 0:e.parentElement),t.hasAttribute("data-marp-fitting-math")&&(l=t.parentElement),l){const t=getComputedStyle(l),e=Math.ceil(l.clientWidth-parseFloat(t.paddingLeft||"0")-parseFloat(t.paddingRight||"0"));e&&(s=e)}const c=Math.max(n,s),d=Math.max(a,1),u=`0 0 ${c} ${d}`;i(r,"width",`${c}`),i(r,"height",`${d}`),i(t,"preserveAspectRatio",getComputedStyle(t).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),i(t,"viewBox",u)&&t.classList.toggle("__reflow__")}))}(e),o&&window.requestAnimationFrame(a)};return a(),()=>{o=!1}}const l=Symbol(),s=document.currentScript;((t=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(t[l])return t[l];const e=a({target:t}),r=()=>{e(),delete t[l]};Object.defineProperty(t,l,{configurable:!0,value:r})})(s?s.getRootNode():document)}();
+</script></foreignObject></svg></div><div class="bespoke-marp-note" data-index="0" tabindex="0"><p>Don't introduce self; the MC will do that
+
+I'm speaking today about the Temporal proposal, which adds modern date and time handling to JavaScript. In this presentation, I'll give a tour through the API, and show you what you can do with Temporal by means of an easy, medium, and complicated programming task.</p><p>##_footer: Photo by &lt;a href=&quot;https://unsplash.com/@kylethacker&quot;&gt;Kyle Thacker&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/stanley-park&quot;&gt;Unsplash&lt;/a&gt;
+
+# About the speaker
+
+- Vancouver, Canada
+- Igalia S.L.
+- TC39 delegate
+
+![bg right](stanley-park.jpg)
+
+I'm one of many TC39 delegates
+One of the &quot;champions&quot; of the Temporal proposal</p></div><div class="bespoke-marp-note" data-index="1" tabindex="0"><p>Temporal is an API that has been proposed to become part of JavaScript. It's currently making its way through the standardization process. It will add a built-in library for dates and times to JavaScript, like many other programming languages already have.
+
+Temporal is built-in to the browser or JS engine. That's important because many developers include a dependency on Moment or some similar library in their app to achieve the same thing that you could with Temporal. But, depending on how much locale data you include, this may add a payload of anywhere from a dozen to two hundred kilobytes to the app.
+
+Temporal is strongly typed. It means that for different kinds of data, such as a calendar date with or without an associated time, there are different types to represent them, instead of one type fits all.
+
+Temporal objects are immutable. That means that you don't have to worry about code that you don't own, modifying your objects without your knowledge.
+
+Temporal is designed to work together with JavaScript's internationalization facilities, and provides things that a lot of other libraries don't, such as non-Gregorian calendars.</p></div><div class="bespoke-marp-note" data-index="2" tabindex="0"><p>A fair question for any proposal is, do we really need this? JavaScript already has the global Date object. It's not perfect, but it's done OK for all these years.</p></div><div class="bespoke-marp-note" data-index="3" tabindex="0"><p>I disagree! We do actually have a good list of Date's deficiencies. This here is a list of problems with Date that were identified way back at the beginning, that Temporal aims to solve. You can read about them in the linked blog post by Maggie Johnson-Pint, one of the Moment developers and also one of the original architects of Temporal. She lists them &quot;in order of relative disgust.&quot; I won't go into all of these. Some of them, such as the unwieldy APIs, could be fixed. Others, like the mutability, cannot be fixed without breaking the web, because so much code out there already relies on the existing behaviour.
+
+JavaScript Date (which I'm going to optimistically call &quot;legacy Date&quot;) was based on a Date class from Java, which Java deprecated in 1997 and replaced by something better.</p></div><div class="bespoke-marp-note" data-index="4" tabindex="0"><p>I mentioned strong typing. For the next few slides I'm going to give you a tour through these types that Temporal introduces.</p></div><div class="bespoke-marp-note" data-index="5" tabindex="0"><p>The first type you should know about is Instant. It represents what we call an exact time, an instantaneous point on the timeline, with nanosecond resolution. There is no calendar, so no months, weeks, years, or days; no time zone, so no daylight saving adjustments. Just purely an ever-increasing number.</p></div><div class="bespoke-marp-note" data-index="6" tabindex="0"><p>mermaid.js</p><p>Next we have a family of types called the &quot;Plain&quot; types. These represent a date on your wall calendar and a time on your wall clock, which we call &quot;wall&quot; time for short.
+They represent your local date and time independent of time zone, and so there are no daylight saving adjustments.
+But unlike Instant, they are not exact moments in time.</p></div><div class="bespoke-marp-note" data-index="7" tabindex="0"><p>Why do we have this family of types with progressively less information?
+It's so that you can correctly represent the information that you have. For example, with legacy Date, if you wanted to represent a date without a time, you might use midnight in the user's local time zone. But there are actually days in certain time zones where midnight is skipped due to daylight saving time. This can cause hard-to-track-down bugs. For example, midnight on November 4th, 2018, didn't exist in Brazil!</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>In Temporal, we have these types that don't carry all the information:
+
+PlainDate is a day without a specific clock time. It's a very common use case!
+
+PlainTime is a clock time, not on any specific day.
+
+PlainYearMonth is a month without a specific day. You could think of using it to refer to an event that happens occasionally, like I have there &quot;the September 2021 board meeting&quot;. It also corresponds to HTML input type month.
+
+PlainMonthDay is a calendar date, but without a specific year. You could think of it as referring to a birthday or anniversary.</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>Completing the family of types that represent dates and times is another exact time type, ZonedDateTime. Just like Instant, this type represents an exact moment in time. But it is also coupled to a location with time zone rules, because it includes a time zone. The time zone means that this type does account for daylight saving time changes (and other changes in the time zone.) It also has a calendar, which means that unlike Instant it has a year, month, and day.
+
+We say that ZonedDateTime represents a calendar event that happened, or will happen, at a place on Earth.</p></div><div class="bespoke-marp-note" data-index="10" tabindex="0"><p>There are some other auxiliary types that don't represent a date or a time. Duration is used in arithmetic with the other types, and has some methods of its own for rounding and converting between units.</p></div><div class="bespoke-marp-note" data-index="11" tabindex="0"><p>Finally there are the TimeZone and Calendar types. Usually you won't need to use these directly, because you'll be using the built-in ones implicitly when you use the other types.
+
+However, you can write your own custom time zones and calendars for specialized applications. I won't go into that here.</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>This diagram is taken from the Temporal documentation. It shows the relationships between the types. You can see there are the two types on the left that know the exact time, and the other types on the right that know the wall time. ZonedDateTime spans both categories because it knows both the exact time and the wall time.</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>Now that you've been introduced to the cast of characters in Temporal, it's time to show how to accomplish a programming task. I've picked three tasks to walk through: an easy one, a medium one, and a complicated one.</p></div><div class="bespoke-marp-note" data-index="14" tabindex="0"><p>The easy task is to get the current time as a Unix timestamp in milliseconds. This is the #1 top voted question for legacy Date on Stack Overflow, so naturally we'll want to be able to do the same thing in Temporal.
+
+First we consider what type we have to use. A timestamp represents an exact time without regard to time zones, so we use Instant. (In fact, Instant was very nearly named Timestamp.)
+
+The next thing, maybe a meta-thing, to consider, is do we really want a timestamp in milliseconds or will the Instant object itself work just as well? Going forward, as Temporal gets wider adoption, we expect that numerical timestamps are going to be mainly necessary for interoperation, and not so much for JavaScript applications, where Instant will be used. But for the sake of this example let's say that we do need a numerical timestamp.
+
+We know what type we need, and next we need to know how to fill it with the current time.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>We do this with the functions in the &quot;Now&quot; namespace. Any of these functions will give you the current date, time, and/or time zone, as one of the Temporal types. There are shortcuts for the calendar types for when you are using the ISO calendar.
+
+Since we need the current time as an Instant, we'll use the top one from this list.
+
+Next we'll need to figure out how to get a number of milliseconds since the Unix epoch from the Instant.</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p>Temporal types have read-only properties with which we can get this sort of information. This is a full list of these properties. Not every type has each property; only the ones that make sense for that type. So, for example, &quot;year&quot; is only on types that have calendars, &quot;offset&quot; only exists on ZonedDateTime, and the &quot;epochNanosconds&quot; and similar properties are only on the exact time types.
+
+In our case we need the epochMilliseconds property.</p></div><div class="bespoke-marp-note" data-index="17" tabindex="0"><p>Putting the previous slides together into this line of code: we get the result of Temporal.Now.instant, and examine its epochMilliseconds property to obtain a Unix timestamp in milliseconds.</p></div><div class="bespoke-marp-note" data-index="18" tabindex="0"><p>Now for the medium task. The question we have to answer is, what is the date one month from today?
+
+We already saw in the previous task how to figure out what the date is today, so let's skip that for the moment (although I'll talk more about how that interacts with calendars in a moment.) How do we add one month to a date?</p></div><div class="bespoke-marp-note" data-index="19" tabindex="0"><p>When I mentioned Duration a few slides ago, I mentioned arithmetic methods. This is where we will need to use one of those arithmetic methods. We have add and subtract for adding or subtracting a Duration. We also have since and until that determine the elapsed time between two Temporal objects.
+
+In our case we use the add method, and pass it a property bag that automatically gets converted to a Duration, representing one month, like in this line of code.
+
+Now this 'date' variable, where does it come from? We know we need to use one of the Now methods, and we have two choices: plainDate(), which takes a calendar, and plainDateISO() which does not.</p></div><div class="bespoke-marp-note" data-index="20" tabindex="0"><p>So, a little bit about calendars. The ISO calendar can be thought of as the &quot;machine&quot; calendar. How it works is standardized, with no regional or language dependence.
+
+The Gregorian calendar is a human calendar that is used in a large part of the world with minor variations, but it is similar enough to the ISO calendar that you can switch between the two without having to do any mental calculations. 
+
+However, although a large part of the world uses the Gregorian calendar, that does not mean that the whole world uses it. Some regions don't; and in some regions, people use the Gregorian calendar for business purposes, and another one for religious purposes.
+
+Already without Temporal, you can print a legacy Date object in a non-ISO, non-Gregorian calendar if the user wants it. That's good enough for some applications, but not for answering this question, because how long one month is depends on which month you're talking about, in which calendar.</p></div><div class="bespoke-marp-note" data-index="21" tabindex="0"><p>Here's an example of how that could go wrong. Today's date in the Gregorian calendar is August 6th, and one month later is September 6th. But in the Hebrew calendar, these two dates are not one month apart this year. They are one month and one day apart. So it is not enough just to add a month and print the dates in another calendar; you have to actually consider the calendar when performing the addition.
+
+The lesson here is when working with dates that the user will see, is to use the user's calendar, not the machine ISO calendar.</p></div><div class="bespoke-marp-note" data-index="22" tabindex="0"><p>Putting it all together, the proper way to get the date one month from today is to define exactly what &quot;month&quot; you mean by choosing the calendar!
+
+You can get the calendar from the user's preferences in your app, or from their locale using the resolvedOptions method of Intl.DateTimeFormat (though beware; this does not always correspond to what the user actually wants!)
+
+Then, you can get today's date in that calendar using Now.plainDate, add one month to it using the add method, and format it for the user with the toLocaleString method. Here's an example of what it looks like in my locale: 2021 dash 09 dash 06.</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>Now for the complicated task. We need to answer the question, using the information on the conference website, what time does Global Scope happen for me? Which sessions can I attend, when I'm not asleep? This question turns out to be surprisingly hard to answer, if we _don't_ use a computer, because it requires a lot of mental gymnastics with time zones and subtracting or adding hours. Most people, myself included, just put &quot;11 o'clock AEST&quot; into a search engine and hope that the search engine correctly guesses what I want. Temporal's strongly typed approach is perfect for solving this problem.</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Here are the facts that we know. We know from the website the two calendar dates of the conference: August 6th and 13th, 2021.
+
+There are three sessions on each conference day. We know the local start times of each of the three sessions, and what time zones those local start times are given in.
+
+I also know my time zone, and I know the hours in my local time zone during which I'm willing to be online watching a conference.</p></div><div class="bespoke-marp-note" data-index="25" tabindex="0"><p>Here's pseudocode of what we need to do. For each date and each session, we know the wall time and the time zone, which allows us to figure out the exact time that the session starts and ends. Then we need to go from exact time back to wall time in my time zone to check whether I'm awake or not. If I am, then we print out that session.</p></div><div class="bespoke-marp-note" data-index="26" tabindex="0"><p>Here's the first part of the code, where we set things up. We have the calendar dates, the session time zones and start hours, the length of the sessions, and my time zone.
+
+For this calculation it's OK to use the ISO calendar for the dates because I'm reckoning my awake times in the ISO calendar as well.
+
+There are a few things to explain here. One of them is how I determined these time zone names! On the website we had Australia Eastern Standard Time, British Summer Time, and Eastern Standard Time (with North America implied in that last one.) But those are human names, not machine identifiers. These strings with the slashes, like Australia-slash-Brisbane, are the official identifiers of the IANA time zone database, and that's how you refer to time zones in Temporal. If you don't know the IANA identifier for a particular time zone, you can usually find it out on Wikipedia. The identifier is always at least as precise; for example, in our case, some of the eastern part of Australia uses AEST for half the year, but Queensland uses it the whole year round, so AEST can be ambiguous if you have dates scattered throughout the year. 
+
+The next question is why are we using these from() methods to create our Temporal objects?</p></div><div class="bespoke-marp-note" data-index="27" tabindex="0"><p>As you might expect, you could also use a Temporal type's constructor to create an instance of it, but the constructors are intended for low-level use where you have all the data in exactly the right format, like in these examples.</p></div><div class="bespoke-marp-note" data-index="28" tabindex="0"><p>On the other hand, there are these from() methods, which are high-level and accept many more kinds of data. In particular, they are more readable, either for someone else who's reading your code, or for you who's re-reading it later. In most cases I'd recommend using from() to create a Temporal object.</p></div><div class="bespoke-marp-note" data-index="29" tabindex="0"><p>Now back to writing code. The other piece of data that I mentioned we know is what times I'm willing to be online for the conference. I want to write a little function that takes a wall-clock time and returns true if the time is within my online hours.
+
+For that we have to do comparisons. Each type has a compare static method that we use for this. It's a static method so that you can use it as an argument to the sort method of Arrays.
+
+If instead you just want the common case of checking whether two Temporal objects are equal, use the equals method.</p></div><div class="bespoke-marp-note" data-index="30" tabindex="0"><p>Here is the function that tells whether I can be online. We are using Temporal.PlainTime.compare to implement it.
+
+Here I _am_ taking advantage of the fact that my online hours do not cross midnight... we'd have to be slightly more complicated to support the case where they did.</p></div><div class="bespoke-marp-note" data-index="31" tabindex="0"><p>And now this code is how the actual calculation works, that I previously outlined in pseudocode.
+
+We loop through each conference date and the info for each session, and convert it to the exact time sessionStart, as a ZonedDateTime. Then we use the withTimeZone method to get a new ZonedDateTime object for the start of the session in my time zone, instead of the conference session's time zone. Then we add the session length using the add method that we're already familiar with, to get the end of the session in my time zone. These we pass to our comparison function, and if they are during my online times, we print out the start and the end of the session using formatRange.
+
+If you're watching a recording of this talk, you might want to pause it at this point to examine the code in more detail.
+
+I'll quickly go into details about the new methods that we've seen here.</p></div><div class="bespoke-marp-note" data-index="32" tabindex="0"><p>The toZonedDateTime method that we saw is an example of one of the methods for conversion between Temporal types. To convert from one Temporal type to another, you either need to add information or drop information. If you drop information, like the year when you go from PlainDate to PlainMonthDay, the method doesn't take any argument. On the other hand, if you add information, like the clock time when you go from PlainDate to PlainDateTime, the method will take the required information as an argument. In our case we converted from PlainDate to ZonedDateTime, so we had to add both a time zone and a time, which the toZonedDateTime method takes in a property bag.</p></div><div class="bespoke-marp-note" data-index="33" tabindex="0"><p>The other new method you saw was withTimeZone. This is a good time to get into how to modify a Temporal object. Technically you can't! Temporal objects are immutable. But you can get a new object of the same type with one or more components replaced. This is what the with method is for. It takes a property bag with one or more components to replace, and returns a new object.
+
+Here you can see an example: we take a date, and replace the day with the last day of the month.
+
+We have separate methods for withCalendar and withTimeZone, because these two can't be provided at the same time as any other properties. It would be ambiguous which property you'd have to replace first.</p></div><div class="bespoke-marp-note" data-index="34" tabindex="0"><p>Take that code, put it all together, run it, and here is the nicely formatted answer! (This is the answer in my time zone, with my locale's formatting, of course. Your answer will be different.)
+
+This is a seemingly simple question answered in more lines of code than you might expect, but I seriously would not have wanted to even try to write this code with legacy Date. It would've been possible, by carefully making sure the Dates were all in UTC, and converting accordingly by manually adding or subtracting the right number of hours, but really susceptible to bugs.</p></div><div class="bespoke-marp-note" data-index="35" tabindex="0"><p>I hope you've found this a useful tour of Temporal. And if you deal with legacy Dates in your code base, I hope you're excited to replace them with Temporal objects! You can check out the documentation at this link. At some point it will graduate and you'll be able to find it on MDN instead, along with the rest of JavaScript's built-ins.
+
+If you're interested in learning some of the things that people widely believe about dates and times, but that aren't true, you can check out yourcalendricalfallacyis.com for an interesting read.</p></div><div class="bespoke-marp-note" data-index="36" tabindex="0"><p>Thank you for your attention.</p></div><script>/*!! License: https://unpkg.com/@marp-team/marp-cli@1.1.1/lib/bespoke.js.LICENSE.txt */
+!function(){"use strict";var e=function(e,t){var n,r=1===(e.parent||e).nodeType?e.parent||e:document.querySelector(e.parent||e),a=[].filter.call("string"==typeof e.slides?r.querySelectorAll(e.slides):e.slides||r.children,(function(e){return"SCRIPT"!==e.nodeName})),s={},i=function(e,t){return(t=t||{}).index=a.indexOf(e),t.slide=e,t},o=function(e,t){s[e]=(s[e]||[]).filter((function(e){return e!==t}))},l=function(e,t){return(s[e]||[]).reduce((function(e,n){return e&&!1!==n(t)}),!0)},c=function(e,t){a[e]&&(n&&l("deactivate",i(n,t)),n=a[e],l("activate",i(n,t)))},d=function(e,t){var r=a.indexOf(n)+e;l(e>0?"next":"prev",i(n,t))&&c(r,t)},u={off:o,on:function(e,t){return(s[e]||(s[e]=[])).push(t),o.bind(null,e,t)},fire:l,slide:function(e,t){if(!arguments.length)return a.indexOf(n);l("slide",i(a[e],t))&&c(e,t)},next:d.bind(null,1),prev:d.bind(null,-1),parent:r,slides:a,destroy:function(e){l("destroy",i(n,e)),s={}}};return(t||[]).forEach((function(e){e(u)})),n||c(0),u};function t(e){e.parent.classList.add("bespoke-marp-parent"),e.slides.forEach((e=>e.classList.add("bespoke-marp-slide"))),e.on("activate",(t=>{const n=t.slide,r=!n.classList.contains("bespoke-marp-active");e.slides.forEach((e=>{e.classList.remove("bespoke-marp-active"),e.setAttribute("aria-hidden","true")})),n.classList.add("bespoke-marp-active"),n.removeAttribute("aria-hidden"),r&&(n.classList.add("bespoke-marp-active-ready"),document.body.clientHeight,n.classList.remove("bespoke-marp-active-ready"))}))}function n(e){let t=0,n=0;Object.defineProperty(e,"fragments",{enumerable:!0,value:e.slides.map((e=>[null,...e.querySelectorAll("[data-marpit-fragment]")]))});const r=r=>void 0!==e.fragments[t][n+r],a=(r,a)=>{t=r,n=a,e.fragments.forEach(((e,t)=>{e.forEach(((e,n)=>{if(null==e)return;const s=t<r||t===r&&n<=a;e.setAttribute("data-bespoke-marp-fragment",s?"active":"inactive"),t===r&&n===a?e.setAttribute("data-bespoke-marp-current-fragment","current"):e.removeAttribute("data-bespoke-marp-current-fragment")}))})),e.fragmentIndex=a;const s={slide:e.slides[r],index:r,fragments:e.fragments[r],fragmentIndex:a};e.fire("fragment",s)};e.on("next",(({fragment:s=!0})=>{if(s){if(r(1))return a(t,n+1),!1;const s=t+1;e.fragments[s]&&a(s,0)}else{const r=e.fragments[t].length;if(n+1<r)return a(t,r-1),!1;const s=e.fragments[t+1];s&&a(t+1,s.length-1)}})),e.on("prev",(({fragment:s=!0})=>{if(r(-1)&&s)return a(t,n-1),!1;const i=t-1;e.fragments[i]&&a(i,e.fragments[i].length-1)})),e.on("slide",(({index:t,fragment:n})=>{let r=0;if(void 0!==n){const a=e.fragments[t];if(a){const{length:e}=a;r=-1===n?e-1:Math.min(Math.max(n,0),e-1)}}a(t,r)})),a(0,0)}var r,a={exports:{}};r=a,function(){var e="undefined"!=typeof window&&void 0!==window.document?window.document:{},t=r.exports,n=function(){for(var t,n=[["requestFullscreen","exitFullscreen","fullscreenElement","fullscreenEnabled","fullscreenchange","fullscreenerror"],["webkitRequestFullscreen","webkitExitFullscreen","webkitFullscreenElement","webkitFullscreenEnabled","webkitfullscreenchange","webkitfullscreenerror"],["webkitRequestFullScreen","webkitCancelFullScreen","webkitCurrentFullScreenElement","webkitCancelFullScreen","webkitfullscreenchange","webkitfullscreenerror"],["mozRequestFullScreen","mozCancelFullScreen","mozFullScreenElement","mozFullScreenEnabled","mozfullscreenchange","mozfullscreenerror"],["msRequestFullscreen","msExitFullscreen","msFullscreenElement","msFullscreenEnabled","MSFullscreenChange","MSFullscreenError"]],r=0,a=n.length,s={};r<a;r++)if((t=n[r])&&t[1]in e){for(r=0;r<t.length;r++)s[n[0][r]]=t[r];return s}return!1}(),a={change:n.fullscreenchange,error:n.fullscreenerror},s={request:function(t,r){return new Promise(function(a,s){var i=function(){this.off("change",i),a()}.bind(this);this.on("change",i);var o=(t=t||e.documentElement)[n.requestFullscreen](r);o instanceof Promise&&o.then(i).catch(s)}.bind(this))},exit:function(){return new Promise(function(t,r){if(this.isFullscreen){var a=function(){this.off("change",a),t()}.bind(this);this.on("change",a);var s=e[n.exitFullscreen]();s instanceof Promise&&s.then(a).catch(r)}else t()}.bind(this))},toggle:function(e,t){return this.isFullscreen?this.exit():this.request(e,t)},onchange:function(e){this.on("change",e)},onerror:function(e){this.on("error",e)},on:function(t,n){var r=a[t];r&&e.addEventListener(r,n,!1)},off:function(t,n){var r=a[t];r&&e.removeEventListener(r,n,!1)},raw:n};n?(Object.defineProperties(s,{isFullscreen:{get:function(){return Boolean(e[n.fullscreenElement])}},element:{enumerable:!0,get:function(){return e[n.fullscreenElement]}},isEnabled:{enumerable:!0,get:function(){return Boolean(e[n.fullscreenEnabled])}}}),t?r.exports=s:window.screenfull=s):t?r.exports={isEnabled:!1}:window.screenfull={isEnabled:!1}}();var s=a.exports;function i(e){e.fullscreen=()=>{s.isEnabled&&s.toggle(document.body)},document.addEventListener("keydown",(t=>{"f"!==t.key&&"F11"!==t.key||t.altKey||t.ctrlKey||t.metaKey||!s.isEnabled||(e.fullscreen(),t.preventDefault())}))}function o(e=2e3){return t=>{let n;function r(){n&&clearTimeout(n),n=setTimeout((()=>{t.parent.classList.add("bespoke-marp-inactive"),t.fire("marp-inactive")}),e),t.parent.classList.contains("bespoke-marp-inactive")&&(t.parent.classList.remove("bespoke-marp-inactive"),t.fire("marp-active"))}document.addEventListener("mousedown",r),document.addEventListener("mousemove",r),document.addEventListener("touchend",r),setTimeout(r,0)}}const l=["AUDIO","BUTTON","INPUT","SELECT","TEXTAREA","VIDEO"];function c(e){e.parent.addEventListener("keydown",(e=>{if(!e.target)return;const t=e.target;(l.includes(t.nodeName)||"true"===t.contentEditable)&&e.stopPropagation()}))}function d(e){window.addEventListener("load",(()=>{for(const t of e.slides){const e=t.querySelector("[data-marp-fitting]")?"":"hideable";t.setAttribute("data-bespoke-marp-load",e)}}))}var u;function f({interval:e=250}={}){return t=>{document.addEventListener("keydown",(e=>{if(" "===e.key&&e.shiftKey)t.prev();else if("ArrowLeft"===e.key||"ArrowUp"===e.key||"PageUp"===e.key)t.prev({fragment:!e.shiftKey});else if(" "!==e.key||e.shiftKey)if("ArrowRight"===e.key||"ArrowDown"===e.key||"PageDown"===e.key)t.next({fragment:!e.shiftKey});else if("End"===e.key)t.slide(t.slides.length-1,{fragment:-1});else{if("Home"!==e.key)return;t.slide(0)}else t.next();e.preventDefault()}));let n,r,a=0;t.parent.addEventListener("wheel",(s=>{let i=!1;const o=(e,t)=>{e&&(i=i||function(e,t){return function(e,t){const n=t===u.X?"Width":"Height";return e[`client${n}`]<e[`scroll${n}`]}(e,t)&&function(e,t){const{overflow:n}=e,r=e[`overflow${t}`];return"auto"===n||"scroll"===n||"auto"===r||"scroll"===r}(getComputedStyle(e),t)}(e,t)),(null==e?void 0:e.parentElement)&&o(e.parentElement,t)};if(0!==s.deltaX&&o(s.target,u.X),0!==s.deltaY&&o(s.target,u.Y),i)return;s.preventDefault();const l=Math.sqrt(Math.pow(s.deltaX,2)+Math.pow(s.deltaY,2));if(void 0!==s.wheelDelta){if(void 0===s.webkitForce&&Math.abs(s.wheelDelta)<40)return;if(s.deltaMode===s.DOM_DELTA_PIXEL&&l<4)return}else if(s.deltaMode===s.DOM_DELTA_PIXEL&&l<12)return;r&&clearTimeout(r),r=setTimeout((()=>{n=0}),e);const c=Date.now()-a<e,d=l<=n;if(n=l,c||d)return;let f;(s.deltaX>0||s.deltaY>0)&&(f="next"),(s.deltaX<0||s.deltaY<0)&&(f="prev"),f&&(t[f](),a=Date.now())}))}}!function(e){e.X="X",e.Y="Y"}(u||(u={}));const p=(...e)=>history.replaceState(...e),m="data-bespoke-view",g="presenter",h="next",v=["",g,h],b=(e,{protocol:t,host:n,pathname:r,hash:a}=location)=>{const s=e.toString();return`${t}//${n}${r}${s?"?":""}${s}${a}`},w=()=>{const e=document.body.getAttribute(m);if(v.includes(e))return e;throw new Error("View mode is not assigned.")},y=e=>new URLSearchParams(location.search).get(e),k=(e,t={})=>{var n;const r=Object.assign({location:location,setter:p},t),a=new URLSearchParams(r.location.search);for(const t of Object.keys(e)){const n=e[t];"string"==typeof n?a.set(t,n):a.delete(t)}try{r.setter(Object.assign({},null!==(n=window.history.state)&&void 0!==n?n:{}),"",b(a,r.location))}catch(e){console.error(e)}},E={available:(()=>{try{return localStorage.setItem("bespoke-marp","bespoke-marp"),localStorage.removeItem("bespoke-marp"),!0}catch(e){return console.warn("Warning: Using localStorage is restricted in the current host so some features may not work."),!1}})(),get:e=>{try{return localStorage.getItem(e)}catch(e){return null}},set:(e,t)=>{try{return localStorage.setItem(e,t),!0}catch(e){return!1}},remove:e=>{try{return localStorage.removeItem(e),!0}catch(e){return!1}}};function x(e=".bespoke-marp-osc"){const t=document.querySelector(e);if(!t)return()=>{};const n=(e,n)=>{t.querySelectorAll(`[data-bespoke-marp-osc=${JSON.stringify(e)}]`).forEach(n)};return s.isEnabled||n("fullscreen",(e=>e.style.display="none")),E.available||n("presenter",(e=>{e.disabled=!0,e.title="Presenter view is disabled due to restricted localStorage."})),e=>{t.addEventListener("click",(t=>{if(t.target instanceof HTMLElement){const{bespokeMarpOsc:n}=t.target.dataset;switch(n&&t.target.blur(),n){case"next":e.next({fragment:!t.shiftKey});break;case"prev":e.prev({fragment:!t.shiftKey});break;case"fullscreen":"function"==typeof e.fullscreen&&s.isEnabled&&e.fullscreen();break;case"presenter":e.openPresenterView()}}})),e.parent.appendChild(t),e.on("activate",(({index:t})=>{n("page",(n=>n.textContent=`Page ${t+1} of ${e.slides.length}`))})),e.on("fragment",(({index:t,fragments:r,fragmentIndex:a})=>{n("prev",(e=>e.disabled=0===t&&0===a)),n("next",(n=>n.disabled=t===e.slides.length-1&&a===r.length-1))})),e.on("marp-active",(()=>t.removeAttribute("aria-hidden"))),e.on("marp-inactive",(()=>t.setAttribute("aria-hidden","true"))),s.isEnabled&&s.onchange((()=>n("fullscreen",(e=>e.classList.toggle("exit",s.isEnabled&&s.isFullscreen)))))}}function L(e){window.addEventListener("message",(t=>{if(t.origin!==window.origin)return;const[n,r]=t.data.split(":");if("navigate"===n){const[t,n]=r.split(",");let a=Number.parseInt(t,10),s=Number.parseInt(n,10)+1;s>=e.fragments[a].length&&(a+=1,s=0),e.slide(a,{fragment:s})}}))}function S(e){if(!(e=>e.syncKey&&"string"==typeof e.syncKey)(e))throw new Error("The current instance of Bespoke.js is invalid for Marp bespoke presenter plugin.");Object.defineProperties(e,{openPresenterView:{enumerable:!0,value:M},presenterUrl:{enumerable:!0,get:I}}),E.available&&document.addEventListener("keydown",(t=>{"p"!==t.key||t.altKey||t.ctrlKey||t.metaKey||(t.preventDefault(),e.openPresenterView())}))}function M(){const e=Math.max(Math.floor(.85*window.innerWidth),640),t=Math.max(Math.floor(.85*window.innerHeight),360);return window.open(this.presenterUrl,`bespoke-marp-presenter-${this.syncKey}`,`width=${e},height=${t},menubar=no,toolbar=no`)}function I(){const e=new URLSearchParams(location.search);return e.set("view","presenter"),e.set("sync",this.syncKey),b(e)}var P=["area","base","br","col","command","embed","hr","img","input","keygen","link","meta","param","source","track","wbr"];let O=e=>String(e).replace(/[&<>"']/g,(e=>`&${F[e]};`)),F={"&":"amp","<":"lt",">":"gt",'"':"quot","'":"apos"},$="dangerouslySetInnerHTML",A={className:"class",htmlFor:"for"},T={};function q(e,t){let n=[],r="";t=t||{};for(let e=arguments.length;e-- >2;)n.push(arguments[e]);if("function"==typeof e)return t.children=n.reverse(),e(t);if(e){if(r+="<"+e,t)for(let e in t)!1!==t[e]&&null!=t[e]&&e!==$&&(r+=` ${A[e]?A[e]:O(e)}="${O(t[e])}"`);r+=">"}if(-1===P.indexOf(e)){if(t[$])r+=t[$].__html;else for(;n.length;){let e=n.pop();if(e)if(e.pop)for(let t=e.length;t--;)n.push(e[t]);else r+=!0===T[e]?e:O(e)}r+=e?`</${e}>`:""}return T[r]=!0,r}const K=({children:e})=>q(null,null,...e),N="bespoke-marp-presenter-container",C="bespoke-marp-presenter-next",D="bespoke-marp-presenter-next-container",j="bespoke-marp-presenter-note-container",X="bespoke-marp-presenter-info-container",R="bespoke-marp-presenter-info-page",U="bespoke-marp-presenter-info-page-text",B="bespoke-marp-presenter-info-page-prev",V="bespoke-marp-presenter-info-page-next",Y="bespoke-marp-presenter-info-time",H="bespoke-marp-presenter-info-timer";function z(e){const{title:t}=document;document.title="[Presenter view]"+(t?` - ${t}`:"");const n={},r=e=>(n[e]=n[e]||document.querySelector(`.${e}`),n[e]);document.body.appendChild((e=>{const t=document.createElement("div");return t.className=N,t.appendChild(e),t.insertAdjacentHTML("beforeend",q(K,null,q("div",{class:D},q("iframe",{class:C,src:"?view=next"})),q("div",{class:j}),q("div",{class:X},q("div",{class:R},q("button",{class:B,tabindex:"-1",title:"Previous"},"Previous"),q("span",{class:U}),q("button",{class:V,tabindex:"-1",title:"Next"},"Next")),q("time",{class:Y,title:"Current time"}),q("div",{class:H})))),t})(e.parent)),(e=>{r(D).addEventListener("click",(()=>e.next()));const t=r(C),n=(a=t,(e,t)=>{var n;return null===(n=a.contentWindow)||void 0===n?void 0:n.postMessage(`navigate:${e},${t}`,"null"===window.origin?"*":window.origin)});var a;t.addEventListener("load",(()=>{r(D).classList.add("active"),n(e.slide(),e.fragmentIndex),e.on("fragment",(({index:e,fragmentIndex:t})=>n(e,t)))}));const s=document.querySelectorAll(".bespoke-marp-note");s.forEach((e=>{e.addEventListener("keydown",(e=>e.stopPropagation())),r(j).appendChild(e)})),e.on("activate",(()=>s.forEach((t=>t.classList.toggle("active",t.dataset.index==e.slide()))))),e.on("activate",(({index:t})=>{r(U).textContent=`${t+1} / ${e.slides.length}`}));const i=r(B),o=r(V);i.addEventListener("click",(t=>{i.blur(),e.prev({fragment:!t.shiftKey})})),o.addEventListener("click",(t=>{o.blur(),e.next({fragment:!t.shiftKey})})),e.on("fragment",(({index:t,fragments:n,fragmentIndex:r})=>{i.disabled=0===t&&0===r,o.disabled=t===e.slides.length-1&&r===n.length-1}));const l=()=>r(Y).textContent=(new Date).toLocaleTimeString();l(),setInterval(l,250)})(e)}function _(e){const t=w();return t===h&&e.appendChild(document.createElement("span")),{"":S,[g]:z,[h]:L}[t]}function J(e){e.on("activate",(t=>{document.querySelectorAll(".bespoke-progress-parent > .bespoke-progress-bar").forEach((n=>{n.style.flexBasis=100*t.index/(e.slides.length-1)+"%"}))}))}const W=e=>{const t=Number.parseInt(e,10);return Number.isNaN(t)?null:t};function G(e={}){const t=Object.assign({history:!0},e);return e=>{let n=!0;const r=e=>{const t=n;try{return n=!0,e()}finally{n=t}},a=(t={fragment:!0})=>{((t,n)=>{const{fragments:r,slides:a}=e,s=Math.max(0,Math.min(t,a.length-1)),i=Math.max(0,Math.min(n||0,r[s].length-1));s===e.slide()&&i===e.fragmentIndex||e.slide(s,{fragment:i})})((W(location.hash.slice(1))||1)-1,t.fragment?W(y("f")||""):null)};e.on("fragment",(({index:e,fragmentIndex:r})=>{n||k({f:0===r||r.toString()},{location:Object.assign(Object.assign({},location),{hash:`#${e+1}`}),setter:(...e)=>t.history?history.pushState(...e):history.replaceState(...e)})})),setTimeout((()=>{a(),window.addEventListener("hashchange",(()=>r((()=>{a({fragment:!1}),k({f:void 0})})))),window.addEventListener("popstate",(()=>{n||r((()=>a()))})),n=!1}),0)}}function Q(e={}){var t;const n=e.key||(null===(t=window.history.state)||void 0===t?void 0:t.marpBespokeSyncKey)||Math.random().toString(36).slice(2),r=`bespoke-marp-sync-${n}`;var a;a={marpBespokeSyncKey:n},k({},{setter:(e,...t)=>p(Object.assign(Object.assign({},e),a),...t)});const s=()=>{const e=E.get(r);return e?JSON.parse(e):Object.create(null)},i=e=>{const t=s(),n=Object.assign(Object.assign({},t),e(t));return E.set(r,JSON.stringify(n)),n},o=()=>{window.removeEventListener("pageshow",o),i((e=>({reference:(e.reference||0)+1})))};return e=>{o(),Object.defineProperty(e,"syncKey",{value:n,enumerable:!0});let t=!0;setTimeout((()=>{e.on("fragment",(e=>{t&&i((()=>({index:e.index,fragmentIndex:e.fragmentIndex})))}))}),0),window.addEventListener("storage",(n=>{if(n.key===r&&n.oldValue&&n.newValue){const r=JSON.parse(n.oldValue),a=JSON.parse(n.newValue);if(r.index!==a.index||r.fragmentIndex!==a.fragmentIndex)try{t=!1,e.slide(a.index,{fragment:a.fragmentIndex})}finally{t=!0}}}));const a=()=>{const{reference:e}=s();void 0===e||e<=1?E.remove(r):i((()=>({reference:e-1})))};window.addEventListener("pagehide",(e=>{e.persisted&&window.addEventListener("pageshow",o),a()})),e.on("destroy",a)}}function Z({slope:e=Math.tan(-35*Math.PI/180),swipeThreshold:t=30}={}){return n=>{let r;const a=n.parent,s=e=>{const t=a.getBoundingClientRect();return{x:e.pageX-(t.left+t.right)/2,y:e.pageY-(t.top+t.bottom)/2}};a.addEventListener("touchstart",(e=>{r=1===e.touches.length?s(e.touches[0]):void 0}),{passive:!0}),a.addEventListener("touchmove",(e=>{if(r)if(1===e.touches.length){e.preventDefault();const t=s(e.touches[0]),n=t.x-r.x,a=t.y-r.y;r.delta=Math.sqrt(Math.pow(Math.abs(n),2)+Math.pow(Math.abs(a),2)),r.radian=Math.atan2(n,a)}else r=void 0})),a.addEventListener("touchend",(a=>{if(r){if(r.delta&&r.delta>=t&&r.radian){let t=r.radian-e;t=(t+Math.PI)%(2*Math.PI)-Math.PI,n[t<0?"next":"prev"](),a.stopPropagation()}r=void 0}}),{passive:!0})}}function ee(e,t,n,r){return new(n||(n=Promise))((function(a,s){function i(e){try{l(r.next(e))}catch(e){s(e)}}function o(e){try{l(r.throw(e))}catch(e){s(e)}}function l(e){var t;e.done?a(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,o)}l((r=r.apply(e,t||[])).next())}))}let te;const ne=()=>(void 0===te&&(te="wakeLock"in navigator&&navigator.wakeLock),te),re=()=>ee(void 0,void 0,void 0,(function*(){const e=ne();if(e)try{return yield e.request("screen")}catch(e){console.warn(e)}return null}));function ae(){return ee(this,void 0,void 0,(function*(){if(!ne())return;let e;const t=()=>{e&&"visible"===document.visibilityState&&re()};return document.addEventListener("visibilitychange",t),document.addEventListener("fullscreenchange",t),e=yield re(),e}))}!function(r=document.getElementById("p")){document.body.setAttribute(m,(()=>{const e=y("view");return e===h||e===g?e:""})());const a=(e=>{const t=y(e);return k({[e]:void 0}),t})("sync")||void 0,s=!1,l=!0;e(r,((...e)=>{const t=v.findIndex((e=>w()===e));if(t<0)throw new Error("Invalid view");return e.map((([e,n])=>e[t]&&n)).filter((e=>e))})([[l,l,s],Q({key:a})],[[l,l,l],_(r)],[[l,l,s],c],[[l,l,l],t],[[l,s,s],o()],[[l,l,l],d],[[l,l,l],G({history:!1})],[[l,l,s],f()],[[l,l,s],i],[[l,s,s],J],[[l,l,s],Z()],[[l,s,s],x()],[[l,l,l],n],[[l,l,s],ae]))}()}();</script></body></html>
