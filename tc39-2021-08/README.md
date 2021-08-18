@@ -140,9 +140,9 @@ called === 2
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ✅ spec text ✅ tests -->
 
-### Unintended observable property access (PR [#1616](https://github.com/tc39/proposal-temporal/pulls/1616), [#1673](https://github.com/tc39/proposal-temporal/pull/1673))
+### Unintended observable property access (PR [#1616](https://github.com/tc39/proposal-temporal/pulls/1616))
 
 ```js
 d = Temporal.Duration.from('P12M');
@@ -359,11 +359,20 @@ TODO (ask Ms2ger about [#1692](https://github.com/tc39/proposal-temporal/issues/
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ✅ spec text ✅ tests -->
 
 ### Incorrect assertion in CalendarDaysInMonth (PR [#1716](https://github.com/tc39/proposal-temporal/pull/1716))
 
-TODO
+```js
+class C extends Temporal.Calendar {
+  constructor() { super('iso8601'); }
+  daysInMonth() { return Infinity; }
+}
+ym = Temporal.Now.plainDate(new C()).toPlainYearMonth();
+ym.subtract({ months: 6 });
+// Intended: Throw RangeError
+// Currently fails an assertion in the spec text as written
+```
 
 ---
 

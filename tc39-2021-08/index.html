@@ -270,7 +270,7 @@ called === <span class="hljs-number">2</span>
 </ul>
 <footer><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> spec text <img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> tests</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-footer="✅ spec text ❌ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-footer="✅ spec text ✅ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
 @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
@@ -285,16 +285,16 @@ pre code { background-color: #042029; }
 .hljs-attr { color: #e9b96e; }
 .hljs-variable { color: red; font-weight: bold; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
-" data-marpit-pagination="11" data-marpit-pagination-total="39" style="--paginate:true;--footer:✅ spec text ❌ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+" data-marpit-pagination="11" data-marpit-pagination-total="39" style="--paginate:true;--footer:✅ spec text ✅ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>Unintended observable property access (PR <a href="https://github.com/tc39/proposal-temporal/pulls/1616">#1616</a>, <a href="https://github.com/tc39/proposal-temporal/pull/1673">#1673</a>)</h3>
+<h3>Unintended observable property access (PR <a href="https://github.com/tc39/proposal-temporal/pulls/1616">#1616</a>)</h3>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>d = Temporal.Duration.from(<span class="hljs-string">&#x27;P12M&#x27;</span>);
 <span class="hljs-built_in">Object</span>.defineProperty(d, <span class="hljs-string">&#x27;months&#x27;</span>, { <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">Infinity</span>; }});
 d.total({ <span class="hljs-attr">unit</span>: <span class="hljs-string">&#x27;days&#x27;</span>, <span class="hljs-attr">relativeTo</span>: Temporal.Now.plainDateTimeISO() });
 <span class="hljs-comment">// Throws according to current spec text. Not intended</span>
 </span></span></foreignObject></svg></code></pre>
 <p>An accidental <span style="color: darkred;">Get(<em>duration</em>, <strong>&quot;months&quot;</strong>)</span> instead of <span style="color: darkred;"><em>duration</em>.[[Months]]</span></p>
-<footer><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> spec text <img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> tests</footer>
+<footer><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> spec text <img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> tests</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-footer="✅ spec text ✅ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
 @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -665,7 +665,7 @@ pre code { background-color: #042029; }
 <p>TODO (ask Ms2ger about <a href="https://github.com/tc39/proposal-temporal/issues/1692">#1692</a>)</p>
 <footer><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> spec text <img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> tests</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-paginate="true" data-footer="✅ spec text ❌ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-paginate="true" data-footer="✅ spec text ✅ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
 @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
@@ -680,11 +680,19 @@ pre code { background-color: #042029; }
 .hljs-attr { color: #e9b96e; }
 .hljs-variable { color: red; font-weight: bold; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
-" data-marpit-pagination="24" data-marpit-pagination-total="39" style="--paginate:true;--footer:✅ spec text ❌ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
+" data-marpit-pagination="24" data-marpit-pagination-total="39" style="--paginate:true;--footer:✅ spec text ✅ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
 <h3>Incorrect assertion in CalendarDaysInMonth (PR <a href="https://github.com/tc39/proposal-temporal/pull/1716">#1716</a>)</h3>
-<p>TODO</p>
-<footer><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> spec text <img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> tests</footer>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Temporal</span>.<span class="hljs-title">Calendar</span> </span>{
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-built_in">super</span>(<span class="hljs-string">&#x27;iso8601&#x27;</span>); }
+  <span class="hljs-function"><span class="hljs-title">daysInMonth</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">Infinity</span>; }
+}
+ym = Temporal.Now.plainDate(<span class="hljs-keyword">new</span> C()).toPlainYearMonth();
+ym.subtract({ <span class="hljs-attr">months</span>: <span class="hljs-number">6</span> });
+<span class="hljs-comment">// Intended: Throw RangeError</span>
+<span class="hljs-comment">// Currently fails an assertion in the spec text as written</span>
+</span></span></foreignObject></svg></code></pre>
+<footer><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> spec text <img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> tests</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-paginate="true" data-footer="✅ spec text ✅ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
 @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
