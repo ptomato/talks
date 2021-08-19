@@ -57,6 +57,116 @@ TODO
 
 <!-- _class: invert lead -->
 
+# Adjustments
+
+---
+
+<!-- _footer: ❌ spec text ❌ tests -->
+
+### Guard against garbage in `Calendar.fields` (PR TODO)
+
+- `Temporal.Calendar.prototype.fields()` expects an iterable as argument
+  - Will now throw if the iterable yields any duplicate values
+  - Will now throw if the iterable yields any values that are not `'year'`, `'month'`, `'monthCode'`, `'day'`, `'hour'`, `'minute'`, `'second'`, `'millisecond'`, `'microsecond'`, `'nanosecond'`
+
+---
+
+### Guard against garbage (cont'd)
+
+```js
+Temporal.Calendar.from('iso8601').fields({
+    *[Symbol.iterator]() {
+        while(true)
+            yield 'garbage';
+    }
+});
+// Before: infinite loop
+// After: throws RangeError
+```
+
+---
+
+<!-- _footer: ✅ spec text ✅ tests -->
+
+### Align addition in PlainDate & Calendar (PR [#1710](https://github.com/tc39/proposal-temporal/pull/1710))
+
+- The treatment of Duration input differed between the common case of adding with PlainDate and the lower-level case of adding with Calendar directly
+  - Occurs when adding e.g. 24 hours, 86400 seconds
+  - Per [an earlier decision](https://github.com/tc39/proposal-temporal/issues/324), smaller units are balanced up to larger units, but calendars as separate objects didn't exist at that time
+- Advantage: Less surprise for programmers
+- Disadvantage: Chance for userland calendars to be inconsistent
+
+---
+
+```js
+calendar = new Temporal.Calendar('iso8601');
+date = new Temporal.PlainDate(2000, 1, 1, calendar);
+
+date.add({ hours: 24 }) // 2000-01-02
+calendar.dateAdd(date, { hours: 24 })
+// Before: throws TypeError due to no applicable properties in property bag
+// After: 2000-01-02
+
+date.add('PT24H') // 2000-01-02
+calendar.dateAdd(date, 'PT24H')
+// Before: 2000-01-01
+// After: 2000-01-02
+
+hours24 = new Temporal.Duration(0, 0, 0, 0, 24);
+date.add(hours24) // 2000-01-02
+calendar.dateAdd(date, hours24)
+// Before: 2000-01-01
+// After: 2000-01-02
+```
+
+---
+
+<!-- _footer: ✅ spec text ✅ tests -->
+
+### Consistent order of operations in toPlainDate (PR [#1734](https://github.com/tc39/proposal-temporal/pull/1734))
+
+```js
+class C extends Temporal.Calendar {
+  constructor() { super('iso8601'); }
+  fields(f) {
+    console.log('boo!');
+    return super.fields(f);
+  }
+}
+const yearMonth = new Temporal.PlainYearMonth(2021, 8, new C());
+yearMonth.toPlainDate('bad input');  // throws TypeError; unchanged
+const monthDay = new Temporal.PlainMonthDay(8, 31, new C());
+monthDay.toPlainDate('bad input');
+// Before: logs boo!, then throws TypeError
+// After: throws TypeError
+```
+- Fixes an inconsistency in the order of user-visible operations
+- Allows implementors to combine an operation
+
+---
+
+<!-- _footer: ❌ spec text ❌ tests -->
+
+### Strings with `Z` + bracketed time zone (PR #TODO)
+
+- IETF feedback highlighted a gap in Temporal string formats
+  1. `2021-08-31T12:30[Asia/Tokyo]` local time + TZ ✅
+  2. `2021-08-31T12:30+09:00[Asia/Tokyo]` local time + offset + TZ ✅
+  3. `2021-08-31T12:30+00:00[Asia/Tokyo]` bad offset, throw ✅
+  4. `2021-08-31T03:30Z[Asia/Tokyo]` instant + TZ ❌
+
+```js
+// Proposed: support for cases where local time is unknown (e.g. legacy Date migration)
+Temporal.ZonedDateTime.from('2021-08-31T03:30Z[Asia/Tokyo]')
+  // => 2021-08-31T12:30+09:00[Asia/Tokyo] (currently: throws)
+Temporal.TimeZone.from("2021-08-31T03:30Z[Asia/Tokyo]")
+  // => Asia/Tokyo (currently: UTC)
+```
+
+---
+
+<!-- _class: invert lead -->
+
 # Bugs
 
 ---
@@ -119,7 +229,6 @@ Temporal.Duration.from({ hours: 6 }).with({ hours: 6.7 })
 ```
 
 - When making non-integer Duration properties throw, in order to avoid surprises for users, we forgot about `with()`
-- **TODO:** What the constructor does is on the agenda for the next champions meeting
 
 ---
 
@@ -350,21 +459,6 @@ plain.with({ day: 1 });
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests -->
-
-### `TimeZone.from(str)` with Z and bracket (PR #TODO)
-
-```js
-Temporal.TimeZone.from("2021-01-05T16:37:40.840192769Z[Asia/Tokyo]")
-  // Intended: throw*
-  // Actual, according to current spec text: UTC time zone
-```
-
-- \*but see later slide in the "Adjustments" section!
-- Changing this to throw makes it consistent
-
----
-
 <!-- _footer: ✅ spec text ✅ tests -->
 
 ### Incorrect assertion in CalendarDaysInMonth (PR [#1716](https://github.com/tc39/proposal-temporal/pull/1716))
@@ -386,7 +480,16 @@ ym.subtract({ months: 6 });
 
 ### Incorrect assertion in `Duration.compare()` (PR [#1726](https://github.com/tc39/proposal-temporal/pull/1726))
 
-TODO
+```js
+class T extends Temporal.TimeZone {
+  constructor() { super('UTC'); }
+  getOffsetNanosecondsFor() { throw new Error('gotcha'); }
+}
+const relativeTo = new Temporal.ZonedDateTime(0n, new T());
+Temporal.Duration.compare({ hours: 24 }, { days: 1 }, { relativeTo });
+// Intended: Throw Error('gotcha')
+// Currently fails an assertion in the spec text as written
+```
 
 ---
 
@@ -410,104 +513,23 @@ TODO
 
 ---
 
-<!-- _class: invert lead -->
-
-# Adjustments
-
----
-
-<!-- _footer: ❌ spec text ❌ tests -->
-
-### Guard against garbage in `Calendar.fields` (PR TODO)
-
-- `Temporal.Calendar.prototype.fields()` expects an iterable as argument
-  - Will now throw if the iterable yields any duplicate values
-  - Will now throw if the iterable yields any values that are not `'year'`, `'month'`, `'monthCode'`, `'day'`, `'hour'`, `'minute'`, `'second'`, `'millisecond'`, `'microsecond'`, `'nanosecond'`
-
----
-
-### Guard against garbage (cont'd)
-
-```js
-Temporal.Calendar.from('iso8601').fields({
-    *[Symbol.iterator]() {
-        while(true)
-            yield 'garbage';
-    }
-});
-// Before: infinite loop
-// After: throws RangeError
-```
-
----
-
-<!-- _footer: ✅ spec text ✅ tests -->
-
-### Align addition in PlainDate & Calendar (PR [#1710](https://github.com/tc39/proposal-temporal/pull/1710))
-
-- The treatment of Duration input differed between the common case of adding with PlainDate and the lower-level case of adding with Calendar directly
-  - Occurs when adding e.g. 24 hours, 86400 seconds
-  - Per [an earlier decision](https://github.com/tc39/proposal-temporal/issues/324), smaller units are balanced up to larger units, but calendars as separate objects didn't exist at that time
-- Advantage: Less surprise for programmers
-- Disadvantage: Chance for userland calendars to be inconsistent
-
----
-
-```js
-calendar = new Temporal.Calendar('iso8601');
-date = new Temporal.PlainDate(2000, 1, 1, calendar);
-
-date.add({ hours: 24 }) // 2000-01-02
-calendar.dateAdd(date, { hours: 24 })
-// Before: throws TypeError due to no applicable properties in property bag
-// After: 2000-01-02
-
-date.add('PT24H') // 2000-01-02
-calendar.dateAdd(date, 'PT24H')
-// Before: 2000-01-01
-// After: 2000-01-02
-
-hours24 = new Temporal.Duration(0, 0, 0, 0, 24);
-date.add(hours24) // 2000-01-02
-calendar.dateAdd(date, hours24)
-// Before: 2000-01-01
-// After: 2000-01-02
-```
-
----
-
-<!-- _footer: ✅ spec text ✅ tests -->
-
-### Consistent order of operations in toPlainDate (PR [#1734](https://github.com/tc39/proposal-temporal/pull/1734))
-
-```js
-class C extends Temporal.Calendar {
-  constructor() { super('iso8601'); }
-  fields(f) {
-    console.log('boo!');
-    return super.fields(f);
-  }
-}
-const yearMonth = new Temporal.PlainYearMonth(2021, 8, new C());
-yearMonth.toPlainDate('bad input');  // throws TypeError; unchanged
-const monthDay = new Temporal.PlainMonthDay(8, 31, new C());
-monthDay.toPlainDate('bad input');
-// Before: logs boo!, then throws TypeError
-// After: throws TypeError
-```
-- Fixes an inconsistency in the order of user-visible operations
-- Allows implementors to combine an operation
-
----
-
-<!-- _footer: ❌ spec text ❌ tests -->
-
-### Strings with `Z` and bracketed time zone (PR #TODO)
-
-- Explanation TODO
-
----
-
 # Asking for consensus
 
 - On the normative PRs discussed in the previous slides
+
+---
+
+---
+
+<!-- _footer: ❌ spec text ❌ tests -->
+
+### `TimeZone.from(str)` with Z and bracket (PR #TODO)
+
+```js
+Temporal.TimeZone.from("2021-01-05T16:37:40.840192769Z[Asia/Tokyo]")
+  // Intended: throw
+  // Actual, according to current spec text: UTC time zone
+```
+
+- Changing this makes it consistent with `ZonedDateTime.from()`
+- This slide only applies if the other PR is not approved
