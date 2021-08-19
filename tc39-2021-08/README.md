@@ -26,6 +26,7 @@ _footer: <span style="color:yellow;">**Status: DRAFT**</span>
 
 # ⌚ **Temporal**
 
+**Ujjwal Sharma**
 **Philip Chimento**
 Igalia, in partnership with Bloomberg  
 TC39 August/September 2021
@@ -247,7 +248,7 @@ date = date.with({ month: -Infinity });
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests -->
+<!-- _footer: ✅ spec text ❌ tests -->
 
 ### Fix wrong value passed to user code (PR [#1667](https://github.com/tc39/proposal-temporal/pull/1667))
 
@@ -349,11 +350,18 @@ plain.with({ day: 1 });
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ spec text ❌ tests -->
 
-### Missing brand checks (PR [#1693](https://github.com/tc39/proposal-temporal/pull/1693))
+### `TimeZone.from(str)` with Z and bracket (PR #TODO)
 
-TODO (ask Ms2ger about [#1692](https://github.com/tc39/proposal-temporal/issues/1692))
+```js
+Temporal.TimeZone.from("2021-01-05T16:37:40.840192769Z[Asia/Tokyo]")
+  // Intended: throw*
+  // Actual, according to current spec text: UTC time zone
+```
+
+- \*but see later slide in the "Adjustments" section!
+- Changing this to throw makes it consistent
 
 ---
 
@@ -390,7 +398,7 @@ TODO
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ spec text ❌ tests -->
 
 ### Typos that were normative 😱
 
@@ -398,65 +406,13 @@ TODO
 - List of pull requests:
   - [#1718](https://github.com/tc39/proposal-temporal/pull/1718)
   - [#1723](https://github.com/tc39/proposal-temporal/pull/1723)
-  - [#1728](https://github.com/tc39/proposal-temporal/pull/1728) ❌
+  - [#1728](https://github.com/tc39/proposal-temporal/pull/1728) (TODO: needs tests)
 
 ---
 
 <!-- _class: invert lead -->
 
 # Adjustments
-
----
-
-<!-- _footer: ❌ spec text ❌ tests -->
-
-### Mathematical values in Duration ([#1604](https://github.com/tc39/proposal-temporal/issues/1604))
-
-- General principle, internal slots should store MVs
-- Values of `Temporal.Duration` are unbounded
-- Advantage: consistency, avoidance of subtle bugs
-- Disadvantages: potentially disruptive for implementors, potentially less performant
-- Thanks to André Bargull for noting this is a normative change
-
----
-
-<!-- _footer: ❌ spec text ❌ tests -->
-
-### No sub-minute time zone offsets ([#1544](https://github.com/tc39/proposal-temporal/issues/1544))
-
-- IETF standardization of the time zone and calendar string annotations blocked on this (FIXME: change)
-- 2021-03: Temporal must remain behind a feature flag until these annotations are standardized
-
----
-
-### No sub-minute time zone offsets (cont'd)
-
-- Change ZonedDateTime.toString and Instant.toString to output time zone offsets only with minutes precision
-- Change ZonedDateTime.from to accept HH:MM precision for non-minute-offset time zones, even with `{ offset: 'reject' }`.
-- No change to `offset` property of ZonedDateTime, or in property bags, or to TimeZone.getOffsetStringFor.
-
----
-
-```js
-timeZone = Temporal.TimeZone.from('Africa/Monrovia');
-zdt = Temporal.PlainDate.from('1972-01-01').toZonedDateTime(timeZone);
-
-// Before:
-zdt.toString() === '1972-01-01T00:00:00-00:44:30[Africa/Monrovia]'
-zdt.toInstant().toString({ timeZone }) === '1972-01-01T00:00:00-00:44:30'
-zdt.offset === '-00:44:30'
-timeZone.getOffsetStringFor(zdt.toInstant()) === '-00:44:30'
-Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:44:30[Africa/Monrovia]').equals(zdt)
-Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:45[Africa/Monrovia]') // throws
-
-// After:
-zdt.toString() === '1972-01-01T00:00:00-00:45[Africa/Monrovia]'
-zdt.toInstant().toString({ timeZone }) === '1972-01-01T00:00:00-00:45'
-zdt.offset === '-00:44:30'
-timeZone.getOffsetStringFor(zdt.toInstant()) === '-00:44:30'
-Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:44:30[Africa/Monrovia]').equals(zdt)
-Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:45[Africa/Monrovia]').equals(zdt)
-```
 
 ---
 
@@ -520,17 +476,6 @@ calendar.dateAdd(date, hours24)
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests -->
-
-### Consistent default options (PR #TODO)
-
-- When Temporal invokes a calendar operation with the default options:
-  - Sometimes passed `undefined` as the options argument
-  - Sometimes passed `Object.create(null)` as the options argument
-- This should be consistent, because it is observable in userland calendars
-
----
-
 <!-- _footer: ✅ spec text ✅ tests -->
 
 ### Consistent order of operations in toPlainDate (PR [#1734](https://github.com/tc39/proposal-temporal/pull/1734))
@@ -557,6 +502,12 @@ monthDay.toPlainDate('bad input');
 
 <!-- _footer: ❌ spec text ❌ tests -->
 
-### TODO: -0 in Duration.negated
+### Strings with `Z` and bracketed time zone (PR #TODO)
 
-On the agenda for next champions meeting
+- Explanation TODO
+
+---
+
+# Asking for consensus
+
+- On the normative PRs discussed in the previous slides
