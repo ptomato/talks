@@ -309,8 +309,6 @@ plain.with({ hour: 13 });
 // Actual, according to current spec text: throws RangeError
 ```
 
-- **TODO**: PlainYearMonth.add and PlainYearMonth.subtract
-
 ---
 
 <!-- _footer: ✅ spec text ✅ tests -->
