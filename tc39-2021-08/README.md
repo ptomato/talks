@@ -21,7 +21,7 @@ style: |
 
 <!--
 _class: invert lead
-_footer: <span style="color:yellow;">**Status: DRAFT**</span>
+_footer: <span style="color:yellow;">These footers tracking tests status will be removed later</span>
 -->
 
 # ⌚ **Temporal**
@@ -51,7 +51,16 @@ TC39 August/September 2021
 
 ---
 
-TODO
+## IETF progress
+
+- SEDATE working group chartered
+- Draft RFC is 'adopted'; not yet 'published'
+- Changes are unlikely at this point, but still possible
+- Two changes requested to the syntax of serialization strings
+  - One, `Z[TimeZone]`, is being presented today
+  - Removal of sub-minute time zone offsets not yet incorporated into the proposal, will be presented in Oct.
+- One syntax change still being discussed
+  - Resolution may be "do nothing"
 
 ---
 
@@ -61,9 +70,9 @@ TODO
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests -->
+<!-- _footer: ❌ needs tests -->
 
-### Guard against garbage in `Calendar.fields` (PR TODO)
+### Guard against garbage in `Calendar.fields` (PR [#1750](https://github.com/tc39/proposal-temporal/pull/1750))
 
 - `Temporal.Calendar.prototype.fields()` expects an iterable as argument
   - Will now throw if the iterable yields any duplicate values
@@ -86,7 +95,7 @@ Temporal.Calendar.from('iso8601').fields({
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Align addition in PlainDate & Calendar (PR [#1710](https://github.com/tc39/proposal-temporal/pull/1710))
 
@@ -121,7 +130,7 @@ calendar.dateAdd(date, hours24)
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Consistent order of operations in toPlainDate (PR [#1734](https://github.com/tc39/proposal-temporal/pull/1734))
 
@@ -145,7 +154,7 @@ monthDay.toPlainDate('bad input');
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ needs tests -->
 
 ### Strings with `Z` + bracketed time zone (PR [#1749](https://github.com/tc39/proposal-temporal/pull/1749))
 
@@ -171,7 +180,7 @@ Temporal.TimeZone.from('2021-08-31T03:30Z[Asia/Tokyo]')
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Totally wrong Duration property bag (PR [#1659](https://github.com/tc39/proposal-temporal/pull/1659))
 
@@ -185,7 +194,7 @@ Temporal.Duration.from({ years: 5 });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Duration string serialization bugs
 
@@ -206,7 +215,7 @@ new Temporal.Duration().toString({ fractionalSecondDigits: 2 })
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Adjust Duration string parsing (PR [#1683](https://github.com/tc39/proposal-temporal/pull/1683))
 
@@ -217,7 +226,7 @@ new Temporal.Duration().toString({ fractionalSecondDigits: 2 })
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Non-integers in `Duration.with` (PR [#1735](https://github.com/tc39/proposal-temporal/pull/1735))
 
@@ -232,7 +241,7 @@ Temporal.Duration.from({ hours: 6 }).with({ hours: 6.7 })
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Observable order of Duration checks (PR [#1601](https://github.com/tc39/proposal-temporal/pulls/1601))
 
@@ -250,7 +259,7 @@ called === 2
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Unintended observable property access (PR [#1616](https://github.com/tc39/proposal-temporal/pulls/1616))
 
@@ -265,7 +274,7 @@ An accidental <span style="color: darkred;">Get(_duration_, **"months"**)</span>
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Accidental duplicate call in ZDT.with (PR [#1688](https://github.com/tc39/proposal-temporal/pull/1688))
 
@@ -288,7 +297,7 @@ datetime.with({ hour: 2 }, { offset: 'prefer', disambiguation: 'earlier' });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Align difference options in PDT & ZDT (PR [#1736](https://github.com/tc39/proposal-temporal/pull/1736))
 
@@ -320,7 +329,7 @@ zdt.since(start.toZonedDateTime(Temporal.Now.timeZone()), options);
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Wrong error type (PRs [#1646](https://github.com/tc39/proposal-temporal/pulls/1646), [#1720](https://github.com/tc39/proposal-temporal/pull/1720))
 
@@ -339,7 +348,7 @@ duration.total();  // missing a unit to get the total of
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### ±∞ in property bags (PR [#1638](https://github.com/tc39/proposal-temporal/pull/1638))
 
@@ -357,7 +366,7 @@ date = date.with({ month: -Infinity });
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ needs tests -->
 
 ### Fix wrong value passed to user code (PR [#1667](https://github.com/tc39/proposal-temporal/pull/1667))
 
@@ -379,7 +388,7 @@ plain.toZonedDateTime('America/Vancouver');
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ needs tests -->
 
 ### Object passed twice to user code (PR [#1748](https://github.com/tc39/proposal-temporal/pull/1748))
 
@@ -421,7 +430,7 @@ plain.with({ hour: 13 });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Return type of `Calendar.mergeFields()` (PR [#1719](https://github.com/tc39/proposal-temporal/pull/1719))
 
@@ -442,7 +451,7 @@ plain.with({ day: 1 });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Watch out for modulo definition (PR [#1709](https://github.com/tc39/proposal-temporal/pull/1709))
 
@@ -453,7 +462,7 @@ plain.with({ day: 1 });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Mark options parameters as optional (PR [#1640](https://github.com/tc39/proposal-temporal/pull/1640))
 
@@ -461,7 +470,7 @@ plain.with({ day: 1 });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Incorrect assertion in CalendarDaysInMonth (PR [#1716](https://github.com/tc39/proposal-temporal/pull/1716))
 
@@ -478,7 +487,7 @@ ym.subtract({ months: 6 });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Incorrect assertion in `Duration.compare()` (PR [#1726](https://github.com/tc39/proposal-temporal/pull/1726))
 
@@ -495,7 +504,7 @@ Temporal.Duration.compare({ hours: 24 }, { days: 1 }, { relativeTo });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Undefined variable (PR [#1687](https://github.com/tc39/proposal-temporal/pull/1687))
 
@@ -503,7 +512,7 @@ Temporal.Duration.compare({ hours: 24 }, { days: 1 }, { relativeTo });
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ✅✅❌ needs tests -->
 
 ### Typos that were normative 😱
 
@@ -511,12 +520,14 @@ Temporal.Duration.compare({ hours: 24 }, { days: 1 }, { relativeTo });
 - List of pull requests:
   - [#1718](https://github.com/tc39/proposal-temporal/pull/1718)
   - [#1723](https://github.com/tc39/proposal-temporal/pull/1723)
-  - [#1728](https://github.com/tc39/proposal-temporal/pull/1728) (TODO: needs tests)
+  - [#1728](https://github.com/tc39/proposal-temporal/pull/1728)
 
 ---
 
+<!-- _class: invert lead -->
+
 # Asking for consensus
 
-- On the normative PRs discussed in the previous slides
+On the normative PRs discussed in the previous slides
 
 ---
