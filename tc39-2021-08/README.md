@@ -40,8 +40,8 @@ TC39 August/September 2021
 
 - IETF string format standardization update
 - Asking for consensus on several minor normative changes
-  - Changes originally intended by the champions but incorrectly expressed in the spec text ("bugs")
   - Changes suggested by implementors ("adjustments")
+  - Changes originally intended by the champions but incorrectly expressed in the spec text ("bugs")
 
 ---
 
@@ -145,9 +145,9 @@ monthDay.toPlainDate('bad input');
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests -->
+<!-- _footer: ✅ spec text ❌ tests -->
 
-### Strings with `Z` + bracketed time zone (PR #TODO)
+### Strings with `Z` + bracketed time zone (PR [#1749](https://github.com/tc39/proposal-temporal/pull/1749))
 
 - IETF feedback highlighted a gap in Temporal string formats
   1. `2021-08-31T12:30[Asia/Tokyo]` local time + TZ ✅
@@ -159,8 +159,8 @@ monthDay.toPlainDate('bad input');
 // Proposed: support for cases where local time is unknown (e.g. legacy Date migration)
 Temporal.ZonedDateTime.from('2021-08-31T03:30Z[Asia/Tokyo]')
   // => 2021-08-31T12:30+09:00[Asia/Tokyo] (currently: throws)
-Temporal.TimeZone.from("2021-08-31T03:30Z[Asia/Tokyo]")
-  // => Asia/Tokyo (currently: UTC)
+Temporal.TimeZone.from('2021-08-31T03:30Z[Asia/Tokyo]')
+  // => Asia/Tokyo (currently: UTC; this is additionally inconsistent)
 ```
 
 ---
@@ -379,9 +379,9 @@ plain.toZonedDateTime('America/Vancouver');
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests (issue 1686) -->
+<!-- _footer: ✅ spec text ❌ tests -->
 
-### Object passed twice to user code (PR #TODO)
+### Object passed twice to user code (PR [#1748](https://github.com/tc39/proposal-temporal/pull/1748))
 
 ```js
 class C extends Temporal.Calendar {
@@ -448,6 +448,8 @@ plain.with({ day: 1 });
 
 - Modulo in Ecma-262 is defined differently than `%` in JS
 - Defines a 'remainder' operation for mathematical values
+
+![height:300px](https://cdn.shopify.com/s/files/1/0193/6473/products/maxresdefault_800x.jpg?v=1495129383)
 
 ---
 
@@ -518,18 +520,3 @@ Temporal.Duration.compare({ hours: 24 }, { days: 1 }, { relativeTo });
 - On the normative PRs discussed in the previous slides
 
 ---
-
----
-
-<!-- _footer: ❌ spec text ❌ tests -->
-
-### `TimeZone.from(str)` with Z and bracket (PR #TODO)
-
-```js
-Temporal.TimeZone.from("2021-01-05T16:37:40.840192769Z[Asia/Tokyo]")
-  // Intended: throw
-  // Actual, according to current spec text: UTC time zone
-```
-
-- Changing this makes it consistent with `ZonedDateTime.from()`
-- This slide only applies if the other PR is not approved
