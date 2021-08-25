@@ -53,14 +53,14 @@ TC39 August/September 2021
 
 ## IETF progress
 
-- SEDATE working group chartered
-- Draft RFC is 'adopted'; not yet 'published'
-- Changes are unlikely at this point, but still possible
-- Two changes requested to the syntax of serialization strings
-  - One, `Z[TimeZone]`, is being presented today
+- New IETF WG appears: [SEDATE](http://datatracker.ietf.org/wg/sedate).
+- `draft-ryzokuken-datetime-extended` -> `draft-ietf-sedate-datetime-extended`.
+- Building consensus and setting up liason agreements with ISO.
+- Two changes requested to the syntax of serialization strings:
+  - One, `Z[TimeZone]`, is being presented today.
   - Removal of sub-minute time zone offsets not yet incorporated into the proposal, will be presented in Oct.
-- One syntax change still being discussed
-  - Resolution may be "do nothing"
+- One discussion that might cause a minor change in syntax (calendar key name), but nothing else.
+- Optimistic results and on schedule.
 
 ---
 
