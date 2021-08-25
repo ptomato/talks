@@ -331,7 +331,7 @@ zdt.since(start.toZonedDateTime(Temporal.Now.timeZone()), options);
 
 <!-- _footer: ✅ tests -->
 
-### Wrong error type (PRs [#1646](https://github.com/tc39/proposal-temporal/pulls/1646), [#1720](https://github.com/tc39/proposal-temporal/pull/1720))
+### Wrong error type (PRs [#1646](https://github.com/tc39/proposal-temporal/pull/1646), [#1720](https://github.com/tc39/proposal-temporal/pull/1720))
 
 ```js
 instant = Temporal.Now.instant();
@@ -345,6 +345,7 @@ duration.total();  // missing a unit to get the total of
 ```
 
 - `TypeError` is more appropriate here than `RangeError`
+- We discussed whether required property bag is OK and feel that this is the right tradeoff
 
 ---
 

@@ -641,7 +641,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="22" data-marpit-pagination-total="35" style="--paginate:true;--footer:✅ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>Wrong error type (PRs <a href="https://github.com/tc39/proposal-temporal/pulls/1646">#1646</a>, <a href="https://github.com/tc39/proposal-temporal/pull/1720">#1720</a>)</h3>
+<h3>Wrong error type (PRs <a href="https://github.com/tc39/proposal-temporal/pull/1646">#1646</a>, <a href="https://github.com/tc39/proposal-temporal/pull/1720">#1720</a>)</h3>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>instant = Temporal.Now.instant();
 instant.round();  <span class="hljs-comment">// missing a unit to round to</span>
 
@@ -653,6 +653,7 @@ duration.total();  <span class="hljs-comment">// missing a unit to get the total
 </span></span></foreignObject></svg></code></pre>
 <ul>
 <li><code>TypeError</code> is more appropriate here than <code>RangeError</code></li>
+<li>We discussed whether required property bag is OK and feel that this is the right tradeoff</li>
 </ul>
 <footer><img class="emoji" draggable="false" alt="✅" src="https://twemoji.maxcdn.com/2/svg/2705.svg" data-marp-twemoji=""/> tests</footer>
 </section>
