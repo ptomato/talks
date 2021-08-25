@@ -243,7 +243,7 @@ Temporal.Duration.from({ hours: 6 }).with({ hours: 6.7 })
 
 <!-- _footer: ✅ tests -->
 
-### Observable order of Duration checks (PR [#1601](https://github.com/tc39/proposal-temporal/pulls/1601))
+### Observable order of Duration checks (PR [#1601](https://github.com/tc39/proposal-temporal/pull/1601))
 
 ```js
 called = 0;
@@ -261,7 +261,7 @@ called === 2
 
 <!-- _footer: ✅ tests -->
 
-### Unintended observable property access (PR [#1616](https://github.com/tc39/proposal-temporal/pulls/1616))
+### Unintended observable property access (PR [#1616](https://github.com/tc39/proposal-temporal/pull/1616))
 
 ```js
 d = Temporal.Duration.from('P12M');

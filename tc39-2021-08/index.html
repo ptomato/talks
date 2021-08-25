@@ -487,7 +487,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="17" data-marpit-pagination-total="35" style="--paginate:true;--footer:✅ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>Observable order of Duration checks (PR <a href="https://github.com/tc39/proposal-temporal/pulls/1601">#1601</a>)</h3>
+<h3>Observable order of Duration checks (PR <a href="https://github.com/tc39/proposal-temporal/pull/1601">#1601</a>)</h3>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>called = <span class="hljs-number">0</span>;
 observer = { <span class="hljs-function"><span class="hljs-title">valueOf</span>(<span class="hljs-params"></span>)</span> { called++; <span class="hljs-keyword">return</span> <span class="hljs-literal">Infinity</span>; }};
 d = <span class="hljs-keyword">new</span> Temporal.Duration(observer, observer); <span class="hljs-comment">// =&gt; throws RangeError</span>
@@ -519,7 +519,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="18" data-marpit-pagination-total="35" style="--paginate:true;--footer:✅ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>Unintended observable property access (PR <a href="https://github.com/tc39/proposal-temporal/pulls/1616">#1616</a>)</h3>
+<h3>Unintended observable property access (PR <a href="https://github.com/tc39/proposal-temporal/pull/1616">#1616</a>)</h3>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>d = Temporal.Duration.from(<span class="hljs-string">&#x27;P12M&#x27;</span>);
 <span class="hljs-built_in">Object</span>.defineProperty(d, <span class="hljs-string">&#x27;months&#x27;</span>, { <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">Infinity</span>; }});
 d.total({ <span class="hljs-attr">unit</span>: <span class="hljs-string">&#x27;days&#x27;</span>, <span class="hljs-attr">relativeTo</span>: Temporal.Now.plainDateTimeISO() });
