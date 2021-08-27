@@ -8,6 +8,7 @@ style: |
   code { font-family: Hack; }
   section { font-family: Rubik, sans-serif; letter-spacing: 0; }
   section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+  section.smaller-type li { font-size: 85% }
   pre code { background-color: #042029; }
   .hljs-string { color: #8ae234; }
   .hljs-number, .hljs-literal { color: #729fcf; }
@@ -51,10 +52,12 @@ TC39 August/September 2021
 
 ---
 
+<!-- _class: smaller-type -->
+
 ## IETF progress
 
 - New IETF WG appears: [SEDATE](http://datatracker.ietf.org/wg/sedate).
-- `draft-ryzokuken-datetime-extended` -> `draft-ietf-sedate-datetime-extended`.
+- _draft-ryzokuken-datetime-extended_ → _draft-ietf-sedate-datetime-extended_.
 - Building consensus and setting up liason agreements with ISO.
 - Two changes requested to the syntax of serialization strings:
   - One, `Z[TimeZone]`, is being presented today.
