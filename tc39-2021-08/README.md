@@ -370,7 +370,7 @@ date = date.with({ month: -Infinity });
 
 ---
 
-<!-- _footer: ❌ needs tests -->
+<!-- _footer: ✅ tests -->
 
 ### Fix wrong value passed to user code (PR [#1667](https://github.com/tc39/proposal-temporal/pull/1667))
 
@@ -516,7 +516,7 @@ Temporal.Duration.compare({ hours: 24 }, { days: 1 }, { relativeTo });
 
 ---
 
-<!-- _footer: ✅✅❌ needs tests -->
+<!-- _footer: ✅ tests -->
 
 ### Typos that were normative 😱
 
