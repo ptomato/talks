@@ -22,7 +22,6 @@ style: |
 
 <!--
 _class: invert lead
-_footer: <span style="color:yellow;">These footers tracking tests status will be removed later</span>
 -->
 
 # ⌚ **Temporal**
@@ -73,8 +72,6 @@ TC39 August/September 2021
 
 ---
 
-<!-- _footer: ❌ needs tests -->
-
 ### Guard against garbage in `Calendar.fields` (PR [#1750](https://github.com/tc39/proposal-temporal/pull/1750))
 
 - `Temporal.Calendar.prototype.fields()` expects an iterable as argument
@@ -97,8 +94,6 @@ Temporal.Calendar.from('iso8601').fields({
 ```
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Align addition in PlainDate & Calendar (PR [#1710](https://github.com/tc39/proposal-temporal/pull/1710))
 
@@ -133,8 +128,6 @@ calendar.dateAdd(date, hours24)
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Consistent order of operations in toPlainDate (PR [#1734](https://github.com/tc39/proposal-temporal/pull/1734))
 
 ```js
@@ -156,8 +149,6 @@ monthDay.toPlainDate('bad input');
 - Allows implementors to combine an operation
 
 ---
-
-<!-- _footer: ❌ needs tests -->
 
 ### Strings with `Z` + bracketed time zone (PR [#1749](https://github.com/tc39/proposal-temporal/pull/1749))
 
@@ -183,8 +174,6 @@ Temporal.TimeZone.from('2021-08-31T03:30Z[Asia/Tokyo]')
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Totally wrong Duration property bag (PR [#1659](https://github.com/tc39/proposal-temporal/pull/1659))
 
 ```js
@@ -196,8 +185,6 @@ Temporal.Duration.from({ years: 5 });
 - Duration property bags unintentionally had to have all 10 properties!
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Duration string serialization bugs
 
@@ -218,8 +205,6 @@ new Temporal.Duration().toString({ fractionalSecondDigits: 2 })
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Adjust Duration string parsing (PR [#1683](https://github.com/tc39/proposal-temporal/pull/1683))
 
 - Valid ISO strings were inadvertently rejected by the grammar used by `Temporal.Duration.from()`
@@ -228,8 +213,6 @@ new Temporal.Duration().toString({ fractionalSecondDigits: 2 })
   - `"P1Y1D"` - months/weeks absent in between two other calendar units
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Non-integers in `Duration.with` (PR [#1735](https://github.com/tc39/proposal-temporal/pull/1735))
 
@@ -243,8 +226,6 @@ Temporal.Duration.from({ hours: 6 }).with({ hours: 6.7 })
 - When making non-integer Duration properties throw, in order to avoid surprises for users, we forgot about `with()`
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Observable order of Duration checks (PR [#1601](https://github.com/tc39/proposal-temporal/pull/1601))
 
@@ -262,8 +243,6 @@ called === 2
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Unintended observable property access (PR [#1616](https://github.com/tc39/proposal-temporal/pull/1616))
 
 ```js
@@ -276,8 +255,6 @@ d.total({ unit: 'days', relativeTo: Temporal.Now.plainDateTimeISO() });
 An accidental <span style="color: darkred;">Get(_duration_, **"months"**)</span> instead of <span style="color: darkred;">_duration_.[[Months]]</span>
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Accidental duplicate call in ZDT.with (PR [#1688](https://github.com/tc39/proposal-temporal/pull/1688))
 
@@ -299,8 +276,6 @@ datetime.with({ hour: 2 }, { offset: 'prefer', disambiguation: 'earlier' });
 - Algorithm was unnecessarily fetching the same information twice, potentially from user code.
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Align difference options in PDT & ZDT (PR [#1736](https://github.com/tc39/proposal-temporal/pull/1736))
 
@@ -332,8 +307,6 @@ zdt.since(start.toZonedDateTime(Temporal.Now.timeZone()), options);
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Wrong error type (PRs [#1646](https://github.com/tc39/proposal-temporal/pull/1646), [#1720](https://github.com/tc39/proposal-temporal/pull/1720))
 
 ```js
@@ -352,8 +325,6 @@ duration.total();  // missing a unit to get the total of
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### ±∞ in property bags (PR [#1638](https://github.com/tc39/proposal-temporal/pull/1638))
 
 ```js
@@ -369,8 +340,6 @@ date = date.with({ month: -Infinity });
 - Surprising results above due to `Infinity` being subject to `{ overflow: 'constrain' }`
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Fix wrong value passed to user code (PR [#1667](https://github.com/tc39/proposal-temporal/pull/1667))
 
@@ -391,8 +360,6 @@ plain.toZonedDateTime('America/Vancouver');
 - Also missing an argument
 
 ---
-
-<!-- _footer: ❌ needs tests -->
 
 ### Object passed twice to user code (PR [#1748](https://github.com/tc39/proposal-temporal/pull/1748))
 
@@ -434,8 +401,6 @@ plain.with({ hour: 13 });
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Return type of `Calendar.mergeFields()` (PR [#1719](https://github.com/tc39/proposal-temporal/pull/1719))
 
 ```js
@@ -455,8 +420,6 @@ plain.with({ day: 1 });
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Watch out for modulo definition (PR [#1709](https://github.com/tc39/proposal-temporal/pull/1709))
 
 - Modulo in Ecma-262 is defined differently than `%` in JS
@@ -466,15 +429,11 @@ plain.with({ day: 1 });
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Mark options parameters as optional (PR [#1640](https://github.com/tc39/proposal-temporal/pull/1640))
 
 - Affects `length` property of some functions
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Incorrect assertion in CalendarDaysInMonth (PR [#1716](https://github.com/tc39/proposal-temporal/pull/1716))
 
@@ -491,8 +450,6 @@ ym.subtract({ months: 6 });
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Incorrect assertion in `Duration.compare()` (PR [#1726](https://github.com/tc39/proposal-temporal/pull/1726))
 
 ```js
@@ -508,15 +465,11 @@ Temporal.Duration.compare({ hours: 24 }, { days: 1 }, { relativeTo });
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Undefined variable (PR [#1687](https://github.com/tc39/proposal-temporal/pull/1687))
 
 - Fix spec algorithm that was nonsensical due to a missing variable definition
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Typos that were normative 😱
 
