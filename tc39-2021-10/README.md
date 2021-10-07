@@ -51,8 +51,7 @@ TC39 October 2021
 
 ### No sub-minute time zone offsets (PR #TODO)
 
-- IETF working group for standardizing extensions to ISO string serialization format
-- Working group requested that we drop this extension
+- IETF working group for standardizing extensions to ISO string serialization format requested that we drop this extension
 - Ujjwal mentioned this in the August plenary
 - Change to spec text is ready now
 
@@ -162,9 +161,9 @@ duration.toString({ fractionalSecondDigits: 2 });
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1803](https://github.com/tc39/proposal-temporal/issues/1803) -->
+<!-- _footer: ✅ spec text ✅ tests -->
 
-### Totally wrong PlainTime property bag (#TODO)
+### Totally wrong PlainTime property bag ([#1862](https://github.com/tc39/proposal-temporal/pull/1862))
 
 ```js
 Temporal.PlainTime.from({ hour: 19, minute: 39, second: 9 });
@@ -231,6 +230,21 @@ d = Temporal.Duration.from({ years: 1, days: 1 })
 Temporal.Duration.compare(d, { years: 1, hours: 25 }, { relativeTo })
   // Correct answer: 0
   // According to current spec text: -1
+```
+
+---
+
+<!-- _footer: ✅ spec text ❌ tests -->
+
+### Bug in Duration string serialization ([#1860](https://github.com/tc39/proposal-temporal/pull/1860))
+
+- Failed to account for the case of 0 decimal digits
+
+```js
+d = Temporal.Duration.from({ seconds: 5 });
+d.toString({ fractionalSecondDigits: 0 })
+  // Intended: "PT5S"
+  // Actual, according to current spec text: "PT5.000000000S"
 ```
 
 ---
