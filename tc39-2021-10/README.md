@@ -47,9 +47,9 @@ TC39 October 2021
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1544](https://github.com/tc39/proposal-temporal/issues/1544) -->
+<!-- _footer: ✅ spec text ❌ tests -->
 
-### No sub-minute time zone offsets (PR #TODO)
+### No sub-minute time zone offsets (PR [#1871](https://github.com/tc39/proposal-temporal/pull/1871))
 
 - IETF working group for standardizing extensions to ISO string serialization format requested that we drop this extension
 - Ujjwal mentioned this in the August plenary
@@ -152,6 +152,29 @@ duration.toString({ fractionalSecondDigits: 2 });
   // Before: 'P3YT0.00S'
   // After: 'P3Y'
 ```
+
+---
+
+<!-- _footer: ✅ spec text ✅ tests -->
+
+### Consistent order of operations in ZDT with() (PR [#1865](https://github.com/tc39/proposal-temporal/pull/1865))
+
+```js
+class C extends Temporal.Calendar {
+  constructor() { super('iso8601'); }
+  mergeFields(f1, f2) {
+    console.log('boo!');
+    return super.mergeFields(f1, f2);
+  }
+}
+const dateTime = Temporal.Now.zonedDateTime(new C());
+Object.defineProperty(dateTime, "offset", { value: undefined });
+dateTime.with({ year: 2022 });
+// Before: logs boo!, then throws TypeError
+// After: throws TypeError
+```
+- Fixes an inconsistency in the order of user-visible operations
+- Allows implementors to be slightly more efficient
 
 ---
 
@@ -282,6 +305,24 @@ timeZone.getOffsetNanosecondsFor = undefined;
 timeZone.getOffsetStringFor(Temporal.Now.instant())
 // Before: "+00:00"
 // After: throws TypeError
+```
+
+TODO: check similar fallback for CalendarMergeFields?
+
+---
+
+<!-- _footer: ❌ spec text ❌ tests [#1864](https://github.com/tc39/proposal-temporal/issues/1864) -->
+
+### Consistent units handling in PlainDate (#TODO)
+
+- In `since()` and `until()` methods,
+
+```js
+date1 = Temporal.PlainDate.from('1970-01-01');
+date2 = Temporal.Now.plainDateISO()
+date1.until(date2, { smallestUnit: 'year' })
+// Before: throws RangeError (because default largestUnit < smallestUnit)
+// After: Duration of { years: 51 }
 ```
 
 ---
