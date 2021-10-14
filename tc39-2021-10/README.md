@@ -22,6 +22,7 @@ style: |
 
 <!--
 _class: invert lead
+_footer: DRAFT: items with "❌ spec text" will be removed before agenda deadline
 -->
 
 # ⌚ **Temporal**
@@ -361,6 +362,8 @@ Temporal.TimeZone.from('2000-01-01T00:00-07:00[Etc/GMT+7]').id
 - **FIXME:** further fix `2020-10-25T07:45:24.123-00:00:00.321[+11:11:11.1]` if there is time before the agenda deadline ([#1797](https://github.com/tc39/proposal-temporal/issues/1797))
 
 ---
+
+<!-- _footer: ✅ spec text ❌ tests -->
 
 ### Typos that were normative 😱
 
