@@ -27,8 +27,8 @@ _footer: DRAFT: items with "❌ spec text" will be removed before agenda deadlin
 
 # ⌚ **Temporal**
 
-**Philip Chimento**
-Igalia, in partnership with Bloomberg  
+**Philip Chimento** (Igalia, in partnership with Bloomberg)  
+**Justin Grant** (invited expert for Temporal)  
 TC39 October 2021
 
 ---
@@ -66,6 +66,8 @@ TC39 October 2021
 
 ---
 
+### No sub-minute time zone offsets (cont'd)
+
 ```js
 timeZone = Temporal.TimeZone.from('Africa/Monrovia');
 zdt = Temporal.PlainDate.from('1972-01-01').toZonedDateTime(timeZone);
@@ -89,9 +91,26 @@ Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:45[Africa/Monrovia]').equals
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1832](https://github.com/tc39/proposal-temporal/issues/1832) -->
+<!-- _footer: ✅ spec text ❌ tests -->
 
-### `new Duration()` throws on non-integer (#TODO)
+### `YYYY-MM-DDThh:mmZ` as PlainDate string ([#1874](https://github.com/tc39/proposal-temporal/pull/1874))
+
+```js
+Temporal.PlainDate.from('2020-10-25T11:00Z')
+  // Before: 2020-10-25
+  // Proposed change: throw
+```
+
+- Accepting this kind of string in Plain types poses a risk when deserializing from DBs
+- Some DBs attach local-time-zone semantics to this kind of string
+- Could result in off-by-one-day bugs that affect users
+- On the other hand, this makes some other use cases like extracting part of an ISO string harder
+
+---
+
+<!-- _footer: ✅ spec text ❌ tests -->
+
+### `new Duration()` throws on non-integer ([#1872](https://github.com/tc39/proposal-temporal/pull/1872))
 
 - `new Temporal.Duration(0, 0, 0, 0, 1.1)` should not silently drop the 0.1 hour
 - Brings constructor in line with other ways to create a Duration
@@ -110,9 +129,9 @@ new Temporal.Duration(0, 0, 0, 0, 1)  // throws RangeError because not exact
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1821](https://github.com/tc39/proposal-temporal/issues/1821), [#1782](https://github.com/tc39/proposal-temporal/issues/1782) -->
+<!-- _footer: ✅ spec text ❌ tests -->
 
-### `relativeTo` PlainDate/ZonedDateTime (#TODO)
+### `relativeTo` PlainDate/ZonedDateTime ([#1873](https://github.com/tc39/proposal-temporal/pull/1873))
 
 - Several operations have a `relativeTo` option
 - Previously treated as PlainDateTime or ZonedDateTime
@@ -140,25 +159,16 @@ Temporal.Duration.from({ days: 7 }).round({ largestUnit: 'weeks', relativeTo });
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1763](https://github.com/tc39/proposal-temporal/issues/1763) -->
+<!-- _footer: ✅ spec text ✅ tests -->
 
-### Make fractionalSecondDigits consistent (#TODO)
+### Consistent order of operations in ZonedDateTime with() (PR [#1865](https://github.com/tc39/proposal-temporal/pull/1865))
 
-- In toString methods, `fractionalSecondDigits` is ignored if seconds not displayed
-- Make Temporal.Duration consistent with this
-
-```js
-duration = Temporal.Duration.from({ years: 3 });
-duration.toString({ fractionalSecondDigits: 2 });
-  // Before: 'P3YT0.00S'
-  // After: 'P3Y'
-```
+- Fixes an inconsistency in the order of observable operations
+- Allows implementors to be slightly more efficient
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
-
-### Consistent order of operations in ZDT with() (PR [#1865](https://github.com/tc39/proposal-temporal/pull/1865))
+### Consistent order of operations in ZonedDateTime with() (cont'd)
 
 ```js
 class C extends Temporal.Calendar {
@@ -174,8 +184,14 @@ dateTime.with({ year: 2022 });
 // Before: logs boo!, then throws TypeError
 // After: throws TypeError
 ```
-- Fixes an inconsistency in the order of user-visible operations
-- Allows implementors to be slightly more efficient
+
+---
+
+<!-- _footer: ❌ spec text ❌ tests [#1756](https://github.com/tc39/proposal-temporal/issues/1756) -->
+
+### Options bag where an option is required
+
+(placeholder)
 
 ---
 
@@ -240,24 +256,6 @@ Temporal.TimeZone.from('-07:30').getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1791](https://github.com/tc39/proposal-temporal/issues/1791) -->
-
-### Bug in Duration comparison (#TODO)
-
-- Incorrect comparison with time zone offset shifts
-
-```js
-// Note: 2020-11-01 is a 25-hour day in America/Vancouver time zone
-relativeTo = Temporal.ZonedDateTime.from('2019-11-01T00:00-07:00[America/Vancouver]');
-d = Temporal.Duration.from({ years: 1, days: 1 })
-
-Temporal.Duration.compare(d, { years: 1, hours: 25 }, { relativeTo })
-  // Correct answer: 0
-  // According to current spec text: -1
-```
-
----
-
 <!-- _footer: ✅ spec text ❌ tests -->
 
 ### Bug in Duration string serialization ([#1860](https://github.com/tc39/proposal-temporal/pull/1860))
@@ -312,64 +310,20 @@ TODO: check similar fallback for CalendarMergeFields?
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1864](https://github.com/tc39/proposal-temporal/issues/1864) -->
-
-### Consistent units handling in PlainDate (#TODO)
-
-- In `since()` and `until()` methods,
-
-```js
-date1 = Temporal.PlainDate.from('1970-01-01');
-date2 = Temporal.Now.plainDateISO()
-date1.until(date2, { smallestUnit: 'year' })
-// Before: throws RangeError (because default largestUnit < smallestUnit)
-// After: Duration of { years: 51 }
-```
-
----
-
-<!-- _footer: ❌ spec text ❌ tests [#1685](https://github.com/tc39/proposal-temporal/issues/1685) -->
-
-### Consistent default options (#TODO)
-
-- When Temporal invokes a calendar operation with the default options:
-  - Sometimes passed `undefined` as the options argument
-  - Sometimes passed `Object.create(null)` as the options argument
-- This should be consistent, because it is observable in userland calendars
-
----
-
-<!-- _footer: ❌ spec text ❌ tests [#1805](https://github.com/tc39/proposal-temporal/issues/1805) -->
-
-### Mistake in grammar of time zone names (#TODO)
-
-- Special `Etc/GMT` time zones not correctly parsed
-
-```js
-Temporal.TimeZone.from('2000-01-01T00:00-07:00[Etc/GMT+7]').id
-// Intended: "Etc/GMT+7"
-// Actual, according to current spec text: "-07:00"
-```
-
----
-
 <!-- _footer: ✅ spec text ❌ tests -->
 
 ### Mistake in grammar of ISO 8601 strings ([#1796](https://github.com/tc39/proposal-temporal/pull/1796))
 
 - Affects strings with a time zone offset with fractional seconds, e.g. `2020-10-25T07:45:24.123-00:00:00.321`
 - Grammar was ambiguous as to which fraction should be used for the time (.123 or .321)
-- **FIXME:** further fix `2020-10-25T07:45:24.123-00:00:00.321[+11:11:11.1]` if there is time before the agenda deadline ([#1797](https://github.com/tc39/proposal-temporal/issues/1797))
 
 ---
 
 <!-- _footer: ✅ spec text ❌ tests -->
 
-### Typos that were normative 😱
+### Typo in UnbalanceDurationRelative ([#1780](https://github.com/tc39/proposal-temporal/pull/1780))
 
-- Fix algorithms that don't work as described in the current spec text due to typos
-- List of pull requests:
-  - [#1780](https://github.com/tc39/proposal-temporal/pull/1780)
+- Fix an algorithm that doesn't work as described in the current spec text due to a typo
 
 ---
 
