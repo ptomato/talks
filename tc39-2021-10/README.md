@@ -120,12 +120,12 @@ parseDateUnsafe = s => Temporal.Instant.from(s).toZonedDateTime(s).toPlainDate()
 - Non-breaking change for `*.p.round` and `Duration.p.total`
 
 ```js
-unitRange = { largestUnit: 'hours', smallestUnit: 'milliseconds' }
-duration = datetime.since('2020-01-01', unitRange)
+durationOpts = { largestUnit: 'hours', smallestUnit: 'milliseconds', roundingMode: 'trunc' }
+duration = datetime.since('2020-01-01', durationOpts)
 
 duration.round('seconds') // proposed equivalent to { smallestUnit: 'seconds' }
 duration.round({ largestUnit: 'milliseconds' }) // smallestUnit OR largestUnit req'd
-duration.round(unitRange) // can continue sharing options with until() and since()
+duration.round({ ...durationOpts, roundingIncrement: 100 }) // same options shape as until() and since()
 
 duration.total('days') // proposed equivalent to { unit: 'days' }
 duration.total({ unit: 'months', relativeTo: '2020-01-01[America/Denver]' })

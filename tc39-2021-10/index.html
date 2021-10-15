@@ -228,12 +228,12 @@ pre code { background-color: #042029; }
 <li>Strings replace req'd options bag; advanced cases can use objects</li>
 <li>Non-breaking change for <code>*.p.round</code> and <code>Duration.p.total</code></li>
 </ul>
-<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>unitRange = { <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;hours&#x27;</span>, <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;milliseconds&#x27;</span> }
-duration = datetime.since(<span class="hljs-string">&#x27;2020-01-01&#x27;</span>, unitRange)
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>durationOpts = { <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;hours&#x27;</span>, <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;milliseconds&#x27;</span>, <span class="hljs-attr">roundingMode</span>: <span class="hljs-string">&#x27;trunc&#x27;</span> }
+duration = datetime.since(<span class="hljs-string">&#x27;2020-01-01&#x27;</span>, durationOpts)
 
 duration.round(<span class="hljs-string">&#x27;seconds&#x27;</span>) <span class="hljs-comment">// proposed equivalent to { smallestUnit: &#x27;seconds&#x27; }</span>
 duration.round({ <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;milliseconds&#x27;</span> }) <span class="hljs-comment">// smallestUnit OR largestUnit req&#x27;d</span>
-duration.round(unitRange) <span class="hljs-comment">// can continue sharing options with until() and since()</span>
+duration.round({ ...durationOpts, <span class="hljs-attr">roundingIncrement</span>: <span class="hljs-number">100</span> }) <span class="hljs-comment">// same options shape as until() and since()</span>
 
 duration.total(<span class="hljs-string">&#x27;days&#x27;</span>) <span class="hljs-comment">// proposed equivalent to { unit: &#x27;days&#x27; }</span>
 duration.total({ <span class="hljs-attr">unit</span>: <span class="hljs-string">&#x27;months&#x27;</span>, <span class="hljs-attr">relativeTo</span>: <span class="hljs-string">&#x27;2020-01-01[America/Denver]&#x27;</span> })
