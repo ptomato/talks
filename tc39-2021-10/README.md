@@ -22,7 +22,7 @@ style: |
 
 <!--
 _class: invert lead
-_footer: DRAFT: items with "❌ spec text" will be removed before agenda deadline
+_footer: DRAFT: tests tracking footers will be removed before presenting
 -->
 
 # ⌚ **Temporal**
@@ -48,7 +48,7 @@ TC39 October 2021
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### No sub-minute time zone offsets (PR [#1871](https://github.com/tc39/proposal-temporal/pull/1871))
 
@@ -91,7 +91,7 @@ Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:45[Africa/Monrovia]').equals
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### `YYYY-MM-DDThh:mmZ` as PlainDate string ([#1874](https://github.com/tc39/proposal-temporal/pull/1874))
 
@@ -108,7 +108,15 @@ Temporal.PlainDate.from('2020-10-25T11:00Z')
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
+
+### Options bag where an option is required ([#1875](https://github.com/tc39/proposal-temporal/pull/1875))
+
+(placeholder)
+
+---
+
+<!-- _footer: ❌ tests -->
 
 ### `new Duration()` throws on non-integer ([#1872](https://github.com/tc39/proposal-temporal/pull/1872))
 
@@ -129,7 +137,7 @@ new Temporal.Duration(0, 0, 0, 0, 1)  // throws RangeError because not exact
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### `relativeTo` PlainDate/ZonedDateTime ([#1873](https://github.com/tc39/proposal-temporal/pull/1873))
 
@@ -159,7 +167,7 @@ Temporal.Duration.from({ days: 7 }).round({ largestUnit: 'weeks', relativeTo });
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Consistent order of operations in ZonedDateTime with() (PR [#1865](https://github.com/tc39/proposal-temporal/pull/1865))
 
@@ -187,21 +195,13 @@ dateTime.with({ year: 2022 });
 
 ---
 
-<!-- _footer: ❌ spec text ❌ tests [#1756](https://github.com/tc39/proposal-temporal/issues/1756) -->
-
-### Options bag where an option is required
-
-(placeholder)
-
----
-
 <!-- _class: invert lead -->
 
 # Bugs
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Totally wrong PlainTime property bag ([#1862](https://github.com/tc39/proposal-temporal/pull/1862))
 
@@ -215,7 +215,7 @@ Temporal.PlainTime.from({ hour: 19, minute: 39, second: 9 });
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Duration string with fraction ([#1759](https://github.com/tc39/proposal-temporal/pull/1759))
 
@@ -229,7 +229,7 @@ Temporal.Duration.from('PT0.1S').milliseconds
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Time zone offset string with fraction ([#1830](https://github.com/tc39/proposal-temporal/pull/1830))
 
@@ -242,7 +242,7 @@ Temporal.TimeZone.from('+00:00:00.1').getOffsetStringFor(Temporal.Now.instant())
 ```
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Time zone offset string sign ([#1833](https://github.com/tc39/proposal-temporal/pull/1833))
 
@@ -256,7 +256,7 @@ Temporal.TimeZone.from('-07:30').getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Bug in Duration string serialization ([#1860](https://github.com/tc39/proposal-temporal/pull/1860))
 
@@ -271,7 +271,7 @@ d.toString({ fractionalSecondDigits: 0 })
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Wrong rounding mode ([#1777](https://github.com/tc39/proposal-temporal/pull/1777))
 
@@ -290,7 +290,7 @@ october.since(april, { smallestUnit: 'year', roundingMode: 'floor' }).years
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Remove `getOffsetNanosecondsFor` fallback ([#1829](https://github.com/tc39/proposal-temporal/pull/1829))
 
@@ -306,11 +306,9 @@ timeZone.getOffsetStringFor(Temporal.Now.instant())
 // After: throws TypeError
 ```
 
-TODO: check similar fallback for CalendarMergeFields?
-
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Mistake in grammar of ISO 8601 strings ([#1796](https://github.com/tc39/proposal-temporal/pull/1796))
 
@@ -319,7 +317,7 @@ TODO: check similar fallback for CalendarMergeFields?
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
+<!-- _footer: ❌ tests -->
 
 ### Typo in UnbalanceDurationRelative ([#1780](https://github.com/tc39/proposal-temporal/pull/1780))
 
