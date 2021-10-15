@@ -93,7 +93,7 @@ Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:45[Africa/Monrovia]').equals
 
 <!-- _footer: ❌ tests -->
 
-### `YYYY-MM-DDThh:mmZ` as PlainDate string ([#1874](https://github.com/tc39/proposal-temporal/pull/1874))
+### `YYYY-MM-DDThh:mmZ` as PlainDate string (PR [#1874](https://github.com/tc39/proposal-temporal/pull/1874))
 
 ```js
 Temporal.PlainDate.from('2020-10-25T11:00Z')
@@ -101,18 +101,35 @@ Temporal.PlainDate.from('2020-10-25T11:00Z')
   // Proposed change: throw
 ```
 
-- Accepting this kind of string in Plain types poses a risk when deserializing from DBs
-- Some DBs attach local-time-zone semantics to this kind of string
-- Could result in off-by-one-day bugs that affect users
-- On the other hand, this makes some other use cases like extracting part of an ISO string harder
+- Current behavior is risky when deserializing from DBs that sometimes attach local-time-zone semantics to ISO strings
+- Can cause off-by-one-day bugs that affect users
+- Ignoring this risk is still possible with more explicit, verbose code:
+
+```js
+parseDateUnsafe = s => Temporal.Instant.from(s).toZonedDateTime(s).toPlainDate()
+```
 
 ---
 
 <!-- _footer: ❌ tests -->
 
-### Options bag where an option is required ([#1875](https://github.com/tc39/proposal-temporal/pull/1875))
+### Strings in place of req'd options bag (PR [#1875](https://github.com/tc39/proposal-temporal/pull/1875))
 
-(placeholder)
+- Reviewer feedback: options bags should be optional!
+- Strings replace req'd options bag; advanced cases can use objects
+- Non-breaking change for `*.p.round` and `Duration.p.total`
+
+```js
+unitRange = { largestUnit: 'hours', smallestUnit: 'milliseconds' }
+duration = datetime.since('2020-01-01', unitRange)
+
+duration.round('seconds') // proposed equivalent to { smallestUnit: 'seconds' }
+duration.round({ largestUnit: 'milliseconds' }) // smallestUnit OR largestUnit req'd
+duration.round(unitRange) // can continue sharing options with until() and since()
+
+duration.total('days') // proposed equivalent to { unit: 'days' }
+duration.total({ unit: 'months', relativeTo: '2020-01-01[America/Denver]' })
+```
 
 ---
 
@@ -169,14 +186,14 @@ Temporal.Duration.from({ days: 7 }).round({ largestUnit: 'weeks', relativeTo });
 
 <!-- _footer: ✅ tests -->
 
-### Consistent order of operations in ZonedDateTime with() (PR [#1865](https://github.com/tc39/proposal-temporal/pull/1865))
+### Consistent order of operations in ZonedDateTime `with()` (PR [#1865](https://github.com/tc39/proposal-temporal/pull/1865))
 
 - Fixes an inconsistency in the order of observable operations
 - Allows implementors to be slightly more efficient
 
 ---
 
-### Consistent order of operations in ZonedDateTime with() (cont'd)
+### Consistent order of operations in ZonedDateTime `with()` (cont'd)
 
 ```js
 class C extends Temporal.Calendar {

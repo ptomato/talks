@@ -190,17 +190,18 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="7" data-marpit-pagination-total="24" style="--paginate:true;--footer:❌ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3><code>YYYY-MM-DDThh:mmZ</code> as PlainDate string (<a href="https://github.com/tc39/proposal-temporal/pull/1874">#1874</a>)</h3>
+<h3><code>YYYY-MM-DDThh:mmZ</code> as PlainDate string (PR <a href="https://github.com/tc39/proposal-temporal/pull/1874">#1874</a>)</h3>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>Temporal.PlainDate.from(<span class="hljs-string">&#x27;2020-10-25T11:00Z&#x27;</span>)
   <span class="hljs-comment">// Before: 2020-10-25</span>
   <span class="hljs-comment">// Proposed change: throw</span>
 </span></span></foreignObject></svg></code></pre>
 <ul>
-<li>Accepting this kind of string in Plain types poses a risk when deserializing from DBs</li>
-<li>Some DBs attach local-time-zone semantics to this kind of string</li>
-<li>Could result in off-by-one-day bugs that affect users</li>
-<li>On the other hand, this makes some other use cases like extracting part of an ISO string harder</li>
+<li>Current behavior is risky when deserializing from DBs that sometimes attach local-time-zone semantics to ISO strings</li>
+<li>Can cause off-by-one-day bugs that affect users</li>
+<li>Ignoring this risk is still possible with more explicit, verbose code:</li>
 </ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>parseDateUnsafe = <span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> Temporal.Instant.from(s).toZonedDateTime(s).toPlainDate()
+</span></span></foreignObject></svg></code></pre>
 <footer><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> tests</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-footer="❌ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -221,8 +222,22 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="8" data-marpit-pagination-total="24" style="--paginate:true;--footer:❌ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>Options bag where an option is required (<a href="https://github.com/tc39/proposal-temporal/pull/1875">#1875</a>)</h3>
-<p>(placeholder)</p>
+<h3>Strings in place of req'd options bag (PR <a href="https://github.com/tc39/proposal-temporal/pull/1875">#1875</a>)</h3>
+<ul>
+<li>Reviewer feedback: options bags should be optional!</li>
+<li>Strings replace req'd options bag; advanced cases can use objects</li>
+<li>Non-breaking change for <code>*.p.round</code> and <code>Duration.p.total</code></li>
+</ul>
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>unitRange = { <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;hours&#x27;</span>, <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;milliseconds&#x27;</span> }
+duration = datetime.since(<span class="hljs-string">&#x27;2020-01-01&#x27;</span>, unitRange)
+
+duration.round(<span class="hljs-string">&#x27;seconds&#x27;</span>) <span class="hljs-comment">// proposed equivalent to { smallestUnit: &#x27;seconds&#x27; }</span>
+duration.round({ <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;milliseconds&#x27;</span> }) <span class="hljs-comment">// smallestUnit OR largestUnit req&#x27;d</span>
+duration.round(unitRange) <span class="hljs-comment">// can continue sharing options with until() and since()</span>
+
+duration.total(<span class="hljs-string">&#x27;days&#x27;</span>) <span class="hljs-comment">// proposed equivalent to { unit: &#x27;days&#x27; }</span>
+duration.total({ <span class="hljs-attr">unit</span>: <span class="hljs-string">&#x27;months&#x27;</span>, <span class="hljs-attr">relativeTo</span>: <span class="hljs-string">&#x27;2020-01-01[America/Denver]&#x27;</span> })
+</span></span></foreignObject></svg></code></pre>
 <footer><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> tests</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-footer="❌ tests" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -338,7 +353,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="12" data-marpit-pagination-total="24" style="--paginate:true;--footer:✅ tests;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>Consistent order of operations in ZonedDateTime with() (PR <a href="https://github.com/tc39/proposal-temporal/pull/1865">#1865</a>)</h3>
+<h3>Consistent order of operations in ZonedDateTime <code>with()</code> (PR <a href="https://github.com/tc39/proposal-temporal/pull/1865">#1865</a>)</h3>
 <ul>
 <li>Fixes an inconsistency in the order of observable operations</li>
 <li>Allows implementors to be slightly more efficient</li>
@@ -363,7 +378,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="13" data-marpit-pagination-total="24" style="--paginate:true;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>Consistent order of operations in ZonedDateTime with() (cont'd)</h3>
+<h3>Consistent order of operations in ZonedDateTime <code>with()</code> (cont'd)</h3>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Temporal</span>.<span class="hljs-title">Calendar</span> </span>{
   <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-built_in">super</span>(<span class="hljs-string">&#x27;iso8601&#x27;</span>); }
   <span class="hljs-function"><span class="hljs-title">mergeFields</span>(<span class="hljs-params">f1, f2</span>)</span> {
