@@ -259,7 +259,7 @@ Temporal.TimeZone.from('+00:00:00.1').getOffsetStringFor(Temporal.Now.instant())
 ```
 ---
 
-<!-- _footer: ❌ tests -->
+<!-- _footer: ✅ tests -->
 
 ### Time zone offset string sign ([#1833](https://github.com/tc39/proposal-temporal/pull/1833))
 
