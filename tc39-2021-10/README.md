@@ -28,7 +28,6 @@ style: |
 
 <!--
 _class: invert lead
-_footer: DRAFT: tests tracking footers will be removed before presenting
 -->
 
 # ⌚ **Temporal**
@@ -54,8 +53,6 @@ TC39 October 2021
 # Adjustments
 
 ---
-
-<!-- _footer: ❌ tests -->
 
 ### No sub-minute time zone offsets (PR [#1871](https://github.com/tc39/proposal-temporal/pull/1871))
 
@@ -98,8 +95,6 @@ Temporal.ZonedDateTime.from('1972-01-01T00:00:00-00:45[Africa/Monrovia]').equals
 
 ---
 
-<!-- _footer: ❌ tests -->
-
 ### `YYYY-MM-DDThh:mmZ` as PlainDate string (PR [#1874](https://github.com/tc39/proposal-temporal/pull/1874))
 
 ```js
@@ -117,8 +112,6 @@ parseDateUnsafe = s => Temporal.Instant.from(s).toZonedDateTime(s).toPlainDate()
 ```
 
 ---
-
-<!-- _footer: ❌ tests -->
 
 ### `new Duration()` throws on non-integer ([#1872](https://github.com/tc39/proposal-temporal/pull/1872))
 
@@ -138,8 +131,6 @@ new Temporal.Duration(0, 0, 0, 0, 1)  // throws RangeError because not exact
 ```
 
 ---
-
-<!-- _footer: ❌ tests -->
 
 ### `relativeTo` PlainDate/ZonedDateTime ([#1873](https://github.com/tc39/proposal-temporal/pull/1873))
 
@@ -168,8 +159,6 @@ Temporal.Duration.from({ days: 7 }).round({ largestUnit: 'weeks', relativeTo });
 ```
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Consistent order of operations in ZonedDateTime `with()` (PR [#1865](https://github.com/tc39/proposal-temporal/pull/1865))
 
@@ -203,8 +192,6 @@ dateTime.with({ year: 2022 });
 
 ---
 
-<!-- _footer: ✅ tests -->
-
 ### Totally wrong PlainTime property bag ([#1862](https://github.com/tc39/proposal-temporal/pull/1862))
 
 ```js
@@ -216,8 +203,6 @@ Temporal.PlainTime.from({ hour: 19, minute: 39, second: 9 });
 - PlainTime property bags unintentionally had to have all 6 properties!
 
 ---
-
-<!-- _footer: ❌ tests -->
 
 ### Duration string with fraction ([#1759](https://github.com/tc39/proposal-temporal/pull/1759))
 
@@ -231,8 +216,6 @@ Temporal.Duration.from('PT0.1S').milliseconds
 
 ---
 
-<!-- _footer: ❌ tests -->
-
 ### Time zone offset string with fraction ([#1830](https://github.com/tc39/proposal-temporal/pull/1830))
 
 - Another off-by-one string indexing error
@@ -243,8 +226,6 @@ Temporal.TimeZone.from('+00:00:00.1').getOffsetStringFor(Temporal.Now.instant())
 // Actual, according to current spec text: "+00:00"
 ```
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Time zone offset string sign ([#1833](https://github.com/tc39/proposal-temporal/pull/1833))
 
@@ -258,8 +239,6 @@ Temporal.TimeZone.from('-07:30').getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
-<!-- _footer: ❌ tests -->
-
 ### Bug in Duration string serialization ([#1860](https://github.com/tc39/proposal-temporal/pull/1860))
 
 - Failed to account for the case of 0 decimal digits
@@ -272,8 +251,6 @@ d.toString({ fractionalSecondDigits: 0 })
 ```
 
 ---
-
-<!-- _footer: ❌ tests -->
 
 ### Wrong rounding mode ([#1777](https://github.com/tc39/proposal-temporal/pull/1777))
 
@@ -292,8 +269,6 @@ october.since(april, { smallestUnit: 'year', roundingMode: 'floor' }).years
 
 ---
 
-<!-- _footer: ❌ tests -->
-
 ### Remove `getOffsetNanosecondsFor` fallback ([#1829](https://github.com/tc39/proposal-temporal/pull/1829))
 
 - An earlier version of the proposal had fallbacks like this
@@ -310,8 +285,6 @@ timeZone.getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
-<!-- _footer: ❌ tests -->
-
 ### Mistake in grammar of ISO 8601 strings ([#1796](https://github.com/tc39/proposal-temporal/pull/1796))
 
 - Affects strings with a time zone offset with fractional seconds, e.g. `2020-10-25T07:45:24.123-00:00:00.321`
@@ -319,15 +292,11 @@ timeZone.getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
-<!-- _footer: ❌ tests -->
-
 ### Typo in UnbalanceDurationRelative ([#1780](https://github.com/tc39/proposal-temporal/pull/1780))
 
 - Fix an algorithm that doesn't work as described in the current spec text due to a typo
 
 ---
-
-<!-- _footer: ✅ tests -->
 
 ### Bug in PlainDateTime/PlainTime `since` ([#1875](https://github.com/tc39/proposal-temporal/pull/1875))
 
@@ -390,7 +359,7 @@ On the normative PRs discussed in the previous slides
 // "1 of N required" or mutually-exclusive properties
 duration.round('day')
 duration.round({ smallestUnit: 'day' })
-duration.round({ largestUnit: 'month' }) // either `smallestUnit` or `largestUnit` is required
+duration.round({ largestUnit: 'month' }) // either smallestUnit or largestUnit is required
 
 // primitives that are aggregations
 f(7)
@@ -398,7 +367,6 @@ f({ read: true, write: true, execute: true }) // at least one property req'd
 ```
 
 ---
-<!-- _footer: ❌ tests -->
 
 ### Strings in place of req'd options bag (PR [#1875](https://github.com/tc39/proposal-temporal/pull/1875))
 
@@ -429,7 +397,8 @@ pdt.round();
 // ❌ splitting options bags on required vs. optional seems wacky, verbose, and hostile
 pdt.round({ smallestUnit: 'day' }, { roundingMode: 'ceil' });
 
-// ❌ less bad than above, but still makes it harder for users to learn about similarity between `round` and `until`/`since` options
+// ❌ less bad than above, but still makes it harder for users to learn about
+// similarity between round() and until()/since() options
 pdt.round('day', { roundingMode: 'ceil' });
 ```
 
