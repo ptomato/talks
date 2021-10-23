@@ -8,7 +8,13 @@ style: |
   code { font-family: Hack; }
   section { font-family: Rubik, sans-serif; letter-spacing: 0; }
   section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
-  section.smaller-type li { font-size: 85% }
+  section pre { margin: 0.5em 0 }
+  section li li { font-size: 85% }
+  section li li pre { margin: 0.1em 0 }
+  section.smaller-type li { font-size: 90% }
+  section.smaller-type li li { font-size: 88% }
+  section.smaller-type li pre { margin: 0.1em 0 }
+  h3 { margin-bottom: 0.8em }
   pre code { background-color: #042029; }
   .hljs-string { color: #8ae234; }
   .hljs-number, .hljs-literal { color: #729fcf; }
@@ -39,6 +45,7 @@ TC39 October 2021
 - Asking for consensus on several minor normative changes
   - Changes suggested by implementors ("adjustments")
   - Changes originally intended by the champions but incorrectly expressed in the spec text ("bugs")
+- One normative adjustment requires discussion and may be contentious, so it's at the end
 
 ---
 
@@ -60,9 +67,9 @@ TC39 October 2021
 
 ### No sub-minute time zone offsets (cont'd)
 
-- Change ZonedDateTime.toString and Instant.toString to output time zone offsets only with minutes precision
-- Change ZonedDateTime.from to accept HH:MM precision for non-minute-offset time zones, even with `{ offset: 'reject' }`.
-- No change to `offset` property of ZonedDateTime, or in property bags, or to TimeZone.getOffsetStringFor.
+- Change `ZonedDateTime.p.toString` and `Instant.p.toString` to output time zone offsets only with minutes precision
+- Change `ZonedDateTime.from` to accept HH:MM precision for non-minute-offset time zones, even with `{ offset: 'reject' }`.
+- No change to `offset` property of `ZonedDateTime`, or in property bags, or to `TimeZone.p.getOffsetStringFor`.
 
 ---
 
@@ -113,28 +120,6 @@ parseDateUnsafe = s => Temporal.Instant.from(s).toZonedDateTime(s).toPlainDate()
 
 <!-- _footer: ❌ tests -->
 
-### Strings in place of req'd options bag (PR [#1875](https://github.com/tc39/proposal-temporal/pull/1875))
-
-- Reviewer feedback: options bags should be optional!
-- Strings replace req'd options bag; advanced cases can use objects
-- Non-breaking change for `*.p.round` and `Duration.p.total`
-
-```js
-durationOpts = { largestUnit: 'hours', smallestUnit: 'milliseconds', roundingMode: 'trunc' }
-duration = datetime.since('2020-01-01', durationOpts)
-
-duration.round('seconds') // proposed equivalent to { smallestUnit: 'seconds' }
-duration.round({ largestUnit: 'milliseconds' }) // smallestUnit OR largestUnit req'd
-duration.round({ ...durationOpts, roundingIncrement: 100 }) // same options shape as until() and since()
-
-duration.total('days') // proposed equivalent to { unit: 'days' }
-duration.total({ unit: 'months', relativeTo: '2020-01-01[America/Denver]' })
-```
-
----
-
-<!-- _footer: ❌ tests -->
-
 ### `new Duration()` throws on non-integer ([#1872](https://github.com/tc39/proposal-temporal/pull/1872))
 
 - `new Temporal.Duration(0, 0, 0, 0, 1.1)` should not silently drop the 0.1 hour
@@ -159,8 +144,8 @@ new Temporal.Duration(0, 0, 0, 0, 1)  // throws RangeError because not exact
 ### `relativeTo` PlainDate/ZonedDateTime ([#1873](https://github.com/tc39/proposal-temporal/pull/1873))
 
 - Several operations have a `relativeTo` option
-- Previously treated as PlainDateTime or ZonedDateTime
-- The time component was only used if it was a ZonedDateTime
+- Previously treated as `PlainDateTime` or `ZonedDateTime`
+- The time component was only used if it was a `ZonedDateTime`
 - Simplifies things slightly for implementors
 
 ---
@@ -342,8 +327,131 @@ timeZone.getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
+<!-- _footer: ✅ tests -->
+
+### Bug in PlainDateTime/PlainTime `since` ([#1875](https://github.com/tc39/proposal-temporal/pull/1875))
+
+- Spec reversed arguments
+  - Intended: calculate from `this` to `other`
+  - Current: calculate from `other` to `this`
+- Only affects `{largestUnit: 'years'}` or `{largestUnit: 'months'}` 
+- PR changes spec to match polyfill, tests, and docs
+- ⏳ This bug was discovered after advancement deadline
+
+---
+
 <!-- _class: invert lead -->
 
 # Asking for consensus
 
 On the normative PRs discussed in the previous slides
+
+---
+
+<!-- _class: invert lead -->
+
+# Discussion
+
+---
+
+<!-- _class: smaller-type -->
+
+### Patterns for optional/required params ([#1756](https://github.com/tc39/proposal-temporal/issues/1756))
+
+- Optional params SHOULD be a property bag to support future extension
+  ```js
+  JSON.stringify({ x }, undefined, 2) // ❌ SHOULD NOT make new APIs with positional, optional params
+
+  new Intl.DisplayNames(undefined, { type }) // ✅ MAY stay consistent with existing APIs
+  ```
+
+- Required params SHOULD NOT be property bags
+
+  - Exception: "primitive | bag" polymorphic param MAY be required
+    ```js
+    duration.round() // ❌ throws because it's a no-op
+    duration.round('day') // ✅
+    duration.round({ smallestUnit: 'day' }) // ✅ same as .round('day')
+    duration.round({ smallestUnit: 'day', roundingIncrement: 7 }) // ✅ other optional props
+    ```
+  - Exception: bags for "data" (not options) MAY be required
+    ```js
+    plainDate.with()  // ❌ throws because it's a no-op
+    plainDate.with({ day: 1, month: 2 }) // ✅ required param with optional props
+    ```
+---
+
+### Param patterns: open issue
+
+- If a primitive corresponds to a bag property, is that property always required in object form?
+  - Choice 1: MUST. "Required" should mean it's required everywhere
+  - Choice 2: SHOULD, with exceptions for unusual cases (like below)
+```js
+// "1 of N required" or mutually-exclusive properties
+duration.round('day')
+duration.round({ smallestUnit: 'day' })
+duration.round({ largestUnit: 'month' }) // either `smallestUnit` or `largestUnit` is required
+
+// primitives that are aggregations
+f(7)
+f({ read: true, write: true, execute: true }) // at least one property req'd
+```
+
+---
+<!-- _footer: ❌ tests -->
+
+### Strings in place of req'd options bag (PR [#1875](https://github.com/tc39/proposal-temporal/pull/1875))
+
+- Reviewer feedback: options bags should be optional!
+- Strings replace req'd options bag; advanced cases can use objects
+- Non-breaking change for `*.p.round` and `Duration.p.total`
+
+```js
+durationOpts = { largestUnit: 'hours', smallestUnit: 'milliseconds', roundingMode: 'trunc' }
+duration = datetime.since('2020-01-01', durationOpts)
+
+duration.round('seconds') // proposed equivalent to { smallestUnit: 'seconds' }
+duration.round({ largestUnit: 'milliseconds' }) // smallestUnit OR largestUnit req'd
+duration.round({ ...durationOpts, roundingIncrement: 100 }) // same options shape as until() and since()
+
+duration.total('days') // proposed equivalent to { unit: 'days' }
+duration.total({ unit: 'months', relativeTo: '2020-01-01[America/Denver]' })
+```
+
+---
+
+### Alternatives considered and rejected
+
+```js
+// ❌ why let users write code that's guaranteed to be wrong?
+pdt.round();
+
+// ❌ splitting options bags on required vs. optional seems wacky, verbose, and hostile
+pdt.round({ smallestUnit: 'day' }, { roundingMode: 'ceil' });
+
+// ❌ less bad than above, but still makes it harder for users to learn about similarity between `round` and `until`/`since` options
+pdt.round('day', { roundingMode: 'ceil' });
+```
+
+<!--
+---
+
+### DISCUSSION: req'd vs. optional params patterns?
+
+Problem to solve: options objects where properties are required in some APIs or cases but optional in others.
+
+```js
+pdt = Temporal.PlainDateTime.from('2021-10-28T10:00');
+roundingOpts = { smallestUnit: 'day', roundingMode: 'ceil' };
+
+// `smallestUnit` option is optional for `until` and `since`
+notRounded = pdt.since('2021-01-01');
+fullDays = pdt.since('2021-01-01', { smallestUnit: 'day' });
+partialDays = pdt.since('2021-01-01', roundingOpts);
+
+// `smallestUnit` option is required for `round` 
+pdt.round(); // throws (to avoid no-op calls)
+closestMidnight = pdt.round({ smallestUnit: 'day' });
+nextMidnight = pdt.round(roundingOpts);
+```
+-->
