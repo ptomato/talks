@@ -323,7 +323,79 @@ On the normative PRs discussed in the previous slides
 
 ---
 
+### Problem: options can have defaults in some contexts but not others
+
+```js
+// Options are optional for `until` and `since` (default is "no rounding")
+unrounded = plainDateTime.since('2021-01-01');
+fullDays = plainDateTime.since('2021-01-01', { smallestUnit: 'day' });
+partialDays = plainDateTime.since('2021-01-01', { smallestUnit: 'day', roundingMode: 'ceil' });
+
+// `smallestUnit` option is required for `round` (no obvious default)
+closestMidnight = plainDateTime.round({ smallestUnit: 'day' });
+nextMidnight = plainDateTime.round({ smallestUnit: 'day', roundingMode: 'ceil' });
+
+// Not unique to Temporal use cases, e.g. hypothetical I/O API
+file = File.create('foo.txt', { ...opts, readonly: true });
+file.setMetadata({ readonly: false }); // same options shape, but required
+
+// Or a hypothetical crypto API
+alg = new Algorithm('super-cool-crypto', { ...opts, bits: 128 });
+alg.upgrade({ bits: 256 }); // same options shape, but required
+```
+
+---
+
+
+### Normative: allow strings for req'd options ([#1875](https://github.com/tc39/proposal-temporal/pull/1875))
+
+- Addresses reviewer feedback: _"options bags should be optional"_
+- Proposed solution: required param can be string (common case) or bag (advanced cases)
+- Non-breaking change for `*.p.round` and `Duration.p.total`
+
+```js
+durationOpts = { largestUnit: 'hours', smallestUnit: 'milliseconds', roundingMode: 'trunc' }
+duration = datetime.since('2020-01-01', durationOpts)
+
+duration.round('seconds') // proposed change
+duration.round({ smallestUnit: 'seconds' }) // equivalent to the line above
+duration.round({ ...durationOpts, roundingIncrement: 100 }) // same options shape as until() and since()
+
+duration.total('days') // proposed equivalent to { unit: 'days' }
+duration.total({ unit: 'months', relativeTo: '2020-01-01[America/Denver]' })
+```
+---
 <!-- _class: smaller-type -->
+
+### Open issue with PR [#1875](https://github.com/tc39/proposal-temporal/pull/1875)
+
+- If a primitive corresponds to a bag property, is it req'd in object form?
+  - Choice 1: MUST. "Required" should mean it's required everywhere
+  - Choice 2: SHOULD, except unusual cases like:
+    - "1 of N are required" properties
+    - mutually-exclusive properties
+    - primitives that can aggregate multiple properties
+- Looking for consensus opinion about which choice is best
+
+```js
+duration.round('day') // Proposed change
+duration.round({ smallestUnit: 'day' })  // Current behavior, equivalent to line above
+
+// Current behavior: either smallestUnit or largestUnit is required. Must change?
+duration.round({ largestUnit: 'month' }) 
+```
+<!--
+
+// Unusual case #2: primitives that are aggregations (hypothetical API; not Temporal)
+f(0b111)
+f({ read: true, write: true, execute: true })
+
+---
+--> 
+
+<!-- _class: smaller-type -->
+
+<!--
 
 ### Patterns for optional/required params ([#1756](https://github.com/tc39/proposal-temporal/issues/1756))
 
@@ -339,52 +411,16 @@ On the normative PRs discussed in the previous slides
   - Exception: "primitive | bag" polymorphic param MAY be required
     ```js
     duration.round() // ❌ throws because it's a no-op
-    duration.round('day') // ✅
-    duration.round({ smallestUnit: 'day' }) // ✅ same as .round('day')
-    duration.round({ smallestUnit: 'day', roundingIncrement: 7 }) // ✅ other optional props
+    duration.round('day') // ✅ (proposed change to Temporal API)
+    duration.round({ smallestUnit: 'hour' }) // ✅ same as .round('day')
+    duration.round({ smallestUnit: 'hour', roundingIncrement: 12 }) // ✅ other optional props
     ```
   - Exception: bags for "data" (not options) MAY be required
     ```js
     plainDate.with()  // ❌ throws because it's a no-op
     plainDate.with({ day: 1, month: 2 }) // ✅ required param with optional props
     ```
----
 
-### Param patterns: open issue
-
-- If a primitive corresponds to a bag property, is that property always required in object form?
-  - Choice 1: MUST. "Required" should mean it's required everywhere
-  - Choice 2: SHOULD, with exceptions for unusual cases (like below)
-```js
-// "1 of N required" or mutually-exclusive properties
-duration.round('day')
-duration.round({ smallestUnit: 'day' })
-duration.round({ largestUnit: 'month' }) // either smallestUnit or largestUnit is required
-
-// primitives that are aggregations
-f(7)
-f({ read: true, write: true, execute: true }) // at least one property req'd
-```
-
----
-
-### Strings in place of req'd options bag (PR [#1875](https://github.com/tc39/proposal-temporal/pull/1875))
-
-- Reviewer feedback: options bags should be optional!
-- Strings replace req'd options bag; advanced cases can use objects
-- Non-breaking change for `*.p.round` and `Duration.p.total`
-
-```js
-durationOpts = { largestUnit: 'hours', smallestUnit: 'milliseconds', roundingMode: 'trunc' }
-duration = datetime.since('2020-01-01', durationOpts)
-
-duration.round('seconds') // proposed equivalent to { smallestUnit: 'seconds' }
-duration.round({ largestUnit: 'milliseconds' }) // smallestUnit OR largestUnit req'd
-duration.round({ ...durationOpts, roundingIncrement: 100 }) // same options shape as until() and since()
-
-duration.total('days') // proposed equivalent to { unit: 'days' }
-duration.total({ unit: 'months', relativeTo: '2020-01-01[America/Denver]' })
-```
 
 ---
 
@@ -394,15 +430,18 @@ duration.total({ unit: 'months', relativeTo: '2020-01-01[America/Denver]' })
 // ❌ why let users write code that's guaranteed to be wrong?
 pdt.round();
 
-// ❌ splitting options bags on required vs. optional seems wacky, verbose, and hostile
+// ❌ splitting options bags on required vs. optional seems verbose and hostile.
 pdt.round({ smallestUnit: 'day' }, { roundingMode: 'ceil' });
 
-// ❌ less bad than above, but still makes it harder for users to learn about
-// similarity between round() and until()/since() options
+// ❌ less bad than above, but still makes it harder for users to reuse learning
+// and code for round() and until()/since() options.
 pdt.round('day', { roundingMode: 'ceil' });
+
+// ❌ removing rounding from `until` and `since` to solve options shape corner case seems like overkill.
+pdt.until('2020-01-01');
+
 ```
 
-<!--
 ---
 
 ### DISCUSSION: req'd vs. optional params patterns?
