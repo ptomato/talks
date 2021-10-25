@@ -127,7 +127,7 @@ Temporal.Duration.from({ hours: 1.1 })  // throws RangeError because not exact
 new Temporal.Duration(0, 0, 0, 0, 1.1)  // 1 hour (!)
 
 // After:
-new Temporal.Duration(0, 0, 0, 0, 1)  // throws RangeError because not exact
+new Temporal.Duration(0, 0, 0, 0, 1.1)  // throws RangeError because not exact
 ```
 
 ---
@@ -298,12 +298,12 @@ timeZone.getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
-### Bug in PlainDateTime/PlainTime `since` ([#1875](https://github.com/tc39/proposal-temporal/pull/1875))
+### Bug in PlainDateTime/PlainTime `since` ([#1881](https://github.com/tc39/proposal-temporal/pull/1881))
 
 - Spec reversed arguments
   - Intended: calculate from `this` to `other`
   - Current: calculate from `other` to `this`
-- Only affects `{largestUnit: 'years'}` or `{largestUnit: 'months'}` 
+- Only affects `{largestUnit: 'years'}` or `{largestUnit: 'months'}`
 - PR changes spec to match polyfill, tests, and docs
 - ⏳ This bug was discovered after advancement deadline
 
