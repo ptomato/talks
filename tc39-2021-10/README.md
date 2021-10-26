@@ -309,6 +309,22 @@ timeZone.getOffsetStringFor(Temporal.Now.instant())
 
 ---
 
+### Bug in PlainTime `since`/`until` ([#1885](https://github.com/tc39/proposal-temporal/pull/1885))
+
+- Omitted a "× _sign_" in the DifferenceTime operation
+- Caused the resulting Durations to have the wrong sign in some cases
+- ⏳ This bug was discovered after advancement deadline
+
+---
+
+### Bug in Duration `toString` ([#1889](https://github.com/tc39/proposal-temporal/pull/1889))
+
+- The mod squad strikes again! One straggler from [last time](https://ptomato.name/talks/tc39-2021-08/#28)
+- Changes `Duration.prototype.toString()` to correctly use remainder instead of modulo
+- ⏳ This bug was discovered after advancement deadline
+
+---
+
 <!-- _class: invert lead -->
 
 # Asking for consensus
