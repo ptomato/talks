@@ -400,6 +400,63 @@ duration.round({ smallestUnit: 'day' })  // Current behavior, equivalent to line
 // Current behavior: either smallestUnit or largestUnit is required. Must change?
 duration.round({ largestUnit: 'month' }) 
 ```
+
+---
+
+<!-- _class: invert lead -->
+
+# Timebox Overflow
+<p>
+<img src="https://user-images.githubusercontent.com/277214/139199588-fcef5074-3dd5-44b4-ac51-5821232208af.png" style="height:400px;">
+</p>
+
+---
+
+### Bug: `offset` is ignored ([#1893](https://github.com/tc39/proposal-temporal/pull/1893))
+
+- `ZonedDateTime.from` (and 4 more ZDT methods) ignores `offset` in property bag inputs
+- ⏳ This bug was discovered after advancement deadline
+
+```js
+// Unchanged
+Temporal.ZonedDateTime.from('2021-10-28T00:00:00-07:00[Europe/London]');
+// => RangeError: Offset -07:00 is invalid for 2021-10-28T00:00:00 in Europe/London
+Temporal.ZonedDateTime.from({ year: 2021, month: 10, day: 28, timeZone: 'Europe/London', offset: '+01:00'})
+// => 2021-10-28T00:00:00+01:00[Europe/London]
+
+// Before: 
+Temporal.ZonedDateTime.from({ year: 2021, month: 10, day: 28, timeZone: 'Europe/London', offset: '-07:00'})
+// => 2021-10-28T00:00:00+01:00[Europe/London]
+
+// After:
+Temporal.ZonedDateTime.from({ year: 2021, month: 10, day: 28, timeZone: 'Europe/London', offset: '-07:00'})
+// => RangeError: Offset -07:00 is invalid for 2021-10-28T00:00:00 in Europe/London
+```
+
+---
+
+### Choices for missing `round` options
+
+- How to deal with omitting `round` options?
+  1. `.round({})` returns identity, but `.round()` throws
+  2. Both return identity
+  3. Both throw
+- Current Temporal Stage 3 proposal uses (3) because:
+  - It's a no-op and almost certainly a bug
+  - To defend against prop-name typos like `.round({smalestUnit: 'second'})`
+
+- Is there a compelling reason to change current Stage 3 behavior?
+
+---
+
+<!-- _class: invert lead -->
+
+# Asking for consensus (again)
+
+<p>
+<img src="https://user-images.githubusercontent.com/277214/139202111-cce3d44a-4cc4-4c19-bf38-bb3e41e8ad30.png" style="height:400px;">
+</p>
+
 <!--
 
 // Unusual case #2: primitives that are aggregations (hypothetical API; not Temporal)
