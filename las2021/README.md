@@ -646,7 +646,7 @@ _footer: Image <a href="https://www.pexels.com/photo/black-and-brown-himalayan-c
 
 ![bg opacity:.6](grumpycat.jpg)
 
-## Fast-forward to the [written code](https://github.com/ptomato/bloatpad)
+## Fast-forward to the [written code](https://gitlab.gnome.org/ptomato/bloatpad)
 
 (Live demo, but in case that doesn't work out, screenshots follow)
 
