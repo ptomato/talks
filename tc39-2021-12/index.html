@@ -53,8 +53,8 @@ pre code { background-color: #042029; }
 ;">
 <h1>Temporal update</h1>
 <ul>
-<li>Similar to last time!</li>
-<li>Asking for consensus on several minor normative changes
+<li>Similar to what we asked for consensus on last time!</li>
+<li>Asking for consensus on several minor normative changes:
 <ul>
 <li>Changes suggested by implementors (&quot;adjustments&quot;)</li>
 <li>Changes to make spec text accurately reflect the intentions of the champions (&quot;bugs&quot;)</li>
@@ -149,7 +149,11 @@ pre code { background-color: #042029; }
 <ul>
 <li>Some TimeZone methods were missing brand checks</li>
 <li>Left over from how these methods worked at one time</li>
-<li>Some trickery with plain objects should no longer work:</li>
+<li>Some trickery with plain objects should no longer work:
+<ul>
+<li><span style="font-size:18px">Note: inheriting TimeZone still works as intended; this change affects only the case where you skip creating the internal slots</span></li>
+</ul>
+</li>
 </ul>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> timeZone = <span class="hljs-built_in">Object</span>.create(Temporal.TimeZone.prototype, {
   <span class="hljs-function"><span class="hljs-title">getPossibleInstantsFor</span>(<span class="hljs-params"></span>)</span> { ... },
@@ -385,7 +389,7 @@ pre code { background-color: #042029; }
   <span class="hljs-comment">// throws (no change)</span>
 Temporal.Instant.from(<span class="hljs-string">&#x27;2021-12-14T10:00Z[u-ca=kodak]&#x27;</span>)
   <span class="hljs-comment">// Before: throws</span>
-  <span class="hljs-comment">// After: calendar annotation ignored</span>
+  <span class="hljs-comment">// After: same result as &#x27;2021-12-14T10:00Z&#x27;; calendar annotation ignored</span>
 </span></span></foreignObject></svg></code></pre>
 <footer><img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> spec text <img class="emoji" draggable="false" alt="❌" src="https://twemoji.maxcdn.com/2/svg/274c.svg" data-marp-twemoji=""/> tests <a href="https://github.com/tc39/proposal-temporal/issues/1901">#1901</a></footer>
 </section>

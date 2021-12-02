@@ -35,8 +35,8 @@ TC39 December 2021
 
 # Temporal update
 
-- Similar to last time!
-- Asking for consensus on several minor normative changes
+- Similar to what we asked for consensus on last time!
+- Asking for consensus on several minor normative changes:
   - Changes suggested by implementors ("adjustments")
   - Changes to make spec text accurately reflect the intentions of the champions ("bugs")
 - No discussions this time, just fixes
@@ -69,6 +69,7 @@ TC39 December 2021
 - Some TimeZone methods were missing brand checks
 - Left over from how these methods worked at one time
 - Some trickery with plain objects should no longer work:
+  - <span style="font-size:18px">Note: inheriting TimeZone still works as intended; this change affects only the case where you skip creating the internal slots</span>
 ```js
 const timeZone = Object.create(Temporal.TimeZone.prototype, {
   getPossibleInstantsFor() { ... },
@@ -173,7 +174,7 @@ Temporal.PlainDateTime.from('2021-12-14T10:00[u-ca=kodak]')
   // throws (no change)
 Temporal.Instant.from('2021-12-14T10:00Z[u-ca=kodak]')
   // Before: throws
-  // After: calendar annotation ignored
+  // After: same result as '2021-12-14T10:00Z'; calendar annotation ignored
 ```
 
 ---
