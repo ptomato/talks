@@ -56,6 +56,36 @@ TC39 December 2021
 
 ---
 
+<!-- _footer: ✅ spec text ❌ tests -->
+
+### ISO 8601 time-only representation ([#1952](https://github.com/tc39/proposal-temporal/pull/1952))
+
+- Time-only strings may be prefixed with a `T` designator; Temporal did not yet conform to this
+- The `T` is _required_ where ambiguity with date representations is possible
+  - Originally did not support this because `Temporal.PlainTime.from()` was not considered ambiguous
+  - Since then, we moved towards accepting strings in other places where ambiguity may occur
+
+---
+
+### ISO 8601 time-only representation (cont'd)
+
+Examples of ambiguous strings:
+
+- **2021-12**: year-month, or time with UTC offset **20:21:00-12:00**?
+- **202112**: year-month, or time **20:21:12**?
+  - Times now require **T2021-12** and **T202112**
+- **12-14**: month-day, or time with UTC offset **12:00:00-14:00**?
+- **1214**: month-day, or time **12:14:00**?
+  - Times now require **T12-14** and **T1214**
+- **2021-12-14**: date, or date-time with time defaulting to 00:00?
+  - If you want "midnight" from a date-only string, parse as PDT
+
+<!--
+    Note that a lot of the ambiguities arise because ISO 8601 allows omitting the colon in a time representation (this is called "basic format" whereas the format with the colon is called "extended format")
+-->
+
+---
+
 <!-- _class: invert lead -->
 
 # Bugs
@@ -98,6 +128,18 @@ Temporal.Duration.from('-PT1.03125H').toString()
 
 <!-- _footer: ✅ spec text ✅ tests -->
 
+### Missing calendar annotations in ISO strings ([#1950](https://github.com/tc39/proposal-temporal/pull/1950))
+
+- Some calendar annotations forgotten in the ISO 8601 grammar
+- PlainTime strings like `15:13:45[u-ca=iso8601]` should be allowed
+  - Necessary if we ever want to include time calendars in a future proposal without breaking the web
+- PlainYearMonth and PlainMonthDay strings like `2021-12-14[u-ca=iso8601]` should be allowed
+  - Necessary for round-tripping via toString()
+
+---
+
+<!-- _footer: ✅ spec text ✅ tests -->
+
 ### Modulo vs. remainder, round 3 ([#1947](https://github.com/tc39/proposal-temporal/pull/1947))
 
 - I thought for sure we had eliminated all of this type of bug, but an implementor found another one!
@@ -127,37 +169,6 @@ Temporal.Duration.from('-PT1.03125H').toString()
 <!-- _class: invert lead -->
 
 # Storage area
-
----
-
-<!-- _footer: ❌ spec text ❌ tests [#1765](https://github.com/tc39/proposal-temporal/issues/1765) -->
-
-### ISO 8601 time-only representation (#TODO)
-
-- Time-only strings may be prefixed with a `T` designator; Temporal did not yet conform to this
-- The `T` is _required_ where ambiguity with date representations is possible
-  - Originally did not support this because `Temporal.PlainTime.from()` was not considered ambiguous
-  - Since then, we moved towards accepting strings in other places where ambiguity may occur
-
----
-
-### ISO 8601 time-only representation (cont'd)
-
-Examples of ambiguous strings:
-
-- **2021-12**: year-month, or time with UTC offset **20:21:00-12:00**?
-  - Latter now requires **T2021-12**
-- **12-14**: month-day, or time with UTC offset **12:00:00-14:00**?
-  - Latter now requires **T12-14**
-- **2021-12-14**: date, or date-time with time defaulting to 00:00?
-  - Latter now requires workaround:
-    ```js
-    Temporal.PlainDateTime.from('2021-12-14').toPlainTime()
-    ```
-
-<!--
-    Note that a lot of the ambiguities arise because ISO 8601 allows omitting the colon in a time representation (this is called "basic format" whereas the format with the colon is called "extended format")
--->
 
 ---
 
@@ -239,16 +250,6 @@ date1.until(date2, { smallestUnit: 'year' })
   // According to current spec text: throws RangeError
   // (because default largestUnit < smallestUnit)
 ```
-
----
-
-<!-- _footer: ❌ spec text ❌ tests [#1896](https://github.com/tc39/proposal-temporal/issues/1896) -->
-
-### Accept calendar in ISO time string (#TODO)
-
-- Strings like `15:13:45[u-ca=iso8601]` should be allowed
-- The calendar annotation was forgotten in the ISO 8601 grammar
-- Necessary if we ever want to include time calendars in a future proposal without breaking the web
 
 ---
 
