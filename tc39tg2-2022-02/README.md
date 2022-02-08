@@ -130,22 +130,24 @@ These may or may not require discussion / action from TG2.
 
 ---
 
-## Property-bag time zones & calendars in 402
+### Property-bag zones & calendars in 402
+
+<small>
 
 - Temporal issue: [#2005](https://github.com/tc39/proposal-temporal/issues/2005)
-- The [[TimeZone]] and [[Calendar]] internal slots of `Intl.DateTimeFormat` should become Temporal instances and not strings
-- However, Temporal also accepts property-bag time zones and calendars that implement the protocol, what should be the result of this code?
+- The [[TimeZone]] and [[Calendar]] internal slots of DateTimeFormat should be Temporal instances, not strings
+- Temporal also accepts property-bag time zones and calendars that implement the protocol
 
----
+</small>
 
 ```js
 const timeZone = {
     getOffsetNanosecondsFor(instant) { ... },
     getPossibleInstantsFor(dateTime) { ... },
     toString() { return "Etc/My_Zone"; }
-}
+};
 const dateTime = Temporal.Now.zonedDateTimeISO(timeZone);
-dateTime.toLocaleString();
+dateTime.toLocaleString();  // Should this code succeed or fail? What should be the result?
 ```
 
 ---
