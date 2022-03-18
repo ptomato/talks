@@ -22,7 +22,6 @@ style: |
 
 <!--
 _class: invert lead
-_footer: <strong>DRAFT</strong>, to be finalized by 2022-03-18
 -->
 
 # ⌚ **Temporal**
@@ -39,7 +38,7 @@ TC39 March 2022
 - Asking for consensus on several minor normative changes:
   - Changes suggested by implementors ("adjustments")
   - Changes to make spec text accurately reflect the intentions of the champions ("bugs")
-- No discussions this time, just fixes
+- No big discussions this time, just fixes
 
 ---
 
@@ -47,13 +46,12 @@ TC39 March 2022
 
 - Will continue turning implementor feedback into presentations like this as bandwidth allows
 - Number of normative PRs per plenary meeting seems to be decreasing 📉
-  - 26 → 19 → 12 → 9 (+ maybe 1)
 
 ---
 
 # IETF update
 
-This slide will be filled in after the IETF meeting of 19–25 March!
+This slide will be filled in after the IETF meeting on 21 March!
 
 ---
 
@@ -63,22 +61,20 @@ This slide will be filled in after the IETF meeting of 19–25 March!
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
-
 ### Mathematical values in Duration (PR [#2094](https://github.com/tc39/proposal-temporal/pull/2094))
 
 - General principle: internal slots should store MVs
   - Avoid subtle bugs
   - Avoid "speccing IEEE arithmetic"
 - Implementor feedback:
-  - Values of `Temporal.Duration` are unbounded integers
+  - The difference is observable because values of `Temporal.Duration` are unbounded integers
   - Storing 10 BigInts far less performant than 10 Numbers
 
 ---
 
 ### Mathematical values in Duration (2)
 
-- Note that Duration fields can now store the _intersection_ of:
+- Change Duration internal slots to store the _intersection_ of:
   - mathematical integers
   - Number values
 - Specifically _not_ NaN, ±∞, −0, non-integers, integers not exactly representable in a double
@@ -104,8 +100,6 @@ evenmore.subtract(more).nanoseconds
 ```
 
 ---
-
-<!-- _footer: ✅ spec text ✅ tests -->
 
 ### Consistent default options (PR [#2028](https://github.com/tc39/proposal-temporal/pull/2028))
 
@@ -134,11 +128,18 @@ ym = Temporal.PlainYearMonth.from("2022-03")
 
 ---
 
-<!-- _footer: ✅ spec text ❌ tests -->
-
 ### Consistent expanded-year output (PR [#2090](https://github.com/tc39/proposal-temporal/pull/2090))
 
-DRAFT, not decided yet
+- Change output of `toString()` for years between 0 and 999
+- Previously, used expanded year format to avoid leading zeroes
+- Now, use four-digit format to be consistent with `Date.toISOString()`
+- Avoid pitfalls when porting code from legacy Date to Temporal
+- ISO 8601: representation of any year <1582 is "by agreement of the communicating parties"
+
+```
+Before: +000001-12-31
+After: 0001-12-31 
+```
 
 ---
 
@@ -148,16 +149,19 @@ DRAFT, not decided yet
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
-
 ### Wrong sign in PYM.subtract (PR [#2002](https://github.com/tc39/proposal-temporal/pull/2002))
 
-- Sign-flip error in the algorithm for PlainYearMonth.subtract
+- Sign-flip error in the algorithm for PlainYearMonth.subtract when determining ISO reference point for subtraction
 - Would produce wrong results if implemented exactly as written
 
----
+```js
+m = Temporal.PlainYearMonth.from({ year: 2022, month: 3 });
+m.subtract({ days: 31 });
+  // Correct answer: 2022-02
+  // According to current spec text: 2022-01
+```
 
-<!-- _footer: ✅ spec text ❌ tests -->
+---
 
 ### Calendar mix-up in PYM arithmetic (PR [#2003](https://github.com/tc39/proposal-temporal/pull/2003))
 
@@ -179,8 +183,6 @@ m.subtract({ months: 1 })
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
-
 ### DST bug in Duration comparison (PR [#2026](https://github.com/tc39/proposal-temporal/pull/2026))
 
 - Incorrect comparison with time zone offset shifts
@@ -198,8 +200,6 @@ Temporal.Duration.compare(d, { years: 1, hours: 25 }, { relativeTo })
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
-
 ### Remove non-roundtrippable serialization ([#2035](https://github.com/tc39/proposal-temporal/pull/2035))
 
 - `toString()` on PlainYearMonth and PlainMonthDay with ISO calendar returned a string that wasn't valid as input to `from()`
@@ -212,8 +212,6 @@ new Temporal.PlainYearMonth(2022, 3).toString({ calendarName: 'always' })
 ```
 
 ---
-
-<!-- _footer: ✅ spec text ✅ tests -->
 
 ### PMD not handled in DTF.formatRange (PR [#2043](https://github.com/tc39/proposal-temporal/pull/2043))
 
@@ -230,8 +228,6 @@ dtf.formatRange(aMonthDay, notAMonthDay)
 
 ---
 
-<!-- _footer: ✅ spec text ✅ tests -->
-
 ### Mistake in grammar of `Etc/GMT±N` time zone names (PR [#2050](https://github.com/tc39/proposal-temporal/pull/2050))
 
 - Special `Etc/GMT` time zones not correctly parsed
@@ -243,8 +239,6 @@ Temporal.TimeZone.from('2000-01-01T00:00-07:00[Etc/GMT+7]').id
 ```
 
 ---
-
-<!-- _footer: ✅ spec text ✅ tests -->
 
 ### Normative typo 😱 [PR #2000](https://github.com/tc39/proposal-temporal/pull/2000)
 
@@ -265,9 +259,14 @@ On the normative changes just presented
 Three major pieces of implementor feedback remaining to address:
 
 - Investigate optimizing the built-in calendar case (issue [#1808](https://github.com/tc39/proposal-temporal/issues/1808))
-- Integrate Temporal.Calendar and Temporal.TimeZone into Intl.DateTimeFormat options (issue [#2005](https://github.com/tc39/proposal-temporal/issues/2005))
-- Investigate removing [[Calendar]] slot from PlainTime (issue [#1588](https://github.com/tc39/proposal-temporal/issues/1588))
+- Integrate Calendar and TimeZone into Intl.DTF options ([#2005](https://github.com/tc39/proposal-temporal/issues/2005))
+- Investigate removing [[Calendar]] slot from PlainTime ([#1588](https://github.com/tc39/proposal-temporal/issues/1588))
+
+Finally:
+
+- Implement conclusions of IETF string standardization ([#1450](https://github.com/tc39/proposal-temporal/issues/1450))
+- Fix some other minor errors that you probably don't care about
 
 <!--
-    I hope to present all of these in June, probably along with a couple of tweaks. Follow along with the issues if you are interested in these topics.
+    I hope to present all of these in June. Follow along with the issues if you are interested in these topics.
 -->
