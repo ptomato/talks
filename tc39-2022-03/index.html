@@ -215,11 +215,11 @@ pre code { background-color: #042029; }
   <span class="hljs-comment">// Before: false (blank.negated().years is -0)</span>
   <span class="hljs-comment">// After: true</span>
 
-max = Temporal.Duration.from({ <span class="hljs-attr">nanoseconds</span>: <span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER });
-more = max.add({ <span class="hljs-attr">nanoseconds</span>: <span class="hljs-number">1</span> });
-evenmore = max.add({ <span class="hljs-attr">nanoseconds</span>: <span class="hljs-number">2</span> });
-evenmore.nanoseconds - more.nanoseconds  <span class="hljs-comment">// 0</span>
-evenmore.subtract(more).nanoseconds
+maxSafe = Temporal.Duration.from({ <span class="hljs-attr">nanoseconds</span>: <span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER });
+minUnsafe = maxSafe.add({ <span class="hljs-attr">nanoseconds</span>: <span class="hljs-number">1</span> });
+moreUnsafe = maxSafe.add({ <span class="hljs-attr">nanoseconds</span>: <span class="hljs-number">2</span> });
+moreUnsafe.nanoseconds - minUnsafe.nanoseconds  <span class="hljs-comment">// 0</span>
+moreUnsafe.subtract(minUnsafe).nanoseconds
   <span class="hljs-comment">// Before: 1</span>
   <span class="hljs-comment">// After: 0</span>
 </span></span></foreignObject></svg></code></pre>

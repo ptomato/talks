@@ -90,11 +90,11 @@ Object.is(blank.years, blank.negated().years)
   // Before: false (blank.negated().years is -0)
   // After: true
 
-max = Temporal.Duration.from({ nanoseconds: Number.MAX_SAFE_INTEGER });
-more = max.add({ nanoseconds: 1 });
-evenmore = max.add({ nanoseconds: 2 });
-evenmore.nanoseconds - more.nanoseconds  // 0
-evenmore.subtract(more).nanoseconds
+maxSafe = Temporal.Duration.from({ nanoseconds: Number.MAX_SAFE_INTEGER });
+minUnsafe = maxSafe.add({ nanoseconds: 1 });
+moreUnsafe = maxSafe.add({ nanoseconds: 2 });
+moreUnsafe.nanoseconds - minUnsafe.nanoseconds  // 0
+moreUnsafe.subtract(minUnsafe).nanoseconds
   // Before: 1
   // After: 0
 ```
