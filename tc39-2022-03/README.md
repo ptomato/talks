@@ -51,7 +51,14 @@ TC39 March 2022
 
 # IETF update
 
-This slide will be filled in after the IETF meeting on 21 March!
+- Open threads closed in IETF meeting last week
+- Syntax extensions finalized
+  - Not yet reflected in proposal: expect a future normative change
+- Draft to be published in the coming weeks
+- Final question: how to deal with internally inconsistent timestamps
+  - Doesn't affect syntax
+  - May not affect Temporal at all
+  - Still under discussion by champions
 
 ---
 
