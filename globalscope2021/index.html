@@ -44,8 +44,7 @@ pre code { background-color: #042029; }
 <h1><strong>Temporal</strong></h1>
 <h2>Modern dates and times in JavaScript</h2>
 <p><strong>Philip Chimento</strong> • <i class="fab fa-github"></i> ptomato • <i class="fab fa-twitter"></i> @therealptomato<br />
-Igalia, in partnership with Bloomberg<br />
-Global Scope, 6 August 2021</p>
+Igalia, in partnership with Bloomberg</p>
 <footer>Photo by <a href="https://unsplash.com/@cblanco_31">Carlos Blanco</a> on <a href="https://unsplash.com/s/photos/gastown-clock">Unsplash</a></footer>
 </section>
 </foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="invert lead" style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -288,7 +287,7 @@ pre code { background-color: #042029; }
 <li>Like <code>Temporal.Instant</code>, an exact time</li>
 <li>But also with a calendar and time zone</li>
 <li>Correctly accounts for the time zone's daylight saving rules</li>
-<li>“The Global Scope session is on Friday, August 13th, 2021, at 11 AM, Australian Eastern Standard Time”</li>
+<li>“The conference session is on Friday, August 13th, 2021, at 11 AM, Australian Eastern Standard Time”</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -639,12 +638,12 @@ pre code { background-color: #042029; }
 " style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
 <h1>What is the date, one month from today?</h1>
-<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&gt; d1 = Temporal.Now.plainDateISO();
-&gt; d1.toLocaleString(<span class="hljs-string">&#x27;en&#x27;</span>, { <span class="hljs-attr">calendar</span>: <span class="hljs-string">&#x27;hebrew&#x27;</span> });
+<pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&gt; today = Temporal.PlainDate.from(<span class="hljs-string">&#x27;2021-08-06&#x27;</span>)
+&gt; today.toLocaleString(<span class="hljs-string">&#x27;en&#x27;</span>, { <span class="hljs-attr">calendar</span>: <span class="hljs-string">&#x27;hebrew&#x27;</span> });
 <span class="hljs-string">&#x27;28 Av 5781&#x27;</span>
 
-&gt; d2 = d1.add({ <span class="hljs-attr">months</span>: <span class="hljs-number">1</span> });
-&gt; d2.toLocaleString(<span class="hljs-string">&#x27;en&#x27;</span>, { <span class="hljs-attr">calendar</span>: <span class="hljs-string">&#x27;hebrew&#x27;</span> });
+&gt; nextMonth = today.add({ <span class="hljs-attr">months</span>: <span class="hljs-number">1</span> });
+&gt; nextMonth.toLocaleString(<span class="hljs-string">&#x27;en&#x27;</span>, { <span class="hljs-attr">calendar</span>: <span class="hljs-string">&#x27;hebrew&#x27;</span> });
 <span class="hljs-string">&#x27;29 Elul 5781&#x27;</span>  <span class="hljs-comment">// WRONG!</span>
 </span></span></foreignObject></svg></code></pre>
 </section>
@@ -667,8 +666,8 @@ pre code { background-color: #042029; }
 ;">
 <h1>What is the date, one month from today?</h1>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> calendar = ... <span class="hljs-comment">// choose the appropriate calendar</span>
-<span class="hljs-keyword">const</span> date = Temporal.Now.plainDate(calendar);
-<span class="hljs-built_in">console</span>.log(date.add({ <span class="hljs-attr">months</span>: <span class="hljs-number">1</span> }).toLocaleString());
+<span class="hljs-keyword">const</span> today = Temporal.Now.plainDate(calendar);
+<span class="hljs-built_in">console</span>.log(today.add({ <span class="hljs-attr">months</span>: <span class="hljs-number">1</span> }).toLocaleString());
 <span class="hljs-comment">// example in my locale: &quot;2021-09-06&quot;</span>
 </span></span></foreignObject></svg></code></pre>
 </section>
@@ -690,7 +689,7 @@ pre code { background-color: #042029; }
 " class="lead" style="--class:lead;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
 <h1>A complicated one</h1>
-<p>What time is Global Scope for me?</p>
+<p>What times are these conference sessions for me?</p>
 <p><img src="sessions.png" alt="" /></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -710,7 +709,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h1>What time is Global Scope for me?</h1>
+<h1>What time is the conference for me?</h1>
 <p>What we know:</p>
 <ul>
 <li>The two calendar dates that the sessions occur on (August 6 &amp; 13)</li>
@@ -736,7 +735,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h1>What time is Global Scope for me?</h1>
+<h1>What time is the conference for me?</h1>
 <ul>
 <li>For each session date,
 <ul>
@@ -771,7 +770,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h2>What time is Global Scope for me?</h2>
+<h2>What time is the conference for me?</h2>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> dates = [
   Temporal.PlainDate.from({ <span class="hljs-attr">year</span>: <span class="hljs-number">2021</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">6</span> }),
   Temporal.PlainDate.from({ <span class="hljs-attr">year</span>: <span class="hljs-number">2021</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">13</span> })
@@ -882,7 +881,7 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h2>What time is Global Scope for me?</h2>
+<h2>What time is the conference for me?</h2>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> myCoffeeTime = Temporal.PlainTime.from(<span class="hljs-string">&#x27;08:00&#x27;</span>);
 <span class="hljs-keyword">const</span> myBedtime = Temporal.PlainTime.from(<span class="hljs-string">&#x27;23:00&#x27;</span>);
 
@@ -909,9 +908,9 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h2>What time is Global Scope for me?</h2>
+<h2>What time is the conference for me?</h2>
 <pre><code class="language-js"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Intl</span>.DateTimeFormat(<span class="hljs-comment">/* your preferred format here */</span>);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Put Global Scope in your calendar:&#x27;</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Put the conference in your calendar:&#x27;</span>);
 dates.forEach(<span class="hljs-function">(<span class="hljs-params">date</span>) =&gt;</span> {
   sessions.forEach(<span class="hljs-function">(<span class="hljs-params">{ timeZone, hour }</span>) =&gt;</span> {
     <span class="hljs-keyword">const</span> sessionStart = date.toZonedDateTime({ timeZone, <span class="hljs-attr">plainTime</span>: { hour } });
@@ -1002,8 +1001,8 @@ pre code { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " style="--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h2>What time is Global Scope for me?</h2>
-<pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>Put Global Scope in your calendar:
+<h2>What time is the conference for me?</h2>
+<pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>Put the conference in your calendar:
 Thursday, August 5, 6:00 – 10:00 p.m.
 Friday, August 6, 10:00 a.m. – 2:00 p.m.
 Thursday, August 12, 6:00 – 10:00 p.m.
@@ -1051,9 +1050,9 @@ pre code { background-color: #042029; }
 " class="invert" style="--class:invert;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;"></section>
 <script>!function(){"use strict";const t="marpitSVGPolyfill:setZoomFactor,",e=Symbol();let r,o;function n(n){const i="object"==typeof n&&n.target||document,a="object"==typeof n?n.zoom:n;window[e]||(Object.defineProperty(window,e,{configurable:!0,value:!0}),window.addEventListener("message",(({data:e,origin:r})=>{if(r===window.origin)try{if(e&&"string"==typeof e&&e.startsWith(t)){const[,t]=e.split(","),r=Number.parseFloat(t);Number.isNaN(r)||(o=r)}}catch(t){console.error(t)}})));let l=!1;Array.from(i.querySelectorAll("svg[data-marpit-svg]"),(t=>{var e,n,i,s;t.style.transform||(t.style.transform="translateZ(0)");const c=a||o||t.currentScale||1;r!==c&&(r=c,l=c);const d=t.getBoundingClientRect(),{length:u}=t.children;for(let r=0;r<u;r+=1){const o=t.children[r],a=o.getScreenCTM();if(a){const t=null!==(n=null===(e=o.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==n?n:0,r=null!==(s=null===(i=o.y)||void 0===i?void 0:i.baseVal.value)&&void 0!==s?s:0,l=o.firstElementChild,{style:u}=l;u.transformOrigin||(u.transformOrigin=`${-t}px ${-r}px`),u.transform=`scale(${c}) matrix(${a.a}, ${a.b}, ${a.c}, ${a.d}, ${a.e-d.left}, ${a.f-d.top}) translateZ(0.0001px)`}}})),!1!==l&&Array.from(i.querySelectorAll("iframe"),(({contentWindow:e})=>{null==e||e.postMessage(`${t}${l}`,"null"===window.origin?"*":window.origin)}))}r=1,o=void 0;const i=(t,e,r)=>{if(t.getAttribute(e)!==r)return t.setAttribute(e,r),!0};function a({once:t=!1,target:e=document}={}){const r="Apple Computer, Inc."===navigator.vendor?[n]:[];let o=!t;const a=()=>{for(const t of r)t({target:e});!function(t=document){Array.from(t.querySelectorAll('svg[data-marp-fitting="svg"]'),(t=>{var e;const r=t.firstChild,o=r.firstChild,{scrollWidth:n,scrollHeight:a}=o;let l,s=1;if(t.hasAttribute("data-marp-fitting-code")&&(l=null===(e=t.parentElement)||void 0===e?void 0:e.parentElement),t.hasAttribute("data-marp-fitting-math")&&(l=t.parentElement),l){const t=getComputedStyle(l),e=Math.ceil(l.clientWidth-parseFloat(t.paddingLeft||"0")-parseFloat(t.paddingRight||"0"));e&&(s=e)}const c=Math.max(n,s),d=Math.max(a,1),u=`0 0 ${c} ${d}`;i(r,"width",`${c}`),i(r,"height",`${d}`),i(t,"preserveAspectRatio",getComputedStyle(t).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),i(t,"viewBox",u)&&t.classList.toggle("__reflow__")}))}(e),o&&window.requestAnimationFrame(a)};return a(),()=>{o=!1}}const l=Symbol(),s=document.currentScript;((t=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(t[l])return t[l];const e=a({target:t}),r=()=>{e(),delete t[l]};Object.defineProperty(t,l,{configurable:!0,value:r})})(s?s.getRootNode():document)}();
-</script></foreignObject></svg></div><div class="bespoke-marp-note" data-index="0" tabindex="0"><p>Don't introduce self; the MC will do that
+</script></foreignObject></svg></div><div class="bespoke-marp-note" data-index="0" tabindex="0"><p>I'm speaking today about the Temporal proposal, which adds modern date and time handling to JavaScript. In this presentation, I'll give a tour through the API, and show you what you can do with Temporal by means of an easy, medium, and complicated programming task.
 
-I'm speaking today about the Temporal proposal, which adds modern date and time handling to JavaScript. In this presentation, I'll give a tour through the API, and show you what you can do with Temporal by means of an easy, medium, and complicated programming task.</p></div><div class="bespoke-marp-note" data-index="1" tabindex="0"><p>Temporal is an API that has been proposed to become part of JavaScript. It's currently making its way through the standardization process. It will add a built-in library for dates and times to JavaScript, like many other programming languages already have.
+This is an adaptation of a presentation that I gave last year at a conference</p></div><div class="bespoke-marp-note" data-index="1" tabindex="0"><p>Temporal is an API that has been proposed to become part of JavaScript. It's currently making its way through the standardization process. It will add a built-in library for dates and times to JavaScript, like many other programming languages already have.
 
 Temporal is built-in to the browser or JS engine. That's important because many developers include a dependency on Moment or some similar library in their app to achieve the same thing that you could with Temporal. But, depending on how much locale data you include, this may add a payload of anywhere from a dozen to two hundred kilobytes to the app.
 
@@ -1102,13 +1101,13 @@ The Gregorian calendar is a human calendar that is used in a large part of the w
 
 However, although a large part of the world uses the Gregorian calendar, that does not mean that the whole world uses it. Some regions don't; and in some regions, people use the Gregorian calendar for business purposes, and another one for religious purposes.
 
-Already without Temporal, you can print a legacy Date object in a non-ISO, non-Gregorian calendar if the user wants it. That's good enough for some applications, but not for answering this question, because how long one month is depends on which month you're talking about, in which calendar.</p></div><div class="bespoke-marp-note" data-index="21" tabindex="0"><p>Here's an example of how that could go wrong. Today's date in the Gregorian calendar is August 6th, and one month later is September 6th. But in the Hebrew calendar, these two dates are not one month apart this year. They are one month and one day apart. So it is not enough just to add a month and print the dates in another calendar; you have to actually consider the calendar when performing the addition.
+Already without Temporal, you can print a legacy Date object in a non-ISO, non-Gregorian calendar if the user wants it. That's good enough for some applications, but not for answering this question, because how long one month is depends on which month you're talking about, in which calendar.</p></div><div class="bespoke-marp-note" data-index="21" tabindex="0"><p>Here's an example of how that could go wrong. Let's say today's date in the Gregorian calendar is August 6th, and one month later is September 6th. But in the Hebrew calendar, these two dates are not one month apart this year. They are one month and one day apart. So it is not enough just to add a month and print the dates in another calendar; you have to actually consider the calendar when performing the addition.
 
 The lesson here is when working with dates that the user will see, is to use the user's calendar, not the machine ISO calendar.</p></div><div class="bespoke-marp-note" data-index="22" tabindex="0"><p>Putting it all together, the proper way to get the date one month from today is to define exactly what &quot;month&quot; you mean by choosing the calendar!
 
 You can get the calendar from the user's preferences in your app, or from their locale using the resolvedOptions method of Intl.DateTimeFormat (though beware; this does not always correspond to what the user actually wants!)
 
-Then, you can get today's date in that calendar using Now.plainDate, add one month to it using the add method, and format it for the user with the toLocaleString method. Here's an example of what it looks like in my locale: 2021 dash 09 dash 06.</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>Now for the complicated task. We need to answer the question, using the information on the conference website, what time does Global Scope happen for me? Which sessions can I attend, when I'm not asleep? This question turns out to be surprisingly hard to answer, if we _don't_ use a computer, because it requires a lot of mental gymnastics with time zones and subtracting or adding hours. Most people, myself included, just put &quot;11 o'clock AEST&quot; into a search engine and hope that the search engine correctly guesses what I want. Temporal's strongly typed approach is perfect for solving this problem.</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Here are the facts that we know. We know from the website the two calendar dates of the conference: August 6th and 13th, 2021.
+Then, you can get today's date in that calendar using Now.plainDate, add one month to it using the add method, and format it for the user with the toLocaleString method. Here's an example of what it looks like in my locale: 2021 dash 09 dash 06.</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>Now for the complicated task. We need to answer the question, using the information on this conference website, what times do these sessions happen for me? Which sessions can I attend, when I'm not asleep? This question turns out to be surprisingly hard to answer, if we _don't_ use a computer, because it requires a lot of mental gymnastics with time zones and subtracting or adding hours. Most people, myself included, just put &quot;11 o'clock AEST&quot; into a search engine and hope that the search engine correctly guesses what I want. Temporal's strongly typed approach is perfect for solving this problem.</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>Here are the facts that we know. We know from the website the two calendar dates of the conference: August 6th and 13th, 2021.
 
 There are three sessions on each conference day. We know the local start times of each of the three sessions, and what time zones those local start times are given in.
 

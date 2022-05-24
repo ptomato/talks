@@ -29,14 +29,13 @@ _footer: Photo by <a href="https://unsplash.com/@cblanco_31">Carlos Blanco</a> o
 
 **Philip Chimento** • <i class="fab fa-github"></i> ptomato • <i class="fab fa-twitter"></i> @therealptomato  
 Igalia, in partnership with Bloomberg  
-Global Scope, 6 August 2021
 
 ![bg](gastown-clock.jpg)
 
 <!--
-Don't introduce self; the MC will do that
-
 I'm speaking today about the Temporal proposal, which adds modern date and time handling to JavaScript. In this presentation, I'll give a tour through the API, and show you what you can do with Temporal by means of an easy, medium, and complicated programming task.
+
+This is an adaptation of a presentation that I gave last year at a conference 
 -->
 
 ---
@@ -188,7 +187,7 @@ PlainMonthDay is a calendar date, but without a specific year. You could think o
 - Like `Temporal.Instant`, an exact time
 - But also with a calendar and time zone
 - Correctly accounts for the time zone's daylight saving rules
-- “The Global Scope session is on Friday, August 13th, 2021, at 11 AM, Australian Eastern Standard Time”
+- “The conference session is on Friday, August 13th, 2021, at 11 AM, Australian Eastern Standard Time”
 
 <!--
 Completing the family of types that represent dates and times is another exact time type, ZonedDateTime. Just like Instant, this type represents an exact moment in time. But it is also coupled to a location with time zone rules, because it includes a time zone. The time zone means that this type does account for daylight saving time changes (and other changes in the time zone.) It also has a calendar, which means that unlike Instant it has a year, month, and day.
@@ -424,17 +423,17 @@ Already without Temporal, you can print a legacy Date object in a non-ISO, non-G
 # What is the date, one month from today?
 
 ```js
-> d1 = Temporal.Now.plainDateISO();
-> d1.toLocaleString('en', { calendar: 'hebrew' });
+> today = Temporal.PlainDate.from('2021-08-06')
+> today.toLocaleString('en', { calendar: 'hebrew' });
 '28 Av 5781'
 
-> d2 = d1.add({ months: 1 });
-> d2.toLocaleString('en', { calendar: 'hebrew' });
+> nextMonth = today.add({ months: 1 });
+> nextMonth.toLocaleString('en', { calendar: 'hebrew' });
 '29 Elul 5781'  // WRONG!
 ```
 
 <!--
-Here's an example of how that could go wrong. Today's date in the Gregorian calendar is August 6th, and one month later is September 6th. But in the Hebrew calendar, these two dates are not one month apart this year. They are one month and one day apart. So it is not enough just to add a month and print the dates in another calendar; you have to actually consider the calendar when performing the addition.
+Here's an example of how that could go wrong. Let's say today's date in the Gregorian calendar is August 6th, and one month later is September 6th. But in the Hebrew calendar, these two dates are not one month apart this year. They are one month and one day apart. So it is not enough just to add a month and print the dates in another calendar; you have to actually consider the calendar when performing the addition.
 
 The lesson here is when working with dates that the user will see, is to use the user's calendar, not the machine ISO calendar.
 -->
@@ -445,8 +444,8 @@ The lesson here is when working with dates that the user will see, is to use the
 
 ```js
 const calendar = ... // choose the appropriate calendar
-const date = Temporal.Now.plainDate(calendar);
-console.log(date.add({ months: 1 }).toLocaleString());
+const today = Temporal.Now.plainDate(calendar);
+console.log(today.add({ months: 1 }).toLocaleString());
 // example in my locale: "2021-09-06"
 ```
 
@@ -464,17 +463,17 @@ Then, you can get today's date in that calendar using Now.plainDate, add one mon
 
 # A complicated one
 
-What time is Global Scope for me?
+What times are these conference sessions for me?
 
 ![](sessions.png)
 
 <!--
-Now for the complicated task. We need to answer the question, using the information on the conference website, what time does Global Scope happen for me? Which sessions can I attend, when I'm not asleep? This question turns out to be surprisingly hard to answer, if we _don't_ use a computer, because it requires a lot of mental gymnastics with time zones and subtracting or adding hours. Most people, myself included, just put "11 o'clock AEST" into a search engine and hope that the search engine correctly guesses what I want. Temporal's strongly typed approach is perfect for solving this problem.
+Now for the complicated task. We need to answer the question, using the information on this conference website, what times do these sessions happen for me? Which sessions can I attend, when I'm not asleep? This question turns out to be surprisingly hard to answer, if we _don't_ use a computer, because it requires a lot of mental gymnastics with time zones and subtracting or adding hours. Most people, myself included, just put "11 o'clock AEST" into a search engine and hope that the search engine correctly guesses what I want. Temporal's strongly typed approach is perfect for solving this problem.
 -->
 
 ---
 
-# What time is Global Scope for me?
+# What time is the conference for me?
 
 What we know:
 - The two calendar dates that the sessions occur on (August 6 & 13)
@@ -492,7 +491,7 @@ I also know my time zone, and I know the hours in my local time zone during whic
 
 ---
 
-# What time is Global Scope for me?
+# What time is the conference for me?
 
 - For each session date,
   - For each session,
@@ -506,7 +505,7 @@ Here's pseudocode of what we need to do. For each date and each session, we know
 
 ---
 
-## What time is Global Scope for me?
+## What time is the conference for me?
 
 ```js
 const dates = [
@@ -588,7 +587,7 @@ If instead you just want the common case of checking whether two Temporal object
 
 ---
 
-## What time is Global Scope for me?
+## What time is the conference for me?
 
 ```js
 const myCoffeeTime = Temporal.PlainTime.from('08:00');
@@ -608,11 +607,11 @@ Here I _am_ taking advantage of the fact that my online hours do not cross midni
 
 ---
 
-## What time is Global Scope for me?
+## What time is the conference for me?
 
 ```js
 const formatter = new Intl.DateTimeFormat(/* your preferred format here */);
-console.log('Put Global Scope in your calendar:');
+console.log('Put the conference in your calendar:');
 dates.forEach((date) => {
   sessions.forEach(({ timeZone, hour }) => {
     const sessionStart = date.toZonedDateTime({ timeZone, plainTime: { hour } });
@@ -682,10 +681,10 @@ We have separate methods for withCalendar and withTimeZone, because these two ca
 
 ---
 
-## What time is Global Scope for me?
+## What time is the conference for me?
 
 ```
-Put Global Scope in your calendar:
+Put the conference in your calendar:
 Thursday, August 5, 6:00 – 10:00 p.m.
 Friday, August 6, 10:00 a.m. – 2:00 p.m.
 Thursday, August 12, 6:00 – 10:00 p.m.
