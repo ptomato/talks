@@ -27,7 +27,7 @@ _footer: DRAFT
 
 # ⌚ **Temporal**
 
-**(your name here?)**
+**Ujjwal Sharma**
 Igalia, in partnership with Bloomberg  
 TC39 June 2022
 
@@ -115,7 +115,7 @@ Temporal.Instant.from('+275760-09-13T01:00+01:00').epochSeconds
 
 <!-- _footer: Tests: ❌ -->
 
-### Fix mistake in time zone name grammar (PR [#2200](https://github.com/tc39/proposal-temporal/pull/2200))
+### Fix time zone name grammar (PR [#2200](https://github.com/tc39/proposal-temporal/pull/2200))
 
 - Time zone strings with UTC offset time zones not in grammar
 - More invalid strings that should've been valid:
@@ -163,6 +163,48 @@ Temporal.PlainDate.from('2022-01-01').with({
     return 2023;
   },
 });
+```
+
+---
+
+<!-- _footer: Tests: ❌ -->
+
+### Check calendar in PlainTime (PR [#2224](https://github.com/tc39/proposal-temporal/pull/2224))
+
+- For consistency with property bags, check calendar when converting to PlainTime
+- Only ISO 8601 calendar allowed in PlainTime
+- Necessary for web-compatibility if PlainTime gets calendar later
+
+```js
+plainTime = Temporal.PlainTime.from({ hour: 12, minute: 0, calendar: 'gregory' });
+// throws (unchanged)
+
+const plainDateTime = Temporal.Now.plainDateTime('gregory');
+plainTime = Temporal.PlainTime.from(plainDateTime);
+// Current spec text: normal PlainTime
+// Intended: throws RangeError, e.g. "only ISO 8601 calendar allowed in PlainTime"
+// (Ditto for plainDateTime.toPlainTime(), ZonedDateTime.from(), and ZonedDateTime.p.toPlainTime())
+```
+
+---
+
+<!-- _footer: Tests: ❌ -->
+
+### Validate overflow option in `from()` (PR [#2225](https://github.com/tc39/proposal-temporal/pull/2225))
+
+- Similar to previous item
+- For consistency with property bags, validate overflow option when converting Temporal objects to PlainDate and PlainDateTime
+
+```js
+plainDate = Temporal.PlainDate.from({ year: 2022, month: 6, day: 6 }, { overflow: 'bogus value' });
+// throws (unchanged)
+
+const plainDateTime = Temporal.Now.plainDateTimeISO();
+plainDate = Temporal.PlainDate.from(plainDateTime, { overflow: 'bogus value' });
+// Current spec text: normal PlainDate
+// Intended: throws RangeError due to `overflow` value
+
+// (Ditto for PlainDateTime.from())
 ```
 
 ---
