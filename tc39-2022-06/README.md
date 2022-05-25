@@ -165,9 +165,10 @@ Temporal.PlainDate.from('2022-01-01').with({
 });
 ```
 
+<!--
 ---
 
-<!-- _footer: Tests: ❌ -->
+<! _footer: Tests: ❌ >
 
 ### Check calendar in PlainTime (PR [#2224](https://github.com/tc39/proposal-temporal/pull/2224))
 
@@ -185,6 +186,7 @@ plainTime = Temporal.PlainTime.from(plainDateTime);
 // Intended: throws RangeError, e.g. "only ISO 8601 calendar allowed in PlainTime"
 // (Ditto for plainDateTime.toPlainTime(), ZonedDateTime.from(), and ZonedDateTime.p.toPlainTime())
 ```
+-->
 
 ---
 
@@ -207,9 +209,10 @@ plainDate = Temporal.PlainDate.from(plainDateTime, { overflow: 'bogus value' });
 // (Ditto for PlainDateTime.from())
 ```
 
+<!--
 ---
 
-<!-- _footer: Tests: ❌ -->
+<! _footer: Tests: ❌ >
 
 ### Fix overflow case in Duration.total (PR #0000)
 
@@ -222,6 +225,7 @@ Temporal.Duration.from({ microseconds: Number.MAX_VALUE }).total('nanoseconds')
 // Current spec text: unclear what you should get; fails assertion
 // After this change: Infinity
 ```
+-->
 
 ---
 
