@@ -40,7 +40,7 @@ TC39 July 2022
 - We continue to adjust the proposal based on implementor feedback and bug reports
 - Fixes continue to become more and more obscure edge cases
 - More to present this time than last time, due to SpiderMonkey implementation advancing
-- This month's major bug finder is **André Bargull**
+- This month's major bug finder is **André Bargull**, thanks :tada:
 
 ---
 
@@ -166,11 +166,12 @@ zonedDateTime.toString({ calendarName: 'never' });
 
 ---
 
-### ISO string grammar fixes (PR [#2284](https://github.com/tc39/proposal-temporal/pull/2284), [#2287](https://github.com/tc39/proposal-temporal/pull/2287))
+### ISO 8601 grammar (PR [#2284](https://github.com/tc39/proposal-temporal/pull/2284), [#2287](https://github.com/tc39/proposal-temporal/pull/2287), [#2345](https://github.com/tc39/proposal-temporal/pull/2345))
 
 - Clarify `192312[America/New_York]` is a year-month string, not `19:23:12`
 - Clarify `1901-04[America/New_York]` is a year-month string, not `19:01` with UTC-4 offset
 - Clarify `192312[u-ca=iso8601]` is a year-month string, not `19:23:12`
+- Accept and ignore calendar in Instant strings: e.g. `2022-07-18T10:00Z[u-ca=gregory]`
 - A few more mistakes in disambiguating HHMMSS from YYYYMM
 
 ---
@@ -236,6 +237,39 @@ Temporal.PlainDate.from({ year: 2022, month: 7, day: 18, calendar })
   // Before: throws "don't call me"
   // After: throws "do call me"
 ```
+
+---
+
+### Correct duration balancing algorithm (PR [#2344](https://github.com/tc39/proposal-temporal/pull/2344))
+
+- Incorrect translation of the code into specification steps led to durations being balanced relative to the wrong date.
+
+```js
+const relativeTo = Temporal.PlainDate.from('1972-02-01');
+const duration = Temporal.Duration.from({ years: 3, months: 11, days: 28 });
+// (this duration is one day short of 4 years because February 1972 had 29 days)
+duration.round({ largestUnit: 'years', relativeTo });
+  // Before: result is a duration of 4 years
+  // After: result is the same as the input duration
+```
+
+<!--
+---
+
+### Remove unnecessary call to user code (PR [#2346](https://github.com/tc39/proposal-temporal/pull/2346))
+
+- Converting the `relativeTo` option from a ZonedDateTime to a PlainDate in RoundDuration involves a call to a time zone method
+- Do this only for certain `smallestUnit` values when it is needed, instead of unconditionally
+
+```js
+const relativeTo = Temporal.Now.zonedDateTimeISO({
+  getOffsetNanosecondsFor() { throw new Error("don't call me"); }
+});
+Temporal.Duration.from({ seconds: 120 }).round({ smallestUnit: 'minutes', relativeTo });
+  // Before: throws "don't call me"
+  // After: a duration of 2 minutes
+```
+-->
 
 ---
 
