@@ -253,6 +253,43 @@ duration.round({ largestUnit: 'years', relativeTo });
   // After: result is the same as the input duration
 ```
 
+---
+
+### Edge case in nested calendar props (PR [#2350](https://github.com/tc39/proposal-temporal/pull/2350))
+
+- Nested calendar properties in property bags are disallowed
+- Value was handled inconsistently if it was a Temporal object
+- One more level of nesting was allowed than intended
+
+```js
+const date = Temporal.PlainDate.from('2020-01-01');
+Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: date });
+  // OK (unchanged)
+Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: { calendar: 'iso8601' } });
+  // OK (unchanged; property bag stands in for PlainDate)
+Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: { calendar: { calendar: date } } });
+  // throws RangeError (unchanged; too much nesting)
+Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: { calendar: date } });
+  // Before: OK
+  // After: throws RangeError
+```
+
+---
+
+### Extreme time zone transitions (PR [#2351](https://github.com/tc39/proposal-temporal/pull/2351))
+
+- `Temporal.TimeZone.p.getNextTransition()` at the end of the allowed range for `Temporal.Instant` should not throw
+- Consistent with what we do for `Temporal.Now.instant()` if the system clock is past the end of the range
+- In the year 275760 will we still have time zone transitions anyway?
+
+```js
+const lastTime = Temporal.Instant.fromEpochSeconds(86400_0000_0000);
+const tz = Temporal.TimeZone.from('America/Vancouver');
+tz.getNextTransition(lastTime);
+  // Before: throws RangeError
+  // After: null
+```
+
 <!--
 ---
 
