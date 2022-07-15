@@ -254,24 +254,9 @@ duration.round({ largestUnit: 'years', relativeTo });
 
 ---
 
-### Edge case in nested calendar props (PR [#2350](https://github.com/tc39/proposal-temporal/pull/2350))
+### ~~Edge case in nested calendar props~~ (PR [#2350](https://github.com/tc39/proposal-temporal/pull/2350))
 
-- Nested calendar properties in property bags are disallowed
-- Value was handled inconsistently if it was a Temporal object
-- One more level of nesting was allowed than intended
-
-```js
-const date = Temporal.PlainDate.from('2020-01-01');
-Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: date });
-  // OK (unchanged)
-Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: { calendar: 'iso8601' } });
-  // OK (unchanged; property bag stands in for PlainDate)
-Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: { calendar: { calendar: date } } });
-  // throws RangeError (unchanged; too much nesting)
-Temporal.PlainDate.from({ year: 2020, month: 1, day: 1, calendar: { calendar: date } });
-  // Before: OK
-  // After: throws RangeError
-```
+- (Needs more discussion after all, withdrawn)
 
 ---
 
