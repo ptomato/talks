@@ -1,0 +1,26 @@
+{
+  "name": "guadec2022",
+  "version": "1.0.0",
+  "description": "Slides for GUADEC 2022",
+  "main": "index.html",
+  "scripts": {
+    "build": "marp --html README.md -o index.html",
+    "pdf": "marp --allow-local-files --html README.md -o slides-Chimento-guadec2022.pdf",
+    "watch": "marp --watch --html README.md -o index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ptomato/talks"
+  },
+  "keywords": [
+    "guadec",
+    "gnome",
+    "gjs"
+  ],
+  "author": "Philip Chimento <pchimento@igalia.com>",
+  "license": "CC-BY-ND-4.0",
+  "dependencies": {
+    "@marp-team/marp-cli": "^2.0.4"
+  },
+  "devDependencies": {}
+}
