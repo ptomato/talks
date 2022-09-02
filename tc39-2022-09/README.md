@@ -24,7 +24,6 @@ style: |
 
 <!--
 _class: invert lead
-_footer: DRAFT
 -->
 
 # ⌚ **Temporal**
@@ -138,11 +137,12 @@ Temporal.TimeZone.from(timeZoneInstance);
 
 ---
 
-### Fix rounding in Instant arithmetic (PR #NNNN)
+### Fix rounding in Instant arithmetic (PR [#2400](https://github.com/tc39/proposal-temporal/pull/2400))
 
 - Latent bug in the spec text, exposed by the adoption of NumberFormat V3's rounding modes
 - Result of `Temporal.Instant.prototype.until()` was rounded as if it were a number of epoch nanoseconds, not a Duration
 - Ditto for `Temporal.Instant.prototype.since()`
+- The intention was already correctly tested in test262, so this brings the spec text in line with that
 
 ---
 
