@@ -1,0 +1,25 @@
+{
+  "name": "tc39-2022-09",
+  "version": "1.0.0",
+  "description": "Slides for Temporal item at September 2022 TC39 plenary",
+  "main": "index.html",
+  "scripts": {
+    "build": "marp --html README.md -o index.html",
+    "watch": "marp --watch --html README.md -o index.html"
+  },
+  "repository": "https://github.com/ptomato/talks",
+  "keywords": [
+    "tc39",
+    "plenary",
+    "temporal",
+    "date",
+    "calendar",
+    "time zone"
+  ],
+  "author": "Philip Chimento <pchimento@igalia.com>",
+  "license": "CC-BY-ND-4.0",
+  "private": false,
+  "dependencies": {
+    "@marp-team/marp-cli": "^2.1.2"
+  }
+}
