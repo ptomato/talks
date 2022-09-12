@@ -90,7 +90,7 @@ Temporal.Now.zonedDateTimeISO()
 
 ---
 
-### ISO 8601 grammar (PRs [#2394](https://github.com/tc39/proposal-temporal/pull/2394), [#2395](https://github.com/tc39/proposal-temporal/pull/2395), [#2398](https://github.com/tc39/proposal-temporal/pull/2398))
+### ISO 8601 grammar (PRs [#2394](https://github.com/tc39/proposal-temporal/pull/2394), [#2395](https://github.com/tc39/proposal-temporal/pull/2395))
 
 Several other tweaks:
 - A string of 8 decimal digits is a valid (but not currently existing) calendar name and also valid YYYYMMDD syntax.
@@ -102,8 +102,9 @@ Several other tweaks:
 ### ISO 8601 grammar (2)
 
 Several other tweaks:
-- Allow annotations after MM-DD and YYYY-MM syntax
 - Fix bug where interpreting a `relativeTo` string as a PlainDate would accept a `Z` UTC designator (which PlainDate does not)
+- ~~Allow annotations after MM-DD and YYYY-MM syntax~~
+  - (PR [#2398](https://github.com/tc39/proposal-temporal/pull/2398) proved controversial during review period; withdrawn from this plenary)
 
 ---
 

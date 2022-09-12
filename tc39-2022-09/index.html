@@ -225,7 +225,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 " data-marpit-pagination="8" data-marpit-pagination-total="14" style="--paginate:true;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;">
-<h3>ISO 8601 grammar (PRs <a href="https://github.com/tc39/proposal-temporal/pull/2394">#2394</a>, <a href="https://github.com/tc39/proposal-temporal/pull/2395">#2395</a>, <a href="https://github.com/tc39/proposal-temporal/pull/2398">#2398</a>)</h3>
+<h3>ISO 8601 grammar (PRs <a href="https://github.com/tc39/proposal-temporal/pull/2394">#2394</a>, <a href="https://github.com/tc39/proposal-temporal/pull/2395">#2395</a>)</h3>
 <p>Several other tweaks:</p>
 <ul>
 <li>A string of 8 decimal digits is a valid (but not currently existing) calendar name and also valid YYYYMMDD syntax.
@@ -259,8 +259,12 @@ marp-pre code, marp-pre { background-color: #042029; }
 <h3>ISO 8601 grammar (2)</h3>
 <p>Several other tweaks:</p>
 <ul>
-<li>Allow annotations after MM-DD and YYYY-MM syntax</li>
 <li>Fix bug where interpreting a <code>relativeTo</code> string as a PlainDate would accept a <code>Z</code> UTC designator (which PlainDate does not)</li>
+<li><s>Allow annotations after MM-DD and YYYY-MM syntax</s>
+<ul>
+<li>(PR <a href="https://github.com/tc39/proposal-temporal/pull/2398">#2398</a> proved controversial during review period; withdrawn from this plenary)</li>
+</ul>
+</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
