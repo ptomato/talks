@@ -152,3 +152,69 @@ Temporal.TimeZone.from(timeZoneInstance);
 # Requesting consensus
 
 On the normative changes just presented
+
+---
+
+<!-- _class: lead -->
+
+# Extra topic
+IXDTF annotations and the critical flag
+
+---
+
+## Recap: PR [#2397](https://github.com/tc39/proposal-temporal/pull/2397)
+
+- IXDTF contains a specification of our proposed calendar annotation, as well as the de-facto standard time zone annotation introduced by Java
+- Also allows other (as yet unknown) annotations: 2022-09-13T10:00[Asia/Tokyo]**<span style="color:#4e9a06">\[magic=happens]</span>**
+- Introduces a "critical flag" indicating that an annotation must be respected: 2022-09-13T10:00[**<span style="color:#4e9a06">!</span>**<!---->Asia/Tokyo]
+
+---
+
+## Recap (2)
+
+- Temporal only recognizes time zone and calendar annotations, and ignores unknown ones unless they are marked critical
+- Time zone and calendar annotations were already treated as critical anyway, so the critical flag has no effect in Temporal
+  - i.e. `2022-09-13[u-ca=hebrew]` would already never return a date in the Gregorian calendar
+  - However, flag may be needed for interop with other consumers of ISO strings
+
+---
+
+## Critical flag discussion
+
+- Objection on Tuesday: parsing the string loses the information about the presence of the critical flag, for applications that might want to preserve it
+- Objections to objection:
+  - Not the intention of IETF to make the flag part of the data model
+  - Persisting information occupies bits on users' computers whereas use case is as-yet theoretical
+  
+---
+
+## Resolution
+
+- We now agree that it would be web-compatible to support this use case in the future
+- Therefore, all parties OK to proceed as-is
+
+---
+
+## Possible future support (1)
+
+- A future proposal that adds richer parsing methods, allowing you to access the spelling of each component of the string, e.g.
+```js
+Temporal.parseAsZonedDateTime('+0020220913 102060,000[!aMeRiCa/vAnCoUvEr][keep=this][u-ca=iso8601]')
+// → sample output { year: '+002022', month: '09', ..., timeZoneCritical: '!', ... }
+```
+
+---
+
+## Possible future support (2)
+
+- Addition to the data model of Temporal
+- Notably, default output of `toString` would _not_ change regardless of whether we supported this use case now or in the future
+- If the default output were to pass-through `!`, deserializing and reserializing could break downstream consumers that didn't support `!`
+
+---
+
+<!-- _class: lead -->
+
+# Requesting consensus
+
+On PR [#2397](https://github.com/tc39/proposal-temporal/pull/2397)
