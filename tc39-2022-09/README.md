@@ -159,62 +159,31 @@ On the normative changes just presented
 
 # Extra topic
 IXDTF annotations and the critical flag
-
----
-
-## Recap: PR [#2397](https://github.com/tc39/proposal-temporal/pull/2397)
-
-- IXDTF contains a specification of our proposed calendar annotation, as well as the de-facto standard time zone annotation introduced by Java
-- Also allows other (as yet unknown) annotations: 2022-09-13T10:00[Asia/Tokyo]**<span style="color:#4e9a06">\[magic=happens]</span>**
-- Introduces a "critical flag" indicating that an annotation must be respected: 2022-09-13T10:00[**<span style="color:#4e9a06">!</span>**<!---->Asia/Tokyo]
-
----
-
-## Recap (2)
-
-- Temporal only recognizes time zone and calendar annotations, and ignores unknown ones unless they are marked critical
-- Time zone and calendar annotations were already treated as critical anyway, so the critical flag has no effect in Temporal
-  - i.e. `2022-09-13[u-ca=hebrew]` would already never return a date in the Gregorian calendar
-  - However, flag may be needed for interop with other consumers of ISO strings
+PR [#2397](https://github.com/tc39/proposal-temporal/pull/2397)
 
 ---
 
 ## Critical flag discussion
 
-- Objection on Tuesday: parsing the string loses the information about the presence of the critical flag, for applications that might want to preserve it
-- Objections to objection:
-  - Not the intention of IETF to make the flag part of the data model
-  - Persisting information occupies bits on users' computers whereas use case is as-yet theoretical
-  
----
-
-## Resolution
-
-- We now agree that it would be web-compatible to support this use case in the future
-- Therefore, all parties OK to proceed as-is
+- After Day 1 of plenary, we discussed and resolved blocking issues
+- All parties OK to proceed with the normative change as originally presented
 
 ---
 
-## Possible future support (1)
+## Outcome
 
-- A future proposal that adds richer parsing methods, allowing you to access the spelling of each component of the string, e.g.
-```js
-Temporal.parseAsZonedDateTime('+0020220913 102060,000[!aMeRiCa/vAnCoUvEr][keep=this][u-ca=iso8601]')
-// → sample output { year: '+002022', month: '09', ..., timeZoneCritical: '!', ... }
-```
-
----
-
-## Possible future support (2)
-
-- Addition to the data model of Temporal
-- Notably, default output of `toString` would _not_ change regardless of whether we supported this use case now or in the future
-- If the default output were to pass-through `!`, deserializing and reserializing could break downstream consumers that didn't support `!`
+- To maximize compatibility with Java and other legacy libraries, default output of `toString` doesn't include `!`
+- Critical flag is available as opt-in option to `toString`
+- A web-compatible follow-up proposal (e.g. new read-only property, separate parsing method, etc.) can be made to add the ability to detect presence of `!` in input strings, so that users can take that info and  vary the output of `toString` if needed
+- Whether that proposal is needed will depend on use cases for `!` that may appear
 
 ---
-
-<!-- _class: lead -->
 
 # Requesting consensus
 
 On PR [#2397](https://github.com/tc39/proposal-temporal/pull/2397)
+
+Recap of what it does:
+- Bring syntax of annotations in line with IXDTF
+- Enable the `toString` option noted in the previous slide
+- Throw if unknown annotations with the critical flag are parsed
