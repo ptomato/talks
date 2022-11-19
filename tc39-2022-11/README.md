@@ -20,7 +20,6 @@ style: |
   .hljs-attr { color: #e9b96e; }
   .hljs-variable { color: red; font-weight: bold; }
   /* .hljs-comment, .hljs-regexp, .hljs-symbol */
-footer: DRAFT in-progress version
 ---
 
 <!--
@@ -44,7 +43,7 @@ TC39 November-December 2022
 
 <!--
 This update will be a bit different from the ones in previous meetings.
-I have some normative PRs to present for consensus
+I have some normative PRs to present for consensus, as usual, but I'd also like to take a bit of extra time this time...
 -->
 
 ---
@@ -55,39 +54,33 @@ _class: lead
 
 # Tour of remaining issues
 
----
-
 <!--
-_footer: Issue [#1450](https://github.com/tc39/proposal-temporal/issues/1450)
+    ...to take you on a tour of the remaining normative changes that we would potentially make to the proposal before Stage 4. This number is 
 -->
 
-# IETF standardization progress
+---
+
+## IETF standardization progress [#1450](https://github.com/tc39/proposal-temporal/issues/1450)
 
 - IETF document has passed working-group last call
 - Currently in IESG review; changes unlikely, but possible
 - An official RFC number will remove the blocker from our side
 
 <!--
-    IESG = Internet Engineering Steering Group
+    To recap, we are standardizing calendar and time zone annotation syntax in the IETF and agreed at stage 3 to block shipping until there is a standard we can normatively reference.
+    The IETF chartered a working group which completed this document and it's now passed working-group last call.
+    It's now undergoing IESG = Internet Engineering Steering Group review before publication.
 -->
 
 ---
 
-<!--
-_footer: Issue [#1808](https://github.com/tc39/proposal-temporal/issues/1808)
--->
-
-# Optimizability of built-in calendars and time zones (1/4)
+## Optimizability of built-in calendars and time zones [#1808](https://github.com/tc39/proposal-temporal/issues/1808) (1/4)
 
 **Summary:** Normative changes that make it easier for implementations to determine when it's OK to avoid creating a `Temporal.Calendar` or `Temporal.TimeZone` object and just use the built-in behaviour.
 
 ---
 
-<!--
-_footer: Issue [#1808](https://github.com/tc39/proposal-temporal/issues/1808)
--->
-
-# Optimizability (2/4)
+## Optimizability [#1808](https://github.com/tc39/proposal-temporal/issues/1808) (2/4)
 
 - In previous presentations I listed [#1808](https://github.com/tc39/proposal-temporal/issues/1808) as one of the "big" blockers
 - No longer; we've now arrived at a solution
@@ -96,11 +89,7 @@ _footer: Issue [#1808](https://github.com/tc39/proposal-temporal/issues/1808)
 
 ---
 
-<!--
-_footer: Issue [#1808](https://github.com/tc39/proposal-temporal/issues/1808)
--->
-
-# Optimizability (3/4)
+## Optimizability [#1808](https://github.com/tc39/proposal-temporal/issues/1808) (3/4)
 
 ```js
 // Basically the problem is this:
@@ -119,11 +108,7 @@ const d4 = d3.add({ months: 1 });
 
 ---
 
-<!--
-_footer: Issue [#1808](https://github.com/tc39/proposal-temporal/issues/1808)
--->
-
-# Optimizability (4/4)
+## Optimizability [#1808](https://github.com/tc39/proposal-temporal/issues/1808) (4/4)
 
 Proposed solution:
 - Two paths depending on whether object's [[Calendar]] internal slot contains a string (built-in calendar) or an object (custom calendar)
@@ -135,11 +120,7 @@ More details in the issue thread; hope to present spec text next time
 
 ---
 
-<!--
-_footer: Issue [#2005](https://github.com/tc39/proposal-temporal/issues/2005)
--->
-
-# More integration of TimeZone and Calendar with Intl
+## More integration of TimeZone and Calendar with Intl [#2005](https://github.com/tc39/proposal-temporal/issues/2005)
 
 - TG2 has expressed a wish for Temporal to include closer integration of `Temporal.TimeZone` and `Temporal.Calendar` in ECMA-402
 - Nontrivial amount of work, but likely "mechanical"
@@ -148,11 +129,7 @@ _footer: Issue [#2005](https://github.com/tc39/proposal-temporal/issues/2005)
 
 ---
 
-<!--
-_footer: Issue [#2169](https://github.com/tc39/proposal-temporal/issues/2169)
--->
-
-# Extra calendar fields in ECMA-262
+## Extra calendar fields in ECMA-262 [#2169](https://github.com/tc39/proposal-temporal/issues/2169)
 
 - Disagreement about what 402 may add to objects defined in 262
 - Agenda item scheduled to discuss during this plenary
@@ -160,66 +137,49 @@ _footer: Issue [#2169](https://github.com/tc39/proposal-temporal/issues/2169)
 
 ---
 
-<!--
-_footer: Issue [#2195](https://github.com/tc39/proposal-temporal/issues/2195)
--->
-
-# Domain of Duration arithmetic (1/2)
+## Domain of Duration arithmetic [#2195](https://github.com/tc39/proposal-temporal/issues/2195) (1/2)
 
 - In a previous update we changed `Temporal.Duration`'s internal slots to store ℝ(𝔽(_value_)) "float64-representable integers" in response to implementor concern about Duration storage size
 - Concerns still exist about the domain in which arithmetic is performed with these f64-representable integers: ℝ or 𝔽?
 - Champions feel that the status quo is the "least worst" solution
-- This is the sole "big" blocker remaining in my opinion
+- Open to alternatives
 
 ---
 
-<!--
-_footer: Issue [#2195](https://github.com/tc39/proposal-temporal/issues/2195)
--->
-
-# Domain of Duration arithmetic (2/2)
+## Domain of Duration arithmetic [#2195](https://github.com/tc39/proposal-temporal/issues/2195) (2/2)
 
 Plan:
-- Prepare a brief motivating current choices and detailing alternatives
-- Invite stakeholders to a discussion
+- Prepare a brief motivating current choices and detailing already-considered alternatives
+- Invite new alternatives from implementors
 - Fallback is to retain the status quo
 
 ---
 
-<!--
-_footer: Issue [#2221](https://github.com/tc39/proposal-temporal/issues/2221)
--->
-
-# Calendar in PlainTime conversion
+## Calendar in PlainTime conversion [#2221](https://github.com/tc39/proposal-temporal/issues/2221)
 
 - `Temporal.PlainTime` has no calendar but we want to keep the option open to introduce one in the future
 ```js
 const dt = Temporal.Now.zonedDateTime({ calendar: 'hebrew' });
-dt.toPlainTime()  // Now, drops the calendar. What about in the future?
+dt.toPlainTime()  // Currently, drops the calendar. What about in the future?
 ```
-- Issue is small in scope, but...
-- Need to figure out how to keep web-compatible without affecting developer experience now
+
+- Low in severity; use cases for PlainTime calendars not clear
+- Also small in scope, but...
+- Must find how to keep web-compatible without affecting DX now
 - Alternatively, decide that PlainTime will never have a calendar
 
 ---
 
-<!--
-_footer: Issues [#2247](https://github.com/tc39/proposal-temporal/issues/2247) and [#2289](https://github.com/tc39/proposal-temporal/issues/2289)
--->
-
-# Unnecessary calls to user code
+## Unnecessary calls to user code [#2247](https://github.com/tc39/proposal-temporal/issues/2247) & [#2289](https://github.com/tc39/proposal-temporal/issues/2289)
 
 - Implementation feedback has turned up several cases of calling redundantly into user code
 - Until now, we've been fixing these case-by-case
-- Best solved by auditing the whole proposal; in progress
+- Best solved by auditing the whole proposal
+- Work in progress
 
 ---
 
-<!--
-_footer: Issue [#2315](https://github.com/tc39/proposal-temporal/issues/2315)
--->
-
-# MakeDay/MakeDate/TimeFromYear out of range
+## MakeDay/MakeDate/TimeFromYear out of range [#2315](https://github.com/tc39/proposal-temporal/issues/2315)
 
 - [MakeDay](https://tc39.es/ecma262/#sec-makeday), [MakeDate](https://tc39.es/ecma262/#sec-makedate), and [TimeFromYear](https://tc39.es/ecma262/#eqn-TimeFromYear) can overflow to infinity
 - This is even already a problem in ECMA-262 (see [ecma262#1087](https://github.com/tc39/ecma262/issues/1087))
@@ -236,9 +196,13 @@ _footer: Issue [#2315](https://github.com/tc39/proposal-temporal/issues/2315)
 - Need the IETF to publish an RFC, as per previous plenary decision
 - Probably makes sense to ship after:
   - Landing the "optimizability" change ([#1808](https://github.com/tc39/proposal-temporal/issues/1808))
-  - Convincing ourselves we have the least worst solution for Duration arithmetic ([#2195](https://github.com/tc39/proposal-temporal/issues/2195))
+  - Changes to Duration arithmetic domain, if any ([#2195](https://github.com/tc39/proposal-temporal/issues/2195))
 - All other potential normative changes are minor
 - Assuming no more big ones are discovered by implementations
+
+<!--
+    Aside from those two, or one, as the case may be, the champions feel that all the other normative changes that I described are at the level of "bugfix" and unlikely to break the web if changed after Temporal is exposed to the web.
+-->
 
 ---
 
@@ -251,7 +215,7 @@ _footer: Issue [#2315](https://github.com/tc39/proposal-temporal/issues/2315)
 <!--
     test262 coverage is probably sufficient if including the tests in the staging section. But the staging section doesn't count towards stage 4 requirements, so this needs some more work, but it is bounded.
 
-    In order to avoid the problem that we had at Stage 3 where I had the impression that the reviewers and editors found the proposal too large to review each part of it with full attention, I'm wondering if we can stage the spec text in sections, where the editors can review each section once the previous section is agreed upon. We can discuss the process more closer to the time.
+    In order to avoid the problem that we had at Stage 3 where I had the impression that the reviewers and editors found the proposal too large to review each part of it with full attention, I'm wondering if we can stage the spec text in sections, where the editors can review each section once the previous section is agreed upon. We can discuss the process more closer to the time, but it's something we're already thinking about.
 -->
 
 ---
@@ -269,11 +233,7 @@ _footer: Issue [#2315](https://github.com/tc39/proposal-temporal/issues/2315)
 
 ---
 
-<!--
-_footer: Issue [#2112](https://github.com/tc39/proposal-temporal/issues/2112), PR #XXXX
--->
-
-# Handling of non-numeric inputs
+## Handling of non-numeric inputs [#2438](https://github.com/tc39/proposal-temporal/pull/2438)
 
 ```js
 new Temporal.Duration(NaN); new Temporal.PlainTime(NaN);
@@ -284,29 +244,21 @@ new Temporal.Duration(Temporal); new Temporal.PlainTime(Temporal);
 // After: RangeError
 ```
 
-- Align better with Web IDL's conversions for `[EnforceRange] long long` and `double` types
-- Seemed like there was general support for this change in an informal poll a few months ago
+- Align better with Web IDL's conversions for `double` and `[EnforceRange] long long` types
+- Positive support for this change in informal poll a few months ago
 
 ---
 
-<!--
-_footer: Issue [#2254](https://github.com/tc39/proposal-temporal/issues/2254), PR #XXXX
--->
-
-# Order of observable property accesses
+## Order of observable property access [#2437](https://github.com/tc39/proposal-temporal/pull/2437)
 
 - In general, access properties of property bags in alphabetical order
-  - More detailed design principle described in the issue
+  - More detailed design principle described in the [issue]((https://github.com/tc39/proposal-temporal/issues/2254))
 - Align with `Intl.DurationFormat` proposal
   - See corresponding [normative change](https://github.com/tc39/proposal-intl-duration-format/pull/129) there
 
 ---
 
-<!--
-_footer: Issue [#2354](https://github.com/tc39/proposal-temporal/issues/2354), PR [#2433](https://github.com/tc39/proposal-temporal/pull/2433)
--->
-
-# Fast-fail calendar⇔time zone conversion
+## Fast-fail calendar⇔time zone conversion [#2433](https://github.com/tc39/proposal-temporal/pull/2433)
 
 - Throw when passing an object with `Temporal.Calendar` brand to an API that expects a time zone object, and vice versa
 - Mainly to prevent falling into this trap:
@@ -320,11 +272,7 @@ new Temporal.ZonedDateTime(0n, calendar, timeZone);
 
 ---
 
-<!--
-_footer: Issue [#2379](https://github.com/tc39/proposal-temporal/issues/2379), PR [#2428](https://github.com/tc39/proposal-temporal/pull/2428)
--->
-
-# IXDTF annotations and UTC offsets
+## IXDTF annotations and UTC offsets [#2428](https://github.com/tc39/proposal-temporal/pull/2428)
 
 - Leftover from the changes presented last time regarding IXDTF annotations format
   - (because we had some open questions about UTC offset syntax in ISO 8601)
@@ -333,11 +281,7 @@ _footer: Issue [#2379](https://github.com/tc39/proposal-temporal/issues/2379), P
 
 ---
 
-<!--
-_footer: Issue [#2405](https://github.com/tc39/proposal-temporal/issues/2405), PR [#2425](https://github.com/tc39/proposal-temporal/pull/2425)
--->
-
-# `yearOfWeek` API
+## `yearOfWeek` API [#2425](https://github.com/tc39/proposal-temporal/pull/2425)
 
 - Problem identified in the wild: 202**2**-01-01 is day 6 of ISO week 52 of 202**1**
 ```js
@@ -352,11 +296,7 @@ console.log(`${d} is day ${d.dayOfWeek} of ISO week ${d.weekOfYear} of ${d.yearO
 
 ---
 
-<!--
-_footer: Issue [#2410](https://github.com/tc39/proposal-temporal/issues/2410), PR [#2411](https://github.com/tc39/proposal-temporal/pull/2411)
--->
-
-# Don't run user code in `.id` getter
+## Don't run user code in `.id` getter [#2411](https://github.com/tc39/proposal-temporal/pull/2411)
 
 - Fix unintentional leftover from an earlier change
 ```js
@@ -372,11 +312,7 @@ t.id  // => "UTC" (unchanged)
 
 ---
 
-<!--
-_footer: Issue [#2423](https://github.com/tc39/proposal-temporal/issues/2423), PR [#2424](https://github.com/tc39/proposal-temporal/pull/2424)
--->
-
-# Fix rounding in epoch time getters
+## Fix rounding in epoch time getters [#2424](https://github.com/tc39/proposal-temporal/pull/2424)
 
 - Instant and ZonedDateTime's `.epochSeconds`, `.epochMilliseconds`, `.epochMicroseconds` getters round in the wrong direction pre-1970
 - For epoch times, "rounding up" is towards the end of time, "down" is towards the Big Bang
