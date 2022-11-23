@@ -193,7 +193,7 @@ dt.toPlainTime()  // Currently, drops the calendar. What about in the future?
 # When is it ready to ship?
 
 - "Ready to ship" definition being discussed in this plenary
-- Need the IETF to publish an RFC, as per previous plenary decision
+- Need the IETF to publish an RFC, so they can complete their review
 - Probably makes sense to ship after:
   - Landing the "optimizability" change ([#1808](https://github.com/tc39/proposal-temporal/issues/1808))
   - Changes to Duration arithmetic domain, if any ([#2195](https://github.com/tc39/proposal-temporal/issues/2195))
@@ -206,10 +206,11 @@ dt.toPlainTime()  // Currently, drops the calendar. What about in the future?
 
 ---
 
-# When is it ready for Stage 4?
+# What is needed for Stage 4?
 
 - test262 nearing completion
 - Implementations known to be near completion: SerenityOS, V8
+- Implementations in progress: SpiderMonkey, JSC
 - Pull request into ECMA-262 would be giant; stage it in sections?
 
 <!--
