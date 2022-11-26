@@ -209,8 +209,8 @@ dt.toPlainTime()  // Currently, drops the calendar. What about in the future?
 # What is needed for Stage 4?
 
 - test262 nearing completion
-- Implementations known to be near completion: SerenityOS, V8
-- Implementations in progress: SpiderMonkey, JSC
+- Implementations known to be near completion: GraalJS, LibJS, V8
+- Implementations in progress: Boa, JSC, SpiderMonkey
 - Pull request into ECMA-262 would be giant; stage it in sections?
 
 <!--
