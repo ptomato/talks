@@ -182,7 +182,7 @@ Proposed solution (incidentals):
 
 ---
 
-### Values accepted by Calendar.from/TimeZone.from (PR #....)
+### Values accepted by Calendar.from/TimeZone.from (PR [#2485](https://github.com/tc39/proposal-temporal/pull/2485))
 
 - Following on from the change to builtin calendars and time zones
 - Now worth revisiting that from() accepts two kinds of strings (identifiers and ISO strings) and three kinds of objects (Temporal objects, plain objects that are custom calendars, plain objects that are property bags)
