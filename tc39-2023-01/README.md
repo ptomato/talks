@@ -77,7 +77,7 @@ TC39 January-February 2023
 
 ## Validation in mergeFields [#2466](https://github.com/tc39/proposal-temporal/issues/2466)
 
-(summary to be added after getting clarity on this issue in next week's champions meeting)
+(summary to be added after getting clarity on this issue in meeting of 01-26)
 
 ---
 
@@ -239,7 +239,7 @@ Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1
 
 ### Values accepted by Calendar.from/TimeZone.from (PR [#2485](https://github.com/tc39/proposal-temporal/pull/2485))
 
-(summary to be added after getting clarity on this issue in next week's champions meeting)
+(summary to be added after getting clarity on this issue in meeting of 01-26)
 
 ---
 
