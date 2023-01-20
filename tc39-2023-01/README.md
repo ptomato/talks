@@ -104,7 +104,7 @@ TC39 January-February 2023
 # When is it ready to ship unflagged?
 
 - "Ready to ship" definition being discussed in this plenary
-- Need the IETF to publish an RFC, so they can complete their review
+- Need the IETF to publish the RFC in any case
 
 <!--
 -->
@@ -115,140 +115,6 @@ TC39 January-February 2023
 
 # Questions
 ### (about this section)
-
----
-
-<!-- _class: invert lead -->
-
-# Adjustments
-to the proposal
-
----
-
-### Optimizability of built-in calendars and time zones (1/5)
-
-**Summary:** A large change that solves a long-standing request from implementations, making it easier to determine when it's OK to avoid creating a `Temporal.Calendar` or `Temporal.TimeZone` object and just use the built-in behaviour.
-
-Pull request: [#2482](https://github.com/tc39/proposal-temporal/pull/2482)
-
----
-
-### Optimizability (2/5)
-
-```js
-// Basically the problem is this:
-const d = Temporal.PlainDate.from({ year: 2022, month: 11, day: 30, calendar: 'gregory' });
-d.calendar  // ⇒ Property value is a Temporal.Calendar instance
-// Every time some calendar calculation is done, e.g...
-const d2 = d.add({ months: 1 });
-// ...the calendar methods have to be looked up on that instance and called
-// even though we just want the behaviour of the built-in calendar
-
-// But on the other hand, in the case of a custom calendar object...
-const d3 = d.withCalendar(myCustomCalendar);
-const d4 = d3.add({ months: 1 });
-// ... we do actually want those lookups to happen
-```
-
----
-
-### Optimizability (3/5)
-
-Proposed solution (calendars: Plain types and ZonedDateTime)
-- [[Calendar]] internal slot can store
-  - a string (`"iso8601"`, `"gregory"`), for built-in behaviour that always calls intrinsics
-  - an object, for custom behaviour with observable lookups & calls
-- Replace `.calendar` getter with `.calendarId` getter, which returns the string directly or Gets `.id` on the object
-- Add `.getCalendar()` method, which returns the object directly or creates a new Temporal.Calendar from the string
-
----
-
-### Optimizability (4/5)
-
-Proposed solution (time zones):
-- ZonedDateTime [[TimeZone]] internal slot can store a string or object, just like [[Calendar]] in previous slide
-- Replace `ZonedDateTime.prototype.timeZone` getter with `ZonedDateTime.prototype.timeZoneId` getter
-- Add `ZonedDateTime.prototype.getTimeZone()` method
-
----
-
-### Optimizability (5/5)
-
-Proposed solution (incidentals):
-- Rename `Temporal.Now.timeZone()` → `Temporal.Now.timeZoneId()`, always returns a string
-- Remove calendars altogether from Temporal.PlainTime
-- Remove read of `timeZone` on property bag passed to `ZonedDateTime.p.with()`
-- Change time zone and calendar comparison semantics to use `.id`
-
----
-
-### Values accepted by Calendar.from/TimeZone.from (PR [#2485](https://github.com/tc39/proposal-temporal/pull/2485))
-
-- Following on from the change to builtin calendars and time zones
-- Now worth revisiting that from() accepts two kinds of strings (identifiers and ISO strings) and three kinds of objects (Temporal objects, plain objects that are custom calendars, plain objects that are property bags)
-- TBD: fill this slide after Thursday's champions meeting
-
----
-
-### Remove fallback `fields` and `mergeFields` (PR [#2467](https://github.com/tc39/proposal-temporal/pull/2467))
-
-- An earlier design had fallbacks for more Calendar methods
-- If builtin calendars always call intrinsics, e.g. `delete Temporal.Calendar.prototype.fields` isn't a concern
-- Guidance for custom calendars that don't extend `Temporal.Calendar` is to always implement all methods
-- Won't affect the vast majority of code
-
----
-
-### Extra calendar fields in ECMA-262 (PR [#2442](https://github.com/tc39/proposal-temporal/pull/2442))
-
-- Previous plenary resolved that 402 may add properties to objects defined in 262
-- This PR is the result of that
-- Doesn't affect implementations
-
----
-
-### Clarify meaning of `daysInMonth` (PR [#2484](https://github.com/tc39/proposal-temporal/pull/2484))
-
-- Previously, `daysInMonth` had two meanings:
-  - Count of days in the month
-  - Number of the last day of the month
-- Normally the same, but transition from Julian to Gregorian calendar skipped some calendar days
-- This is not currently a CLDR calendar supported by `Intl`
-- However, CLDR plans to add it in the future
-- e.g. `Temporal.PlainYearMonth.from('1582-10').daysInMonth === 21`
-- The distinction requires a change to PlainYearMonth arithmetic
-
----
-
-### Clarify non-ISO-calendar methods (PRs [#2474](https://github.com/tc39/proposal-temporal/pull/2474) and [#2475](https://github.com/tc39/proposal-temporal/pull/2475))
-
-- Address questions raised during implementation
-- Definition of `mergeFields` for non-ISO-calendar is ambiguous
-- Definitions of `yearMonthFromFields` and `monthDayFromFields` were missing a step
-
----
-
-### Limit previously 'unlimited' rounding increments (PR [#2480](https://github.com/tc39/proposal-temporal/pull/2480))
-
-- When rounding Durations, `years`, `months`, `weeks`, `days` fields were allowed to be rounded to any positive finite increment
-- Limit requested by implementor due to storage concern
-- Limit is now `1e9`
-
-```js
-Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1e10 })
-  // Before: no problem!
-  // After: RangeError
-```
-
----
-
-### Consistency in user-observable operations (PR [#2478](https://github.com/tc39/proposal-temporal/pull/2478))
-
-- General principle: Perform user-observable validation operations on the receiver before any arguments
-- There were a few places this wasn't the case
-  - `with()` methods
-  - PlainYearMonth `add()`, `subtract()`
-- Unlikely to make any difference unless specifically looking for it with `Proxy`
 
 ---
 
@@ -267,7 +133,7 @@ Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1
 ```js
 class C extends Temporal.Calendar {
     constructor() { super('iso8601'); }
-    fields(l) { return [...l, 'era']; }
+    fields(list) { return [...list, 'era']; }
 }
 Temporal.PlainDate.from({ era: 'foo', year: 2023, month: 1, day: 30, calendar: new C() });
 ```
@@ -304,7 +170,7 @@ later.since(earlier, {smallestUnit: "nanoseconds"}).nanoseconds
 ### Stricter validation of Calendar/TimeZone method return values (PR [#2456](https://github.com/tc39/proposal-temporal/pull/2456))
 
 - Return value always validated when calling into user code
-- Inconsistency: sometimes throw on wrong type, sometimes convert
+- Inconsistent: sometimes throw on wrong type, sometimes convert
 - Choice is to consistently throw on wrong type
 - This is no longer accepted:
 
@@ -313,6 +179,7 @@ class C extends Temporal.Calendar {
     constructor() { super("iso8601"); }
     daysInWeek() { return "7"; }
 }
+Temporal.Now.plainDate(new C()).daysInWeek;
 ```
 
 ---
@@ -330,8 +197,147 @@ Temporal.PlainMonthDay.from('2023-01-05[u-ca=hebrew]')
 
 ---
 
+<!-- _class: invert lead -->
+
+# Adjustments
+to the proposal
+
+---
+
+### Limit previously 'unlimited' rounding increments (PR [#2480](https://github.com/tc39/proposal-temporal/pull/2480))
+
+- When rounding Durations, `years`, `months`, `weeks`, `days` fields were allowed to be rounded to any positive finite increment
+- Limit requested by implementor due to storage concern
+- Limit is now `1e9`
+
+```js
+Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1e10 })
+  // Before: no problem!
+  // After: RangeError
+```
+
+---
+
+### Clarify meaning of `daysInMonth` (PR [#2484](https://github.com/tc39/proposal-temporal/pull/2484))
+
+- Previously, `daysInMonth` had two meanings:
+  - **Count** of days in the month (we've chosen this one)
+  - **1-based index** of the last day of the month
+- Normally the same, but transition from Julian to Gregorian calendar skipped some calendar days
+- This is not currently a CLDR calendar supported by `Intl`
+- However, CLDR plans to add it in the future
+- e.g. `Temporal.PlainYearMonth.from('1582-10').daysInMonth === 21`
+- The distinction requires a change to PlainYearMonth arithmetic
+
+---
+
+### Clarify non-ISO-calendar methods (PRs [#2474](https://github.com/tc39/proposal-temporal/pull/2474) and [#2475](https://github.com/tc39/proposal-temporal/pull/2475))
+
+- Address questions raised during implementation
+- Definition of `mergeFields` for non-ISO-calendar is ambiguous
+- Definitions of `yearMonthFromFields` and `monthDayFromFields` were missing a step
+
+---
+
+### Values accepted by Calendar.from/TimeZone.from (PR [#2485](https://github.com/tc39/proposal-temporal/pull/2485))
+
+(summary to be added after getting clarity on this issue in next week's champions meeting)
+
+---
+
+### Remove fallback `fields` and `mergeFields` (PR [#2467](https://github.com/tc39/proposal-temporal/pull/2467))
+
+- An earlier design had fallbacks for more Calendar methods
+- If builtin calendars always call intrinsics (see later slide), e.g. `delete Temporal.Calendar.prototype.fields` isn't a concern
+- Guidance for custom calendars that don't extend `Temporal.Calendar` is to always implement all methods
+- Won't affect the vast majority of code
+
+---
+
+### Extra calendar fields in ECMA-262 (PR [#2442](https://github.com/tc39/proposal-temporal/pull/2442))
+
+- Previous plenary resolved that 402 may add properties to objects defined in 262
+- This PR is the result of that
+- Doesn't affect implementations
+
+---
+
+### Consistency in user-observable operations (PR [#2478](https://github.com/tc39/proposal-temporal/pull/2478))
+
+- General principle: Perform user-observable validation operations on the receiver before any arguments
+- There were a few places this wasn't the case
+  - `with()` methods
+  - PlainYearMonth `add()`, `subtract()`
+- Unlikely to make any difference unless specifically looking for it with `Proxy`
+
+---
+
+### Optimizability of built-in calendars and time zones (1/5)
+
+**Summary:** A large change that solves a long-standing request from implementations, making it easier to determine when it's OK to avoid creating a `Temporal.Calendar` or `Temporal.TimeZone` object and just use the built-in behaviour.
+
+Pull request: [#2482](https://github.com/tc39/proposal-temporal/pull/2482)
+
+---
+
+### Optimizability (2/5)
+
+```js
+// Basically the problem is this:
+const d = Temporal.PlainDate.from({ year: 2022, month: 11, day: 30, calendar: 'gregory' });
+d.calendar  // ⇒ Property value is a Temporal.Calendar instance
+// Every time some calendar calculation is done, e.g...
+const d2 = d.add({ months: 1 });
+// ...the calendar methods have to be looked up on that instance and called
+// even though we just want the behaviour of the built-in calendar
+
+// But on the other hand, in the case of a custom calendar object...
+const d3 = d.withCalendar(myCustomCalendar);
+const d4 = d3.add({ months: 1 });
+// ... we do actually want those lookups to happen
+```
+
+---
+
+### Optimizability (3/5)
+
+Proposed solution (calendars: Plain types and ZonedDateTime)
+- [[Calendar]] internal slot can store
+  - a string (`"iso8601"`, `"gregory"`), for built-in behaviour that always calls intrinsics
+  - an object, for custom behaviour with observable lookups & calls
+- Replace `.calendar` getter with `.calendarId`\* getter, which returns the string directly or Gets `.id` on the object
+- Add `.getCalendar()` method, which returns the object directly or creates a new Temporal.Calendar from the string
+
+---
+
+### Optimizability (4/5)
+
+Proposed solution (time zones):
+- ZonedDateTime [[TimeZone]] internal slot can store a string or object, just like [[Calendar]] in previous slide
+- Replace `ZonedDateTime.prototype.timeZone` getter with `ZonedDateTime.prototype.timeZoneId`\* getter
+- Add `ZonedDateTime.prototype.getTimeZone()` method
+
+---
+
+### Optimizability (5/5)
+
+Proposed solution (incidentals):
+- Rename `Temporal.Now.timeZone()` → `Temporal.Now.timeZoneId()`\*, always returns a string
+- Remove calendars altogether from Temporal.PlainTime
+- Remove read of `timeZone` on property bag passed to `ZonedDateTime.p.with()`
+- Change time zone and calendar comparison semantics to use `.id`
+
+---
+
 <!-- _class: lead -->
 
 # Requesting consensus
 
 On the normative changes just presented
+(\*except for `calendarId` / `timeZoneId` naming, discussion ahead)
+
+---
+
+### Spelling of `calendarId`/`timeZoneId`
+
+(placeholder slide)
