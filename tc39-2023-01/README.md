@@ -57,9 +57,7 @@ TC39 January-February 2023
 
 # Final push (2)
 
-- As of today's plenary, there remain no open discussions
-- Two/three (TBD) normative PRs remain to be made
-- (Assuming what we present today gets consensus)
+(placeholder slide for current status and plans)
 
 <!--
 -->
