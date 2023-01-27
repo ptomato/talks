@@ -57,9 +57,20 @@ TC39 January-February 2023
 
 # Final push (2)
 
-(placeholder slide for current status and plans)
+- All known discussions on normative issues resolved
+- Most of those PRs presenting today with 2 to 3 PRs expected in March plenary
+- After March, the champions plan to pause work (unless implementers report more issues) until two implementations are complete and we can ask for Stage 4
+
+---
+
+<!-- _class: lead -->
+
+# <span style="color:white;">Nearly done!</span>
+
+![bg](finish.png)
 
 <!--
+https://www.nicepng.com/downpng/u2t4r5t4w7y3i1q8_finish-marathon-finish-line-clipart/
 -->
 
 ---
@@ -68,16 +79,10 @@ TC39 January-February 2023
 
 - IESG review asked for a section on security concerns
 - This section has been written and the ball is back in IESG's court
-- Reminder; an official RFC number will remove the blocker from our side
+- Reminder: an official RFC number will remove the blocker from our side
 
 <!--
 -->
-
----
-
-## Validation in mergeFields [#2466](https://github.com/tc39/proposal-temporal/issues/2466)
-
-(summary to be added after getting clarity on this issue in meeting of 01-26)
 
 ---
 
@@ -327,15 +332,17 @@ Proposed solution (incidentals):
 
 ---
 
+### Spelling of `calendarId`/`timeZoneId`
+
+- We received an objection via the GitHub thread that `calendarId` and `timeZoneId` are not acceptable
+- Alternatives are `calendarID`/`timeZoneID`, `calendarCode`/`timeZoneCode`
+- We want to align with the [W3C design principles](https://w3ctag.github.io/design-principles/#casing-rules) and don't have a good reason to diverge from them
+- Changing to `code` involves more churn than necessary because we have to change the existing `Temporal.Calendar.p.id` and `Temporal.TimeZone.p.id` properties
+
+---
+
 <!-- _class: lead -->
 
 # Requesting consensus
 
 On the normative changes just presented
-(\*except for `calendarId` / `timeZoneId` naming, discussion ahead)
-
----
-
-### Spelling of `calendarId`/`timeZoneId`
-
-(placeholder slide)
