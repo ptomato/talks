@@ -45,13 +45,13 @@ TC39 January-February 2023
 
 ---
 
-
 # Final push
 
 - What does "final push" mean?
 - Goals:
   - All discussions on existing issues resolved
   - By March plenary, no remaining normative changes
+  - After, new issues not considered unless instances of the spec not working
 
 ---
 
@@ -135,10 +135,9 @@ https://www.nicepng.com/downpng/u2t4r5t4w7y3i1q8_finish-marathon-finish-line-cli
 
 ```js
 class C extends Temporal.Calendar {
-    constructor() { super('iso8601'); }
     fields(list) { return [...list, 'era']; }
 }
-Temporal.PlainDate.from({ era: 'foo', year: 2023, month: 1, day: 30, calendar: new C() });
+Temporal.PlainDate.from({ era: 'foo', year: 2023, month: 1, day: 30, calendar: new C("iso8601") });
 ```
 
 ---
@@ -163,7 +162,7 @@ Temporal.ZonedDateTime.from('2023-01-30T10[Antarctica/McMurdo]').toLocaleString(
 ```js
 const earlier = new Temporal.ZonedDateTime(1546935756_123_456_789n, "UTC");
 const later = new Temporal.ZonedDateTime(1631018380_987_654_289n, "UTC");
-later.since(earlier, {smallestUnit: "nanoseconds"}).nanoseconds
+later.since(earlier, { smallestUnit: "nanoseconds" }).nanoseconds
   // Current spec text: 504
   // Intended: 500
 ```
@@ -179,10 +178,9 @@ later.since(earlier, {smallestUnit: "nanoseconds"}).nanoseconds
 
 ```js
 class C extends Temporal.Calendar {
-    constructor() { super("iso8601"); }
     daysInWeek() { return "7"; }
 }
-Temporal.Now.plainDate(new C()).daysInWeek;
+Temporal.Now.plainDate(new C("iso8601")).daysInWeek;
 ```
 
 ---
@@ -242,12 +240,6 @@ Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1
 
 ---
 
-### Values accepted by Calendar.from/TimeZone.from (PR [#2485](https://github.com/tc39/proposal-temporal/pull/2485))
-
-(summary to be added after getting clarity on this issue in meeting of 01-26)
-
----
-
 ### Remove fallback `fields` and `mergeFields` (PR [#2467](https://github.com/tc39/proposal-temporal/pull/2467))
 
 - An earlier design had fallbacks for more Calendar methods
@@ -275,15 +267,19 @@ Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1
 
 ---
 
-### Optimizability of built-in calendars and time zones (1/5)
+### Optimizability of built-in calendars and time zones
 
-**Summary:** A large change that solves a long-standing request from implementations, making it easier to determine when it's OK to avoid creating a `Temporal.Calendar` or `Temporal.TimeZone` object and just use the built-in behaviour.
+#### Summary
+
+A large change that solves a long-standing request from implementations, making it easier to determine when it's OK to avoid creating a `Temporal.Calendar` or `Temporal.TimeZone` object and just use the built-in behaviour.
 
 Pull request: [#2482](https://github.com/tc39/proposal-temporal/pull/2482)
 
 ---
 
-### Optimizability (2/5)
+### Optimizability
+
+#### Problem statement
 
 ```js
 // Basically the problem is this:
@@ -302,33 +298,82 @@ const d4 = d3.add({ months: 1 });
 
 ---
 
-### Optimizability (3/5)
+### Optimizability
 
-Proposed solution (calendars: Plain types and ZonedDateTime)
+#### Proposed solution (1/4)
+
+For types with calendars (Plain types and ZonedDateTime)
 - [[Calendar]] internal slot can store
   - a string (`"iso8601"`, `"gregory"`), for built-in behaviour that always calls intrinsics
   - an object, for custom behaviour with observable lookups & calls
-- Replace `.calendar` getter with `.calendarId`\* getter, which returns the string directly or Gets `.id` on the object
+
+---
+
+### Optimizability
+
+#### Proposed solution (2/4)
+
+For types with calendars (Plain types and ZonedDateTime)
+- Replace `.calendar` getter with `.calendarId` getter, which returns the string directly or Gets `.id` on the calendar object
 - Add `.getCalendar()` method, which returns the object directly or creates a new Temporal.Calendar from the string
 
 ---
 
-### Optimizability (4/5)
+### Optimizability
 
-Proposed solution (time zones):
+#### Proposed solution (3/4)
+
+Same for time zones, without loss of generality
 - ZonedDateTime [[TimeZone]] internal slot can store a string or object, just like [[Calendar]] in previous slide
-- Replace `ZonedDateTime.prototype.timeZone` getter with `ZonedDateTime.prototype.timeZoneId`\* getter
+- Replace `ZonedDateTime.prototype.timeZone` getter with `ZonedDateTime.prototype.timeZoneId` getter
 - Add `ZonedDateTime.prototype.getTimeZone()` method
 
 ---
 
-### Optimizability (5/5)
+### Optimizability
 
-Proposed solution (incidentals):
-- Rename `Temporal.Now.timeZone()` → `Temporal.Now.timeZoneId()`\*, always returns a string
+#### Proposed solution (4/4)
+
+Incidentals:
+- Rename `Temporal.Now.timeZone()` → `Temporal.Now.timeZoneId()`, always returns a string
 - Remove calendars altogether from Temporal.PlainTime
 - Remove read of `timeZone` on property bag passed to `ZonedDateTime.p.with()`
 - Change time zone and calendar comparison semantics to use `.id`
+
+---
+
+### Optimizability
+
+#### Values accepted by `Calendar.from`/`TimeZone.from`
+
+- Previously, `Calendar.from()` accepted a property bag: `{ day, month, year, calendar }`
+- Distinguished from plain-object custom calendar case by presence of `calendar` property
+- Now breaks "string = fast builtin, object = slow custom" principle
+- Objects only accepted _if they completely implement the protocol_
+- Separate PR: [#2485](https://github.com/tc39/proposal-temporal/pull/2485)
+
+---
+
+### Optimizability
+
+#### Values accepted by other `from`
+
+- Property bags for creating other Temporal types, e.g.
+```js
+Temporal.ZonedDateTime.from({ year, month, day, calendar, timeZone })
+```
+- `calendar`/`timeZone` properties can be string or object here
+- No change from status quo
+- Considered distinguishing `calendarId` (only string) and `calendar` (only object, or both) but seems unnecessary at this time
+
+---
+
+### Optimizability
+
+#### Fallout from this change
+
+- This is one of the limited areas where we'll consider adjustments between now and the next plenary
+- Based on implementation concerns, experience from users of polyfills, or unexpected consequences to developer experience
 
 ---
 
