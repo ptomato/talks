@@ -227,8 +227,10 @@ Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1
 - Normally the same, but transition from Julian to Gregorian calendar skipped some calendar days
 - This is not currently a CLDR calendar supported by `Intl`
 - However, CLDR plans to add it in the future
-- e.g. `Temporal.PlainYearMonth.from('1582-10').daysInMonth === 21`
 - The distinction requires a change to PlainYearMonth arithmetic
+```js
+julianGregorian.yearMonthFromFields({ year: 1582, month: 10 }).daysInMonth === 21
+```
 
 ---
 
@@ -245,6 +247,7 @@ Temporal.PlainDate.from('2023-01-05').until('2023-01-06', { roundingIncrement: 1
 - An earlier design had fallbacks for more Calendar methods
 - If builtin calendars always call intrinsics (see later slide), e.g. `delete Temporal.Calendar.prototype.fields` isn't a concern
 - Guidance for custom calendars that don't extend `Temporal.Calendar` is to always implement all methods
+  - <small>(All methods required anyway in the builtins-always-call-intrinsics world)</small>
 - Won't affect the vast majority of code
 
 ---
@@ -338,7 +341,7 @@ Incidentals:
 - Rename `Temporal.Now.timeZone()` → `Temporal.Now.timeZoneId()`, always returns a string
 - Remove calendars altogether from Temporal.PlainTime
 - Remove read of `timeZone` on property bag passed to `ZonedDateTime.p.with()`
-- Change time zone and calendar comparison semantics to use `.id`
+- Change time zone and calendar comparison semantics to use SameValue then `.id`
 
 ---
 
@@ -379,10 +382,11 @@ Temporal.ZonedDateTime.from({ year, month, day, calendar, timeZone })
 
 ### Spelling of `calendarId`/`timeZoneId`
 
-- We received an objection via the GitHub thread that `calendarId` and `timeZoneId` are not acceptable
-- Alternatives are `calendarID`/`timeZoneID`, `calendarCode`/`timeZoneCode`
-- We want to align with the [W3C design principles](https://w3ctag.github.io/design-principles/#casing-rules) and don't have a good reason to diverge from them
-- Changing to `code` involves more churn than necessary because we have to change the existing `Temporal.Calendar.p.id` and `Temporal.TimeZone.p.id` properties
+- Objection in GitHub: `calendarId` and `timeZoneId` are not OK
+- Alternatives considered but not chosen:
+  - `calendarID`/`timeZoneID`: Violates [W3C casing rules](https://w3ctag.github.io/design-principles/#casing-rules). We aren't bound by those, but also don't want to confuse devs who are used to `getElementById`.
+  - `calendarCode`/`timeZoneCode`: OK, but much more churn than necessary (to change existing `id` properties to `code`)
+  - Single `timeZone: string | TimeZoneProtocol` property: We were unsure if polymorphic properties are OK
 
 ---
 

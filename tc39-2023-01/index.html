@@ -574,9 +574,10 @@ marp-pre code, marp-pre { background-color: #042029; }
 <li>Normally the same, but transition from Julian to Gregorian calendar skipped some calendar days</li>
 <li>This is not currently a CLDR calendar supported by <code>Intl</code></li>
 <li>However, CLDR plans to add it in the future</li>
-<li>e.g. <code>Temporal.PlainYearMonth.from('1582-10').daysInMonth === 21</code></li>
 <li>The distinction requires a change to PlainYearMonth arithmetic</li>
 </ul>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">julianGregorian.<span class="hljs-title function_">yearMonthFromFields</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">1582</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">10</span> }).<span class="hljs-property">daysInMonth</span> === <span class="hljs-number">21</span>
+</code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
 @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -629,7 +630,11 @@ marp-pre code, marp-pre { background-color: #042029; }
 <ul>
 <li>An earlier design had fallbacks for more Calendar methods</li>
 <li>If builtin calendars always call intrinsics (see later slide), e.g. <code>delete Temporal.Calendar.prototype.fields</code> isn't a concern</li>
-<li>Guidance for custom calendars that don't extend <code>Temporal.Calendar</code> is to always implement all methods</li>
+<li>Guidance for custom calendars that don't extend <code>Temporal.Calendar</code> is to always implement all methods
+<ul>
+<li><small>(All methods required anyway in the builtins-always-call-intrinsics world)</small></li>
+</ul>
+</li>
 <li>Won't affect the vast majority of code</li>
 </ul>
 </section>
@@ -869,7 +874,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 <li>Rename <code>Temporal.Now.timeZone()</code> → <code>Temporal.Now.timeZoneId()</code>, always returns a string</li>
 <li>Remove calendars altogether from Temporal.PlainTime</li>
 <li>Remove read of <code>timeZone</code> on property bag passed to <code>ZonedDateTime.p.with()</code></li>
-<li>Change time zone and calendar comparison semantics to use <code>.id</code></li>
+<li>Change time zone and calendar comparison semantics to use SameValue then <code>.id</code></li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -984,10 +989,14 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;">
 <h3>Spelling of <code>calendarId</code>/<code>timeZoneId</code></h3>
 <ul>
-<li>We received an objection via the GitHub thread that <code>calendarId</code> and <code>timeZoneId</code> are not acceptable</li>
-<li>Alternatives are <code>calendarID</code>/<code>timeZoneID</code>, <code>calendarCode</code>/<code>timeZoneCode</code></li>
-<li>We want to align with the <a href="https://w3ctag.github.io/design-principles/#casing-rules">W3C design principles</a> and don't have a good reason to diverge from them</li>
-<li>Changing to <code>code</code> involves more churn than necessary because we have to change the existing <code>Temporal.Calendar.p.id</code> and <code>Temporal.TimeZone.p.id</code> properties</li>
+<li>Objection in GitHub: <code>calendarId</code> and <code>timeZoneId</code> are not OK</li>
+<li>Alternatives considered but not chosen:
+<ul>
+<li><code>calendarID</code>/<code>timeZoneID</code>: Violates <a href="https://w3ctag.github.io/design-principles/#casing-rules">W3C casing rules</a>. We aren't bound by those, but also don't want to confuse devs who are used to <code>getElementById</code>.</li>
+<li><code>calendarCode</code>/<code>timeZoneCode</code>: OK, but much more churn than necessary (to change existing <code>id</code> properties to <code>code</code>)</li>
+<li>Single <code>timeZone: string | TimeZoneProtocol</code> property: We were unsure if polymorphic properties are OK</li>
+</ul>
+</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="34" data-paginate="true" data-class="lead" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
