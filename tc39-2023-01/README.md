@@ -274,7 +274,10 @@ julianGregorian.yearMonthFromFields({ year: 1582, month: 10 }).daysInMonth === 2
 
 #### Summary
 
-A large change that solves a long-standing request from implementations, making it easier to determine when it's OK to avoid creating a `Temporal.Calendar` or `Temporal.TimeZone` object and just use the built-in behaviour.
+- Largest remaining change expected
+- Addresses request from implementers to avoid creating `Temporal.Calendar` or `Temporal.TimeZone` objects...
+  - ...when Temporal objects use only built-in timezones/calendars ([#1808](https://github.com/tc39/proposal-temporal/issues/1808))
+  - ...when constructing `Temporal.PlainTime` objects ([#1588](https://github.com/tc39/proposal-temporal/issues/1588))
 
 Pull request: [#2482](https://github.com/tc39/proposal-temporal/pull/2482)
 
@@ -285,63 +288,56 @@ Pull request: [#2482](https://github.com/tc39/proposal-temporal/pull/2482)
 #### Problem statement
 
 ```js
-// Basically the problem is this:
 const d = Temporal.PlainDate.from({ year: 2022, month: 11, day: 30, calendar: 'gregory' });
-d.calendar  // ⇒ Property value is a Temporal.Calendar instance
-// Every time some calendar calculation is done, e.g...
-const d2 = d.add({ months: 1 });
-// ...the calendar methods have to be looked up on that instance and called
-// even though we just want the behaviour of the built-in calendar
+d.calendar  // ⇒ a Temporal.Calendar instance
 
-// But on the other hand, in the case of a custom calendar object...
+// Many Temporal operations...
+const d2 = d.add({ months: 1 });
+// ...require a Calendar instance and calling (perhaps patched) observable methods
+// even though we just want built-in calendar behaviour.
+
+// But in the case of a custom calendar object...
 const d3 = d.withCalendar(myCustomCalendar);
 const d4 = d3.add({ months: 1 });
-// ... we do actually want those lookups to happen
+// ... we do actually want those observable calls to happen
 ```
 
 ---
 
 ### Optimizability
 
-#### Proposed solution (1/4)
+#### Proposed (1/3): Types w/ calendars (`Plain*`, `ZonedDateTime`)
 
-For types with calendars (Plain types and ZonedDateTime)
-- [[Calendar]] internal slot can store
-  - a string (`"iso8601"`, `"gregory"`), for built-in behaviour that always calls intrinsics
-  - an object, for custom behaviour with observable lookups & calls
-
----
-
-### Optimizability
-
-#### Proposed solution (2/4)
-
-For types with calendars (Plain types and ZonedDateTime)
-- Replace `.calendar` getter with `.calendarId` getter, which returns the string directly or Gets `.id` on the calendar object
-- Add `.getCalendar()` method, which returns the object directly or creates a new Temporal.Calendar from the string
+- [[Calendar]] internal slot stores either:
+  - string (e.g. `"iso8601"`, `"gregory"`): for built-in behaviour that only calls intrinsics
+  - object: for custom behaviour with observable lookups & calls
+- Replace `.calendar` getter with `.calendarId` getter
+  - Returns the string slot value, or Gets `.id` on the slot object
+- Add `.getCalendar()` method
+  - Returns the object slot value, or creates new `Temporal.Calendar`
 
 ---
 
 ### Optimizability
 
-#### Proposed solution (3/4)
+#### Proposed (2/3): Time zones in `ZonedDateTime`
 
-Same for time zones, without loss of generality
 - ZonedDateTime [[TimeZone]] internal slot can store a string or object, just like [[Calendar]] in previous slide
-- Replace `ZonedDateTime.prototype.timeZone` getter with `ZonedDateTime.prototype.timeZoneId` getter
-- Add `ZonedDateTime.prototype.getTimeZone()` method
+- Replace `ZonedDateTime.p.timeZone` getter with `ZonedDateTime.p.timeZoneId` getter
+- Add `ZonedDateTime.p.getTimeZone()` method
 
 ---
 
 ### Optimizability
 
-#### Proposed solution (4/4)
+#### Proposed (3/3): Other changes
 
-Incidentals:
-- Rename `Temporal.Now.timeZone()` → `Temporal.Now.timeZoneId()`, always returns a string
-- Remove calendars altogether from Temporal.PlainTime
-- Remove read of `timeZone` on property bag passed to `ZonedDateTime.p.with()`
-- Change time zone and calendar comparison semantics to use SameValue then `.id`
+- Rename `Temporal.Now.timeZone()` → `Temporal.Now.timeZoneId()`
+  - Returns a string to encourage fast path use
+- Remove calendars altogether from `Temporal.PlainTime`
+- Change time zone & calendar comparison semantics
+  - New behavior: SameValue with `.id` fallback
+- Remove extra reads of `timeZone` property in `ZonedDateTime.p.with()`
 
 ---
 
