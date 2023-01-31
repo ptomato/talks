@@ -349,11 +349,13 @@ Incidentals:
 
 #### Values accepted by `Calendar.from`/`TimeZone.from`
 
-- Previously, `Calendar.from()` accepted a property bag: `{ day, month, year, calendar }`
-- Distinguished from plain-object custom calendar case by presence of `calendar` property
-- Now breaks "string = fast builtin, object = slow custom" principle
-- Objects only accepted _if they completely implement the protocol_
-- Separate PR: [#2485](https://github.com/tc39/proposal-temporal/pull/2485)
+- Previously could pass a property bag
+  - e.g. `Temporal.Calendar.from({ day, month, year, calendar })`
+  - Distinguished from custom calendar object by `calendar` prop
+  - Now breaks "string = fast builtin, object = slow custom" principle
+- New behaviour
+  - Objects only accepted _if they completely implement the protocol_
+  - Separate PR: [#2485](https://github.com/tc39/proposal-temporal/pull/2485)
 
 ---
 

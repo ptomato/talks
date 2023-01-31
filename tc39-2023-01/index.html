@@ -900,11 +900,19 @@ marp-pre code, marp-pre { background-color: #042029; }
 <h3>Optimizability</h3>
 <h4>Values accepted by <code>Calendar.from</code>/<code>TimeZone.from</code></h4>
 <ul>
-<li>Previously, <code>Calendar.from()</code> accepted a property bag: <code>{ day, month, year, calendar }</code></li>
-<li>Distinguished from plain-object custom calendar case by presence of <code>calendar</code> property</li>
+<li>Previously could pass a property bag
+<ul>
+<li>e.g. <code>Temporal.Calendar.from({ day, month, year, calendar })</code></li>
+<li>Distinguished from custom calendar object by <code>calendar</code> prop</li>
 <li>Now breaks &quot;string = fast builtin, object = slow custom&quot; principle</li>
+</ul>
+</li>
+<li>New behaviour
+<ul>
 <li>Objects only accepted <em>if they completely implement the protocol</em></li>
 <li>Separate PR: <a href="https://github.com/tc39/proposal-temporal/pull/2485">#2485</a></li>
+</ul>
+</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
