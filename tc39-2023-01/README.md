@@ -393,3 +393,46 @@ Temporal.ZonedDateTime.from({ year, month, day, calendar, timeZone })
 # Requesting consensus
 
 On the normative changes just presented
+
+---
+
+<!-- _class: lead invert -->
+
+# Overflow item
+
+---
+
+### Spelling of `calendarId`/`timeZoneId`
+
+- As mentioned yesterday, Jordan kindly agreed to withdraw objection
+- Consensus is on `calendarId`/`timeZoneId`
+
+---
+
+### Fix time zone formatting in ZonedDateTime (PR [#2479](https://github.com/tc39/proposal-temporal/pull/2479))
+
+- ZonedDateTime's [[TimeZone]] slot unintentionally left unconsidered in locale-sensitive formatting
+
+```js
+Temporal.ZonedDateTime.from('2023-01-30T10[Antarctica/McMurdo]').toLocaleString('en')
+  // Current spec text: '1/29/2023, 1:00:00 PM PST' (for me, that is)
+  // Intended: '1/30/2023, 10:00:00 AM GMT+13'
+```
+
+- More time for review needed
+
+---
+
+### Avoid duplicate reads of options bags (PR [#2447](https://github.com/tc39/proposal-temporal/pull/2447))
+
+- In some methods that take an options bag, we have to copy the options in order to pass to calendar methods
+- Previously, called getters once to get the option value, and once to copy the properties to a new object
+
+```js
+Temporal.Now.plainDateISO().since(Temporal.Now.plainDateISO(), {
+  get smallestUnit() { console.log("get smallestUnit"); },
+  get largestUnit() { console.log("get largestUnit"); },
+});
+```
+
+- Forgotten in Tuesday's slides, so notified after the agenda deadline
