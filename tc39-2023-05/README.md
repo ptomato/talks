@@ -70,7 +70,7 @@ TC39 May 2023
 
 ---
 
-## ... (PR [#2570](https://github.com/tc39/proposal-temporal/pull/2570))
+## Deduplication of field names (PR [#2570](https://github.com/tc39/proposal-temporal/pull/2570))
 
 - Request from Anba (Firefox) for a small optimizability improvement
 
@@ -82,7 +82,7 @@ TC39 May 2023
 
 ---
 
-## >1 calendar annotation (PR #0000)
+## >1 calendar annotation (PR [#2572](https://github.com/tc39/proposal-temporal/pull/2572))
 
 - Required due to a clarification from the IETF on how to interpret multiple calendar annotations
 - Also incorporates a suggestion from Anba (Firefox) for better optimizability
