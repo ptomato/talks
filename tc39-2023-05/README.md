@@ -70,23 +70,52 @@ TC39 May 2023
 
 ---
 
-## ... (PR [#2570](https://github.com/tc39/proposal-temporal/pull/2570))
+## Optimize PrepareTemporalFields (PR [#2570](https://github.com/tc39/proposal-temporal/pull/2570))
 
 - Request from Anba (Firefox) for a small optimizability improvement
+- Removes duplicate property names from `PrepareTemporalFields`
+- Reduces unnecessary observable calls to `Get(O,P)`
 
+```js
+const calendar = new class extends Temporal.Calendar {
+  fields(fieldNames) return super.fields(fieldNames).concat(['monthCode', 'monthCode']);
+}('iso8601');
+
+const ym = new Temporal.PlainYearMonth(2023, 3, calendar);
+ym.toPlainDate({day: 1});
+// Current spec: monthCode property was accessed thrice.
+// After this change: monthCode property is only accessed once. 
+```
 ---
 
 ## Fix rounding bug (PR [#2571](https://github.com/tc39/proposal-temporal/pull/2571))
 
 - Bug reported by Adam Shaw (a polyfill author)
+- In cases where a number is rounded up to next unit, current behaviour is inconsistent with `Duration.prototype.round()`
+- Fixes the result after rounding in case of `until()/since()/toString()`
 
+
+```js
+const earlier = new Temporal.PlainDate(2022, 1, 1);
+const later = new Temporal.PlainDate(2023, 12, 25);
+const duration = earlier.until(later, { largestUnit: "years", smallestUnit: "months", roundingMode: "expand" });
+console.log(duration.toString());
+// Current spec text: 1Y12M 
+// After this change: 2Y
+```
 ---
 
-## >1 calendar annotation (PR #0000)
+## Implement IETF change for multiple calendar annotations (PR [#2572](https://github.com/tc39/proposal-temporal/pull/2572))
 
 - Required due to a clarification from the IETF on how to interpret multiple calendar annotations
 - Also incorporates a suggestion from Anba (Firefox) for better optimizability
 
+```js
+const instance = new Temporal.Calendar("iso8601");
+const result = instance.dateAdd("2000-05-02T15:23[u-ca=iso8601][!u-ca=discord]", new Temporal.Duration());
+// Current spec text: Created a PlainDate object
+// After this change: Throws a RangeError
+```
 ---
 
 <!-- _class: lead -->
