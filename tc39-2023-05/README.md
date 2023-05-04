@@ -1,7 +1,6 @@
 ---
 theme: gaia
 paginate: true
-footer: DRAFT
 style: |
   @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
   @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -74,11 +73,11 @@ TC39 May 2023
 
 - Request from Anba (Firefox) for a small optimizability improvement
 - Removes duplicate property names from `PrepareTemporalFields`
-- Reduces unnecessary observable calls to `Get(O,P)`
+- Unlikely edge case, unless intentional with a custom calendar
 
 ```js
 const calendar = new class extends Temporal.Calendar {
-  fields(fieldNames) return super.fields(fieldNames).concat(['monthCode', 'monthCode']);
+  fields(fieldNames) { return super.fields(fieldNames).concat(['monthCode', 'monthCode']); }
 }('iso8601');
 
 const ym = new Temporal.PlainYearMonth(2023, 3, calendar);
@@ -108,13 +107,16 @@ console.log(duration.toString());
 ## >1 calendar annotation (PR [#2572](https://github.com/tc39/proposal-temporal/pull/2572))
 
 - Required due to a clarification from the IETF on how to interpret multiple calendar annotations
-- Also incorporates a suggestion from Anba (Firefox) for better optimizability
+- Also incorporates a suggestion from Anba (Firefox) for better optimizability in YYYY-MM and MM-DD strings
 
 ```js
-const instance = new Temporal.Calendar("iso8601");
-const result = instance.dateAdd("2000-05-02T15:23[u-ca=iso8601][!u-ca=discord]", new Temporal.Duration());
-// Current spec text: Created a PlainDate object
+Temporal.PlainDate.from("2000-05-02T15:23[u-ca=iso8601][!u-ca=gregory]");
+// Current spec text: Created a PlainDate object with ISO 8601 calendar
 // After this change: Throws a RangeError
+
+Temporal.PlainYearMonth.from("2000-05[u-ca=iso8601][u-ca=gregory]");
+// Current spec text: Throws a RangeError
+// After this change: Creates a PlainYearMonth object with ISO 8601 calendar
 ```
 ---
 
