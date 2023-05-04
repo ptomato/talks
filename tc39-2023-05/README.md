@@ -35,8 +35,9 @@ TC39 May 2023
 ## Progress update
 
 - Implementation continues; large Firefox patchset under review
-- Handling bug reports from implementations, polyfill writers, users
-- Work continues on integer arithmetic changes discussed in March
+- Only one change from March is outstanding: integer arithmetic optimization
+- No other big changes expected
+    - Issues reported since March have been minor 
 
 ---
 
