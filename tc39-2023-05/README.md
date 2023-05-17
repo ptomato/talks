@@ -127,3 +127,12 @@ Temporal.PlainYearMonth.from("2000-05[u-ca=iso8601][u-ca=gregory]");
 # Requesting consensus
 
 On the normative changes just presented
+
+---
+
+# Proposed conclusion for the notes
+
+> Consensus on making normative changes to:
+> - improve handling of duplicate names returned from a custom calendar's `fields` method (PR [#2570](https://github.com/tc39/proposal-temporal/pull/2570))
+> - fix a bug with rounding durations (PR [#2571](https://github.com/tc39/proposal-temporal/pull/2571))
+> - adapt handling of multiple calendar annotations to match the IETF's recent decision (PR [#2572](https://github.com/tc39/proposal-temporal/pull/2572))
