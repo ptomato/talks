@@ -193,7 +193,8 @@ marp-pre code, marp-pre { background-color: #042029; }
 <h2 id="deduplication-of-field-names-pr-2570">Deduplication of field names (PR <a href="https://github.com/tc39/proposal-temporal/pull/2570">#2570</a>)</h2>
 <ul>
 <li>Request from Anba (Firefox) for a small optimizability improvement</li>
-<li>Removes duplicate property names from <code>PrepareTemporalFields</code></li>
+<li><s>Removes</s> <em>throws on</em> duplicate property names in PrepareTemporalFields</li>
+<li><em>Also throws on property names <code>constructor</code> and <code>__proto__</code></em></li>
 <li>Unlikely edge case, unless intentional with a custom calendar</li>
 </ul>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-keyword">const</span> calendar = <span class="hljs-keyword">new</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">extends</span> <span class="hljs-title class_">Temporal</span>.<span class="hljs-property">Calendar</span> {
@@ -203,7 +204,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 <span class="hljs-keyword">const</span> ym = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Temporal</span>.<span class="hljs-title class_">PlainYearMonth</span>(<span class="hljs-number">2023</span>, <span class="hljs-number">3</span>, calendar);
 ym.<span class="hljs-title function_">toPlainDate</span>({<span class="hljs-attr">day</span>: <span class="hljs-number">1</span>});
 <span class="hljs-comment">// Current spec: monthCode property was accessed thrice.</span>
-<span class="hljs-comment">// After this change: monthCode property is only accessed once. </span>
+<span class="hljs-comment">// After this change: throws a RangeError.</span>
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');

@@ -73,7 +73,8 @@ TC39 May 2023
 ## Deduplication of field names (PR [#2570](https://github.com/tc39/proposal-temporal/pull/2570))
 
 - Request from Anba (Firefox) for a small optimizability improvement
-- Removes duplicate property names from `PrepareTemporalFields`
+- ~~Removes~~ _throws on_ duplicate property names in PrepareTemporalFields
+- _Also throws on property names `constructor` and `__proto__`_
 - Unlikely edge case, unless intentional with a custom calendar
 
 ```js
@@ -84,7 +85,7 @@ const calendar = new class extends Temporal.Calendar {
 const ym = new Temporal.PlainYearMonth(2023, 3, calendar);
 ym.toPlainDate({day: 1});
 // Current spec: monthCode property was accessed thrice.
-// After this change: monthCode property is only accessed once. 
+// After this change: throws a RangeError.
 ```
 ---
 
