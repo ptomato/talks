@@ -138,13 +138,16 @@ marp-pre code, marp-pre { background-color: #042029; }
 <li>&quot;90 minutes&quot; preserved unless explicitly balanced to &quot;1 hour 30&quot;</li>
 </ul>
 </li>
-<li>Calculations with time units (days through nanoseconds) use &quot;normalized form&quot;, <em>s</em> × 10⁹ + <em>ns</em>
+<li>Calculations with time units (days* through nanoseconds) use &quot;normalized form&quot;, <em>s</em> × 10⁹ + <em>ns</em>
 <ul>
 <li>|<em>s</em>| ≤ max safe integer</li>
 <li>|<em>ns</em>| ≤ 999,999,999</li>
+<li>Can be implemented as: i96 ns; i64 s + i32 ns; f64 s + f64 ns</li>
+<li>At end of calculation, converted back to integer-per-unit for storage</li>
 </ul>
 </li>
 </ul>
+<p><span style="font-size: 1rem;">*Why are days a time unit? We allow calculations without calendar, and assume 24-hour days in that case.</span></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
 @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -168,10 +171,16 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;">
 <h3 id="integer-math-in-durations-23">Integer math in durations (2/3)</h3>
 <ul>
-<li>Date units years, months, weeks, all limited to maxuint32
+<li>Calendar units years, months, weeks, all limited to maxuint32
 <ul>
-<li>|<em>N</em>| &lt; 2³² for <em>N</em> = <em>y</em>, <em>mon</em>, <em>d</em></li>
+<li>|<em>N</em>| &lt; 2³² for <em>N</em> = <em>y</em>, <em>mon</em>, <em>w</em></li>
 <li>Why not maxint32? Because sign is common to all units</li>
+<li>Implementations can choose to store as u32 instead of f64</li>
+</ul>
+</li>
+<li>Note, performing calculations with <code>relativeTo</code> date can still fail
+<ul>
+<li>2³²-1 years ≫ representable range</li>
 </ul>
 </li>
 <li>With limits, calculations in loops no longer necessary
@@ -213,6 +222,11 @@ marp-pre code, marp-pre { background-color: #042029; }
   <span class="hljs-attr">seconds</span>: <span class="hljs-title class_">Number</span>.<span class="hljs-property">MAX_SAFE_INTEGER</span>,
   <span class="hljs-attr">milliseconds</span>: <span class="hljs-number">1000</span>
 })
+<span class="hljs-comment">// Maximum duration now accepted:</span>
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">Duration</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">years</span>: <span class="hljs-number">2</span>**<span class="hljs-number">32</span>-<span class="hljs-number">1</span>, <span class="hljs-attr">months</span>: <span class="hljs-number">2</span>**<span class="hljs-number">32</span>-<span class="hljs-number">1</span>, <span class="hljs-attr">weeks</span>: <span class="hljs-number">2</span>**<span class="hljs-number">32</span>-<span class="hljs-number">1</span>, <span class="hljs-attr">days</span>: <span class="hljs-number">104249991374</span>,
+    <span class="hljs-attr">hours</span>: <span class="hljs-number">7</span>, <span class="hljs-attr">minutes</span>: <span class="hljs-number">36</span>, <span class="hljs-attr">seconds</span>: <span class="hljs-number">31</span>, <span class="hljs-attr">milliseconds</span>: <span class="hljs-number">999</span>, <span class="hljs-attr">microseconds</span>: <span class="hljs-number">999</span>, <span class="hljs-attr">nanoseconds</span>: <span class="hljs-number">999</span> })
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">Duration</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">years</span>: -(<span class="hljs-number">2</span>**<span class="hljs-number">32</span>-<span class="hljs-number">1</span>), <span class="hljs-attr">months</span>: -(<span class="hljs-number">2</span>**<span class="hljs-number">32</span>-<span class="hljs-number">1</span>), <span class="hljs-attr">weeks</span>: -(<span class="hljs-number">2</span>**<span class="hljs-number">32</span>-<span class="hljs-number">1</span>),
+    <span class="hljs-attr">seconds</span>: -<span class="hljs-title class_">Number</span>.<span class="hljs-property">MAX_SAFE_INTEGER</span>, <span class="hljs-attr">nanoseconds</span>: -<span class="hljs-number">999_999_999</span> })
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -240,8 +254,12 @@ marp-pre code, marp-pre { background-color: #042029; }
 <li>Offset time zones: e.g., <code>&quot;+01:00&quot;</code></li>
 <li>Previously allowed up to ns precision: <code>&quot;+01:00:00.000000001&quot;</code></li>
 <li>IXDTF (the IETF string format) does not actually support &lt;minutes precision in these; we overlooked this</li>
-<li>Better to limit here and expand later, than change IETF at this point</li>
-<li>Offsets of named time zones can still be &lt; minutes (e.g. <code>Africa/Monrovia</code>)</li>
+<li>Better to limit now and relax later, than change IETF at this point</li>
+<li>Offsets of named time zones can still be &lt;minutes precision
+<ul>
+<li>e.g. <code>Africa/Monrovia</code></li>
+</ul>
+</li>
 </ul>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">TimeZone</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&quot;+01:00:01&quot;</span>)  <span class="hljs-comment">// no longer allowed</span>
 </code></pre>

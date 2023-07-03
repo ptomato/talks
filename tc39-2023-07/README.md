@@ -59,17 +59,24 @@ TC39 July 2023
 
 - Storage doesn't change; one f64-representable integer for each unit
     - "90 minutes" preserved unless explicitly balanced to "1 hour 30"
-- Calculations with time units (days through nanoseconds) use "normalized form", _s_ × 10⁹ + _ns_
+- Calculations with time units (days\* through nanoseconds) use "normalized form", _s_ × 10⁹ + _ns_
     - |_s_| ≤ max safe integer
     - |_ns_| ≤ 999,999,999
+    - Can be implemented as: i96 ns; i64 s + i32 ns; f64 s + f64 ns
+    - At end of calculation, converted back to integer-per-unit for storage
+
+<span style="font-size: 1rem;">\*Why are days a time unit? We allow calculations without calendar, and assume 24-hour days in that case.</span>
     
 ---
 
 ### Integer math in durations (2/3)
 
-- Date units years, months, weeks, all limited to maxuint32
-    - |_N_| < 2³² for _N_ = _y_, _mon_, _d_
+- Calendar units years, months, weeks, all limited to maxuint32
+    - |_N_| < 2³² for _N_ = _y_, _mon_, _w_
     - Why not maxint32? Because sign is common to all units
+    - Implementations can choose to store as u32 instead of f64
+- Note, performing calculations with `relativeTo` date can still fail
+    - 2³²-1 years ≫ representable range
 - With limits, calculations in loops no longer necessary
     - Concern emerged in review of SpiderMonkey implementation
 
@@ -88,6 +95,11 @@ Temporal.Duration.from({
   seconds: Number.MAX_SAFE_INTEGER,
   milliseconds: 1000
 })
+// Maximum duration now accepted:
+Temporal.Duration.from({ years: 2**32-1, months: 2**32-1, weeks: 2**32-1, days: 104249991374,
+    hours: 7, minutes: 36, seconds: 31, milliseconds: 999, microseconds: 999, nanoseconds: 999 })
+Temporal.Duration.from({ years: -(2**32-1), months: -(2**32-1), weeks: -(2**32-1),
+    seconds: -Number.MAX_SAFE_INTEGER, nanoseconds: -999_999_999 })
 ```
 
 ---
@@ -97,8 +109,9 @@ Temporal.Duration.from({
 - Offset time zones: e.g., `"+01:00"`
 - Previously allowed up to ns precision: `"+01:00:00.000000001"`
 - IXDTF (the IETF string format) does not actually support &lt;minutes precision in these; we overlooked this
-- Better to limit here and expand later, than change IETF at this point
-- Offsets of named time zones can still be &lt; minutes (e.g. `Africa/Monrovia`)
+- Better to limit now and relax later, than change IETF at this point
+- Offsets of named time zones can still be &lt;minutes precision
+    - e.g. `Africa/Monrovia`
 
 ```js
 Temporal.TimeZone.from("+01:00:01")  // no longer allowed
