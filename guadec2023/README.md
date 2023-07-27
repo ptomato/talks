@@ -52,7 +52,7 @@ _class: gaia lead
 GUADEC, July 27, 2023
 
 <!--
-    This year we have a lot to tell! We have two sessions of GNOME JavaScript. Today you will see me, talking about new features, and Sonny, talking about the JavaScript community. Tomorrow you get Sonny again, talking about tooling, and Evan Welsh, talking about TypeScript.
+    This year we have a lot to tell! For GUADEC 2023 we have two sessions of GNOME JavaScript instead of one, about your favourite BLAZING-FAST, MEMORY-SAFE language. Today you will see me, talking about new features, and Sonny, talking about the JavaScript community. Tomorrow you get Sonny again, talking about tooling, and Evan Welsh, talking about TypeScript.
 -->
 
 ---
