@@ -491,6 +491,10 @@ import foo from 'foo';  // imports foo from foo.js GResource
 { "imports": { "lodash": "./node_modules/lodash-es/lodash.js" } }
 ```
 
+<!--
+    Another thing could be to implement something like Node.js module resolving, where you can import a bare word and it'll look for it in your node_modules directory. Your build tools might generate an import map like this.
+-->
+
 ---
 
 # Possible uses in GNOME (3)
@@ -525,62 +529,19 @@ import foo from 'foo';  // imports foo from foo.js GResource
 
 ---
 
-<div style="display: flex; align-items: center; justify-content: center; height: 100%;">
-<h1>Looking forward</h1>
-</div>
-
----
-
-# Decorators (background)
-
-Last year we made `GObject.registerClass` work without requiring using the return value, this enabled class fields but also prepared us for _decorators_.
-
-```js
-class MyGObject extends GObject.Object {
-
-}
-
-GObject.registerClass(MyGObject);
-```
-
----
-
 # Decorators (future)
 
-TC39 has now [standardized _decorators_](https://github.com/tc39/proposal-decorator-metadata) for JavaScript 🥳
-
-If you've used PyGObject you've probably seen _decorators_ before.
+- TC39 has now [standardized _decorators_](https://github.com/tc39/proposal-decorator-metadata) for JavaScript 🥳
+- More expressive replacement for `GObject.registerClass()`, like PyGObject
 
 ```js
-@gobject({ /* ... */ })
+@GObject.???(???)
 class MyGObject extends GObject.Object {
-
+    // @property, @signal, ???
 }
 ```
 
-We'll be starting work on a decorators-compatible API this year, if you have thoughts or opinions let us know!
-
----
-
-```js
-@gobject({ /* ... */ }) // Similar to GObject.registerClass
-class MyGObject extends GObject.Object {
-    @property()
-    accessor value = null;
-
-    @property.getter({
-        shortName: 'my-array', name: 'My array', description: 'A property!',
-        flags: /* ... */
-    })
-    get prop() {}
-
-    @property.setter
-    set prop() {}
-
-    @signal({name: 'run-last', flags: GObject.SignalFlags.RUN_LAST})
-    emitRunLast(callback) { /* ... */ }
-}
-```
+- Would you use this? Share your thoughts and opinions!
 
 ---
 
