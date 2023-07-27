@@ -484,6 +484,17 @@ import foo from 'foo';  // imports foo from foo.js GResource
 
 # Possible uses in GNOME (2)
 
+- Use third party module code from registries like `npm`
+
+**imports.json**
+```json
+{ "imports": { "lodash": "./node_modules/lodash-es/lodash.js" } }
+```
+
+---
+
+# Possible uses in GNOME (3)
+
 - Use a build tool to download online dependencies
 - But you might use GResource for this, anyway?
 
@@ -511,6 +522,65 @@ import foo from 'foo';  // imports foo from foo.js GResource
 <!--
     So we still have some questions to answer, but if you would use this we'd love to hear from you!
 -->
+
+---
+
+<div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+<h1>Looking forward</h1>
+</div>
+
+---
+
+# Decorators (background)
+
+Last year we made `GObject.registerClass` work without requiring using the return value, this enabled class fields but also prepared us for _decorators_.
+
+```js
+class MyGObject extends GObject.Object {
+
+}
+
+GObject.registerClass(MyGObject);
+```
+
+---
+
+# Decorators (future)
+
+TC39 has now [standardized _decorators_](https://github.com/tc39/proposal-decorator-metadata) for JavaScript 🥳
+
+If you've used PyGObject you've probably seen _decorators_ before.
+
+```js
+@gobject({ /* ... */ })
+class MyGObject extends GObject.Object {
+
+}
+```
+
+We'll be starting work on a decorators-compatible API this year, if you have thoughts or opinions let us know!
+
+---
+
+```js
+@gobject({ /* ... */ }) // Similar to GObject.registerClass
+class MyGObject extends GObject.Object {
+    @property()
+    accessor value = null;
+
+    @property.getter({
+        shortName: 'my-array', name: 'My array', description: 'A property!',
+        flags: /* ... */
+    })
+    get prop() {}
+
+    @property.setter
+    set prop() {}
+
+    @signal({name: 'run-last', flags: GObject.SignalFlags.RUN_LAST})
+    emitRunLast(callback) { /* ... */ }
+}
+```
 
 ---
 
