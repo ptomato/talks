@@ -574,6 +574,163 @@ We need help with:
 
 # Community
 
+<!--
+    lots going on in the community such as documentation, tooling (tomorrow) , extensions...
+    but time is constraint and I want to focus on apps today
+-->
+
+---
+
+# Apps
+
+<img src="apps.png" style="max-width: 100%;max-height: 100%"/>
+
+<!--
+    Fast growing number of GJS apps
+    Doing many different things, video player, Youtube music client, maps, CAD, tooling, book reader
+    in many different ways ClojureScript, TypeScript, JavaScript, with C or Rust for backend or when GJS isn't a good fit
+    some embed GJS, others load a C library from GJS
+-->
+
+---
+
+# Design by Daniel Wood :tophat:
+
+<img src="design.png" style="max-width: 100%;max-height: 100%"/>
+
+<!--
+    I got in touch with Daniel and asked why they used GJS
+    - started as a Ubuntu / Ubuntu phone app written in C++, QML and JS
+    - when Ubuntu phone canceled they ported to a webapp
+    - got excited about GNOME progress, also on phone and decided to make a GTK app
+
+    it's an interesting story and shows why it's important that we have a diverse language bindings ecosystem
+    and how it is one of GNOME strength
+-->
+
+---
+
+<!-- _class: invert lead -->
+
+## ~~Make apps; not themes~~
+
+## Make apps; not extensions
+
+<!--
+  build an app ecosystem platform
+
+  extensions are popular and the ecosystem stays healthy thanks to the effort of Andy Holmes and others
+
+  When possible, prefer apps.
+  When looking at the list of popular extensions I noticed that many could be extensions
+
+  I believe the reason why extensions are so popular is that making, iterating and distributing was so easy
+  but thanks to GNOME Builder, Flatpak and Flathub it has become much easier for apps
+  We are also working hard on GJS (as demonstrated by Philip) and tooling (please come tomorrow) to make it even easier
+
+  Talking about GNOME Builder, it includes a great template use "Create project", select JavaScript and there you go
+  Making, iterating and distributing an app is easier nowadays
+
+  Ok but I'm gonna talk about one app in particular
+
+ -->
+
+---
+
+# Workbench
+
+<img src="workbench.png" style="max-width: 100%;max-height: 100%"/>
+
+<!--
+    There is a library of demos and examples, similar to GTK demo but more aligned with the HIG and less "benchmarks" / test cases
+    with examples ready to use, copy paste and play with
+    I will talk more about it tomorrow in the  GNOME JavaScript Tooling talk
+    also, there will be a workbench workshop on Saturday
+-->
+
+---
+
+# Workbenchers
+
+- “Workbench summer 2023”
+- 2 mentors: Sonny Piers and Andy Holmes :tophat:
+- 3 students
+
+<!--
+    We meet every sunday to discuss how the week went, what has been done, if there are blockers
+    and discuss work to do for the following week
+    we have our own matrix room which on one side helps with cohesion and feels safer
+    on the other, a bit of a disconnect with the rest of the community
+-->
+
+---
+
+# GSoC - Akshay and Sriyansh :tophat:
+
+![center](gsoc.png)
+
+<!-- <style>
+img[alt="center"] {
+  display: block;
+  margin: 0 auto;
+}
+</style> -->
+
+<!--
+    Mention / kudos to Andy for co-mentoring
+-->
+
+---
+
+# Outreachy - José :tophat:
+
+![](jose.png)
+
+<!--
+    José so happy that his demo using Camera demo using libportal and gstreamer glsinkbin -->
+
+![center](library.png)
+
+---
+
+# Rust & GJS
+
+- “An example of C + Rust & GJS playing nicely with each other”
+- [gitlab.gnome.org/ZanderBrown/rustic-gjs](https://gitlab.gnome.org/ZanderBrown/rustic-gjs)
+- :tophat: Zander Brown
+
+<!--
+    rustic-gjs is 2 years old but it's an interesting example how to use Rust + GJS
+    perhaps use Rust for backend and GJS for frontend
+    or simply GJS for prototyping UI
+    This is already possible with C and there is Polari as a demonstration
+-->
+
+---
+
+# libpeas and GNOME Builder
+
+- libpeas is a gobject-based plugins engine
+- targetted at giving applications the chance to assume their own extensibility
+- Used in GNOME Builder for plugins
+- JS plugins in your apps ㊺
+- JS plugins for GNOME Builder ㊺
+- Christian Hergert :tophat:
+- Philip Chimento :tophat:
+
+- https://blogs.gnome.org/chergert/2023/06/02/gjs-plugins-for-libpeas-2-0/
+
+- “An example of C + Rust & GJS playing nicely with each other”
+- [gitlab.gnome.org/ZanderBrown/rustic-gjs](https://gitlab.gnome.org/ZanderBrown/rustic-gjs)
+- :tophat: Zander Brown
+
+<!--
+    rustic-gjs is 2 years old but it's an interesting example how to use Rust + GJS
+    perhaps use Rust for backend and GJS for frontend
+    or simply GJS for prototyping UI
+    This is already possible with C and there is Polari as a demonstration
+-->
+
 ---
 
 <!-- _class: gaia -->
