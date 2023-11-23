@@ -1,7 +1,6 @@
 ---
 theme: gaia
 paginate: true
-footer: DRAFT
 style: |
   @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
   @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -48,13 +47,16 @@ TC39 November 2023
 
 ## Progress update
 
-- All approved normative changes now merged, covered in test262
-- One normative change to propose, from usage experience in community
-- All known blockers for shipping removed, when implementations are ready
+- Most approved normative changes merged with test262 coverage
+- Working through some remaining review comments from Anba
+- One normative change to propose today
+  - (from usage experience in community)
+- Follow the checklist in issue [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates
+- **Will give a loud signal when this checklist is complete**
 
 ---
 
-## As of a month ago
+## Test conformance as of October 2023
 
 <div class="twocol">
 <div>
@@ -62,7 +64,7 @@ TC39 November 2023
 - SpiderMonkey: 92%
 - V8: 74%
 - JavaScriptCore: 31%
-- Serenity: 24%
+- LibJS: 24%
 - Boa: 13%
 
 </div>
@@ -87,7 +89,7 @@ TC39 November 2023
   }
 }%%
 xychart-beta horizontal
-  x-axis [SM, V8, JSC, Serenity, Boa]
+  x-axis [SM, V8, JSC, LibJS, Boa]
   y-axis "% of test262 passing" 0 --> 100
   bar [92, 74, 31, 24, 13]
 </pre>
@@ -98,15 +100,15 @@ xychart-beta horizontal
 
 ## IETF standardization progress ([#1450](https://github.com/tc39/proposal-temporal/issues/1450))
 
-- **Complete.** This is no longer a blocker for shipping.
+- **Complete.** This is no longer a blocker for shipping unflagged.
 
 ---
 
 ## Leap days in PYM/PMD.toPlainDate ([#2718](https://github.com/tc39/proposal-temporal/pull/2718))
 
-What day of the week is your birthday in 2030?
 
 ```js
+// What day of the week is your birthday in 2030?
 const bd = Temporal.PlainMonthDay.from("12-15");
 bd.toPlainDate({ year: 2030 }).dayOfWeek;
 ```
@@ -139,5 +141,6 @@ On normative PR [#2718](https://github.com/tc39/proposal-temporal/pull/2718)
 
 # Proposed summary for notes
 
-> All known blockers for shipping implementations have been removed, and implementations are encouraged to continue their work and ship unflagged when ready.
-> Consensus on normative change to overflow behaviour in PlainYearMonth/PlainMonthDay.p.toPlainDate (PR [#2718](https://github.com/tc39/proposal-temporal/pull/2718))
+> The blocker on IETF standardization of the string format has been resolved.
+> The champions will give a signal when outstanding changes have been merged, and at that point implementations will be encouraged to continue their work and ship unflagged when ready.
+> A normative change to overflow behaviour in PlainYearMonth/PlainMonthDay.p.toPlainDate (PR [#2718](https://github.com/tc39/proposal-temporal/pull/2718)) reached consensus.
