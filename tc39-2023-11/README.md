@@ -265,7 +265,7 @@ The string on the last line is still not valid because 99:99 is just not a time 
 
 ### Conversions between Temporal objects
 
-<div class="twocol"  style="font-size: 65%">
+<div class="twocol"  style="font-size: 55%">
 <div>
 
 #### Result always valid:
