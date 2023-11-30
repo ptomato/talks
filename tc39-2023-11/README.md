@@ -308,7 +308,7 @@ The string on the last line is still not valid because 99:99 is just not a time 
   ```js
   plainDate.until({ year: 2023, month: 11, day: 31 })
   plainDate.equals({ year: 2023, month: 11, day: 31 })
-  // and many more
+  // and 68 more methods
   ```
 
 #### Throws
