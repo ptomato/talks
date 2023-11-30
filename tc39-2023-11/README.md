@@ -263,7 +263,7 @@ The string on the last line is still not valid because 99:99 is just not a time 
 
 ---
 
-### Conversions between Temporal objects
+### APIs that could clamp or reject
 
 <div class="twocol"  style="font-size: 55%">
 <div>
