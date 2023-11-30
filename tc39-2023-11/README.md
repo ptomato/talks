@@ -307,6 +307,8 @@ The string on the last line is still not valid because 99:99 is just not a time 
 - Valid property bag → any Temporal type (convenience coercion)
   ```js
   plainDate.until({ year: 2023, month: 11, day: 31 })
+  plainDate.equals({ year: 2023, month: 11, day: 31 })
+  // and many more
   ```
 
 #### Throws
