@@ -285,11 +285,11 @@ The string on the last line is still not valid because 99:99 is just not a time 
   ```js
   timeZone.getInstantFor('2023-02-13T02:30', { disambiguation: 'reject' })
   ```
-- Valid property bag → any Temporal type (`from()`)
+- Valid property bag → any Temporal type (`from`)
   ```js
   Temporal.PlainDate.from({ year: 2023, month: 11, day: 31 }, { overflow: 'reject' })
   ```
-- Temporal type + {some properties} → Same type (`with()`)
+- Temporal type + {some properties} → Same type (`with`)
   ```js
   plainDate.with({ day: 31 }, { overflow: 'reject' })
   ```

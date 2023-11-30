@@ -643,10 +643,10 @@ table { font-size: 70%; }
 <li>Valid date-time string + TimeZone → Instant<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">timeZone.<span class="hljs-title function_">getInstantFor</span>(<span class="hljs-string">&#x27;2023-02-13T02:30&#x27;</span>, { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
 </code></pre>
 </li>
-<li>Valid property bag → any Temporal type (<code>from()</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDate</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+<li>Valid property bag → any Temporal type (<code>from</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDate</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
 </code></pre>
 </li>
-<li>Temporal type + {some properties} → Same type (<code>with()</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">with</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+<li>Temporal type + {some properties} → Same type (<code>with</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">with</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
 </code></pre>
 </li>
 </ul>
