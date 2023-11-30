@@ -627,52 +627,42 @@ table { font-size: 70%; }
 " lang="en-CA" data-marpit-pagination="16" style="--paginate:true;--theme:gaia;--style:@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css')
 ;" data-marpit-pagination-total="18">
 <h3 id="apis-that-could-clamp-or-reject">APIs that could clamp or reject</h3>
-<div class="twocol"  style="font-size: 55%">
+<div class="twocol"  style="font-size: 65%">
 <div>
-<h4 id="clamps-by-default-option-to-throw">Clamps by default, option to throw</h4>
-<ul>
-<li>PlainDateTime + TimeZone → ZonedDateTime<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDateTime.<span class="hljs-title function_">toZonedDateTime</span>(timeZone, { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
-</code></pre>
-</li>
-<li>Syntactically valid date-time-zone string → ZonedDateTime<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;2023-03-12T02:30[America/Vancouver]&#x27;</span>,
+<h4 id="most-conversions-clamp-by-default-option-to-throw">Most conversions: Clamp by default, option to throw</h4>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDateTime.<span class="hljs-title function_">toZonedDateTime</span>(timeZone,
   { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
-<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;2023-03-12T02:30-09:00[America/Vancouver]&#x27;</span>,
+
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(
+  <span class="hljs-string">&#x27;2023-03-12T02:30[America/Vancouver]&#x27;</span>,
+  { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(
+  <span class="hljs-string">&#x27;2023-03-12T02:30-09:00[America/Vancouver]&#x27;</span>,
   { <span class="hljs-attr">offset</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+
+timeZone.<span class="hljs-title function_">getInstantFor</span>(plainDateTime,
+  { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDate</span>.<span class="hljs-title function_">from</span>(
+  { <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> },
+  { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+
+plainDate.<span class="hljs-title function_">with</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
 </code></pre>
-</li>
-<li>Valid date-time string + TimeZone → Instant<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">timeZone.<span class="hljs-title function_">getInstantFor</span>(<span class="hljs-string">&#x27;2023-02-13T02:30&#x27;</span>, { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
-</code></pre>
-</li>
-<li>Valid property bag → any Temporal type (<code>from</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDate</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
-</code></pre>
-</li>
-<li>Temporal type + {some properties} → Same type (<code>with</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">with</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
-</code></pre>
-</li>
-</ul>
 </div>
 <div>
-<h4 id="always-clamps">Always clamps</h4>
-<ul>
-<li>PlainDate + PlainTime + TimeZone → ZonedDateTime (convenience methods)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">toZonedDateTime</span>({ plainTime, timeZone })
+<h4 id="convenience-methods--conversions-always-clamp">Convenience methods &amp; conversions: Always clamp</h4>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">toZonedDateTime</span>({ plainTime, timeZone })
 plainTime.<span class="hljs-title function_">toZonedDateTime</span>({ plainDate, timeZone })
-</code></pre>
-</li>
-<li>Valid property bag → any Temporal type (convenience coercion)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">until</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> })
+plainDate.<span class="hljs-title function_">until</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> })
 plainDate.<span class="hljs-title function_">equals</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> })
-<span class="hljs-comment">// and 68 more methods</span>
+<span class="hljs-comment">// ...convenience conversions happen at 68 other entry points</span>
 </code></pre>
-</li>
-</ul>
-<h4 id="throws">Throws</h4>
-<ul>
-<li><span style="color:#a40000;">PlainYearMonth + {day} → PlainDate <img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/26a0.svg" data-marp-twemoji=""/></span><pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainYearMonth.<span class="hljs-title function_">toPlainDate</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> })
+<h4 id="span-stylecolora40000conversions-that-throw-bug-%E2%9A%A0%EF%B8%8Fspan"><span style="color:#a40000;">Conversions that throw (bug!) <img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/26a0.svg" data-marp-twemoji=""/></span></h4>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainYearMonth.<span class="hljs-title function_">toPlainDate</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> })
+plainMonthDay.<span class="hljs-title function_">toPlainDate</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2030</span> })
 </code></pre>
-</li>
-<li><span style="color:#a40000;">PlainMonthDay + {year} → PlainDate <img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/26a0.svg" data-marp-twemoji=""/></span><pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainMonthDay.<span class="hljs-title function_">toPlainDate</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2030</span> })
-</code></pre>
-</li>
-</ul>
 </div>
 </div>
 </section>
@@ -706,9 +696,9 @@ table { font-size: 70%; }
 ;" data-marpit-pagination-total="18">
 <h3 id="pr-2718">PR <a href="https://github.com/tc39/proposal-temporal/pull/2718">#2718</a></h3>
 <ul>
-<li>Moves &quot;Throws&quot; items into &quot;Always clamps&quot; category</li>
+<li>Moves &quot;Throws&quot; items into &quot;Always clamp&quot; category</li>
 <li>Motivated by feedback from practitioners</li>
-<li>If we were still designing API at Stage 2, would move into &quot;Clamps by default, option to throw&quot; instead</li>
+<li>If we were still designing API at Stage 2, would move into &quot;Clamp by default, option to throw&quot; instead</li>
 <li>Will track adding the option as a possibility for a follow-on proposal</li>
 </ul>
 </section>
@@ -766,17 +756,16 @@ Here are some examples of what's valid and what's not. The top one is a valid mo
 
 ISO 8601 and IXDTF do not include time zone transitions in their definition of validity. That'd be impossible.
 The string on the second-to-last line is a nonexistent time because it's in the middle of the hour when we set the clocks forward this spring in my time zone, but it's a valid string and when you convert it to a Temporal object, you can choose with an option whether to clamp it or throw.
-The string on the last line is still not valid because 99:99 is just not a time that clocks can display.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>Here's an overview of all the ways that you can convert data in Temporal that could be invalid in the result domain.
-This is a pretty short list because most conversions can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped. An example of a conversion that can't fail is converting from a PlainDateTime to a PlainDate. Every valid PlainDateTime object can be converted to a valid PlainDate.
+The string on the last line is still not valid because 99:99 is just not a time that clocks can display.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>Here's an overview of the ways that you can convert data in Temporal that could be invalid in the result domain.
+What's not shown here is that most conversions can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped. An example of a conversion that can't fail is converting from a PlainDateTime to a PlainDate. Every valid PlainDateTime object can be converted to a valid PlainDate.
 
 Most failable conversions clamp by default, but have an option to throw. On the left are examples of what circumstances this occurs in. (Sorry, it's a bit crammed in.)
 
-The ones that don't have an option to throw are because we considered them a convenience conversion, and so they use the default option. The PlainDate + PlainTime + TimeZone to ZonedDateTime methods are just shorthand for first converting to a PlainDateTime and then a ZonedDateTime, so if you want to adjust the behaviour you can specify in which conversion you want the clamping or throwing to occur.
-Likewise, any method that accepts a Temporal object also accepts a property bag, and this is a shorthand for calling `from()` on the property bag. If you want the throwing behaviour, you can specify it manually by 
+The ones that don't have an option to throw are because we considered them a convenience conversion, and so they use the default option. If you want the throwing behaviour, you can specify it manually by using `from()` or whatever.
 
-Given this context, let's come back to the normative change. In the current Temporal spec, these red ones don't follow the same default behavior as other Temporal APIs, which is to constrain the output to a valid date if the desired date doesn't exist when the receiver is combined with the input.
+Given this context, let's come back to the normative change. In the current Temporal spec, the ones under this &quot;BUG&quot; heading don't follow the same default behavior as other Temporal APIs, which is to constrain the output to a valid date if the desired date doesn't exist when the receiver is combined with the input.
 
-Basically we want to empty the &quot;Throws&quot; category into the &quot;Always clamps&quot; category.</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p>This is a spec bug that was discovered by a user, and we want to fix it so that the default behavior of all similar Temporal APIs are consistent.
+Basically we want to empty the &quot;Throw&quot; category into the &quot;Always clamp&quot; category.</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p>This is a spec bug that was discovered by a user, and we want to fix it so that the default behavior of all similar Temporal APIs are consistent.
 
 If we didn't make this change, then common use cases like &quot;what day of the week is my birthday next year?&quot; could throw, which would be quite unexpected.
 

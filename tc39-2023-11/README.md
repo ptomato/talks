@@ -265,87 +265,76 @@ The string on the last line is still not valid because 99:99 is just not a time 
 
 ### APIs that could clamp or reject
 
-<div class="twocol"  style="font-size: 55%">
+<div class="twocol"  style="font-size: 65%">
 <div>
 
-#### Clamps by default, option to throw
+#### Most conversions: Clamp by default, option to throw
 
-- PlainDateTime + TimeZone → ZonedDateTime
-  ```js
-  plainDateTime.toZonedDateTime(timeZone, { disambiguation: 'reject' })
-  ```
-- Syntactically valid date-time-zone string → ZonedDateTime
-  ```js
-  Temporal.ZonedDateTime.from('2023-03-12T02:30[America/Vancouver]',
-    { disambiguation: 'reject' })
-  Temporal.ZonedDateTime.from('2023-03-12T02:30-09:00[America/Vancouver]',
-    { offset: 'reject' })
-  ```
-- Valid date-time string + TimeZone → Instant
-  ```js
-  timeZone.getInstantFor('2023-02-13T02:30', { disambiguation: 'reject' })
-  ```
-- Valid property bag → any Temporal type (`from`)
-  ```js
-  Temporal.PlainDate.from({ year: 2023, month: 11, day: 31 }, { overflow: 'reject' })
-  ```
-- Temporal type + {some properties} → Same type (`with`)
-  ```js
-  plainDate.with({ day: 31 }, { overflow: 'reject' })
-  ```
+```js
+plainDateTime.toZonedDateTime(timeZone,
+  { disambiguation: 'reject' })
+
+Temporal.ZonedDateTime.from(
+  '2023-03-12T02:30[America/Vancouver]',
+  { disambiguation: 'reject' })
+
+Temporal.ZonedDateTime.from(
+  '2023-03-12T02:30-09:00[America/Vancouver]',
+  { offset: 'reject' })
+
+timeZone.getInstantFor(plainDateTime,
+  { disambiguation: 'reject' })
+
+Temporal.PlainDate.from(
+  { year: 2023, month: 11, day: 31 },
+  { overflow: 'reject' })
+
+plainDate.with({ day: 31 }, { overflow: 'reject' })
+```
 
 </div>
 <div>
 
-#### Always clamps
+#### Convenience methods & conversions: Always clamp
 
-- PlainDate + PlainTime + TimeZone → ZonedDateTime (convenience methods)
-  ```js
-  plainDate.toZonedDateTime({ plainTime, timeZone })
-  plainTime.toZonedDateTime({ plainDate, timeZone })
-  ```
-- Valid property bag → any Temporal type (convenience coercion)
-  ```js
-  plainDate.until({ year: 2023, month: 11, day: 31 })
-  plainDate.equals({ year: 2023, month: 11, day: 31 })
-  // and 68 more methods
-  ```
+```js
+plainDate.toZonedDateTime({ plainTime, timeZone })
+plainTime.toZonedDateTime({ plainDate, timeZone })
+plainDate.until({ year: 2023, month: 11, day: 31 })
+plainDate.equals({ year: 2023, month: 11, day: 31 })
+// ...convenience conversions happen at 68 other entry points
+```
 
-#### Throws
+#### <span style="color:#a40000;">Conversions that throw (bug!) ⚠️</span>
 
-- <span style="color:#a40000;">PlainYearMonth + {day} → PlainDate ⚠️</span>
-  ```js
-  plainYearMonth.toPlainDate({ day: 31 })
-  ```
-- <span style="color:#a40000;">PlainMonthDay + {year} → PlainDate ⚠️</span>
-  ```js
-  plainMonthDay.toPlainDate({ year: 2030 })
-  ```
+```js
+plainYearMonth.toPlainDate({ day: 31 })
+plainMonthDay.toPlainDate({ year: 2030 })
+```
 
 </div>
 </div>
 
 <!--
-Here's an overview of all the ways that you can convert data in Temporal that could be invalid in the result domain.
-This is a pretty short list because most conversions can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped. An example of a conversion that can't fail is converting from a PlainDateTime to a PlainDate. Every valid PlainDateTime object can be converted to a valid PlainDate.
+Here's an overview of the ways that you can convert data in Temporal that could be invalid in the result domain.
+What's not shown here is that most conversions can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped. An example of a conversion that can't fail is converting from a PlainDateTime to a PlainDate. Every valid PlainDateTime object can be converted to a valid PlainDate.
 
 Most failable conversions clamp by default, but have an option to throw. On the left are examples of what circumstances this occurs in. (Sorry, it's a bit crammed in.)
 
-The ones that don't have an option to throw are because we considered them a convenience conversion, and so they use the default option. The PlainDate + PlainTime + TimeZone to ZonedDateTime methods are just shorthand for first converting to a PlainDateTime and then a ZonedDateTime, so if you want to adjust the behaviour you can specify in which conversion you want the clamping or throwing to occur.
-Likewise, any method that accepts a Temporal object also accepts a property bag, and this is a shorthand for calling `from()` on the property bag. If you want the throwing behaviour, you can specify it manually by 
+The ones that don't have an option to throw are because we considered them a convenience conversion, and so they use the default option. If you want the throwing behaviour, you can specify it manually by using `from()` or whatever.
 
-Given this context, let's come back to the normative change. In the current Temporal spec, these red ones don't follow the same default behavior as other Temporal APIs, which is to constrain the output to a valid date if the desired date doesn't exist when the receiver is combined with the input.
+Given this context, let's come back to the normative change. In the current Temporal spec, the ones under this "BUG" heading don't follow the same default behavior as other Temporal APIs, which is to constrain the output to a valid date if the desired date doesn't exist when the receiver is combined with the input.
 
-Basically we want to empty the "Throws" category into the "Always clamps" category.
+Basically we want to empty the "Throw" category into the "Always clamp" category.
 -->
 
 ---
 
 ### PR [#2718](https://github.com/tc39/proposal-temporal/pull/2718)
 
-- Moves "Throws" items into "Always clamps" category
+- Moves "Throws" items into "Always clamp" category
 - Motivated by feedback from practitioners
-- If we were still designing API at Stage 2, would move into "Clamps by default, option to throw" instead
+- If we were still designing API at Stage 2, would move into "Clamp by default, option to throw" instead
 - Will track adding the option as a possibility for a follow-on proposal
 
 <!--
