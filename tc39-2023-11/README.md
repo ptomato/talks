@@ -193,9 +193,9 @@ Across a very wide range of these real-world use cases, what we observed is that
 ### Principle: No data-driven exceptions (2)
 
 - _Data-dependent ambiguous cases should default to some reasonable behaviour instead of throwing_
-* Throwing behaviour can be explicitly requested
-  - Directly, by option; or
-  - Indirectly, by writing equivalent code that uses a method that has the option
+  - Favour consistent behaviour, even if not ideal for all use cases
+  - Favour real-world usage
+* Can opt in to throwing
 
 <!--
 As a shorthand among the Temporal champions, "no data-driven exceptions" means that data-dependent ambiguous cases should default to some reasonable behavior instead of throwing. In retrospect this isn't a good name! But what it means is that if you write your code and it doesn't throw for a normal date and time, then it also shouldn't throw BY DEFAULT for a "weird" date or time.
@@ -217,7 +217,7 @@ Note that most other APIs (like legacy Date) don't offer an option to throw. The
 <!--
 Temporal objects are immutable and always contain valid data. With the old JavaScript Date you can create a Date object that has NaN in its internal slot, representing an "invalid date". You can't do this with Temporal objects.
 
-In this normative change we are talking about converting from one type of Temporal object to another, so 
+In this normative change we are talking about converting from one type of Temporal object to another, so this is the kind of "valid data" we are talking about. For completeness, I'll go over the other kinds data that we consider valid.
 -->
 
 ---
@@ -247,7 +247,7 @@ It's a messy principle (because dates and times and calendars and time zones are
   - Valid: `2024-02-29`
   - Not valid: `00-00`, `12-32`, `2030-02-29`
 - Ambiguity still possible with time zone transitions
-  - Valid: `2023-03-12T02:30[America/Vancouver]`
+  - Syntactically valid: `2023-03-12T02:30[America/Vancouver]`
   - Not valid: `2023-03-12T99:99[America/Vancouver]`
 
 <!--
@@ -268,51 +268,69 @@ The string on the last line is still not valid because 99:99 is just not a time 
 <div class="twocol"  style="font-size: 55%">
 <div>
 
-#### Result always valid:
+#### Clamps by default, option to throw
 
-- Instant + TimeZone → ZonedDateTime
-- PlainDate + PlainTime → PlainDateTime
-- PlainDate → PlainYearMonth
-- PlainDate → PlainMonthDay
-- PlainDateTime → PlainDate
-- PlainDateTime → PlainTime
-- PlainDateTime → PlainYearMonth
-- PlainDateTime → PlainMonthDay
-- ZonedDateTime → any other Temporal object
-- Valid date string → PlainDate
-- Valid time string → PlainTime
-- Valid year-month string → PlainYearMonth
-- Valid month-day string → PlainMonthDay
-- Valid date-time string → PlainDateTime
-- Valid date-time-offset string → Instant
+- PlainDateTime + TimeZone → ZonedDateTime
+  ```js
+  plainDateTime.toZonedDateTime(timeZone, { disambiguation: 'reject' })
+  ```
+- Syntactically valid date-time-zone string → ZonedDateTime
+  ```js
+  Temporal.ZonedDateTime.from('2023-03-12T02:30[America/Vancouver]',
+    { disambiguation: 'reject' })
+  Temporal.ZonedDateTime.from('2023-03-12T02:30-09:00[America/Vancouver]',
+    { offset: 'reject' })
+  ```
+- Valid date-time string + TimeZone → Instant
+  ```js
+  timeZone.getInstantFor('2023-02-13T02:30', { disambiguation: 'reject' })
+  ```
+- Valid property bag → any Temporal type (`from()`)
+  ```js
+  Temporal.PlainDate.from({ year: 2023, month: 11, day: 31 }, { overflow: 'reject' })
+  ```
+- Temporal type + {some properties} → Same type (`with()`)
+  ```js
+  plainDate.with({ day: 31 }, { overflow: 'reject' })
+  ```
 
 </div>
 <div>
 
-#### Clamps by default, option to throw:
-
-- Valid date-time-zone string → ZonedDateTime
-- PlainDateTime + TimeZone → ZonedDateTime
-- Valid date-time string + TimeZone → ZonedDateTime
-- Valid property bag → any Temporal object
-
 #### Always clamps
 
-- PlainDate + PlainTime + TimeZone → ZonedDateTime
+- PlainDate + PlainTime + TimeZone → ZonedDateTime (convenience methods)
+  ```js
+  plainDate.toZonedDateTime({ plainTime, timeZone })
+  plainTime.toZonedDateTime({ plainDate, timeZone })
+  ```
+- Valid property bag → any Temporal type (convenience coercion)
+  ```js
+  plainDate.until({ year: 2023, month: 11, day: 31 })
+  ```
 
 #### Throws
 
 - <span style="color:#a40000;">PlainYearMonth + {day} → PlainDate ⚠️</span>
+  ```js
+  plainYearMonth.toPlainDate({ day: 31 })
+  ```
 - <span style="color:#a40000;">PlainMonthDay + {year} → PlainDate ⚠️</span>
+  ```js
+  plainMonthDay.toPlainDate({ year: 2030 })
+  ```
 
 </div>
 </div>
 
 <!--
-Here's an overview of all the ways that you can convert data in Temporal.
-You can see that most conversions, on the left, can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped.
+Here's an overview of all the ways that you can convert data in Temporal that could be invalid in the result domain.
+This is a pretty short list because most conversions can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped. An example of a conversion that can't fail is converting from a PlainDateTime to a PlainDate. Every valid PlainDateTime object can be converted to a valid PlainDate.
 
-On the right we have conversions that can fail. Most conversions clamp by default, but have an option to throw. The PlainDate + PlainTime + TimeZone to ZonedDateTime conversion is a special case because it's a convenience method for first converting to a PlainDateTime and then a ZonedDateTime.
+Most failable conversions clamp by default, but have an option to throw. On the left are examples of what circumstances this occurs in. (Sorry, it's a bit crammed in.)
+
+The ones that don't have an option to throw are because we considered them a convenience conversion, and so they use the default option. The PlainDate + PlainTime + TimeZone to ZonedDateTime methods are just shorthand for first converting to a PlainDateTime and then a ZonedDateTime, so if you want to adjust the behaviour you can specify in which conversion you want the clamping or throwing to occur.
+Likewise, any method that accepts a Temporal object also accepts a property bag, and this is a shorthand for calling `from()` on the property bag. If you want the throwing behaviour, you can specify it manually by 
 
 Given this context, let's come back to the normative change. In the current Temporal spec, these red ones don't follow the same default behavior as other Temporal APIs, which is to constrain the output to a valid date if the desired date doesn't exist when the receiver is combined with the input.
 

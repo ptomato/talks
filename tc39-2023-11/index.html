@@ -460,15 +460,15 @@ table { font-size: 70%; }
 ;" data-marpit-pagination-total="18">
 <h3 id="principle-no-data-driven-exceptions-2">Principle: No data-driven exceptions (2)</h3>
 <ul>
-<li><em>Data-dependent ambiguous cases should default to some reasonable behaviour instead of throwing</em></li>
-</ul>
+<li><em>Data-dependent ambiguous cases should default to some reasonable behaviour instead of throwing</em>
 <ul>
-<li data-marpit-fragment="1">Throwing behaviour can be explicitly requested
-<ul>
-<li>Directly, by option; or</li>
-<li>Indirectly, by writing equivalent code that uses a method that has the option</li>
+<li>Favour consistent behaviour, even if not ideal for all use cases</li>
+<li>Favour real-world usage</li>
 </ul>
 </li>
+</ul>
+<ul>
+<li data-marpit-fragment="1">Can opt in to throwing</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-paginate="true" data-theme="gaia" data-style="@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
@@ -592,7 +592,7 @@ table { font-size: 70%; }
 </li>
 <li>Ambiguity still possible with time zone transitions
 <ul>
-<li>Valid: <code>2023-03-12T02:30[America/Vancouver]</code></li>
+<li>Syntactically valid: <code>2023-03-12T02:30[America/Vancouver]</code></li>
 <li>Not valid: <code>2023-03-12T99:99[America/Vancouver]</code></li>
 </ul>
 </li>
@@ -629,41 +629,47 @@ table { font-size: 70%; }
 <h3 id="conversions-between-temporal-objects">Conversions between Temporal objects</h3>
 <div class="twocol"  style="font-size: 55%">
 <div>
-<h4 id="result-always-valid">Result always valid:</h4>
+<h4 id="clamps-by-default-option-to-throw">Clamps by default, option to throw</h4>
 <ul>
-<li>Instant + TimeZone → ZonedDateTime</li>
-<li>PlainDate + PlainTime → PlainDateTime</li>
-<li>PlainDate → PlainYearMonth</li>
-<li>PlainDate → PlainMonthDay</li>
-<li>PlainDateTime → PlainDate</li>
-<li>PlainDateTime → PlainTime</li>
-<li>PlainDateTime → PlainYearMonth</li>
-<li>PlainDateTime → PlainMonthDay</li>
-<li>ZonedDateTime → any other Temporal object</li>
-<li>Valid date string → PlainDate</li>
-<li>Valid time string → PlainTime</li>
-<li>Valid year-month string → PlainYearMonth</li>
-<li>Valid month-day string → PlainMonthDay</li>
-<li>Valid date-time string → PlainDateTime</li>
-<li>Valid date-time-offset string → Instant</li>
+<li>PlainDateTime + TimeZone → ZonedDateTime<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDateTime.<span class="hljs-title function_">toZonedDateTime</span>(timeZone, { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+</code></pre>
+</li>
+<li>Syntactically valid date-time-zone string → ZonedDateTime<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;2023-03-12T02:30[America/Vancouver]&#x27;</span>,
+  { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;2023-03-12T02:30-09:00[America/Vancouver]&#x27;</span>,
+  { <span class="hljs-attr">offset</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+</code></pre>
+</li>
+<li>Valid date-time string + TimeZone → Instant<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">timeZone.<span class="hljs-title function_">getInstantFor</span>(<span class="hljs-string">&#x27;2023-02-13T02:30&#x27;</span>, { <span class="hljs-attr">disambiguation</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+</code></pre>
+</li>
+<li>Valid property bag → any Temporal type (<code>from()</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDate</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+</code></pre>
+</li>
+<li>Temporal type + {some properties} → Same type (<code>with()</code>)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">with</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> }, { <span class="hljs-attr">overflow</span>: <span class="hljs-string">&#x27;reject&#x27;</span> })
+</code></pre>
+</li>
 </ul>
 </div>
 <div>
-<h4 id="clamps-by-default-option-to-throw">Clamps by default, option to throw:</h4>
-<ul>
-<li>Valid date-time-zone string → ZonedDateTime</li>
-<li>PlainDateTime + TimeZone → ZonedDateTime</li>
-<li>Valid date-time string + TimeZone → ZonedDateTime</li>
-<li>Valid property bag → any Temporal object</li>
-</ul>
 <h4 id="always-clamps">Always clamps</h4>
 <ul>
-<li>PlainDate + PlainTime + TimeZone → ZonedDateTime</li>
+<li>PlainDate + PlainTime + TimeZone → ZonedDateTime (convenience methods)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">toZonedDateTime</span>({ plainTime, timeZone })
+plainTime.<span class="hljs-title function_">toZonedDateTime</span>({ plainDate, timeZone })
+</code></pre>
+</li>
+<li>Valid property bag → any Temporal type (convenience coercion)<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainDate.<span class="hljs-title function_">until</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2023</span>, <span class="hljs-attr">month</span>: <span class="hljs-number">11</span>, <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> })
+</code></pre>
+</li>
 </ul>
 <h4 id="throws">Throws</h4>
 <ul>
-<li><span style="color:#a40000;">PlainYearMonth + {day} → PlainDate <img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/26a0.svg" data-marp-twemoji=""/></span></li>
-<li><span style="color:#a40000;">PlainMonthDay + {year} → PlainDate <img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/26a0.svg" data-marp-twemoji=""/></span></li>
+<li><span style="color:#a40000;">PlainYearMonth + {day} → PlainDate <img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/26a0.svg" data-marp-twemoji=""/></span><pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainYearMonth.<span class="hljs-title function_">toPlainDate</span>({ <span class="hljs-attr">day</span>: <span class="hljs-number">31</span> })
+</code></pre>
+</li>
+<li><span style="color:#a40000;">PlainMonthDay + {year} → PlainDate <img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/26a0.svg" data-marp-twemoji=""/></span><pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">plainMonthDay.<span class="hljs-title function_">toPlainDate</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2030</span> })
+</code></pre>
+</li>
 </ul>
 </div>
 </div>
@@ -751,17 +757,20 @@ I emphasize BY DEFAULT above because there are cases where developers do want to
 
 Note that most other APIs (like legacy Date) don't offer an option to throw. They just silently fix up the weird data and return the result. So &quot;no data driven exceptions&quot; isn't really a new thing, it's just how all other date/time APIs work. What's new is that Temporal provides &quot;yes data driven exceptions!&quot; options to support the unusual cases where ambiguity is not acceptable.</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>Temporal objects are immutable and always contain valid data. With the old JavaScript Date you can create a Date object that has NaN in its internal slot, representing an &quot;invalid date&quot;. You can't do this with Temporal objects.
 
-In this normative change we are talking about converting from one type of Temporal object to another, so</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>Also note that obviously bad data (like a negative hour or zeroth month) will always throw. These are not &quot;weird data&quot;, they're just plain invalid. However, values like { month: 13 } might be valid in a non-Gregorian calendar, so positive out-of-range day and month values don't throw by default either. The general principle is that if an input could be valid in some day, some month, some year, some calendar, etc. then we we don't throw by default, even if it's not present in a particular day/month/year/calendar. If we can determine _without_ doing any calendar calculation that any individual value is invalid, like a negative day, then the property bag is not valid data and is not subject to clamping.
+In this normative change we are talking about converting from one type of Temporal object to another, so this is the kind of &quot;valid data&quot; we are talking about. For completeness, I'll go over the other kinds data that we consider valid.</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>Also note that obviously bad data (like a negative hour or zeroth month) will always throw. These are not &quot;weird data&quot;, they're just plain invalid. However, values like { month: 13 } might be valid in a non-Gregorian calendar, so positive out-of-range day and month values don't throw by default either. The general principle is that if an input could be valid in some day, some month, some year, some calendar, etc. then we we don't throw by default, even if it's not present in a particular day/month/year/calendar. If we can determine _without_ doing any calendar calculation that any individual value is invalid, like a negative day, then the property bag is not valid data and is not subject to clamping.
 It's a messy principle (because dates and times and calendars and time zones are messy!) but it's consistent.</p></div><div class="bespoke-marp-note" data-index="14" tabindex="0"><p>Finally, parsing strings must also adhere to the grammar defined in ISO 8601 and IXDTF (the new IETF RFC). If a string input doesn't adhere to those specs, we always throw to be compliant. The flexibility discussed above only applies to cases where we're interpreting number inputs, not string inputs.
 
 Here are some examples of what's valid and what's not. The top one is a valid month-day string. The next one is a valid date string. The third line has some month-day and date strings that are 
 
 ISO 8601 and IXDTF do not include time zone transitions in their definition of validity. That'd be impossible.
 The string on the second-to-last line is a nonexistent time because it's in the middle of the hour when we set the clocks forward this spring in my time zone, but it's a valid string and when you convert it to a Temporal object, you can choose with an option whether to clamp it or throw.
-The string on the last line is still not valid because 99:99 is just not a time that clocks can display.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>Here's an overview of all the ways that you can convert data in Temporal.
-You can see that most conversions, on the left, can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped.
+The string on the last line is still not valid because 99:99 is just not a time that clocks can display.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>Here's an overview of all the ways that you can convert data in Temporal that could be invalid in the result domain.
+This is a pretty short list because most conversions can't fail at all (at least not due to being invalid in the result domain like February 29th 2030), and so don't need to be clamped. An example of a conversion that can't fail is converting from a PlainDateTime to a PlainDate. Every valid PlainDateTime object can be converted to a valid PlainDate.
 
-On the right we have conversions that can fail. Most conversions clamp by default, but have an option to throw. The PlainDate + PlainTime + TimeZone to ZonedDateTime conversion is a special case because it's a convenience method for first converting to a PlainDateTime and then a ZonedDateTime.
+Most failable conversions clamp by default, but have an option to throw. On the left are examples of what circumstances this occurs in. (Sorry, it's a bit crammed in.)
+
+The ones that don't have an option to throw are because we considered them a convenience conversion, and so they use the default option. The PlainDate + PlainTime + TimeZone to ZonedDateTime methods are just shorthand for first converting to a PlainDateTime and then a ZonedDateTime, so if you want to adjust the behaviour you can specify in which conversion you want the clamping or throwing to occur.
+Likewise, any method that accepts a Temporal object also accepts a property bag, and this is a shorthand for calling `from()` on the property bag. If you want the throwing behaviour, you can specify it manually by 
 
 Given this context, let's come back to the normative change. In the current Temporal spec, these red ones don't follow the same default behavior as other Temporal APIs, which is to constrain the output to a valid date if the desired date doesn't exist when the receiver is combined with the input.
 
