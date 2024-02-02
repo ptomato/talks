@@ -34,48 +34,51 @@ TC39 February 6–8, 2024
 
 ## Progress update
 
-- Backlog of unmerged normative changes is all caught up
-- Four normative changes to propose today
-  - narrowly scoped, all touching only edge cases
-  - raised by implementors/polyfill writers
-- After these, we are not aware of any more outstanding bugs
+- Backlog of approved normative changes is all caught up
+  - Will merge after this meeting
+- 4 normative changes proposed today for bugs found during implementation, polyfilling, or community use
+  - Narrowly scoped: edge cases with minimal implementer impact
+- NOT an indication of more changes coming
+  - No more known outstanding bugs
+  - Last normative changes were in Nov 2023 and July 2023
+  - Next one... never?
 
 ---
 
 ## Progress update (2)
 
-- Next step is to address any editorial issues that implementors might find disruptive
+- Next: finalize any editorial changes that implementors might find disruptive
 - **Will give a loud signal when this is done**
 - Expect this **soon**
-- Follow the checklist in issue [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates
+- Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates
 
 ---
 
 ### weekOfYear/yearOfWeek optional (PR [#2756](https://github.com/tc39/proposal-temporal/pull/2756))
 
-- Brought to our attention by community members
+- Reported by early adopters
 - Some calendars have **week numbers**, some don't
 - Prior art: some calendars have eras, some don't
-  - dates' `era` and `eraYear` readonly properties may be `undefined`
-- **Proposal**:
-  - allow dates' `weekOfYear` and `yearOfWeek` readonly properties to be `undefined`
-  - allow calendars to return `undefined` from `weekOfYear()` and `yearOfWeek()` methods
+  - Dates' `era` and `eraYear` readonly properties may be `undefined`
+- **Proposal**
+  - Allow `weekOfYear` and `yearOfWeek` readonly properties to be `undefined`
+  - Calendars may return `undefined` from `weekOfYear()` and `yearOfWeek()` methods
 
 ---
 
-### Note on specifying calendar numbering systems
+### Notes for specifying calendars
 
 - **Which** calendars have week numbers and how are they numbered?
 - ECMAScript does **not** have to specify this
-- Data will come from CLDR
+- Data will come from CLDR and ICU
 - However, may be in scope of the Intl Era and Month Codes proposal
-- See issue [tc39/proposal-intl-era-monthcode#15](https://github.com/tc39/proposal-intl-era-monthcode/issues/15) for discussion
+- See [tc39/proposal-intl-era-monthcode#15](https://github.com/tc39/proposal-intl-era-monthcode/issues/15)
 
 ---
 
 ### Duration rounding bug (PR [#2758](https://github.com/tc39/proposal-temporal/pull/2758))
 
-- Brought to our attention by Adam Shaw, a Temporal polyfill author
+- Reported by Adam Shaw (polyfill author)
 ```js
 const duration = Temporal.Duration.from({years: 1, hours: 24});
 const past = Temporal.ZonedDateTime.from("2019-11-01T00:00-07:00[America/Vancouver]");
@@ -85,42 +88,42 @@ const future = past.add(duration);  // 2020-11-01T23:00-08:00[America/Vancouver]
 past.until(future, {largestUnit: 'years'})  // 1 year, 24 hours (CORRECT)
 duration.round({largestUnit: 'years', relativeTo: past})  // 1 year, 1 day (WRONG)
 ```
-- In `round`, the wrong reference date is used
+- In `round`, the wrong reference date was used
 
 ---
 
 ### Duration rounding bug (2)
 
-- More generally, these should _always_ be equivalent:
+- Generalizing, these should _always_ be equivalent:
 ```js
 past.until(past.add(duration), { largestUnit, smallestUnit, roundingMode, etc })
 duration.round({ relativeTo: past, largestUnit, smallestUnit, roundingMode, etc })
 ```
-- Results disagree when `past` is a Temporal.ZonedDateTime and `past` + date part of duration is a day with DST
-- Fix bug and also refactor the spec so these go through the same code path
-- Prevent any future discrepancies
+- Today, results disagree if `past` is a Temporal.ZonedDateTime and a DST change happens on `past` + date part of duration
+- Fix bug + refactor spec to unify codepath for both operations
+- Prevents future discrepancies
 
 ---
 
 ### ZonedDateTime difference bug (PR [#2760](https://github.com/tc39/proposal-temporal/pull/2760))
 
-- Brought to our attention by Adam Shaw, a Temporal polyfill author
-- Surprising:
+- Reported by Adam Shaw (polyfill author)
 ```js
 const duration = Temporal.Duration.from({ months: 1, days: 15, hours: 12 });
 const past = Temporal.ZonedDateTime.from('2024-02-10T02:00[America/New_York]');
 const future = past.add(duration);
 past.until(future, { largestUnit: 'months' })  // => 1 month, 15 days, 11 (!) hours
 ```
-- A shift due to DST is expected, but in this case DST is on 2024-03-10, not at the start or the end of the calculation
-- Change calculation of an intermediate ZDT value
+- Above: DST disambiguation happened at the month/day boundary, but should have been ignored
+- DST disambiguation only expected at the day/hour boundary
+- Narrowly-scoped fix to ZDT addition algorithm
 
 ---
 
 ### End-of-month edge cases (PR [#2759](https://github.com/tc39/proposal-temporal/pull/2759))
 
-- Raised by André Bargull as part of the Firefox implementation
-- Surprising results when adding and subtracting dates near end of month with non-default `largestUnit`:
+- From André Bargull (Firefox impl.) and Adam Shaw (polyfill author)
+- Unexpected `since`/`until` result near end of month
 
 ```js
 const end = new Temporal.PlainDate(1970, 2, 28);
@@ -129,18 +132,9 @@ new Temporal.PlainDate(1970, 1, 29).until(end, {largestUnit:"months"})  // "1 mo
 new Temporal.PlainDate(1970, 1, 30).until(end, {largestUnit:"months"})  // "1 month"
 new Temporal.PlainDate(1970, 1, 31).until(end, {largestUnit:"months"})  // "1 month"
 ```
-- Not necessarily incorrect; results agree with Moment and Luxon
-- Disagree with java.time (1 month, 30 days, 29 days, 28 days resp.)
-
----
-
-### End-of-month edge cases
-
-- Long discussion and some help from polyfill author Adam Shaw
-- Tweak date difference algorithm to differentiate these cases where possible — one-line change!
-- Changes results of 396 date-pairs out of all 2.1M possible date pairs in a 4-year Gregorian calendar cycle
-- "_N_ months and 0 days" → "_N_ - 1 months and 28, 29, or 30 days"
-- Results for default `largestUnit` remain the same
+- Expected (e.g. java.time): 1 month, 30 days, 29 days, 28 days resp. 
+- Affects `largestUnit: 'months'|'years'` (default options are OK)
+- Narrow scope: one-line change affects only 0.2% of date pairs
 
 ---
 
