@@ -34,10 +34,20 @@ TC39 February 6–8, 2024
 
 ## Progress update
 
+- Backlog of unmerged normative changes is all caught up
 - Four normative changes to propose today
-  - (from implementors or usage experience in community)
+  - narrowly scoped, all touching only edge cases
+  - raised by implementors/polyfill writers
+- After these, we are not aware of any more outstanding bugs
+
+---
+
+## Progress update (2)
+
+- Next step is to address any editorial issues that implementors might find disruptive
+- **Will give a loud signal when this is done**
+- Expect this **soon**
 - Follow the checklist in issue [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates
-- **Will give a loud signal when this checklist is complete**
 
 ---
 
@@ -63,33 +73,47 @@ TC39 February 6–8, 2024
 
 ---
 
-<!-- _footer: "*Except for the default roundingMode, which has a reason we won't get into here" -->
-
 ### Duration rounding bug (PR [#2758](https://github.com/tc39/proposal-temporal/pull/2758))
 
-- Brought to our attention by a Temporal polyfill author
-- These should be equivalent\*:
+- Brought to our attention by Adam Shaw, a Temporal polyfill author
 ```js
-past.until(past.add(duration), { largestUnit, etc })
-duration.round({ relativeTo: past, largestUnit, etc })
+const duration = Temporal.Duration.from({years: 1, hours: 24});
+const past = Temporal.ZonedDateTime.from("2019-11-01T00:00-07:00[America/Vancouver]");
+const future = past.add(duration);  // 2020-11-01T23:00-08:00[America/Vancouver]
+  // (note, not 2020-11-02, because 2020-11-01 is a 25-hour day in that time zone)
+
+past.until(future, {largestUnit: 'years'})  // 1 year, 24 hours (CORRECT)
+duration.round({largestUnit: 'years', relativeTo: past})  // 1 year, 1 day (WRONG)
+```
+- In `round`, the wrong reference date is used
+
+---
+
+### Duration rounding bug (2)
+
+- More generally, these should _always_ be equivalent:
+```js
+past.until(past.add(duration), { largestUnit, smallestUnit, roundingMode, etc })
+duration.round({ relativeTo: past, largestUnit, smallestUnit, roundingMode, etc })
 ```
 - Results disagree when `past` is a Temporal.ZonedDateTime and `past` + date part of duration is a day with DST
 - Fix bug and also refactor the spec so these go through the same code path
+- Prevent any future discrepancies
 
 ---
 
 ### ZonedDateTime difference bug (PR [#2760](https://github.com/tc39/proposal-temporal/pull/2760))
 
-- Brought to our attention by a Temporal polyfill author
+- Brought to our attention by Adam Shaw, a Temporal polyfill author
 - Surprising:
 ```js
 const duration = Temporal.Duration.from({ months: 1, days: 15, hours: 12 });
 const past = Temporal.ZonedDateTime.from('2024-02-10T02:00[America/New_York]');
 const future = past.add(duration);
-past.until(future, { largestUnit: 'months' })  // => 1 month, 15 days, 11 hours
+past.until(future, { largestUnit: 'months' })  // => 1 month, 15 days, 11 (!) hours
 ```
 - A shift due to DST is expected, but in this case DST is on 2024-03-10, not at the start or the end of the calculation
-- Changes calculation of an intermediate ZDT value
+- Change calculation of an intermediate ZDT value
 
 ---
 
@@ -113,7 +137,7 @@ new Temporal.PlainDate(1970, 1, 31).until(end, {largestUnit:"months"})  // "1 mo
 ### End-of-month edge cases
 
 - Long discussion and some help from polyfill author Adam Shaw
-- Tweak date difference algorithm to differentiate these cases where possible
+- Tweak date difference algorithm to differentiate these cases where possible — one-line change!
 - Changes results of 396 date-pairs out of all 2.1M possible date pairs in a 4-year Gregorian calendar cycle
 - "_N_ months and 0 days" → "_N_ - 1 months and 28, 29, or 30 days"
 - Results for default `largestUnit` remain the same
