@@ -51,7 +51,7 @@ We believe this is consistent with what we promised in July
 
 ## Progress update (2)
 
-- Next: finalize any editorial changes that implementors might find disruptive
+- Next: finalize any **editorial** changes that implementors might find disruptive
 - **Will give a loud signal when this is done**
 - Expect this **soon**
 - Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates
@@ -159,6 +159,6 @@ On normative PRs [#2756](https://github.com/tc39/proposal-temporal/pull/2756), [
 # Proposed summary for notes
 
 > Consensus was reached on a normative change making week numbering optional for calendars (PR [#2756](https://github.com/tc39/proposal-temporal/pull/2756)), a normative change to fix a bug in duration rounding (PR [#2758](https://github.com/tc39/proposal-temporal/pull/2758)), a normative change to return more useful results from date differences in end-of-month edge cases ([#2759](https://github.com/tc39/proposal-temporal/pull/2759)), and a normative change to fix a bug in ZonedDateTime differences (PR [#2760](https://github.com/tc39/proposal-temporal/pull/2760)) reached consensus.
-> The proposal champions are not aware of any further outstanding bugs, and expect implementations to be able to use the proposal as a stable base in the coming weeks. Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates.
+> The proposal champions are not aware of any further outstanding bugs, and expect implementations to be able to use the proposal as a stable base in the coming weeks with only editorial changes expected. Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates.
 
 ---
