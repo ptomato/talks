@@ -35,13 +35,17 @@ TC39 February 6–8, 2024
 ## Progress update
 
 - Backlog of approved normative changes is all caught up
-  - Will merge after this meeting
 - 4 normative changes proposed today for bugs found during implementation, polyfilling, or community use
   - Narrowly scoped: edge cases with minimal implementer impact
+  - Will merge after this meeting
 - NOT an indication of more changes coming
   - No more known outstanding bugs
-  - Last normative changes were in Nov 2023 and July 2023
+  - Last normative changes were in Nov 2023 (bugfix) and July 2023
   - Next one... never?
+
+<!--
+We believe this is consistent with what we promised in July
+-->
 
 ---
 
@@ -154,9 +158,7 @@ On normative PRs [#2756](https://github.com/tc39/proposal-temporal/pull/2756), [
 
 # Proposed summary for notes
 
-> A normative change making week numbering optional for calendars (PR [#2756](https://github.com/tc39/proposal-temporal/pull/2756)) reached consensus.
-> A normative change to fix a bug in duration rounding (PR [#2758](https://github.com/tc39/proposal-temporal/pull/2758)) reached consensus.
-> A normative change to return more useful results from date differences in end-of-month edge cases ([#2759](https://github.com/tc39/proposal-temporal/pull/2759)) reached consensus.
-> A normative change to fix a bug in ZonedDateTime differences (PR [#2760](https://github.com/tc39/proposal-temporal/pull/2760)) reached consensus.
+> Consensus was reached on a normative change making week numbering optional for calendars (PR [#2756](https://github.com/tc39/proposal-temporal/pull/2756)), a normative change to fix a bug in duration rounding (PR [#2758](https://github.com/tc39/proposal-temporal/pull/2758)), a normative change to return more useful results from date differences in end-of-month edge cases ([#2759](https://github.com/tc39/proposal-temporal/pull/2759)), and a normative change to fix a bug in ZonedDateTime differences (PR [#2760](https://github.com/tc39/proposal-temporal/pull/2760)) reached consensus.
+> The proposal champions are not aware of any further outstanding bugs, and expect implementations to be able to use the proposal as a stable base in the coming weeks. Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates.
 
 ---
