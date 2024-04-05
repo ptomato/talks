@@ -34,11 +34,9 @@ TC39 April 2024
 
 ## Progress update
 
-- Backlog of approved normative changes is all caught up
-<!-- Finished all potentially disruptive editorial changes that were planned -->
 - 1 normative change proposed today for bug caught by a polyfill implementor
-- Due to above bug, implementation signal not given yet
-  - But we expect to give it right after clicking the merge button on this PR
+- A few other bugs found in Duration arithmetic, to be addressed in June plenary
+- We hear continuing concerns from implementations and will work with them to address these before June plenary
 
 ---
 
@@ -47,14 +45,45 @@ TC39 April 2024
 When rounding a ZonedDateTime to the day boundary, it was possible in rare cases due to DST to add a spurious extra day.
 
 ```js
-const zdt0 = Temporal.ZonedDateTime.from('2024-03-10T23:00:01[America/New_York]')
-zdt0.round({ smallestUnit: 'day', roundingMode: 'ceil' })
+const zdt = Temporal.ZonedDateTime.from('2024-03-10T23:00:01[America/New_York]')
+zdt.round({ smallestUnit: 'day', roundingMode: 'ceil' })
   // Current: 2024-03-12T00:00:00-04:00[America/New_York] (incorrect)
   // Proposed: 2024-03-11T00:00:00-04:00[America/New_York] (correct)
 ```
 The incorrect result comes from not taking into account that 23:00:01 is 22h 1s into a 23-hour day. (March 10th was DST "spring forward".)
 
 (Discovered by Adam Shaw, a polyfill implementor)
+
+---
+
+## Implementor concerns
+
+- Concerns raised about the size of Temporal
+- Discussed in hallway during February plenary
+- V8: Concerns about compiled binary size on 32-bit Android ([#2786](https://github.com/tc39/proposal-temporal/issues/2786))
+  - We made a proof of concept showing how to cut binary size up to 38% with no change in functionality
+- JavaScriptCore: General concerns about standard library growth, but not specifically about Temporal
+- (cont'd)
+
+---
+
+## Implementor concerns (2)
+
+- SpiderMonkey: Concerns about Firefox installer size
+- V8: Concerns about complexity of proposal
+- Polyfill: Newly discovered bugs in duration arithmetic
+- Considering dropping or reducing:
+  - User-defined calendars and time zones, associated subclassing?
+  - `relativeTo` parameter in Duration.p.add/subtract?
+- Open to suggestions. It helps us if concerns can be made specific
+
+---
+
+## Implementor concerns (3)
+
+We would like to make sure doubts are addressed before the June 2024 plenary, so there are no remaining obstacles to implementation.
+
+If you have opinions or would like to discuss, please drop in on the Temporal champions meeting, biweekly Thursdays at `08:00[America/Los_Angeles]`!
 
 ---
 
@@ -75,6 +104,7 @@ On normative PR [#2797](https://github.com/tc39/proposal-temporal/pull/2797)
 # Proposed summary for notes
 
 > Consensus was reached on a normative change to fix a bug in rounding that occurred in rare cases having to do with DST.
-> The proposal champions are not aware of any further outstanding bugs<!--, and expect implementations to be able to use the proposal as a stable base in the coming weeks with only editorial changes expected-->. Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates.
+> Over the next few weeks, we plan to dig into remaining concerns from TC39 delegates.
+> Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates.
 
 ---
