@@ -34,25 +34,25 @@ TC39 April 2024
 
 ## Progress update
 
-- 1 normative change proposed today for bug caught by a polyfill implementor
-- A few other bugs found in Duration arithmetic, to be addressed in June plenary
-- We hear continuing concerns from implementations and will work with them to address these before June plenary
+After 7 years, Temporal is close to done. Our only focus is making sure in-progress implementations are successful:
+
+- Fixing small numbers of bugs found by implementors, mostly in corner cases
+- Making targeted changes to reduce complexity to make implementations easier
+- Addressing non-feature-specific implementation concerns, e.g. code size
 
 ---
 
-## Bug in rounding edge cases (PR [#2797](https://github.com/tc39/proposal-temporal/pull/2797))
+## We need your help!
 
-When rounding a ZonedDateTime to the day boundary, it was possible in rare cases due to DST to add a spurious extra day.
+- We would like to make sure doubts are addressed before the June 2024 plenary, so there are no remaining obstacles to implementation
+- If something is preventing you from implementing Temporal, let us know and work with us to resolve ASAP
+- Don't wait! If we need to make changes, we want to make them now
 
-```js
-const zdt = Temporal.ZonedDateTime.from('2024-03-10T23:00:01[America/New_York]')
-zdt.round({ smallestUnit: 'day', roundingMode: 'ceil' })
-  // Current: 2024-03-12T00:00:00-04:00[America/New_York] (incorrect)
-  // Proposed: 2024-03-11T00:00:00-04:00[America/New_York] (correct)
-```
-The incorrect result comes from not taking into account that 23:00:01 is 22h 1s into a 23-hour day. (March 10th was DST "spring forward".)
+You are welcome at the **Temporal champions meeting, biweekly Thursdays at 08:00 Pacific** (or we will happily meet another time if this time doesn't work for you)
 
-(Discovered by Adam Shaw, a polyfill implementor)
+<!--
+1 normative change proposed today for bug caught by a polyfill implementor
+-->
 
 ---
 
@@ -79,11 +79,25 @@ The incorrect result comes from not taking into account that 23:00:01 is 22h 1s 
 
 ---
 
-## Implementor concerns (3)
+<!-- _class: invert lead -->
 
-We would like to make sure doubts are addressed before the June 2024 plenary, so there are no remaining obstacles to implementation.
+# Normative change
 
-If you have opinions or would like to discuss, please drop in on the Temporal champions meeting, biweekly Thursdays at `08:00[America/Los_Angeles]`!
+---
+
+## Bug in rounding edge cases (PR [#2797](https://github.com/tc39/proposal-temporal/pull/2797))
+
+When rounding a ZonedDateTime to the day boundary, it was possible in rare cases due to DST to add a spurious extra day.
+
+```js
+const zdt = Temporal.ZonedDateTime.from('2024-03-10T23:00:01[America/New_York]')
+zdt.round({ smallestUnit: 'day', roundingMode: 'ceil' })
+  // Current: 2024-03-12T00:00:00-04:00[America/New_York] (incorrect)
+  // Proposed: 2024-03-11T00:00:00-04:00[America/New_York] (correct)
+```
+The incorrect result comes from not taking into account that 23:00:01 is 22h 1s into a 23-hour day. (March 10th was DST "spring forward".)
+
+(Discovered by Adam Shaw, a polyfill implementor)
 
 ---
 
@@ -104,7 +118,7 @@ On normative PR [#2797](https://github.com/tc39/proposal-temporal/pull/2797)
 # Proposed summary for notes
 
 > Consensus was reached on a normative change to fix a bug in rounding that occurred in rare cases having to do with DST.
-> Over the next few weeks, we plan to dig into remaining concerns from TC39 delegates.
+> Over the next few weeks, we plan to dig into remaining concerns from TC39 delegates, particularly with the goal of reducing complexity.
 > Follow the checklist in [#2628](https://github.com/tc39/proposal-temporal/issues/2628) for updates.
 
 ---
