@@ -73,7 +73,7 @@ You are welcome at the **Temporal champions meeting, biweekly Thursdays at 08:00
 - V8: Concerns about complexity of proposal
 - Polyfill: Newly discovered bugs in duration arithmetic
 - Considering dropping or reducing:
-  - User-defined calendars and time zones, associated subclassing?
+  - User-defined calendars and time zones, associated classes and/or subclassing?
   - `relativeTo` parameter in Duration.p.add/subtract?
 - Open to suggestions. It helps us if concerns can be made specific
 
