@@ -52,16 +52,16 @@ _class: gaia lead
 <div style="display: inline-grid; grid-template-columns: 1fr 1fr;">
 <div>
 
-**Philip Chimento**
-<i class="fa-solid fa-message"></i> @ptomato:gnome.org
-<i class="fab fa-gitlab"></i> ptomato
+**Evan Welsh**
+<i class="fa-solid fa-message"></i> @ewlsh:gnome.org
+<i class="fab fa-gitlab"></i> ewlsh
 
 </div>
 <div>
 
-**Evan Welsh**
-<i class="fa-solid fa-message"></i> @ewlsh:gnome.org
-<i class="fab fa-gitlab"></i> ewlsh
+**Philip Chimento**
+<i class="fa-solid fa-message"></i> @ptomato:gnome.org
+<i class="fab fa-gitlab"></i> ptomato
 
 </div>
 </div>
@@ -72,18 +72,13 @@ GUADEC, July 19, 2024
 
 # Introduction: What this talk is about
 
-- **What's new and what's next** in GJS?
 - Using **TypeScript** to write GNOME apps
-- [gjs.guide](https://gjs.guide) and community-led **documentation** updates
-- **Workbench**
+- Community-led **documentation** updates
+- **What's new and what's next** in GJS?
 - 🎩 **Thanks** to everyone who contributed!
 
 <!--
   Today we'll be talking about what's new and what's next with JavaScript in GNOME. Evan will be 
-
-  This part of the talk is primarily aimed at people who write code for the GNOME platform in the JavaScript programming language, whether that is GNOME Shell, apps, shell extensions, or even command line scripts. GNOME has its own JavaScript engine for all these purposes, GJS, which is an extended version of the JavaScript engine from the Firefox browser.
-
-  In past years I talked a lot in the "what's new and what's next" sections about the various ways to modernize your code, but nowadays we are running a pretty modern JavaScript in GNOME already, with no modernization "backlog". The new language features are still pretty exciting, but there's nothing earthshaking like ES6 classes. Additionally, we have a lot more visibility of these improvements these days, with better documentation, a more active community of GJS developers, and initiatives like This Week in GNOME, so a yearly GUADEC talk is no longer the only channel where people find out about these things. Nonetheless, I've gotten feedback that people still find these talks useful, so that's a good reason to keep doing them in addition to all those other things I mentioned.
 -->
 
 ---
@@ -92,22 +87,122 @@ GUADEC, July 19, 2024
 
 - Presentation is full of links if you want to click through later
 - If you want to follow along: [**ptomato.name/talks/guadec2024**](https://ptomato.name/talks/guadec2024)
+- ㊻, ㊼, 🎩
 
 <!--
-  This slide deck is also meant to be a resource that you can consult later. The slides are already available on my web space so if you want to click on the links NOW, you can already go there and follow along with the presentation.
+  This slide deck is also meant to be a resource that you can consult later. The slides are already available on Philip's web space so if you want to click on the links NOW, you can already go there and follow along with the presentation.
+
+    By the way, I'll use these little circled 46 and 47 icons to show things that you can expect to see in GNOME 46 and 47. And when you see a hat emoji, that's me tipping my hat to the person who contributed it.
 -->
+
+---
+
+<!-- _class: lead invert -->
+
+# Community
+
+---
+
+# State of TypeScript for GNOME
+
+The first beta of [unified TypeScript definitions](https://github.com/gjsify/ts-for-gir) has been published 😮
+
+Since then Pascal has been working on filling in feature gaps and Evan has been bug hunting.
+
+_Thanks to STF funding_ ⭐
+
+---
+
+# How to use TypeScript today
+
+A massive shoutout to Chris Davis for working continuously on a [TypeScript template for GJS](https://gitlab.gnome.org/World/javascript/gnome-typescript-template)
+
+Most apps should start there!
+
+---
+
+# How to use TypeScript today (experimental)
+
+If you're developing Shell extensions or are adventurous, the beta bindings are [currently published as NPM packages](https://github.com/gjsify/ts-for-gir?tab=readme-ov-file#npm-packages)
+
+⚠️ Distro packaging with NPM packages is not simple, so proceed with caution for apps. ⚠️
+
+We're working to support an ideal format for the TypeScript template and distro packaging, reach out if you want to help!
+
+---
+
+# More Community initiatives
+
+_We have a GNOME-home for JavaScript projects now!_
+
+## gjs.guide
+
+gjs.guide has a new (more official) home at https://gitlab.gnome.org/World/javascript/gjs-guide
+
+## the TypeScript template
+
+The TypeScript template is at https://gitlab.gnome.org/World/javascript/gnome-typescript-template
+
+---
+
+# gjs.guide
+
+- Updated and upgraded with better search and easier navigation
+- Docs written this year...
+  - Extensions, the Shell, and GNOME 46 (🎩 Andy, Javad)
+  - D-Bus (🎩 Andy)
+  - St widget examples (🎩 Nitin Dhembare)
+
+🎩 _to Sebastian Wiesner, Daniel Steele, Adrien Delessert,  Evangelos Paterakis, "Bytez", Jeffery To, Marko Kocic, Pedro Sader Azevedo and many more for adding examples, fixing typos, and making the community better_ 💙 
+
+---
+
+# Workbench
+
+![width:1100px drop-shadow](workbench.png)
+
+<!--
+    There is a library of demos and examples, similar to GTK demo but more aligned with the HIG and less "benchmarks" / test cases
+    with examples ready to use, copy paste and play with
+    I will talk more about it tomorrow in the  GNOME JavaScript Tooling talk
+    also, there will be a workbench workshop on Saturday
+-->
+
+---
+
+# Workbench improvements
+
+<div class="twocolumn">
+<div class="col">
+
+- TypeScript support!
+- Write JS/TS code in Workbench with autocomplete support using the language server!
+- 🎩 Angelo Verlain
+
+</div>
+<div class="col">
+
+![drop-shadow](typescript.png)
+
+</div>
+</div>
 
 ---
 
 <!-- _class: invert lead -->
 
-# What's new and what's next in GJS
+# What's new in GJS
 
 ## for GNOME ㊻ and ㊼?
 
 <!--
     What's new for GNOME 46 and the upcoming GNOME 47?
-    By the way, I'll use these little circled 46 and 47 icons to show things that you can expect to see in GNOME 46 and 47. And when you see a hat emoji, that's me tipping my hat to the person who contributed it.
+
+
+
+  This part of the talk is primarily aimed at people who write code for the GNOME platform in the JavaScript programming language, whether that is GNOME Shell, apps, shell extensions, or even command line scripts. GNOME has its own JavaScript engine for all these purposes, GJS, which is an extended version of the JavaScript engine from the Firefox browser.
+
+  In past years I talked a lot in the "what's new and what's next" sections about the various ways to modernize your code, but nowadays we are running a pretty modern JavaScript in GNOME already, with no modernization "backlog". The new language features are still pretty exciting, but there's nothing earthshaking like ES6 classes. Additionally, we have a lot more visibility of these improvements these days, with better documentation, a more active community of GJS developers, and initiatives like This Week in GNOME, so a yearly GUADEC talk is no longer the only channel where people find out about these things. Nonetheless, I've gotten feedback that people still find these talks useful, so that's a good reason to keep doing them in addition to all those other things I mentioned.
 -->
 
 ---
@@ -133,6 +228,22 @@ Sriyansh and Gary have both made some of these improvements in the past year and
 
 ---
 
+# An update on async support
+
+We've been working on getting rid of `Gio._promisify`...
+
+- GObject Introspection now has async annotations 🥳 ㊻
+- GLib + GObject Introspection will soon support native async operations  
+- GJS has a draft MR to support the work ... ㊼?
+
+_Thanks to STF funding_ ⭐
+
+<!--
+Transition to Philip
+-->
+
+---
+
 # JS engine upgrades ㊼
 
 GJS's underlying JavaScript engine is the one from Firefox, but embedded.
@@ -147,11 +258,25 @@ GJS's underlying JavaScript engine is the one from Firefox, but embedded.
 
 ---
 
-## Intl features ㊼
+## Intl.Segmenter ㊼
 
-- We'll talk about what `Intl` can do for you a bit later in the presentation!
-- `Intl.Segmenter`
-- New options for `Intl.NumberFormat` and `Intl.PluralRules`
+```js
+const segmenter = new Intl.Segmenter('en', { granularity: 'word' });
+const segments = segmenter.segment('The mile-high city');
+for (const { segment, isWordLike } of segments) {
+  if (isWordLike) {
+    console.log(segment);
+  }
+}
+// The
+// mile
+// high
+// city
+```
+
+<!--
+- Split strings into graphemes, words, or sentences according to locale rules
+-->
 
 ---
 
@@ -265,7 +390,7 @@ Decorators we've been eagerly awaiting for the better part of a decade! - I firs
 
 If you've written code in Rust or Python, you probably have gotten used to iterators. Iterators exist already in JS but without all the neato methods 
 
-Using statements are kind of like context managers and with-blocks in Python. They'll be quite useful for explicitly disposing resources, like disconnecting signals and such, which is currently a bit of a hassle in GJS. Relying on it implicitly often runs into problems with callbacks being run during garbage collection.
+Using statements are kind of like context managers and with-blocks in Python. They'll be quite useful for explicitly disposing resources, like disconnecting signals and such, which is currently a bit of a hassle in GJS. Relying on it implicitly often runs into problems with callbacks being run during garbage collection. "Using" should help 
 -->
 
 ---
@@ -277,6 +402,18 @@ Using statements are kind of like context managers and with-blocks in Python. Th
 - `xgettext` has always been a bit hacky to integrate with JS and is just flat-out broken for backtick strings
 - We could drop Gettext integration in JS and move to Intl.MessageFormat for the developer API, while still consuming the Gettext files from GNOME's translation workflow
 - Is anyone interested in a proof of concept?
+
+---
+
+<!-- _class: lead invert --->
+
+# And on that note...
+
+---
+
+<!-- _class: lead invert --->
+
+![](intl.gif)
 
 ---
 
@@ -310,7 +447,7 @@ Intl can't _yet_ replace Gettext, but with the MessageFormat proposal that I men
 - `Intl.NumberFormat` - print numbers (`"€ 0,00"`)
 - `Intl.PluralRules` - select appropriate plural form for language
 - `Intl.RelativeTimeFormat` - print relative times (`"3 days ago"`)
-- `Intl.Segmenter` - split strings into graphemes, words, or sentences
+- `Intl.Segmenter` ㊼ - split strings into graphemes/words/sentences
 
 <!--
   You can do sorting, date and time formatting, number formatting.
@@ -443,104 +580,6 @@ format.format(Date.now());
   In GNOME we do care about the little details like this.
   Intl formatters have a formatToParts method that gives you tagged segments of the string and allows you to customize them before pasting them together and presenting the string to your user.
 -->
-
----
-
-# An update on async support
-
-We've been working on getting rid of `Gio._promisify`...
-
-- GObject Introspection now has async annotations 🥳 ㊻
-- GLib + GObject Introspection will soon support native async operations  
-- GJS has a draft MR to support the work
-
-_Thanks to STF funding_ ⭐
-
----
-
-# State of TypeScript for GNOME
-
-The first beta of a unified TypeScript definitions has been published 😮
-
-Since then Pascal has been working on filling in feature gaps and Evan has been bug hunting.
-
-_Thanks to STF funding_ ⭐
-
----
-
-# How to use TypeScript today
-
-A massive shoutout to Chris Davis for working continuously on a [TypeScript template for GJS](https://gitlab.gnome.org/World/javascript/gnome-typescript-template)
-
-Most apps should start there!
-
----
-
-# How to use TypeScript today (experimental)
-
-If you're developing Shell extensions or are adventurous, the beta bindings are [currently published as NPM packages](https://github.com/gjsify/ts-for-gir?tab=readme-ov-file#npm-packages)
-
-⚠️ Distro packaging with NPM packages is not simple, so proceed with caution for apps. ⚠️
-
-We're working to support an ideal format for the TypeScript template and distro packaging, reach out if you want to help!
-
----
-
-# More Community initiatives
-
-_We have a GNOME-home for JavaScript projects now!_
-
-## gjs.guide
-
-gjs.guide has a new (more official) home at https://gitlab.gnome.org/World/javascript/gjs-guide
-
-## the TypeScript template
-
-The TypeScript template is at https://gitlab.gnome.org/World/javascript/gnome-typescript-template
-
----
-
-# gjs.guide
-
-- Updated and upgraded with better search and easier navigation
-- Docs written this year...
-  - Extensions, the Shell, and GNOME 46 (🎩 Andy, Javad)
-  - D-Bus (🎩 Andy)
-  - St widget examples (🎩 Nitin Dhembare)
-
-🎩 _to Sebastian Wiesner, Daniel Steele, Adrien Delessert,  Evangelos Paterakis, "Bytez", Jeffery To, Marko Kocic, Pedro Sader Azevedo and many more for adding examples, fixing typos, and making the community better_ 💙 
-
----
-
-# Workbench
-
-![width:1100px drop-shadow](workbench.png)
-
-<!--
-    There is a library of demos and examples, similar to GTK demo but more aligned with the HIG and less "benchmarks" / test cases
-    with examples ready to use, copy paste and play with
-    I will talk more about it tomorrow in the  GNOME JavaScript Tooling talk
-    also, there will be a workbench workshop on Saturday
--->
-
----
-
-# Workbench improvements
-
-<div class="twocolumn">
-<div class="col">
-
-- TypeScript support!
-- Write JS/TS code in Workbench with autocomplete support using the language server!
-- 🎩 Angelo Verlain
-
-</div>
-<div class="col">
-
-![drop-shadow](typescript.png)
-
-</div>
-</div>
 
 ---
 
