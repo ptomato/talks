@@ -67,7 +67,7 @@ You are welcome at the **Temporal champions meeting, biweekly Thursdays at 08:00
 - V8: 75%
 - LibJS: 75%
 - JavaScriptCore: 40%
-- Boa: 23%
+- Boa: 23% (pending 32%)
 
 </div>
 <div>
@@ -116,6 +116,7 @@ Make all `valueOf` methods of Temporal objects the same function object?
 Do the same for `toJSON` methods?
 
 Mozilla investigated the feasibility of this and concluded ...
+[TBD]
 
 ---
 
