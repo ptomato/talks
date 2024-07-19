@@ -228,6 +228,21 @@ Sriyansh and Gary have both made some of these improvements in the past year and
 
 ---
 
+# Gtk.AccessibleList ㊻
+
+`Gtk.AccessibleList` can be used to represent list relationships in GTK4 for better accessibility 🥳
+
+```js
+widget.update_relation(
+  Gtk.AccessibleRelation.LABELLED_BY,
+  new Gtk.AccessibleList([label1, label2]
+);
+```
+
+_Thanks to STF funding_ ⭐
+
+---
+
 # An update on async support
 
 We've been working on getting rid of `Gio._promisify`...
