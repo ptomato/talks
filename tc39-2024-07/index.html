@@ -351,7 +351,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 " lang="en-CA" data-marpit-pagination="10" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
 ;" data-marpit-pagination-total="16">
 <h3 id="ambiguous-rounding-operation-pr-2916-2">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (2)</h3>
-<p>Doing the same while simultaneously balancing to a larger calendar unit is ambiguous:</p>
+<p>Doing the same while simultaneously balancing to a larger calendar unit is unclear what the programmer should expect:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">d1.<span class="hljs-title function_">round</span>({
   <span class="hljs-attr">relativeTo</span>: <span class="hljs-string">&#x27;2024-01-01&#x27;</span>,
   <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;years&#x27;</span>,  <span class="hljs-comment">// &lt;= added</span>

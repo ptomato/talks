@@ -171,7 +171,7 @@ d1.round({
 
 ### Ambiguous rounding operation (PR [#2916](https://github.com/tc39/proposal-temporal/pull/2916)) (2)
 
-Doing the same while simultaneously balancing to a larger calendar unit is ambiguous:
+Doing the same while simultaneously balancing to a larger calendar unit is unclear what the programmer should expect:
 
 ```js
 d1.round({
