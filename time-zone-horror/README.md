@@ -91,6 +91,36 @@ Ever heard of leap seconds?
 
 <!-- _class: lead gaia -->
 
+# When does a day start?
+
+---
+
+<!-- _class: lead invert -->
+
+# WRONG
+
+<!-- clock forward at midnight - day starts at 1:00 -->
+
+---
+
+<!-- _class: lead gaia -->
+
+# How many times does a day start...
+
+# ...per day?
+
+---
+
+<!-- _class: lead invert -->
+
+# WRONG
+
+<!-- clock backwards at midnight - day starts twice -->
+
+---
+
+<!-- _class: lead gaia -->
+
 # If you divide the globe into 24 time zone slices, what does it look like?
 
 ---
@@ -154,36 +184,6 @@ _footer: <a href="https://jakubmarian.com/5-weird-things-you-didnt-know-about-ti
 <!--
 This may not exist anymore, but in the computing era, as recently as 1972, Liberia had a time zone offset of 44 minutes 30 seconds.
 -->
-
----
-
-<!-- _class: lead gaia -->
-
-# When does a day start?
-
----
-
-<!-- _class: lead invert -->
-
-# WRONG
-
-<!-- clock forward at midnight - day starts at 1:00 -->
-
----
-
-<!-- _class: lead gaia -->
-
-# How many times does a day start...
-
-# ...per day?
-
----
-
-<!-- _class: lead invert -->
-
-# WRONG
-
-<!-- clock backwards at midnight - day starts twice -->
 
 ---
 
