@@ -192,14 +192,14 @@ This may not exist anymore, but in the computing era, as recently as 1972, Liber
 <div class="twocol">
 <div>
 
-![drop-shadow](please_be_advised.png)
+![drop-shadow w:600px](please_be_advised.png)
 
 </div>
 <div>
 
-![drop-shadow](authority.png)
-![drop-shadow](convenience.png)
-![drop-shadow](tv_news.png)
+![drop-shadow w:600px](authority.png)
+![drop-shadow w:600px](convenience.png)
+![drop-shadow w:600px](tv_news.png)
 
 </div>
 </div>
