@@ -115,8 +115,9 @@ Make all `valueOf` methods of Temporal objects the same function object?
 
 Do the same for `toJSON` methods?
 
-Mozilla investigated the feasibility of this and concluded ...
-[TBD]
+Mozilla investigated the feasibility of this. Their position is that we should only do this if we still get feedback that Temporal is too large to ship after all other proposed changes have been implemented.
+
+Therefore, we propose not to pursue this at this time.
 
 ---
 
