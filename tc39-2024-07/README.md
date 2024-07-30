@@ -29,7 +29,6 @@ style: |
 
 <!--
 _class: invert lead
-footer: DRAFT
 -->
 
 # ⌚ **Temporal**
