@@ -32,7 +32,7 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" class="invert lead" data-marpit-pagination="1" style="--paginate:true;--footer:DRAFT;--class:invert lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+;" data-marpit-pagination-total="18">
 <h1 id="%E2%8C%9A-temporal"><img class="emoji" draggable="false" alt="⌚" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/231a.svg" data-marp-twemoji=""/> <strong>Temporal</strong></h1>
 <p><strong>Philip Chimento</strong><br />
 Igalia, in partnership with Bloomberg<br />
@@ -62,7 +62,7 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="2" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+;" data-marpit-pagination-total="18">
 <h2 id="progress-update">Progress update</h2>
 <p>After 7 years, Temporal is close to done. Our only focus is making sure in-progress implementations are successful, by fixing corner-case bugs found by implementors, and making editorial changes to improve clarity and simplicity.</p>
 <p>We trust that the smaller API we've had since June has resolved all concerns about complexity and code size. Please speak up ASAP if not.</p>
@@ -91,7 +91,7 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="3" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+;" data-marpit-pagination-total="18">
 <h2 id="ship-it-%F0%9F%90%BF%EF%B8%8F">Ship it! <img class="emoji" draggable="false" alt="🐿️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f43f.svg" data-marp-twemoji=""/></h2>
 <p>At this point we see no reason to delay! Please go ahead with implementations and <strong>ship them, unflagged</strong> when they are ready.</p>
 <ul>
@@ -124,7 +124,7 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="4" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+;" data-marpit-pagination-total="18">
 <h2 id="test-conformance-as-of-july-2024">Test conformance as of July 2024</h2>
 <div class="twocol">
 <div>
@@ -187,7 +187,7 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="5" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+;" data-marpit-pagination-total="18">
 <h2 id="follow-up-from-june-tc39">Follow up from June TC39</h2>
 <p>Make all <code>valueOf</code> methods of Temporal objects the same function object?</p>
 <p>Do the same for <code>toJSON</code> methods?</p>
@@ -195,7 +195,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 <p>Therefore, we propose not to pursue this at this time.</p>
 <footer>DRAFT</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-footer="DRAFT" data-class="invert lead" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
 section { font-family: Rubik, sans-serif; letter-spacing: 0; }
@@ -217,9 +217,12 @@ marp-pre code, marp-pre { background-color: #042029; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
-" lang="en-CA" class="invert lead" data-marpit-pagination="6" style="--paginate:true;--footer:DRAFT;--class:invert lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
-<h1 id="bug-fixes">Bug fixes</h1>
+" lang="en-CA" data-marpit-pagination="6" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
+<h2 id="follow-up-from-yesterday-coercing-things">Follow up from yesterday: Coercing Things</h2>
+<p>In yesterday's plenary session some people called for applying the Stop Coercing Things convention to Temporal.</p>
+<p>(Note, original consensus not to apply it to existing stage 3 proposals)</p>
+<p>We caution against making non-essential changes in stage 3, but if there's overwhelming support for this, let's get agreement on it now. We <strong>don't</strong> want to bring a PR back to next meeting.</p>
 <footer>DRAFT</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -245,14 +248,20 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="7" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
-<h3 id="start-of-day-in-toronto-in-1919-pr-2918">Start-of-day in Toronto in 1919 (PR <a href="https://github.com/tc39/proposal-temporal/pull/2918">#2918</a>)</h3>
-<p>The IANA time zone DB has a corner case: On 1919-03-30, Toronto switched to DST at 23:30, skipping the hour between 23:30 and 00:30. That means the day of 1919-03-31 started at 00:30. The algorithm for calculating start-of-day did not take this into account.</p>
-<p>Affects ZonedDateTime.p.startOfDay, .hoursInDay, .withPlainTime, .round, PlainDate.p.toZonedDateTime, and parsing a date-only string with a time zone annotation.</p>
-<p>Credit to Andrew Gallant, who is implementing a Rust library with operations based on Temporal.</p>
+;" data-marpit-pagination-total="18">
+<h2 id="where-could-we-stop-coercing-things">Where could we Stop Coercing Things?</h2>
+<ul>
+<li>integer parameters in Temporal object constructors</li>
+<li>fields in Temporal-object-like property bags</li>
+<li>options values in options bags</li>
+<li><code>Temporal.Instant.fromEpochMilliseconds()</code></li>
+<li><code>Temporal.Instant.fromEpochNanoseconds()</code></li>
+<li><code>toLocaleString()</code> methods</li>
+</ul>
+<p>Not all of these seem like they should change.</p>
 <footer>DRAFT</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-footer="DRAFT" data-class="invert lead" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
 section { font-family: Rubik, sans-serif; letter-spacing: 0; }
@@ -274,20 +283,9 @@ marp-pre code, marp-pre { background-color: #042029; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
-" lang="en-CA" data-marpit-pagination="8" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
-<h3 id="start-of-day-in-toronto-in-1919-what-changes">Start-of-day in Toronto in 1919: What changes</h3>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">edgeCase = <span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;1919-03-31T12:00[America/Toronto]&#x27;</span>);
-edgeCase.<span class="hljs-property">hoursInDay</span>
-  <span class="hljs-comment">// Current: 23</span>
-  <span class="hljs-comment">// Proposed: 23.5</span>
-edgeCase.<span class="hljs-title function_">startOfDay</span>()
-edgeCase.<span class="hljs-title function_">withPlainTime</span>()
-<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;1919-03-31[America/Toronto]&#x27;</span>)
-<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;1919-03-31&#x27;</span>).<span class="hljs-title function_">toZonedDateTime</span>(<span class="hljs-string">&#x27;America/Toronto&#x27;</span>)
-  <span class="hljs-comment">// (all) Current: ZonedDateTime at 1919-03-31T01:00-04:00[America/Toronto]</span>
-  <span class="hljs-comment">// Proposed: ZonedDateTime at 1919-03-31T00:30-04:00[America/Toronto]</span>
-</code></pre>
+" lang="en-CA" class="invert lead" data-marpit-pagination="8" style="--paginate:true;--footer:DRAFT;--class:invert lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
+<h1 id="bug-fixes">Bug fixes</h1>
 <footer>DRAFT</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -313,17 +311,11 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="9" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
-<h3 id="ambiguous-rounding-operation-pr-2916-1">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (1)</h3>
-<p>Rounding a duration to a number of calendar units &gt;1, let's say to the next increment of 8 months, is fine. This is an anticipated and intended use case.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-keyword">const</span> d1 = <span class="hljs-title class_">Temporal</span>.<span class="hljs-property">Duration</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">months</span>: <span class="hljs-number">9</span> });
-d1.<span class="hljs-title function_">round</span>({
-  <span class="hljs-attr">relativeTo</span>: <span class="hljs-string">&#x27;2024-01-01&#x27;</span>,
-  <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;months&#x27;</span>,
-  <span class="hljs-attr">roundingIncrement</span>: <span class="hljs-number">8</span>,
-  <span class="hljs-attr">roundingMode</span>: <span class="hljs-string">&#x27;ceil&#x27;</span>,
-});  <span class="hljs-comment">// =&gt; 16 months</span>
-</code></pre>
+;" data-marpit-pagination-total="18">
+<h3 id="start-of-day-in-toronto-in-1919-pr-2918">Start-of-day in Toronto in 1919 (PR <a href="https://github.com/tc39/proposal-temporal/pull/2918">#2918</a>)</h3>
+<p>The IANA time zone DB has a corner case: On 1919-03-30, Toronto switched to DST at 23:30, skipping the hour between 23:30 and 00:30. That means the day of 1919-03-31 started at 00:30. The algorithm for calculating start-of-day did not take this into account.</p>
+<p>Affects ZonedDateTime.p.startOfDay, .hoursInDay, .withPlainTime, .round, PlainDate.p.toZonedDateTime, and parsing a date-only string with a time zone annotation.</p>
+<p>Credit to Andrew Gallant, who is implementing a Rust library with operations based on Temporal.</p>
 <footer>DRAFT</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -349,18 +341,19 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="10" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
-<h3 id="ambiguous-rounding-operation-pr-2916-2">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (2)</h3>
-<p>Doing the same while simultaneously balancing to a larger calendar unit is unclear what the programmer should expect:</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">d1.<span class="hljs-title function_">round</span>({
-  <span class="hljs-attr">relativeTo</span>: <span class="hljs-string">&#x27;2024-01-01&#x27;</span>,
-  <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;years&#x27;</span>,  <span class="hljs-comment">// &lt;= added</span>
-  <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;months&#x27;</span>,
-  <span class="hljs-attr">roundingIncrement</span>: <span class="hljs-number">8</span>,
-  <span class="hljs-attr">roundingMode</span>: <span class="hljs-string">&#x27;ceil&#x27;</span>,
-});  <span class="hljs-comment">// =&gt; ???</span>
+;" data-marpit-pagination-total="18">
+<h3 id="start-of-day-in-toronto-in-1919-what-changes">Start-of-day in Toronto in 1919: What changes</h3>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">edgeCase = <span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;1919-03-31T12:00[America/Toronto]&#x27;</span>);
+edgeCase.<span class="hljs-property">hoursInDay</span>
+  <span class="hljs-comment">// Current: 23</span>
+  <span class="hljs-comment">// Proposed: 23.5</span>
+edgeCase.<span class="hljs-title function_">startOfDay</span>()
+edgeCase.<span class="hljs-title function_">withPlainTime</span>()
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">ZonedDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;1919-03-31[America/Toronto]&#x27;</span>)
+<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDateTime</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;1919-03-31&#x27;</span>).<span class="hljs-title function_">toZonedDateTime</span>(<span class="hljs-string">&#x27;America/Toronto&#x27;</span>)
+  <span class="hljs-comment">// (all) Current: ZonedDateTime at 1919-03-31T01:00-04:00[America/Toronto]</span>
+  <span class="hljs-comment">// Proposed: ZonedDateTime at 1919-03-31T00:30-04:00[America/Toronto]</span>
 </code></pre>
-<p>Should this be 1 year? 1 year 4 months? Neither is obviously right.</p>
 <footer>DRAFT</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -386,15 +379,17 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="11" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
-<h3 id="ambiguous-rounding-operation-pr-2916-3">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (3)</h3>
-<ul>
-<li>Probably we just never considered this case</li>
-<li>Did not come up in real-world use, but as a result of an implementor looking for corner cases</li>
-<li>To support would ideally require research into real use cases</li>
-<li>Would complicate the rounding algorithm for dubious benefit</li>
-<li>Given where we are in the proposal, prefer to remove/simplify</li>
-</ul>
+;" data-marpit-pagination-total="18">
+<h3 id="ambiguous-rounding-operation-pr-2916-1">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (1)</h3>
+<p>Rounding a duration to a number of calendar units &gt;1, let's say to the next increment of 8 months, is fine. This is an anticipated and intended use case.</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-keyword">const</span> d1 = <span class="hljs-title class_">Temporal</span>.<span class="hljs-property">Duration</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">months</span>: <span class="hljs-number">9</span> });
+d1.<span class="hljs-title function_">round</span>({
+  <span class="hljs-attr">relativeTo</span>: <span class="hljs-string">&#x27;2024-01-01&#x27;</span>,
+  <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;months&#x27;</span>,
+  <span class="hljs-attr">roundingIncrement</span>: <span class="hljs-number">8</span>,
+  <span class="hljs-attr">roundingMode</span>: <span class="hljs-string">&#x27;ceil&#x27;</span>,
+});  <span class="hljs-comment">// =&gt; 16 months</span>
+</code></pre>
 <footer>DRAFT</footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -420,7 +415,78 @@ marp-pre code, marp-pre { background-color: #042029; }
   gap: 1rem;
 }
 " lang="en-CA" data-marpit-pagination="12" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+;" data-marpit-pagination-total="18">
+<h3 id="ambiguous-rounding-operation-pr-2916-2">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (2)</h3>
+<p>Doing the same while simultaneously balancing to a larger calendar unit is unclear what the programmer should expect:</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js">d1.<span class="hljs-title function_">round</span>({
+  <span class="hljs-attr">relativeTo</span>: <span class="hljs-string">&#x27;2024-01-01&#x27;</span>,
+  <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;years&#x27;</span>,  <span class="hljs-comment">// &lt;= added</span>
+  <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;months&#x27;</span>,
+  <span class="hljs-attr">roundingIncrement</span>: <span class="hljs-number">8</span>,
+  <span class="hljs-attr">roundingMode</span>: <span class="hljs-string">&#x27;ceil&#x27;</span>,
+});  <span class="hljs-comment">// =&gt; ???</span>
+</code></pre>
+<p>Should this be 1 year? 1 year 4 months? Neither is obviously right.</p>
+<footer>DRAFT</footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+section.smaller-type li { font-size: 85% }
+marp-pre code, marp-pre { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number, .hljs-literal { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-title.class_ { color: #fce94f; text-decoration: none; font-weight: bold; }
+.hljs-title.function_ { color: #c8a8c4; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+.twocol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+" lang="en-CA" data-marpit-pagination="13" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
+<h3 id="ambiguous-rounding-operation-pr-2916-3">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (3)</h3>
+<ul>
+<li>Probably we just never considered this case</li>
+<li>Did not come up in real-world use, but as a result of an implementor looking for corner cases</li>
+<li>To support would ideally require research into real use cases</li>
+<li>Would complicate the rounding algorithm for dubious benefit</li>
+<li>Given where we are in the proposal, prefer to remove/simplify</li>
+</ul>
+<footer>DRAFT</footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+section.smaller-type li { font-size: 85% }
+marp-pre code, marp-pre { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number, .hljs-literal { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-title.class_ { color: #fce94f; text-decoration: none; font-weight: bold; }
+.hljs-title.function_ { color: #c8a8c4; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+.twocol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+" lang="en-CA" data-marpit-pagination="14" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
 <h3 id="ambiguous-rounding-operation-pr-2916-4">Ambiguous rounding operation (PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a>) (4)</h3>
 <p>Proposal is to throw RangeError on the following combination of options in <code>Temporal.Duration.prototype.round</code>:</p>
 <ul>
@@ -431,7 +497,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 <p>Credit to Adam Shaw, who is implementing a Temporal polyfill, and also again to Andrew Gallant.</p>
 <footer>DRAFT</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-paginate="true" data-footer="DRAFT" data-class="lead" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-footer="DRAFT" data-class="lead" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
 section { font-family: Rubik, sans-serif; letter-spacing: 0; }
@@ -453,12 +519,12 @@ marp-pre code, marp-pre { background-color: #042029; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
-" lang="en-CA" class="lead" data-marpit-pagination="13" style="--paginate:true;--footer:DRAFT;--class:lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+" lang="en-CA" class="lead" data-marpit-pagination="15" style="--paginate:true;--footer:DRAFT;--class:lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
 <h1 id="questions">Questions?</h1>
 <footer>DRAFT</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-paginate="true" data-footer="DRAFT" data-class="lead" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-paginate="true" data-footer="DRAFT" data-class="lead" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
 section { font-family: Rubik, sans-serif; letter-spacing: 0; }
@@ -480,13 +546,13 @@ marp-pre code, marp-pre { background-color: #042029; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
-" lang="en-CA" class="lead" data-marpit-pagination="14" style="--paginate:true;--footer:DRAFT;--class:lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+" lang="en-CA" class="lead" data-marpit-pagination="16" style="--paginate:true;--footer:DRAFT;--class:lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
 <h1 id="requesting-consensus">Requesting consensus</h1>
 <p>PR <a href="https://github.com/tc39/proposal-temporal/pull/2916">#2916</a> and <a href="https://github.com/tc39/proposal-temporal/pull/2918">#2918</a></p>
 <footer>DRAFT</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
 section { font-family: Rubik, sans-serif; letter-spacing: 0; }
@@ -508,8 +574,8 @@ marp-pre code, marp-pre { background-color: #042029; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
-" lang="en-CA" data-marpit-pagination="15" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+" lang="en-CA" data-marpit-pagination="17" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
 <h1 id="proposed-summary-for-notes">Proposed summary for notes</h1>
 <blockquote>
 <p>Consensus was reached on two normative changes: one to fix a TZDB corner case in calculating the start-of-day of March 31, 1919 in Ontario, Canada, and another to disallow a particular ambiguous combination of options in <code>Temporal.Duration.prototype.round()</code>.</p>
@@ -517,7 +583,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 </blockquote>
 <footer>DRAFT</footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-paginate="true" data-footer="DRAFT" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
 section { font-family: Rubik, sans-serif; letter-spacing: 0; }
@@ -539,8 +605,8 @@ marp-pre code, marp-pre { background-color: #042029; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
-" lang="en-CA" data-marpit-pagination="16" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="16">
+" lang="en-CA" data-marpit-pagination="18" style="--paginate:true;--footer:DRAFT;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="18">
 <footer>DRAFT</footer>
 </section>
 <script>!function(){"use strict";const t={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},e="data-marp-auto-scaling-wrapper",i="data-marp-auto-scaling-svg",n="data-marp-auto-scaling-container";class s extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const t=t=>([e])=>{const{width:i,height:n}=e.contentRect;this[t]={width:i,height:n},this.updateSVGRect()};this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(t("containerSize")),this.wrapperObserver=new ResizeObserver(((...e)=>{t("wrapperSize")(...e),this.flushSvgDisplay()}))}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var t,s,o,r,a;this.shadowRoot.innerHTML=`\n<style>\n  svg[${i}] { display: block; width: 100%; height: auto; vertical-align: top; }\n  span[${n}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }\n</style>\n<div ${e}>\n  <svg part="svg" ${i}>\n    <foreignObject><span ${n}><slot></slot></span></foreignObject>\n  </svg>\n</div>\n    `.split(/\n\s*/).join(""),this.wrapper=null!==(t=this.shadowRoot.querySelector(`div[${e}]`))&&void 0!==t?t:void 0;const l=this.svg;this.svg=null!==(o=null===(s=this.wrapper)||void 0===s?void 0:s.querySelector(`svg[${i}]`))&&void 0!==o?o:void 0,this.svg!==l&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=null!==(a=null===(r=this.svg)||void 0===r?void 0:r.querySelector(`span[${n}]`))&&void 0!==a?a:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:t}=this;t&&(t.style.display="inline",requestAnimationFrame((()=>{t.style.display=""})))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(t){const e=()=>{const i=(()=>{const e=t.getPropertyValue("--preserve-aspect-ratio");if(e)return e.trim();return`x${(({textAlign:t,direction:e})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if("start"===t||"end"===t){let i="rtl"===e;return"end"===t&&(i=!i),i?"Max":"Min"}return"Mid"})(t)}YMid meet`})();i!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=i,this.updateSVGRect()),t===this.svgComputedStyle&&requestAnimationFrame(e)};e()}updateSVGRect(){var t,e,i,n,s,o,r;let a=Math.ceil(null!==(e=null===(t=this.containerSize)||void 0===t?void 0:t.width)&&void 0!==e?e:0);const l=Math.ceil(null!==(n=null===(i=this.containerSize)||void 0===i?void 0:i.height)&&void 0!==n?n:0);void 0!==this.dataset.downscaleOnly&&(a=Math.max(a,null!==(o=null===(s=this.wrapperSize)||void 0===s?void 0:s.width)&&void 0!==o?o:0));const c=null===(r=this.svg)||void 0===r?void 0:r.querySelector(":scope > foreignObject");if(null==c||c.setAttribute("width",`${a}`),null==c||c.setAttribute("height",`${l}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${a} ${l}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=a<=0||l<=0?"0":""),this.container){const t=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=t.startsWith("xmid")||t.startsWith("xmax")?"auto":"0",this.container.style.marginRight=t.startsWith("xmi")?"auto":"0"}}}const o=(t,{attrs:e={},style:i})=>class extends t{constructor(...t){super(...t);for(const[t,i]of Object.entries(e))this.hasAttribute(t)||this.setAttribute(t,i);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const t=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:n}=this.dataset;if(void 0!==n){e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${"downscale-only"===n?"data-downscale-only":""}>${e}</marp-auto-scaling>`}this.shadowRoot.innerHTML=t+e}};let r;const a=Symbol();let l;const c="marpitSVGPolyfill:setZoomFactor,",d=Symbol(),g=Symbol();const h=()=>{const t="Apple Computer, Inc."===navigator.vendor,e=t?[u]:[],i={then:e=>(t?(async()=>{if(void 0===l){const t=document.createElement("canvas");t.width=10,t.height=10;const e=t.getContext("2d"),i=new Image(10,10),n=new Promise((t=>{i.addEventListener("load",(()=>t()))}));i.crossOrigin="anonymous",i.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await n,e.drawImage(i,0,0),l=e.getImageData(5,5,1,1).data[3]<128}return l})().then((t=>{null==e||e(t?[u]:[])})):null==e||e([]),i)};return Object.assign(e,i)};let p,m;function u(t){const e="object"==typeof t&&t.target||document,i="object"==typeof t?t.zoom:t;window[g]||(Object.defineProperty(window,g,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",(({data:t,origin:e})=>{if(e===window.origin)try{if(t&&"string"==typeof t&&t.startsWith(c)){const[,e]=t.split(","),i=Number.parseFloat(e);Number.isNaN(i)||(m=i)}}catch(t){console.error(t)}})));let n=!1;Array.from(e.querySelectorAll("svg[data-marpit-svg]"),(t=>{var e,s,o,r;t.style.transform||(t.style.transform="translateZ(0)");const a=i||m||t.currentScale||1;p!==a&&(p=a,n=a);const l=t.getBoundingClientRect(),{length:c}=t.children;for(let i=0;i<c;i+=1){const n=t.children[i];if(n.getScreenCTM){const t=n.getScreenCTM();if(t){const i=null!==(s=null===(e=n.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==s?s:0,c=null!==(r=null===(o=n.y)||void 0===o?void 0:o.baseVal.value)&&void 0!==r?r:0,d=n.children.length;for(let e=0;e<d;e+=1){const s=n.children[e];if("SECTION"===s.tagName){const{style:e}=s;e.transformOrigin||(e.transformOrigin=`${-i}px ${-c}px`),e.transform=`scale(${a}) matrix(${t.a}, ${t.b}, ${t.c}, ${t.d}, ${t.e-l.left}, ${t.f-l.top}) translateZ(0.0001px)`;break}}}}}})),!1!==n&&Array.from(e.querySelectorAll("iframe"),(({contentWindow:t})=>{null==t||t.postMessage(`${c}${n}`,"null"===window.origin?"*":window.origin)}))}function v({once:t=!1,target:e=document}={}){const i=function(t=document){if(t[d])return t[d];let e=!0;const i=()=>{e=!1,delete t[d]};Object.defineProperty(t,d,{configurable:!0,value:i});let n=[],s=!1;(async()=>{try{n=await h()}finally{s=!0}})();const o=()=>{for(const e of n)e({target:t});s&&0===n.length||e&&window.requestAnimationFrame(o)};return o(),i}(e);return t?(i(),()=>{}):i}p=1,m=void 0;const b=Symbol(),w=(e=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const i=window[a];i||customElements.define("marp-auto-scaling",s);for(const n of Object.keys(t)){const s=`marp-${n}`,a=t[n].proto();null!=r||(r=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),r&&a!==HTMLElement?i||customElements.define(s,o(a,{style:t[n].style}),{extends:n}):(i||customElements.define(s,o(HTMLElement,t[n])),e.querySelectorAll(`${n}[is="${s}"]`).forEach((t=>{t.outerHTML=t.outerHTML.replace(new RegExp(`^<${n}`,"i"),`<${s}`).replace(new RegExp(`</${n}>$`,"i"),`</${s}>`)})))}window[a]=!0})(e),e[b])return e[b];const i=v({target:e}),n=()=>{i(),delete e[b]},l=Object.assign(n,{cleanup:n,update:()=>w(e)});return Object.defineProperty(e,b,{configurable:!0,value:l}),l},y=document.currentScript;w(y?y.getRootNode():document)}();

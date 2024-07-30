@@ -121,6 +121,29 @@ Therefore, we propose not to pursue this at this time.
 
 ---
 
+## Follow up from yesterday: Coercing Things
+
+In yesterday's plenary session some people called for applying the Stop Coercing Things convention to Temporal.
+
+(Note, original consensus not to apply it to existing stage 3 proposals)
+
+We caution against making non-essential changes in stage 3, but if there's overwhelming support for this, let's get agreement on it now. We **don't** want to bring a PR back to next meeting.
+
+---
+
+## Where could we Stop Coercing Things?
+
+- integer parameters in Temporal object constructors
+- fields in Temporal-object-like property bags
+- options values in options bags
+- `Temporal.Instant.fromEpochMilliseconds()`
+- `Temporal.Instant.fromEpochNanoseconds()`
+- `toLocaleString()` methods
+
+Not all of these seem like they should change.
+
+---
+
 <!-- _class: invert lead -->
 
 # Bug fixes
