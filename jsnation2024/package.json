@@ -1,0 +1,11 @@
+{
+  "name": "jsnation2024",
+  "packageManager": "yarn@3.3.0",
+  "scripts": {
+    "build": "marp --html README.md -o index.html",
+    "watch": "marp --watch --html README.md -o index.html"
+  },
+  "dependencies": {
+    "@marp-team/marp-cli": "^4.0.0"
+  }
+}
