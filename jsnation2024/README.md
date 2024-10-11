@@ -7,7 +7,7 @@ style: |
   @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
   code { font-family: Hack; }
   section { font-family: Rubik, sans-serif; letter-spacing: 0; }
-  section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+  section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black, 0 0 30px black; }
   marp-pre code, marp-pre { background-color: #042029; }
   .hljs-string { color: #8ae234; }
   .hljs-number { color: #729fcf; }
@@ -48,7 +48,7 @@ I'm speaking today about the Temporal proposal, which adds modern date and time 
 - Strong support for internationalization
 
 <!--
-Temporal is an API that has been proposed to become part of JavaScript. It's currently making its way through the standardization process. It will add a built-in library for dates and times to JavaScript, like many other programming languages already have.
+Temporal is an API that has been proposed to become part of JavaScript. It'll be available in browsers soon. It will add a built-in library for dates and times to JavaScript, like many other programming languages already have.
 
 Temporal is built-in to the browser or JS engine. That's important because many developers include a dependency on Moment or some similar library in their app to achieve the same thing that you could with Temporal. But, depending on how much locale data you include, this may add a payload of anywhere from a dozen to two hundred kilobytes to the app.
 
@@ -155,7 +155,7 @@ But unlike Instant, they are not exact moments in time.
 
 <!--
 Why do we have this family of types with progressively less information?
-It's so that you can correctly represent the information that you have. For example, with legacy Date, if you wanted to represent a date without a time, you might use midnight in the user's local time zone. But there are actually days in certain time zones where midnight is skipped due to daylight saving time. This can cause hard-to-track-down bugs. For example, midnight on November 4th, 2018, didn't exist in Brazil!
+It's so that you can correctly represent the information that you have. For example, with the old Date, if you wanted to represent a date without a time, you might use midnight in the user's local time zone. But there are actually days in certain time zones where midnight is skipped due to daylight saving time. This can cause hard-to-track-down bugs. For example, midnight on November 4th, 2018, didn't exist in Brazil!
 -->
 
 ---
@@ -189,7 +189,7 @@ PlainMonthDay is a calendar date, but without a specific year. You could think o
 - “The conference session is on Monday, November 18th, 2024, at 11 AM, US Eastern Standard Time”
 
 <!--
-Completing the family of types that represent dates and times is another exact time type, ZonedDateTime. Just like Instant, this type represents an exact moment in time. But it is also coupled to a location with time zone rules, because it includes a time zone. The time zone means that this type does account for daylight saving time changes (and other changes in the time zone.) It also has a calendar, which means that unlike Instant it has a year, month, and day.
+Completing the family of types is another exact time type, ZonedDateTime. Just like Instant, this type represents an exact moment in time. But it is also coupled to a location with time zone rules, because it includes a time zone. The time zone means that this type does account for daylight saving time changes (and other changes in the time zone.) It also has a calendar, which means that unlike Instant it has a year, month, and day.
 
 We say that ZonedDateTime represents a calendar event that happened, or will happen, at a place on Earth.
 -->
@@ -245,6 +245,7 @@ There is one more type that's part of Temporal and doesn't represent a date or a
   <path d="m 156,1648 h 705 v 152 H 156 Z"/>
   <text x="200" y="1740" style="font-size: 80px; fill: #737373; white-space: pre;" >These types know</text>
   <text x="215" y="1840" style="font-size: 80px; fill: #737373; white-space: pre;" >time since Epoch</text>
+  <path stroke="#595959" d="M 1560,1275 V 1015"/>
 </svg>
 
 <!--
@@ -275,9 +276,9 @@ Now that you've been introduced to the cast of characters in Temporal, it's time
 Get a Unix timestamp in ms
 
 <!--
-The easy task is to get the current time as a Unix timestamp in milliseconds. This is the #1 top voted question for legacy Date on Stack Overflow, so naturally we'll want to be able to do the same thing in Temporal.
+The easy task is to get the current time as a Unix timestamp in milliseconds. This is the #1 top voted question for the old JavaScript Date object on Stack Overflow, so naturally we'll want to be able to do the same thing in Temporal.
 
-First we consider what type we have to use. A timestamp represents an exact time without regard to time zones, so we use Instant. (In fact, Instant was very nearly named Timestamp.)
+First we consider what type we have to use. A timestamp represents an exact time without regard to time zones, so we use Instant.
 
 The next thing, maybe a meta-thing, to consider, is do we really want a timestamp in milliseconds or will the Instant object itself work just as well? Going forward, as Temporal gets wider adoption, we expect that numerical timestamps are going to be mainly necessary for interoperation, and not so much for JavaScript applications, where Instant will be used. But for the sake of this example let's say that we do need a numerical timestamp.
 
@@ -301,7 +302,7 @@ Temporal.Now.plainTimeISO()
 ```
 
 <!--
-We do this with the functions in the "Now" namespace. Any of these functions will give you the current date, time, and/or time zone, as one of the Temporal types. The "ISO" in the name means that the date is in the ISO 8601 calendar, which is the standardized computer calendar. I'll talk more about calendars later.
+We do this with the functions in the "Now" namespace. Any of these functions will give you the current date, time, and/or time zone, as one of the Temporal types. The "ISO" in the name means that the date is in the standard ISO calendar. I'll talk more about calendars later.
 
 Since we need the current time as an Instant, we'll use the top one from this list.
 
@@ -365,7 +366,7 @@ When I mentioned Duration a few slides ago, I mentioned arithmetic methods. This
 
 In our case we use the add method, and pass it a property bag that automatically gets converted to a Duration, representing one month, like in this line of code.
 
-Now this 'date' variable, where does it come from? We know we need to use one of the Now methods, and we have two choices: plainDate(), which takes a calendar, and plainDateISO() which does not.
+Now this 'date' variable, where does it come from? We know we need to use one of the Now methods. Specifically, Now.plainDateISO().
 -->
 
 ---
@@ -384,7 +385,7 @@ The Gregorian calendar is a human calendar that is used in a large part of the w
 
 However, although a large part of the world uses the Gregorian calendar, that does not mean that the whole world uses it. Some regions don't; and in some regions, people use the Gregorian calendar for business purposes, and another one for religious purposes.
 
-Already without Temporal, you can print a legacy Date object in a non-ISO, non-Gregorian calendar if the user wants it. That's good enough for some applications, but not for answering this question, because how long one month is depends on which month you're talking about, in which calendar.
+Already without Temporal, you can print an old JavaScript Date object in a non-ISO, non-Gregorian calendar if the user wants it. That's good enough for some applications, but not for answering this question, because how long one month is depends on which month you're talking about, in which calendar.
 -->
 
 ---
@@ -413,7 +414,7 @@ The lesson here is when working with dates that the user will see, is to use the
 
 ```js
 const calendar = ... // choose the appropriate calendar
-const today = Temporal.Now.plainDate(calendar);
+const today = Temporal.Now.plainDateISO.withCalendar(calendar);
 console.log(today.add({ months: 1 }).toLocaleString());
 // example output in my locale: "2024-12-18"
 ```
@@ -423,7 +424,7 @@ Putting it all together, the proper way to get the date one month from today is 
 
 You can get the calendar from the user's preferences in your app, or from their locale using the resolvedOptions method of Intl.DateTimeFormat (though beware; this does not always correspond to what the user actually wants!)
 
-Then, you can get today's date in that calendar using Now.plainDate, add one month to it using the add method, and format it for the user with the toLocaleString method. Here's an example of what it looks like in my locale: 2024 dash 12 dash 18.
+Then, you can get today's date in that calendar using Now.plainDateISO, add one month to it using the add method, and format it for the user with the toLocaleString method. Here's an example of what it looks like in my locale: 2024 dash 12 dash 18.
 -->
 
 ---
@@ -449,13 +450,13 @@ This question turns out to be surprisingly hard to answer, if we _don't_ use a c
 # What time is the conference for me?
 
 What we know:
-- The two calendar dates that the sessions occur on (July 23 & 30)
+- The two calendar dates that the sessions occur on (July 23 & 30, 2025)
 - The start times of the sessions and their time zones (11 AM AEST, noon BST, 1 PM EDT)
 - My time zone
 - The hours (in my local time) at which I am willing to be at my computer
 
 <!--
-Here are the facts that we know. We know from the website the two calendar dates of the conference: July 23rd and 30th, 2025.
+Here are the facts that we know. We know from the website the two calendar dates of the conference: July 23rd and 30th. I got the screenshot from a past conference but let's say for this example the dates are in 2025.
 
 There are three sessions on each conference day. We know the local start times of each of the three sessions, and what time zones those local start times are given in.
 
@@ -482,8 +483,8 @@ Here's pseudocode of what we need to do. For each date and each session, we know
 
 ```js
 const dates = [
-  Temporal.PlainDate.from({ year: 2025, month: 7, day: 23 }),
-  Temporal.PlainDate.from({ year: 2025, month: 7, day: 30 })
+  Temporal.PlainDate.from('2025-07-23'),
+  Temporal.PlainDate.from('2025-07-30')
 ];
 const sessions = [
   { timeZone: 'Australia/Brisbane', hour: 11 },
@@ -543,7 +544,7 @@ On the other hand, there are these from() methods, which are high-level and acce
 
 # Comparison
 
-- `equals()` lets you know whether two Temporal objects of the same type are exactly equal (including their calendars and time zones, if applicable)
+- `equals()` lets you know whether two Temporal objects of the same type are exactly equal
 - `Temporal.{type}.compare(obj1, obj2)` is for sorting and ordering
 
 ```js
@@ -551,7 +552,7 @@ dates.sort(Temporal.PlainDate.compare);
 ```
 
 <!--
-Now back to writing code. The other piece of data that I mentioned we know is what times I'm willing to be online for the conference. I want to write a little function that takes a wall-clock time and returns true if the time is within my online hours.
+The other piece of data that I mentioned we know is what times I'm willing to be online for the conference. I want to write a little function that takes a wall-clock time and returns true if the time is within my online hours.
 
 For that we have to do comparisons. Each type has a compare static method that we use for this. It's a static method so that you can use it as an argument to the sort method of Arrays.
 
@@ -573,7 +574,7 @@ function iCanBeOnlineAt(time) {
 ```
 
 <!--
-Here is the function that tells whether I can be online. We are using Temporal.PlainTime.compare to implement it.
+Now back to writing code. Here is the function that tells whether I can be online. We are using PlainTime.compare to implement it.
 
 Here I _am_ taking advantage of the fact that my online hours do not cross midnight... we'd have to be slightly more complicated to support the case where they did.
 -->
@@ -667,7 +668,7 @@ Wednesday, July 30, 2025, 10:00 a.m.–2:00 p.m.
 <!--
 Take that code, put it all together, run it, and here is the nicely formatted answer! (This is the answer in my time zone, with my locale's formatting, with dateStyle full and timeStyle short. Your answer will likely be different.)
 
-This is a seemingly simple question answered in more lines of code than you might expect, but I seriously would not have wanted to even try to write this code with legacy Date. It would've been possible, by carefully making sure the Dates were all in UTC, and converting accordingly by manually adding or subtracting the right number of hours, but really susceptible to bugs.
+This is a seemingly simple question answered in more lines of code than you might expect, but I seriously would not have wanted to even try to write this code with the old Date object. It would've been possible, by carefully making sure the Dates were all in UTC, and converting accordingly by manually adding or subtracting the right number of hours, but really susceptible to bugs.
 -->
 
 ---
@@ -678,7 +679,7 @@ This is a seemingly simple question answered in more lines of code than you migh
 - https://yourcalendricalfallacyis.com/
 
 <!--
-I hope you've found this a useful tour of Temporal. And if you deal with legacy Dates in your code base, I hope you're excited to replace them with Temporal objects! You can check out the documentation at this link. At some point it will graduate and you'll be able to find it on MDN instead, along with the rest of JavaScript's built-ins.
+I hope you've found this a useful tour of Temporal. And if you have the old Date object in your code base, I hope you're excited to replace it with Temporal! You can check out the documentation at this link. At some point it will graduate and you'll be able to find it on MDN instead, along with the rest of JavaScript's built-ins.
 
 If you're interested in learning some of the things that people widely believe about dates and times, but that aren't true, you can check out yourcalendricalfallacyis.com for an interesting read.
 -->
