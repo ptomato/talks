@@ -34,7 +34,11 @@ Igalia, in partnership with Bloomberg
 ![bg](gastown-clock.jpg)
 
 <!--
-I'm speaking today about the Temporal proposal, which adds modern date and time handling to JavaScript. In this presentation, I'll give a tour through the API, and show you what you can do with Temporal by means of an easy, medium, and complicated programming task.
+My name is Philip Chimento. I work as a JavaScript engine developer at Igalia.
+
+I'm speaking today about the Temporal proposal, which adds modern date and time handling to JavaScript. I'm part of a group working on this proposal, and my participation is part of a partnership between Igalia and Bloomberg.
+
+In this presentation, I'll give a tour through the API, and show you what you can do with Temporal by means of an easy, medium, and complicated programming task.
 -->
 
 ---
@@ -142,7 +146,7 @@ graph LR
 <!--
 Next we have a family of types called the "Plain" types. These represent a date on your wall calendar and a time on your wall clock, which we call "wall" time for short.
 They represent your local date and time independent of time zone, and so there are no daylight saving adjustments.
-But unlike Instant, they are not exact moments in time.
+But unlike Instant, they are not exact moments in time. A wall time like "November 18th 2024 at two-thirty" occurs at several different exact times around the world.
 -->
 
 ---
@@ -189,7 +193,7 @@ PlainMonthDay is a calendar date, but without a specific year. You could think o
 - “The conference session is on Monday, November 18th, 2024, at 11 AM, US Eastern Standard Time”
 
 <!--
-Completing the family of types is another exact time type, ZonedDateTime. Just like Instant, this type represents an exact moment in time. But it is also coupled to a location with time zone rules, because it includes a time zone. The time zone means that this type does account for daylight saving time changes (and other changes in the time zone.) It also has a calendar, which means that unlike Instant it has a year, month, and day.
+Completing the family of types is another exact time type, ZonedDateTime. Just like Instant, this type represents an exact moment in time. But it is also coupled to a location with time zone rules, because it includes a time zone. The time zone means that this type does account for daylight saving time changes (and other changes in the time zone.) It also has a calendar, which means that unlike Instant it has a year, month, and day. So it's an exact time that can conveniently give you a wall time as well.
 
 We say that ZonedDateTime represents a calendar event that happened, or will happen, at a place on Earth.
 -->
@@ -311,7 +315,7 @@ Next we'll need to figure out how to get a number of milliseconds since the Unix
 
 ---
 
-# Properties
+# HOW DO I? Date and time info
 
 - Each Temporal object has read-only properties
 - <small>`year`, `month`, `monthCode`, `day`, `hour`, `minute`, `second`, `millisecond`, `microsecond`, `nanosecond`, `calendar`, `timeZone`, `offset`, `era`, `eraYear`, `dayOfWeek`, `dayOfYear`, `weekOfYear`, `daysInWeek`, `daysInMonth`, `daysInYear`, `monthsInYear`, `inLeapYear`, `hoursInDay`, `startOfDay`, `offsetNanoseconds`, `epochMilliseconds`, `epochNanoseconds`</small>
@@ -352,7 +356,7 @@ We already saw in the previous task how to figure out what the date is today, so
 
 ---
 
-# Arithmetic
+# HOW DO I? Arithmetic
 
 - `add()`/`subtract()` take a `Temporal.Duration` and return a new Temporal object of the same type, that far in the future or the past
 - `since()`/`until()` take another Temporal object of the same type and return a `Temporal.Duration` representing the amount of time that elapsed from one to the other
@@ -393,17 +397,18 @@ Already without Temporal, you can print an old JavaScript Date object in a non-I
 # What is the date, one month from today?
 
 ```js
-> today = Temporal.PlainDate.from('2024-10-09')
-> today.toLocaleString('en', { calendar: 'hebrew' });
+> today = new Date('2024-10-09');
+> today.toLocaleString('en', { calendar: 'hebrew', dateStyle: 'long', timeZone: 'UTC' });
 '7 Tishri 5785'
 
-> nextMonth = today.add({ months: 1 });
-> nextMonth.toLocaleString('en', { calendar: 'hebrew' });
+> nextMonth = new Date(today);
+> nextMonth.setUTCMonth(nextMonth.getUTCMonth() + 1);
+> nextMonth.toLocaleString('en', { calendar: 'hebrew', dateStyle: 'long', timeZone: 'UTC' });
 '8 Heshvan 5785'  // WRONG!
 ```
 
 <!--
-Here's an example of how that could go wrong. Let's say today's date in the Gregorian calendar is October 9th, and one month later is November 9th. But in the Hebrew calendar, these two dates are not one month apart this year. They are one month and one day apart. So it is not enough just to add an ISO calendar month and print the dates in another calendar; you have to actually consider the calendar when performing the addition.
+Here's an example of how that could go wrong using the old Date. Let's say today's date in the Gregorian calendar is October 9th, and one month later is November 9th. But in the Hebrew calendar, these two dates are not one month apart this year. They are one month and one day apart. So it is not enough just to add an ISO calendar month and print the dates in another calendar; you have to actually consider the calendar when performing the addition.
 
 The lesson here is when working with dates that the user will see, is to use the user's calendar, not the machine ISO calendar.
 -->
@@ -500,14 +505,14 @@ Here's the first part of the code, where we set things up. We have the calendar 
 
 For this calculation it's OK to use the ISO calendar for the dates because I'm reckoning my awake times in the ISO calendar as well.
 
-There are a few things to explain here. One of them is how I determined these time zone names! On the website we had Australia Eastern Standard Time, British Summer Time, and Eastern Standard Time (with North America implied in that last one.) But those are human names, not machine identifiers. These strings with the slashes, like Australia-slash-Brisbane, are the official identifiers of the IANA time zone database, and that's how you refer to time zones in Temporal. If you don't know the IANA identifier for a particular time zone, you can usually find it out on Wikipedia. The identifier is always at least as precise; for example, in our case, some of the eastern part of Australia uses AEST for half the year, but Queensland uses it the whole year round, so AEST can be ambiguous if you have dates scattered throughout the year. 
+There are a few things to explain here. One of them is how I determined these time zone names! On the website we had Australia Eastern Standard Time, British Summer Time, and Eastern Standard Time (with North America implied in that last one.) But those are human names, not machine identifiers. These strings with the slashes, like Australia-slash-Brisbane, are the official identifiers of the IANA time zone database, and that's how you refer to time zones in Temporal. If you don't know the IANA identifier for a particular time zone, you can usually find it out on Wikipedia. Sometimes the human abbreviations are ambiguous, but the identifiers are always precise.
 
 The next question is why are we using these from() methods to create our Temporal objects?
 -->
 
 ---
 
-# Construction
+# HOW DO I? Construction
 
 - Constructors are low-level
 - Accept numerical arguments for the date/time data
@@ -524,7 +529,7 @@ As you might expect, you could also use a Temporal type's constructor to create 
 
 ---
 
-# Construction
+# HOW DO I? Construction
 
 - `from()` static methods are high-level and friendly
 - Accept property bags, ISO strings, instances
@@ -537,12 +542,12 @@ Temporal.PlainYearMonth.from(myPlainDate);
 ```
 
 <!--
-On the other hand, there are these from() methods, which are high-level and accept many more kinds of data. In particular, they are more readable, either for someone else who's reading your code, or for you who's re-reading it later. In most cases I'd recommend using from() to create a Temporal object.
+On the other hand, there are these factory methods named from(), which are high-level and accept many more kinds of data. In particular, they are often more readable. In most cases I'd recommend using from() to create a Temporal object.
 -->
 
 ---
 
-# Comparison
+# HOW DO I? Comparison
 
 - `equals()` lets you know whether two Temporal objects of the same type are exactly equal
 - `Temporal.{type}.compare(obj1, obj2)` is for sorting and ordering
@@ -611,7 +616,7 @@ I'll quickly go into details about the new methods that we've seen here.
 
 ---
 
-# Conversion
+# HOW DO I? Conversion
 
 - Conversion methods can remove or add information
 - Argument: any information that needs to be added
@@ -630,7 +635,7 @@ The toZonedDateTime method that we saw is an example of one of the methods for c
 
 ---
 
-# Modification
+# HOW DO I? Modification
 
 - `with()` methods
 - Argument: a property bag with some components of the same type
@@ -676,12 +681,9 @@ This is a seemingly simple question answered in more lines of code than you migh
 # Learning more
 
 - https://tc39.es/proposal-temporal/docs/ (to appear on MDN)
-- https://yourcalendricalfallacyis.com/
 
 <!--
 I hope you've found this a useful tour of Temporal. And if you have the old Date object in your code base, I hope you're excited to replace it with Temporal! You can check out the documentation at this link. At some point it will graduate and you'll be able to find it on MDN instead, along with the rest of JavaScript's built-ins.
-
-If you're interested in learning some of the things that people widely believe about dates and times, but that aren't true, you can check out yourcalendricalfallacyis.com for an interesting read.
 -->
 
 ---
