@@ -87,8 +87,10 @@ console.assert(globalThis.someValue === 1);
 
 - New W3C TAG [design principle](https://github.com/w3ctag/design-principles/pull/510):
   - Only purely computational features are exposed everywhere
-  - Exception: Anything relying on an event loop
-  - Expose conservatively: exposed feature should not be primarily useful for unexposed feature
+    - not performing I/O
+    - not affecting the state of the user agent or the user's device
+  - Exception: Anything relying on an event loop is not exposed
+  - Expose conservatively: features primarily useful for unexposed feature are not exposed
 
 ---
 
@@ -110,45 +112,45 @@ console.assert(globalThis.someValue === 1);
 # Today: Test coverage
 
 - ✅ [Test APIs in ShadowRealms created in multiple scopes](https://github.com/web-platform-tests/wpt/issues/48573)
-  - Window
-  - Worker
-  - SharedWorker
-  - ServiceWorker
-  - AudioWorklet
-  - other ShadowRealm
+  - ✅ Window
+  - ✅ Worker
+  - ✅ SharedWorker
+  - ✅ ServiceWorker
+  - ✅ AudioWorklet
+  - ✅ other ShadowRealm
 
 ---
 
 # Today: Test coverage
 
-- ✅ [AbortController]()
-- ✅ [AbortSignal]() (except `AbortSignal.timeout`, not exposed)
-- ✅ [addEventListener]() - pending review
-- ✅ [atob]()
-- ✅ [btoa]()
-- ✅ [ByteLengthQueuingStrategy]()\*
-- ✅ [CompressionStream]()\*
-- ✅ [console]()\*
+- ✅ [AbortController](https://github.com/web-platform-tests/wpt/pull/41965)
+- ✅ [AbortSignal](https://github.com/web-platform-tests/wpt/pull/41965) (except `AbortSignal.timeout`, not exposed)
+- ✅ [addEventListener](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
+- ✅ [atob](https://github.com/web-platform-tests/wpt/pull/49188)
+- ✅ [btoa](https://github.com/web-platform-tests/wpt/pull/49188)
+- ✅ [ByteLengthQueuingStrategy](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [CompressionStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ console ([1](https://github.com/web-platform-tests/wpt/pull/34361), [2](https://github.com/web-platform-tests/wpt/pull/49283) - pending review)
 
 ---
 
 # Today: Test coverage
 
-- ✅ [CountQueuingStrategy]()\*
+- ✅ [CountQueuingStrategy](https://github.com/web-platform-tests/wpt/pull/42005)\*
 - crypto.getRandomValues
 - crypto.randomUUID
-- ✅ [CustomEvent]() - pending review
-- DataCloneError
-- ✅ [DOMException]()
-- ✅ [dispatchEvent]() - pending review
+- ✅ [CustomEvent](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
+- ✅ [DataCloneError](https://github.com/web-platform-tests/wpt/pull/49282) - pending review
+- ✅ [DOMException](https://github.com/web-platform-tests/wpt/pull/49159)
+- ✅ [dispatchEvent](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
 - ErrorEvent
 
 ---
 
 # Today: Test coverage
 
-- ✅ [Event]() - pending review
-- ✅ [EventTarget]() (including `globalThis` being one) - pending review
+- ✅ [Event](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
+- ✅ [EventTarget](https://github.com/web-platform-tests/wpt/pull/41966) (including `globalThis` being one) - pending review
 - onerror
 - onrejectionhandled
 - onunhandledrejection
@@ -160,37 +162,37 @@ console.assert(globalThis.someValue === 1);
 
 # Today: Test coverage
 
-- ✅ [ReadableStream]()\*
-- ✅ [ReadableStreamBYOBReader]()\*
-- ✅ [ReadableStreamBYOBRequest]()\*
-- ✅ [ReadableStreamDefaultController]()\*
-- ✅ [ReadableStreamDefaultReader]()\*
-- ✅ [removeEventListener]() - pending review
-- self
-- structuredClone
+- ✅ [ReadableStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [ReadableStreamBYOBReader](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [ReadableStreamBYOBRequest](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [ReadableStreamDefaultController](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [ReadableStreamDefaultReader](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [removeEventListener](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
+- ✅ [self](https://github.com/web-platform-tests/wpt/pull/49252) - pending review
+- ✅ [structuredClone](https://github.com/web-platform-tests/wpt/pull/49282) - pending review
 
 ---
 
 # Today: Test coverage
 
-- ✅ [TextDecoder]()\*
-- ✅ [TextDecoderStream]()\*
-- ✅ [TextEncoder]()\*
-- ✅ [TextEncoderStream]()\*
-- ✅ [TransformStream]()\*
-- ✅ [TransformStreamDefaultController]()\*
-- ✅ [URL]() - pending interop question
+- ✅ TextDecoder ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
+- ✅ TextDecoderStream ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
+- ✅ TextEncoder ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
+- ✅ TextEncoderStream ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
+- ✅ [TransformStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- TransformStreamDefaultController\*
+- ✅ [URL](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question
 - URLPattern
 
 ---
 
 # Today: Test coverage
 
-- ✅ [URLSearchParams]() - pending Interop question
-- WebAssembly (except `compileStreaming` and `instantiateStreaming`)
-- ✅ [WritableStream]()\*
-- ✅ [WritableStreamDefaultController]()\*
-- ✅ [WritableStreamDefaultWriter]()\*
+- ✅ [URLSearchParams](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question
+- ✅ WebAssembly ([1](https://github.com/web-platform-tests/wpt/pull/36412), [2](https://github.com/web-platform-tests/wpt/pull/41987)) (except `compileStreaming` and `instantiateStreaming`, not exposed)
+- ✅ [WritableStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [WritableStreamDefaultController](https://github.com/web-platform-tests/wpt/pull/42005)\*
+- ✅ [WritableStreamDefaultWriter](https://github.com/web-platform-tests/wpt/pull/42005)\*
 - ✅ Remove any tests for things that were previously thought to be exposed
 
 ---

@@ -242,9 +242,14 @@ marp-pre code, marp-pre { background-color: #042029; }
 <ul>
 <li>New W3C TAG <a href="https://github.com/w3ctag/design-principles/pull/510">design principle</a>:
 <ul>
-<li>Only purely computational features are exposed everywhere</li>
-<li>Exception: Anything relying on an event loop</li>
-<li>Expose conservatively: exposed feature should not be primarily useful for unexposed feature</li>
+<li>Only purely computational features are exposed everywhere
+<ul>
+<li>not performing I/O</li>
+<li>not affecting the state of the user agent or the user's device</li>
+</ul>
+</li>
+<li>Exception: Anything relying on an event loop is not exposed</li>
+<li>Expose conservatively: features primarily useful for unexposed feature are not exposed</li>
 </ul>
 </li>
 </ul>
@@ -341,12 +346,12 @@ marp-pre code, marp-pre { background-color: #042029; }
 <ul>
 <li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/issues/48573">Test APIs in ShadowRealms created in multiple scopes</a>
 <ul>
-<li>Window</li>
-<li>Worker</li>
-<li>SharedWorker</li>
-<li>ServiceWorker</li>
-<li>AudioWorklet</li>
-<li>other ShadowRealm</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> Window</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> Worker</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> SharedWorker</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> ServiceWorker</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> AudioWorklet</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> other ShadowRealm</li>
 </ul>
 </li>
 </ul>
@@ -378,14 +383,14 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;" data-marpit-pagination-total="19">
 <h1 id="today-test-coverage-1">Today: Test coverage</h1>
 <ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">AbortController</a></li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">AbortSignal</a> (except <code>AbortSignal.timeout</code>, not exposed)</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">addEventListener</a> - pending review</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">atob</a></li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">btoa</a></li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">ByteLengthQueuingStrategy</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">CompressionStream</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">console</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41965">AbortController</a></li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41965">AbortSignal</a> (except <code>AbortSignal.timeout</code>, not exposed)</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41966">addEventListener</a> - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/49188">atob</a></li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/49188">btoa</a></li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">ByteLengthQueuingStrategy</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">CompressionStream</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> console (<a href="https://github.com/web-platform-tests/wpt/pull/34361">1</a>, <a href="https://github.com/web-platform-tests/wpt/pull/49283">2</a> - pending review)</li>
 </ul>
 <footer><span style="color:red;font-weight:bold">DRAFT</span></footer>
 </section>
@@ -415,13 +420,13 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;" data-marpit-pagination-total="19">
 <h1 id="today-test-coverage-2">Today: Test coverage</h1>
 <ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">CountQueuingStrategy</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">CountQueuingStrategy</a>*</li>
 <li>crypto.getRandomValues</li>
 <li>crypto.randomUUID</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">CustomEvent</a> - pending review</li>
-<li>DataCloneError</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">DOMException</a></li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">dispatchEvent</a> - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41966">CustomEvent</a> - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/49282">DataCloneError</a> - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/49159">DOMException</a></li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41966">dispatchEvent</a> - pending review</li>
 <li>ErrorEvent</li>
 </ul>
 <footer><span style="color:red;font-weight:bold">DRAFT</span></footer>
@@ -452,8 +457,8 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;" data-marpit-pagination-total="19">
 <h1 id="today-test-coverage-3">Today: Test coverage</h1>
 <ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">Event</a> - pending review</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">EventTarget</a> (including <code>globalThis</code> being one) - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41966">Event</a> - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41966">EventTarget</a> (including <code>globalThis</code> being one) - pending review</li>
 <li>onerror</li>
 <li>onrejectionhandled</li>
 <li>onunhandledrejection</li>
@@ -489,14 +494,14 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;" data-marpit-pagination-total="19">
 <h1 id="today-test-coverage-4">Today: Test coverage</h1>
 <ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">ReadableStream</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">ReadableStreamBYOBReader</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">ReadableStreamBYOBRequest</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">ReadableStreamDefaultController</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">ReadableStreamDefaultReader</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">removeEventListener</a> - pending review</li>
-<li>self</li>
-<li>structuredClone</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">ReadableStream</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">ReadableStreamBYOBReader</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">ReadableStreamBYOBRequest</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">ReadableStreamDefaultController</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">ReadableStreamDefaultReader</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41966">removeEventListener</a> - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/49252">self</a> - pending review</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/49282">structuredClone</a> - pending review</li>
 </ul>
 <footer><span style="color:red;font-weight:bold">DRAFT</span></footer>
 </section>
@@ -526,13 +531,13 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;" data-marpit-pagination-total="19">
 <h1 id="today-test-coverage-5">Today: Test coverage</h1>
 <ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">TextDecoder</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">TextDecoderStream</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">TextEncoder</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">TextEncoderStream</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">TransformStream</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">TransformStreamDefaultController</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">URL</a> - pending interop question</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> TextDecoder (<a href="https://github.com/web-platform-tests/wpt/pull/41968">1</a>, <a href="https://github.com/web-platform-tests/wpt/pull/49286">2</a> - pending review)</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> TextDecoderStream (<a href="https://github.com/web-platform-tests/wpt/pull/41968">1</a>, <a href="https://github.com/web-platform-tests/wpt/pull/49286">2</a> - pending review)</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> TextEncoder (<a href="https://github.com/web-platform-tests/wpt/pull/41968">1</a>, <a href="https://github.com/web-platform-tests/wpt/pull/49286">2</a> - pending review)</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> TextEncoderStream (<a href="https://github.com/web-platform-tests/wpt/pull/41968">1</a>, <a href="https://github.com/web-platform-tests/wpt/pull/49286">2</a> - pending review)</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">TransformStream</a>*</li>
+<li>TransformStreamDefaultController*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41985">URL</a> - pending Interop question</li>
 <li>URLPattern</li>
 </ul>
 <footer><span style="color:red;font-weight:bold">DRAFT</span></footer>
@@ -563,11 +568,11 @@ marp-pre code, marp-pre { background-color: #042029; }
 ;" data-marpit-pagination-total="19">
 <h1 id="today-test-coverage-6">Today: Test coverage</h1>
 <ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">URLSearchParams</a> - pending Interop question</li>
-<li>WebAssembly (except <code>compileStreaming</code> and <code>instantiateStreaming</code>)</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">WritableStream</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">WritableStreamDefaultController</a>*</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="">WritableStreamDefaultWriter</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/41985">URLSearchParams</a> - pending Interop question</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> WebAssembly (<a href="https://github.com/web-platform-tests/wpt/pull/36412">1</a>, <a href="https://github.com/web-platform-tests/wpt/pull/41987">2</a>) (except <code>compileStreaming</code> and <code>instantiateStreaming</code>, not exposed)</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">WritableStream</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">WritableStreamDefaultController</a>*</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> <a href="https://github.com/web-platform-tests/wpt/pull/42005">WritableStreamDefaultWriter</a>*</li>
 <li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> Remove any tests for things that were previously thought to be exposed</li>
 </ul>
 <footer><span style="color:red;font-weight:bold">DRAFT</span></footer>
