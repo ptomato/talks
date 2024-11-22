@@ -29,7 +29,6 @@ style: |
 
 <!--
 _class: invert lead
-footer: <span style="color:red;font-weight:bold">DRAFT</span>
 -->
 
 # 🌒 **ShadowRealm** 🌘
@@ -38,7 +37,8 @@ footer: <span style="color:red;font-weight:bold">DRAFT</span>
 **Philip Chimento**
 Igalia, in partnership with Salesforce  
 TC39 December 2024  
-**DRAFT** - contains info expected to be outdated by the meeting date
+—  
+**NOTE** - checklists will continue to be updated until the meeting
 
 ---
 
@@ -105,7 +105,9 @@ console.assert(globalThis.someValue === 1);
 # Today: HTML integration
 
 - Pull request: [whatwg/html#9893](https://github.com/whatwg/html/pull/9893)
-- **TBD what to say here**
+- Design settled and reviews have occurred
+- Fixing details
+- Some mechanical work needed in specs downstream of HTML to use new terminology
 
 ---
 
@@ -123,77 +125,39 @@ console.assert(globalThis.someValue === 1);
 
 # Today: Test coverage
 
-- ✅ [AbortController](https://github.com/web-platform-tests/wpt/pull/41965)
-- ✅ [AbortSignal](https://github.com/web-platform-tests/wpt/pull/41965) (except `AbortSignal.timeout`, not exposed)
-- ✅ [addEventListener](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
-- ✅ [atob](https://github.com/web-platform-tests/wpt/pull/49188)
-- ✅ [btoa](https://github.com/web-platform-tests/wpt/pull/49188)
-- ✅ [ByteLengthQueuingStrategy](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [CompressionStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ console ([1](https://github.com/web-platform-tests/wpt/pull/34361), [2](https://github.com/web-platform-tests/wpt/pull/49283) - pending review)
+- ✅ **Abort**: AbortController, AbortSignal (except AbortSignal.timeout not exposed) ([PR](https://github.com/web-platform-tests/wpt/pull/41965))
+- ✅ **Base64**: atob, btoa ([PR](https://github.com/web-platform-tests/wpt/pull/49188))
+- ✅ **console** (PR [1](https://github.com/web-platform-tests/wpt/pull/34361), [2](https://github.com/web-platform-tests/wpt/pull/49283))
+- ✅ **crypto**.getRandomValues, crypto.randomUUID ([PR](https://github.com/web-platform-tests/wpt/pull/44137) - pending acceptance by WebCrypto spec)
+- ✅ **DOMException** ([PR](https://github.com/web-platform-tests/wpt/pull/49159))
+- ✅ **Encoding**: TextDecoder, TextDecoderStream, TextEncoder, TextEncoderStream ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
 
 ---
 
 # Today: Test coverage
 
-- ✅ [CountQueuingStrategy](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- crypto.getRandomValues
-- crypto.randomUUID
-- ✅ [CustomEvent](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
-- ✅ [DataCloneError](https://github.com/web-platform-tests/wpt/pull/49282) - pending review
-- ✅ [DOMException](https://github.com/web-platform-tests/wpt/pull/49159)
-- ✅ [dispatchEvent](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
-- ErrorEvent
+- ✅ **Error handler**: ErrorEvent, onerror ([PR](https://github.com/web-platform-tests/wpt/pull/49325) - pending review)
+- ✅ **Events**: addEventListener, CustomEvent, dispatchEvent, Event, EventTarget (including `globalThis` being one), removeEventListener ([PR](https://github.com/web-platform-tests/wpt/pull/41966) - pending review)
+- ✅ **Observable**, Subscriber ([PR](https://github.com/web-platform-tests/wpt/pull/49322) - pending review)
+- **Promise rejection**: onrejectionhandled, onunhandledrejection, PromiseRejectionEvent
+- ✅ **queueMicrotask** and evaluation order: ([PR](https://github.com/web-platform-tests/wpt/pull/49325) - pending review)
+- ✅ **self** ([PR](https://github.com/web-platform-tests/wpt/pull/49252) - pending review)
 
 ---
 
 # Today: Test coverage
 
-- ✅ [Event](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
-- ✅ [EventTarget](https://github.com/web-platform-tests/wpt/pull/41966) (including `globalThis` being one) - pending review
-- onerror
-- onrejectionhandled
-- onunhandledrejection
-- PromiseRejectionEvent
-- queueMicrotask
-- ✅ [ReadableByteStreamController]()\*
+- ✅ **Streams**: ByteLengthQueuingStrategy, CompressionStream, CountQueueingStrategy, ReadableByteStreamController, ReadableStream, ReadableStreamBYOBReader, ReadableStreamBYOBRequest, ReadableStreamDefaultController, ReadableStreamDefaultReader, TransformStream, TransformStreamDefaultController, WritableStream, WritableStreamDefaultController, WritableStreamDefaultWriter (PR [1](https://github.com/web-platform-tests/wpt/pull/42005), [2](https://github.com/web-platform-tests/wpt/pull/49321) - pending review)
 
 ---
 
 # Today: Test coverage
 
-- ✅ [ReadableStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [ReadableStreamBYOBReader](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [ReadableStreamBYOBRequest](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [ReadableStreamDefaultController](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [ReadableStreamDefaultReader](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [removeEventListener](https://github.com/web-platform-tests/wpt/pull/41966) - pending review
-- ✅ [self](https://github.com/web-platform-tests/wpt/pull/49252) - pending review
-- ✅ [structuredClone](https://github.com/web-platform-tests/wpt/pull/49282) - pending review
-
----
-
-# Today: Test coverage
-
-- ✅ TextDecoder ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
-- ✅ TextDecoderStream ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
-- ✅ TextEncoder ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
-- ✅ TextEncoderStream ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
-- ✅ [TransformStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- TransformStreamDefaultController\*
-- ✅ [URL](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question
-- URLPattern
-
----
-
-# Today: Test coverage
-
-- ✅ [URLSearchParams](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question
-- ✅ WebAssembly ([1](https://github.com/web-platform-tests/wpt/pull/36412), [2](https://github.com/web-platform-tests/wpt/pull/41987)) (except `compileStreaming` and `instantiateStreaming`, not exposed)
-- ✅ [WritableStream](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [WritableStreamDefaultController](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ [WritableStreamDefaultWriter](https://github.com/web-platform-tests/wpt/pull/42005)\*
-- ✅ Remove any tests for things that were previously thought to be exposed
+- ✅ **Structured clone**: DataCloneError, structuredClone ([PR](https://github.com/web-platform-tests/wpt/pull/49282) - pending review)
+- ✅ **URL**, URLSearchParams ([PR](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question)
+- ✅ **URLPattern** ([PR](https://github.com/web-platform-tests/wpt/pull/49323) - pending acceptance by URLPattern spec)
+- ✅ **WebAssembly** ([1](https://github.com/web-platform-tests/wpt/pull/36412), [2](https://github.com/web-platform-tests/wpt/pull/41987)) (except `compileStreaming` and `instantiateStreaming` not exposed)
+- ✅ Remove tests for things no longer exposed under the criterion
 
 ---
 
@@ -222,4 +186,4 @@ console.assert(globalThis.someValue === 1);
 
 # Proposed summary for notes
 
-> **TBD** what to say here
+> (to be added)
