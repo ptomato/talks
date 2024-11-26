@@ -136,18 +136,19 @@ console.assert(globalThis.someValue === 1);
 
 # Today: Test coverage
 
-- ✅ **Error handler**: ErrorEvent, onerror ([PR](https://github.com/web-platform-tests/wpt/pull/49325) - pending review)
+- ✅ **Error handler**: ErrorEvent, onerror, reportError ([PR](https://github.com/web-platform-tests/wpt/pull/49325) - pending review)
 - ✅ **Events**: addEventListener, CustomEvent, dispatchEvent, Event, EventTarget (including `globalThis` being one), removeEventListener ([PR](https://github.com/web-platform-tests/wpt/pull/41966) - pending review)
+- ✅ **isSecureContext** ([PR](https://github.com/web-platform-tests/wpt/pull/49365) - pending review)
 - ✅ **Observable**, Subscriber ([PR](https://github.com/web-platform-tests/wpt/pull/49322) - pending review)
-- **Promise rejection**: onrejectionhandled, onunhandledrejection, PromiseRejectionEvent
-- ✅ **queueMicrotask** and evaluation order: ([PR](https://github.com/web-platform-tests/wpt/pull/49325) - pending review)
-- ✅ **self** ([PR](https://github.com/web-platform-tests/wpt/pull/49252) - pending review)
+- ✅ **Promise rejection**: onrejectionhandled, onunhandledrejection, PromiseRejectionEvent ([PR](https://github.com/web-platform-tests/wpt/pull/49341) - pending review)
 
 ---
 
 # Today: Test coverage
 
-- ✅ **Streams**: ByteLengthQueuingStrategy, CompressionStream, CountQueueingStrategy, ReadableByteStreamController, ReadableStream, ReadableStreamBYOBReader, ReadableStreamBYOBRequest, ReadableStreamDefaultController, ReadableStreamDefaultReader, TransformStream, TransformStreamDefaultController, WritableStream, WritableStreamDefaultController, WritableStreamDefaultWriter (PR [1](https://github.com/web-platform-tests/wpt/pull/42005), [2](https://github.com/web-platform-tests/wpt/pull/49321) - pending review)
+- ✅ **queueMicrotask** and evaluation order: ([PR](https://github.com/web-platform-tests/wpt/pull/49325) - pending review)
+- ✅ **self** ([PR](https://github.com/web-platform-tests/wpt/pull/49252) - pending review)
+- ✅ **Streams**: ByteLengthQueuingStrategy, CompressionStream, CountQueueingStrategy, ReadableByteStreamController, ReadableStream, ReadableStreamBYOBReader, ReadableStreamBYOBRequest, ReadableStreamDefaultController, ReadableStreamDefaultReader, TransformStream, WritableStream, WritableStreamDefaultController, WritableStreamDefaultWriter (PR [1](https://github.com/web-platform-tests/wpt/pull/42005), [2](https://github.com/web-platform-tests/wpt/pull/49321) - pending review)
 
 ---
 
@@ -157,7 +158,14 @@ console.assert(globalThis.someValue === 1);
 - ✅ **URL**, URLSearchParams ([PR](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question)
 - ✅ **URLPattern** ([PR](https://github.com/web-platform-tests/wpt/pull/49323) - pending acceptance by URLPattern spec)
 - ✅ **WebAssembly** ([1](https://github.com/web-platform-tests/wpt/pull/36412), [2](https://github.com/web-platform-tests/wpt/pull/41987)) (except `compileStreaming` and `instantiateStreaming` not exposed)
+- WebAssembly **ESM imports**
+
+---
+
+# Today: Test coverage
+
 - ✅ Remove tests for things no longer exposed under the criterion
+- ❌ Not currently covered in WPT at all: TransformStreamDefaultController, WebTransportWriter
 
 ---
 
