@@ -100,6 +100,8 @@ console.assert(globalThis.someValue === 1);
 - Clear criterion to decide whether something is in or out
 - Distinction between "which standards body standardized a feature" is irrelevant
 
+**Update:** Full list of 1300+ global properties, which are in/out, & why: [📋spreadsheet](https://docs.google.com/spreadsheets/d/1x0Uho2vkvhUpFmZi73QvvwNqdrWyvJMZ-2yo4YGoPzU)
+
 ---
 
 # Today: HTML integration
@@ -130,7 +132,7 @@ console.assert(globalThis.someValue === 1);
 - ✅ **console** (PR [1](https://github.com/web-platform-tests/wpt/pull/34361), [2](https://github.com/web-platform-tests/wpt/pull/49283))
 - ✅ **crypto**.getRandomValues, crypto.randomUUID ([PR](https://github.com/web-platform-tests/wpt/pull/44137) - pending acceptance by WebCrypto spec)
 - ✅ **DOMException** ([PR](https://github.com/web-platform-tests/wpt/pull/49159))
-- ✅ **Encoding**: TextDecoder, TextDecoderStream, TextEncoder, TextEncoderStream ([1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
+- ✅ **Encoding**: TextDecoder, TextDecoderStream, TextEncoder, TextEncoderStream (PR [1](https://github.com/web-platform-tests/wpt/pull/41968), [2](https://github.com/web-platform-tests/wpt/pull/49286) - pending review)
 
 ---
 
@@ -147,7 +149,7 @@ console.assert(globalThis.someValue === 1);
 # Today: Test coverage
 
 - ✅ **queueMicrotask** and evaluation order: ([PR](https://github.com/web-platform-tests/wpt/pull/49325) - pending review)
-- ✅ **self** ([PR](https://github.com/web-platform-tests/wpt/pull/49252) - pending review)
+- ✅ **self** ([PR](https://github.com/web-platform-tests/wpt/pull/49252))
 - ✅ **Streams**: ByteLengthQueuingStrategy, CompressionStream, CountQueueingStrategy, ReadableByteStreamController, ReadableStream, ReadableStreamBYOBReader, ReadableStreamBYOBRequest, ReadableStreamDefaultController, ReadableStreamDefaultReader, TransformStream, WritableStream, WritableStreamDefaultController, WritableStreamDefaultWriter (PR [1](https://github.com/web-platform-tests/wpt/pull/42005), [2](https://github.com/web-platform-tests/wpt/pull/49321) - pending review)
 
 ---
@@ -157,7 +159,7 @@ console.assert(globalThis.someValue === 1);
 - ✅ **Structured clone**: DataCloneError, structuredClone ([PR](https://github.com/web-platform-tests/wpt/pull/49282) - pending review)
 - ✅ **URL**, URLSearchParams ([PR](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question)
 - ✅ **URLPattern** ([PR](https://github.com/web-platform-tests/wpt/pull/49323) - pending acceptance by URLPattern spec)
-- ✅ **WebAssembly** ([1](https://github.com/web-platform-tests/wpt/pull/36412), [2](https://github.com/web-platform-tests/wpt/pull/41987)) (except `compileStreaming` and `instantiateStreaming` not exposed)
+- ✅ **WebAssembly** (PR [1](https://github.com/web-platform-tests/wpt/pull/36412), [2](https://github.com/web-platform-tests/wpt/pull/41987)) (except `compileStreaming` and `instantiateStreaming` not exposed)
 - WebAssembly **ESM imports**
 
 ---
