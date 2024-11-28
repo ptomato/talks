@@ -160,7 +160,7 @@ console.assert(globalThis.someValue === 1);
 - ✅ **URL**, URLSearchParams ([PR](https://github.com/web-platform-tests/wpt/pull/41985) - pending Interop question)
 - ✅ **URLPattern** ([PR](https://github.com/web-platform-tests/wpt/pull/49323) - pending acceptance by URLPattern spec)
 - ✅ **WebAssembly** (PR [1](https://github.com/web-platform-tests/wpt/pull/36412), [2](https://github.com/web-platform-tests/wpt/pull/41987)) (except `compileStreaming` and `instantiateStreaming` not exposed)
-- WebAssembly **ESM imports**
+- ✅ WebAssembly **ESM imports** ([PR](https://github.com/web-platform-tests/wpt/pull/49412) - pending review)
 
 ---
 
