@@ -232,4 +232,4 @@ Temporal.PlainMonthDay.from('+999999-01-01[u-ca=chinese]');
 >
 > Implementations should complete work on the proposal and ship it, and let the champions know ASAP if anything is blocking or complicating that. You are welcome to join the champions meetings.
 >
-> A normative change was adopted, to relax requirements on implementations for calculating PlainMonthDays in non-ISO calendars outside the supported PlainDate range (PR [#3054](https://github.com/tc39/proposal-temporal/pull/3054)).
+> A normative change was adopted, to avoid requiring questionable calculations when creating PlainMonthDays in non-ISO calendars outside the supported PlainDate range (PR [#3054](https://github.com/tc39/proposal-temporal/pull/3054)).
