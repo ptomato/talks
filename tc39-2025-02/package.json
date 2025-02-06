@@ -1,0 +1,11 @@
+{
+  "name": "tc39-2024-12",
+  "packageManager": "yarn@3.3.0",
+  "scripts": {
+    "build": "marp --html README.md -o index.html",
+    "watch": "marp --watch --html README.md -o index.html"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.0.4"
+  }
+}
