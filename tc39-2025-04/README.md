@@ -51,12 +51,14 @@ test262 tests, and answer any questions raised.
 <div class="twocol">
 <div>
 
-- SpiderMonkey: TBD
-- Ladybird: TBD
-- GraalJS: TBD
-- V8: TBD
-- Boa: TBD
-- JavaScriptCore: TBD
+| Engine   | %PASS | Change |
+| -------- | ----- | ------ |
+| SM       | ~100% | ↓0.02% |
+| Ladybird | 96%   | ↓0.4%  |
+| GraalJS  | 91%   | ↑1.6%  |
+| Boa      | 85%   | ↑13%   |
+| V8       | 73%   | ↓0.5%  |
+| JSC      | 40%   | ↓0.1%  |
 
 </div>
 <div>
@@ -70,14 +72,18 @@ test262 tests, and answer any questions raised.
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'SM': 0,
-    'Ladybird': 0,
-    'GraalJS': 0,
-    'V8': 0,
-    'Boa': 0,
-    'JSC': 0,
+    'SM': 9137,
+    'Ladybird': 8823,
+    'GraalJS': 8298,
+    'Boa': 7758,
+    'V8': 6690,
+    'JSC': 3647,
   };
-  const totalTests = 4578;
+  const totalTests = 9157;
+  // test/staging/sm tests have noStrict flag. it's too much hassle to
+  // keep track of whether an implementation fails the noStrict tests,
+  // so we just count strict mode and default as two separate tests,
+  // which is what test262-harness does
 
   Chart.defaults.font.family = 'Rubik';
   Chart.defaults.font.size = 16;
@@ -100,12 +106,11 @@ test262 tests, and answer any questions raised.
 </script>
 
 <!--
-npx test262-harness --hostType=sm --hostPath=$HOME/workspace/gecko/obj-debug-x86_64-pc-linux-gnu/dist/bin/js -f Temporal --hostArgs=--enable-temporal "test/**/*.js"
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --hostArgs=--harmony-temporal -- "test/**/*.js"  # requires https://github.com/bterlson/eshost/pull/139
+npx test262-harness --hostType=sm --hostPath=$HOME/workspace/mozilla-unified/obj-debug-x86_64-pc-linux-gnu/dist/bin/js -f Temporal "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --hostArgs=--harmony -- "test/**/*.js"
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --hostArgs=--use-test262-global -- "test/**/*.js"
 npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --hostArgs=--useTemporal=1 -- "test/**/*.js"
-cargo run --release --bin boa_tester -- run --test262-path $HOME/workspace/test262 -s ...
-  (test/built-ins/Temporal, test/intl402/Temporal, test/staging/Temporal, test/staging/Intl402/Temporal, test/intl402/DateTimeFormat/prototype/format*/temporal-*)
+npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa -f Temporal -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147
 npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
 npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal --hostArgs='run --unstable-temporal' -- "test/**/*.js"
 -->
@@ -270,3 +275,6 @@ assert(fullDateString.indexOf(monthName) > -1);
 - What kind of guidelines would be helpful for implementations?
 - More info: https://github.com/tc39/test262/issues/3786
 
+---
+
+# Proposed summary for notes
