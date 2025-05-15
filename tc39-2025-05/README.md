@@ -25,7 +25,6 @@ style: |
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
-footer: "**DRAFT** 2025-05-05"
 ---
 
 <!--
@@ -55,12 +54,12 @@ We have one normative change to propose, based on user feedback.
 
 | Engine   | %PASS | Change |
 | -------- | ----- | ------ |
-| SM       | %   | ↓%  |
-| Ladybird | %   | ↓%  |
-| GraalJS  | %   | ↑%  |
-| Boa      | %   | ↑%  |
-| V8       | %   | ↓%  |
-| JSC      | %   | ↓%  |
+| SM       | TBD%  | TBD%   |
+| Ladybird | TBD%  | TBD%   |
+| GraalJS  | TBD%  | TBD%   |
+| Boa      | TBD%  | TBD%   |
+| V8       | TBD%  | TBD%   |
+| JSC      | TBD%  | TBD%   |
 
 </div>
 <div>
@@ -140,6 +139,17 @@ npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal
 
 ## Change to UTC offset matching (3)
 
+- The Pacific island of Niue changed the UTC offset by 20 seconds in 1952 from UTC-11:19:40 to UTC-11:20
+- Both offsets are valid at, e.g., 1952-10-15 23:59:59
+- Previously, impossible to deserialize!
+- `-11:20:00` would be treated as `-11:20` and match the first candidate, `-11:19:40`
+- With this change, `-11:20:00` and `-11:19:40` work as expected
+- `-11:20` still matches the first candidate
+
+---
+
+## Change to UTC offset matching (4)
+
 Examples of change:
 
 ```js
@@ -152,6 +162,9 @@ Temporal.ZonedDateTime.from('1970-06-01T00:00:00-00:44:40[Africa/Monrovia]')
 Temporal.ZonedDateTime.from('1970-06-01T00:00:00-00:45:00[Africa/Monrovia]')
   // Before: accepted
   // After: throws RangeError
+Temporal.ZonedDateTime.from('1952-10-15T23:59:59-11:20:00[Pacific/Niue]').epochNanoseconds
+  // Before: -543069621000000000n (matches candidate offset -11:19:40)
+  // After:  -543069601000000000n (matches candidate offset -11:20:00)
 ```
 
 ---
