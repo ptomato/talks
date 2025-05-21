@@ -41,7 +41,7 @@ TC39 May 2025
 
 ## Progress update
 
-Temporal is shipping in Firefox Nightly builds. V8 has started to integrate their Rust library and now has a full implementation of Temporal.Instant. Work progresses on the JavaScriptCore implementation.
+Temporal is shipping in Firefox 139 (May 27th). V8 has started to integrate their Rust library and now has a full implementation of Temporal.Instant. Work progresses on the JavaScriptCore implementation.
 
 We have one normative change to propose, based on user feedback.
 
