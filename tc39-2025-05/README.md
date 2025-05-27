@@ -59,7 +59,7 @@ We have one normative change to propose, based on user feedback.
 | GraalJS  | 90%   | ↓0.2%  |
 | Boa      | 90%   | ↑5%    |
 | JSC      | 41%   | ↑0.8%  |
-| V8       | 18%   | ↓55%   |
+| V8       | 19%   | ↓54%   |
 
 </div>
 <div>
@@ -78,7 +78,7 @@ We have one normative change to propose, based on user feedback.
     'GraalJS': 8292,
     'Boa': 8257,
     'JSC': 3727,
-    'V8': 1694,
+    'V8': 1728,
   };
   const totalTests = 9171;
   // test/staging/sm tests have noStrict flag. it's too much hassle to
