@@ -41,25 +41,25 @@ TC39 May 2025
 
 ## Progress update
 
-Temporal is shipping in Firefox 139 (May 27th). V8 has started to integrate their Rust library and now has a full implementation of Temporal.Instant. Work progresses on the JavaScriptCore implementation.
+Temporal is shipping in Firefox 139 (May 27th). V8 has started their integration of the Rust library `temporal_rs` and now has a partial implementation of Temporal.Instant. Work progresses on the JavaScriptCore implementation.
 
 We have one normative change to propose, based on user feedback.
 
 ---
 
-## Test conformance as of April 2025
+## Test conformance as of May 2025
 
 <div class="twocol">
 <div>
 
 | Engine   | %PASS | Change |
 | -------- | ----- | ------ |
-| SM       | TBD%  | TBD%   |
-| Ladybird | TBD%  | TBD%   |
-| GraalJS  | TBD%  | TBD%   |
-| Boa      | TBD%  | TBD%   |
-| V8       | TBD%  | TBD%   |
-| JSC      | TBD%  | TBD%   |
+| SM       | 99%   | ↓0.3%  |
+| Ladybird | 96%   | ↓0.06% |
+| GraalJS  | 90%   | ↓0.2%  |
+| Boa      | 90%   | ↑5%    |
+| JSC      | 41%   | ↑0.8%  |
+| V8       | 18%   | ↓55%   |
 
 </div>
 <div>
@@ -73,14 +73,14 @@ We have one normative change to propose, based on user feedback.
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'SM': 0,
-    'Ladybird': 0,
-    'GraalJS': 0,
-    'Boa': 0,
-    'V8': 0,
-    'JSC': 0,
+    'SM': 9123,
+    'Ladybird': 8831,
+    'GraalJS': 8292,
+    'Boa': 8257,
+    'JSC': 3727,
+    'V8': 1694,
   };
-  const totalTests = 10000;
+  const totalTests = 9171;
   // test/staging/sm tests have noStrict flag. it's too much hassle to
   // keep track of whether an implementation fails the noStrict tests,
   // so we just count strict mode and default as two separate tests,
@@ -107,11 +107,11 @@ We have one normative change to propose, based on user feedback.
 </script>
 
 <!--
-npx test262-harness --hostType=sm --hostPath=$HOME/workspace/mozilla-unified/obj-debug-x86_64-pc-linux-gnu/dist/bin/js -f Temporal "test/**/*.js"
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --hostArgs=--harmony -- "test/**/*.js"
+npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --hostArgs=--harmony-temporal -- "test/**/*.js"
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --hostArgs=--use-test262-global -- "test/**/*.js"
 npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --hostArgs=--useTemporal=1 -- "test/**/*.js"
-npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa -f Temporal -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147
+npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Temporal -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147 and https://github.com/devsnek/esvu/pull/66
 npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
 npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal --hostArgs='run --unstable-temporal' -- "test/**/*.js"
 -->
