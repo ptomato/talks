@@ -647,7 +647,7 @@ I hope you've found this a useful tour of Temporal. And if you have the old Date
 
 ---
 
-# Partnering with Igalia
+# Partnering with [Igalia](https://igalia.com)
 
 - **JS:** BigInt, class fields, JSON imports, Temporal, AsyncContext, ...
 - **Node.js:** require(esm), compile cache, register hooks, ...
