@@ -1,0 +1,22 @@
+{
+  "name": "guadec2023",
+  "version": "1.0.0",
+  "description": "Slides for GUADEC 2025",
+  "main": "index.html",
+  "scripts": {
+    "build": "marp --html README.md -o index.html",
+    "pdf": "marp --allow-local-files --html README.md -o slides-Chimento-guadec2025.pdf",
+    "watch": "marp --watch --html README.md -o index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ptomato/talks"
+  },
+  "keywords": [
+    "guadec",
+    "gnome",
+    "gjs"
+  ],
+  "author": "Philip Chimento <pchimento@igalia.com>",
+  "license": "CC-BY-ND-4.0"
+}
