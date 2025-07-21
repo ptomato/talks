@@ -45,6 +45,10 @@ Temporal is shipping in Firefox 139 (May 27th). V8 has started their integration
 
 We have one normative change to propose, based on user feedback.
 
+<!--
+Mention that temporal_rs is a collaboration between Boa developers, Google, and students from the University of Bergen (Norway)
+-->
+
 ---
 
 ## Test conformance as of May 2025
