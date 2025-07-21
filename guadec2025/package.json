@@ -18,5 +18,9 @@
     "gjs"
   ],
   "author": "Philip Chimento <pchimento@igalia.com>",
-  "license": "CC-BY-ND-4.0"
+  "license": "CC-BY-ND-4.0",
+  "packageManager": "yarn@3.3.0+sha256.bbfc6cc3362afbcb0ce39ee8f36fb2b62ce9834b20d6aeee5c1f481269b52238",
+  "dependencies": {
+    "@marp-team/marp-cli": "^4.2.1"
+  }
 }
