@@ -57,6 +57,7 @@ TC39 September 2025
 | V8       | 99%   | ↑80%   |
 | Ladybird | 97%   | ↑0.2%  |
 | Boa      | 96%   | ↑6%    |
+| Kiesel   | 96%   | ↑96%   |
 | GraalJS  | 90%   | ↓0.2%  |
 | JSC      | 41%   | ↑0.5%  |
 
@@ -76,6 +77,7 @@ TC39 September 2025
     'V8': 9255,
     'Ladybird': 9034,
     'Boa': 9032,
+    'Kiesel': 8961,
     'GraalJS': 8447,
     'JSC': 3850,
   };
@@ -112,6 +114,7 @@ npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f T
 npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --hostArgs=--useTemporal=1 -- "test/**/*.js"
 npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Temporal -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147 and https://github.com/devsnek/esvu/pull/66
 npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
+npx test262-harness --hostType=hermes --hostPath=$HOME/Downloads/kiesel-linux-x86_64 -f Temporal -- "test/**/*.js"
 npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal --hostArgs='run --unstable-temporal' -- "test/**/*.js"
 -->
 
