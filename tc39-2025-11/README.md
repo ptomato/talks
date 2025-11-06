@@ -124,7 +124,7 @@ npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal
 
 ## Path to Stage 4
 
-- V8 unflagged implementation scheduled for mid-January release
+- V8 implementation unflagged in trunk, scheduled for Dec 3 beta and mid-January release
 - Remaining tests in staging are moved to main test262, updated and expanded as needed
 - Identified gaps in test coverage are filled
 - Temporal moves to stage 4, together with Time Zone Canonicalization and Intl Era/Month Code
@@ -137,7 +137,7 @@ npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal
 - Testing millions of combinations of "interesting" inputs
 - Flagging for further inspection when:
   - an assertion fails
-  - an assumed invariant does not hold
+  - an assumed invariant does not hold (e.g. _a_ + _b_ = _a_ - -_b_)
   - results are different between implementations
 
 <!--
