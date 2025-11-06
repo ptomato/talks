@@ -164,7 +164,7 @@ npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal
 - **SpiderMonkey bug**: [#1998020](https://bugzilla.mozilla.org/show_bug.cgi?id=1998020)
 - **JavaScriptCore bugs**: [#301659](https://bugs.webkit.org/show_bug.cgi?id=301659), [#301710](https://bugs.webkit.org/show_bug.cgi?id=301710), [#301717](https://bugs.webkit.org/show_bug.cgi?id=301717), [#301724](https://bugs.webkit.org/show_bug.cgi?id=301724)
 - **temporal_rs bugs**: [#610](https://github.com/boa-dev/temporal/pull/610), [#613](https://github.com/boa-dev/temporal/issues/613), [#617](https://github.com/boa-dev/temporal/issues/617)
-- **V8 bugs unrelated to temporal_rs**: [#446728405](https://issues.chromium.org/issues/446728405) (already filed but stale; added a current reproducer)
+- **V8 bug unrelated to temporal_rs**: [#446728405](https://issues.chromium.org/issues/446728405) (already filed but stale; added a current reproducer)
 - **GraalJS bugs**: Found ≥4 distinct ones. Will open issues soon.
 - **Test262**: Added specific test coverage for all of these bugs.
 
