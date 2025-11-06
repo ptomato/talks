@@ -1,6 +1,7 @@
 ---
 marp: true
 theme: gaia
+math: mathjax
 paginate: true
 style: |
   @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -190,7 +191,7 @@ npx test262-harness --hostType=node --hostPath=$HOME/.local/bin/deno -f Temporal
 - We construct two bounding Durations _start_ and _end_ that are multiples of a rounding increment
 - Such that _start_ ≤ _d_ < _end_
 - Round based on whether _d_ is closer to _start_ or _end_
-- Total based on fraction _d_ - _start_ / _end_ - _start_
+- Total based on fraction $\frac{d - start}{end - start}$
 
 ---
 
