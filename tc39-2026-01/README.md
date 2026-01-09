@@ -39,6 +39,8 @@ _class: invert lead
 Igalia, in partnership with Bloomberg  
 TC39 January 2026
 
+![w:200](igalia.svg)
+
 ---
 
 ## Progress update
