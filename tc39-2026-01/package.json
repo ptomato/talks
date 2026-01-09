@@ -1,0 +1,13 @@
+{
+  "name": "tc39-2026-01",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Philip Chimento <pchimento@igalia.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "marp --html README.md -o index.html"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
+  }
+}
