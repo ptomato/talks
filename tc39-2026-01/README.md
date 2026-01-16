@@ -22,11 +22,7 @@ style: |
   .hljs-attr { color: #e9b96e; }
   .hljs-variable { color: red; font-weight: bold; }
   /* .hljs-comment, .hljs-regexp, .hljs-symbol */
-  .twocol {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
+  .chart { max-width: 50%; margin: 0 auto; }
 ---
 
 <!--
@@ -50,46 +46,40 @@ TC39 January 2026
 
 ---
 
-## Test conformance as of January 2026 (TODO to be updated again before plenary)
+## Test conformance as of January 2026 (TODO to measure again before plenary)
 
-<div class="twocol">
-<div>
-
-| Engine   | %PASS | Change |
-| -------- | ----- | ------ |
-| V8       | 99%   | ↑0.02% |
-| SM       | 97%   | ↓2%    |
-| Kiesel   | 94%   | ↓3%    |
-| Boa      | 94%   | ↓3%    |
-| GraalJS  | 79%   | ↓17%   |
-| Ladybird | 78%   | ↓18%   |
-| JSC      | 46%   | ↓2%    |
-
-</div>
-<div>
+<div class="chart">
   <canvas id="conformance-chart"></canvas>
 </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2"></script>
 
 <script>
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'V8': 12834,
-    'SM': 12548,
-    'Kiesel': 12216,
-    'Boa': 12166,
-    'GraalJS': 10252,
-    'Ladybird': 10076,
-    'JSC': 5946,
+    'SM': { Temporal: 9853, Monthcode: 2648, Timezone: 30 },
+    'V8': { Temporal: 9837, Monthcode: 2928, Timezone: 30 },
+    'Kiesel': { Temporal: 9630, Monthcode: 2514, Timezone: 32 },
+    'Boa': { Temporal: 9622, Monthcode: 2486, Timezone: 22 },
+    'Ladybird': { Temporal: 9572, Monthcode: 464, Timezone: 12 },
+    'GraalJS': { Temporal: 9422, Monthcode: 800, Timezone: 16 },
+    'JSC': { Temporal: 5834, Monthcode: 80, Timezone: 8 },
   };
-  const totalTests = 12932;
+  const totalTests = { Temporal: 9888, Monthcode: 2984, Timezone: 38 };
   // test/staging/sm tests have noStrict flag. it's too much hassle to
   // keep track of whether an implementation fails the noStrict tests,
   // so we just count strict mode and default as two separate tests,
   // which is what test262-harness does
+
+  // do not use ()=>{}
+  const barData = {};
+  for (const tag of ['Temporal', 'Monthcode', 'Timezone']) {
+    barData[tag] = Object.values(results).map(function (result) {
+      return result[tag] * 100 / totalTests[tag];
+    });
+  }
 
   Chart.defaults.font.family = 'Rubik';
   Chart.defaults.font.size = 16;
@@ -98,27 +88,49 @@ TC39 January 2026
     data: {
       labels: Object.keys(results),
       datasets: [{
-        label: '% of test262 passing',
-        // do not use =>
-        data: Object.values(results).map(function (x) { return x * 100 / totalTests }),
+        label: 'Temporal',
+        data: barData.Temporal,
         backgroundColor: '#a40000d0',
+      }, {
+        label: 'Intl Era/Month Code',
+        data: barData.Monthcode,
+        backgroundColor: pattern.draw('diagonal', '#4e9a06'),
+      }, {
+        label: 'Time Zone Canonicalization',
+        data: barData.Timezone,
+        backgroundColor: pattern.draw('diagonal-right-left', '#204a87'),
       }],
     },
     options: {
       aspectRatio: 1.4,
+      label: '% of test262 passing',
       indexAxis: 'y',
     },
   });
 </script>
 
 <!--
-npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal "test/**/*.js"
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --hostArgs=--harmony-temporal -- "test/**/*.js"
-npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --hostArgs=--use-test262-global -- "test/**/*.js"
-npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Temporal -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147 and https://github.com/devsnek/esvu/pull/66
-npx test262-harness --hostType=hermes --hostPath=$HOME/.esvu/bin/kiesel-nightly -f Temporal -- "test/**/*.js"
-npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
-npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --hostArgs=--useTemporal=1 -- "test/**/*.js"
+npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal --fe "Intl.Era-monthcode,canonical-tz" "test/**/*.js"
+npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Intl.Era-monthcode "test/**/*.js"
+npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f canonical-tz "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs=--harmony-temporal -- "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Intl.Era-monthcode --hostArgs=--harmony-temporal -- "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f canonical-tz --hostArgs=--harmony-temporal -- "test/**/*.js"
+npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs=--use-test262-global -- "test/**/*.js"
+npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Intl.Era-monthcode --hostArgs=--use-test262-global -- "test/**/*.js"
+npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f canonical-tz --hostArgs=--use-test262-global -- "test/**/*.js"
+npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
+npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
+npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f canonical-tz --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
+npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs=--useTemporal=1 -- "test/**/*.js"
+npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Intl.Era-monthcode --hostArgs=--useTemporal=1 -- "test/**/*.js"
+npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f canonical-tz --hostArgs=--useTemporal=1 -- "test/**/*.js"
+npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Temporal --fe "Intl.Era-monthcode,canonical-tz" -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147 and https://github.com/devsnek/esvu/pull/66
+npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Intl.Era-monthcode -- "test/**/*.js"
+npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f canonical-tz -- "test/**/*.js"
+npx test262-harness --hostType=kiesel --hostPath=$HOME/.esvu/bin/kiesel-nightly -f Temporal --fe "Intl.Era-monthcode,canonical-tz" -- "test/**/*.js"
+npx test262-harness --hostType=kiesel --hostPath=$HOME/.esvu/bin/kiesel-nightly -f Intl.Era-monthcode -- "test/**/*.js"
+npx test262-harness --hostType=kiesel --hostPath=$HOME/.esvu/bin/kiesel-nightly -f canonical-tz -- "test/**/*.js"
 npx test262-harness --hostType=node --hostPath=$(which node) -f Temporal --hostArgs=... -- "test/**/*.js"
 npx test262-harness --hostType=hermes --hostPath=$(which deno) -f Temporal --hostArgs='run --unstable-temporal --v8-flags=--expose-gc' -- "test/**/*.js"
 -->
@@ -127,11 +139,12 @@ npx test262-harness --hostType=hermes --hostPath=$(which deno) -f Temporal --hos
 
 ## Path to Stage 4
 
-- V8 implementation scheduled for 2026-01-13 release
+- V8 implementation is now available on the Web!
+- GraalJS implementation scheduled for unflagged release
 - Intl Era/Month Code request for stage 3 in this meeting
-- Investigate bugs revealed in SpiderMonkey implementation by new tests
-- Remaining tests in staging are moved to main test262, updated and expanded as needed
-- Identified gaps in test coverage are filled
+- Investigate last conformance bugs in implementations
+- Move remaining tests in staging to main test262, update and expand as needed
+- Fill identified gaps in test coverage
 - Temporal moves to stage 4, together with Time Zone Canonicalization and Intl Era/Month Code
 
 ---
@@ -140,22 +153,27 @@ npx test262-harness --hostType=hermes --hostPath=$(which deno) -f Temporal --hos
 
 ```js
 > Temporal.PlainYearMonth.from("2025-07").subtract({ months: 1 }, { overflow: 'reject' })
-  // Current: RangeError
+  // Current:  RangeError
   // Proposed: Temporal.PlainYearMonth of 2025-06
 ```
 
-- PlainYearMonth addition and subtraction, under the hood, does PlainDate addition or subtraction
-- For a negative duration (subtraction), starting point is end of month
-- This is to prevent user surprise on `Temporal.PlainYearMonth.from("2026-01").subtract({ days: 1 })`
+- Bug has been present in the spec for a _long_ time (>5 years)
+- Found using snapshot testing technique
+- Caused by a bug in the addition/subtraction code that existed to accommodate durations with days
 
 ---
 
 ## Surprise in PlainYearMonth subtract (2)
 
-- Bug has been present in the spec for a _long_ time (>5 years)
-- Found using snapshot testing technique
-- Fix in normative [PR #3208](https://github.com/tc39/proposal-temporal/pull/3208) (h/t Tim Chevalier)
-- A small corresponding change may be needed in Intl Era/Month Code: [PR #109](https://github.com/tc39/proposal-intl-era-monthcode/pull/109)
+- Temporal champions recommend removing the subtract-days-from-PlainYearMonth feature ([PR #3253](https://github.com/tc39/proposal-temporal/pull/3253))
+```js
+> Temporal.PlainYearMonth.from("2025-07").add({ days: 31 })
+  // Current:  Temporal.PlainYearMonth of 2025-08
+  // Proposed: RangeError
+```
+- This also fixes the bug on the previous slide
+- :hourglass: This is a late addition to the agenda
+- Fallback bugfix in [PR #3208](https://github.com/tc39/proposal-temporal/pull/3208) (h/t Tim Chevalier)
 
 ---
 
@@ -163,17 +181,17 @@ npx test262-harness --hostType=hermes --hostPath=$(which deno) -f Temporal --hos
 
 ```js
 > Temporal.PlainDateTime.from('2026-03-08T02:00').toLocaleString()
-  // Current: "2026-03-08, 3:00:00 a.m." (in my locale)
+  // Current:  "2026-03-08, 3:00:00 a.m." (in my locale)
   // Proposed: "2026-03-08, 2:00:00 a.m." (in my locale)
 > Temporal.PlainDate.from('2011-12-30').toLocaleString('en-ca', { timeZone: 'Pacific/Apia' })
-  // Current: "2011-12-31"
+  // Current:  "2011-12-31"
   // Proposed: "2011-12-30"
 ```
 
 - h/t fabon-f and Adam Shaw, JS community members developing tools downstream of Temporal
 - Plain types are wall-clock times
 - Should not be subject to the formatter's time zone
-- Fix in normative [PR #3246](https://github.com/tc39/proposal-temporal/pull/3246) or [#3247](https://github.com/tc39/proposal-temporal/pull/3247) (TODO - one of these to be definitively recommended before plenary)
+- Fix in normative [PR #3246](https://github.com/tc39/proposal-temporal/pull/3246)
 
 ---
 
