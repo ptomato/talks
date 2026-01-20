@@ -59,23 +59,23 @@ TC39 January 2026
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'SM': { Temporal: 9853, Monthcode: 2648, Timezone: 30 },
-    'V8': { Temporal: 9837, Monthcode: 2928, Timezone: 30 },
-    'Kiesel': { Temporal: 9630, Monthcode: 2514, Timezone: 32 },
-    'Boa': { Temporal: 9622, Monthcode: 2486, Timezone: 22 },
-    'Ladybird': { Temporal: 9572, Monthcode: 464, Timezone: 12 },
-    'GraalJS': { Temporal: 9422, Monthcode: 800, Timezone: 16 },
-    'JSC': { Temporal: 5834, Monthcode: 80, Timezone: 8 },
+    'SM': { Temporal: 9853, Monthcode: 2648 },
+    'V8': { Temporal: 9837, Monthcode: 2928 },
+    'Kiesel': { Temporal: 9630, Monthcode: 2514 },
+    'Boa': { Temporal: 9622, Monthcode: 2486 },
+    'Ladybird': { Temporal: 9572, Monthcode: 464 },
+    'GraalJS': { Temporal: 9422, Monthcode: 800 },
+    'JSC': { Temporal: 5834, Monthcode: 80 },
   };
-  const totalTests = { Temporal: 9888, Monthcode: 2984, Timezone: 38 };
+  const totalTests = { Temporal: 9888, Monthcode: 2984 };
   // test/staging/sm tests have noStrict flag. it's too much hassle to
   // keep track of whether an implementation fails the noStrict tests,
   // so we just count strict mode and default as two separate tests,
   // which is what test262-harness does
 
-  // do not use ()=>{}
   const barData = {};
-  for (const tag of ['Temporal', 'Monthcode', 'Timezone']) {
+  for (const tag of ['Temporal', 'Monthcode']) {
+    // do not use ()=>{}
     barData[tag] = Object.values(results).map(function (result) {
       return result[tag] * 100 / totalTests[tag];
     });
@@ -95,10 +95,6 @@ TC39 January 2026
         label: 'Intl Era/Month Code',
         data: barData.Monthcode,
         backgroundColor: pattern.draw('diagonal', '#4e9a06'),
-      }, {
-        label: 'Time Zone Canonicalization',
-        data: barData.Timezone,
-        backgroundColor: pattern.draw('diagonal-right-left', '#204a87'),
       }],
     },
     options: {
@@ -110,27 +106,20 @@ TC39 January 2026
 </script>
 
 <!--
-npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal --fe "Intl.Era-monthcode,canonical-tz" "test/**/*.js"
+npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal --fe Intl.Era-monthcode "test/**/*.js"
 npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Intl.Era-monthcode "test/**/*.js"
-npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f canonical-tz "test/**/*.js"
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs=--harmony-temporal -- "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe Intl.Era-monthcode --hostArgs=--harmony-temporal -- "test/**/*.js"
 npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Intl.Era-monthcode --hostArgs=--harmony-temporal -- "test/**/*.js"
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f canonical-tz --hostArgs=--harmony-temporal -- "test/**/*.js"
-npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs=--use-test262-global -- "test/**/*.js"
+npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --fe Intl.Era-monthcode --hostArgs=--use-test262-global -- "test/**/*.js"
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Intl.Era-monthcode --hostArgs=--use-test262-global -- "test/**/*.js"
-npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f canonical-tz --hostArgs=--use-test262-global -- "test/**/*.js"
-npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
+npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --fe Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
 npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
-npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f canonical-tz --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
-npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --fe "Intl.Era-monthcode,canonical-tz" --hostArgs=--useTemporal=1 -- "test/**/*.js"
+npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --fe Intl.Era-monthcode --hostArgs=--useTemporal=1 -- "test/**/*.js"
 npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Intl.Era-monthcode --hostArgs=--useTemporal=1 -- "test/**/*.js"
-npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f canonical-tz --hostArgs=--useTemporal=1 -- "test/**/*.js"
-npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Temporal --fe "Intl.Era-monthcode,canonical-tz" -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147 and https://github.com/devsnek/esvu/pull/66
+npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Temporal --fe Intl.Era-monthcode -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147 and https://github.com/devsnek/esvu/pull/66
 npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Intl.Era-monthcode -- "test/**/*.js"
-npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f canonical-tz -- "test/**/*.js"
-npx test262-harness --hostType=kiesel --hostPath=$HOME/.esvu/bin/kiesel-nightly -f Temporal --fe "Intl.Era-monthcode,canonical-tz" -- "test/**/*.js"
+npx test262-harness --hostType=kiesel --hostPath=$HOME/.esvu/bin/kiesel-nightly -f Temporal --fe Intl.Era-monthcode -- "test/**/*.js"
 npx test262-harness --hostType=kiesel --hostPath=$HOME/.esvu/bin/kiesel-nightly -f Intl.Era-monthcode -- "test/**/*.js"
-npx test262-harness --hostType=kiesel --hostPath=$HOME/.esvu/bin/kiesel-nightly -f canonical-tz -- "test/**/*.js"
 npx test262-harness --hostType=node --hostPath=$(which node) -f Temporal --hostArgs=... -- "test/**/*.js"
 npx test262-harness --hostType=hermes --hostPath=$(which deno) -f Temporal --hostArgs='run --unstable-temporal --v8-flags=--expose-gc' -- "test/**/*.js"
 -->
@@ -145,7 +134,7 @@ npx test262-harness --hostType=hermes --hostPath=$(which deno) -f Temporal --hos
 - Investigate last conformance bugs in implementations
 - Move remaining tests in staging to main test262, update and expand as needed
 - Fill identified gaps in test coverage
-- Temporal moves to stage 4, together with Time Zone Canonicalization and Intl Era/Month Code
+- Temporal moves to stage 4, together with Intl Era/Month Code
 
 ---
 
