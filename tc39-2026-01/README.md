@@ -3,7 +3,6 @@ marp: true
 theme: gaia
 math: mathjax
 paginate: true
-footer: '**<span style="color:#a40000">DRAFT</span>**'
 style: |
   @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
   @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap');
@@ -22,7 +21,7 @@ style: |
   .hljs-attr { color: #e9b96e; }
   .hljs-variable { color: red; font-weight: bold; }
   /* .hljs-comment, .hljs-regexp, .hljs-symbol */
-  .chart { max-width: 50%; margin: 0 auto; }
+  .chart { max-width: 60%; margin: 0 auto; }
 ---
 
 <!--
@@ -42,11 +41,12 @@ TC39 January 2026
 ## Progress update
 
 - Test262 coverage has been greatly expanded, exposing many implementation bugs.
+- We have 2 implementations at ~100% test conformance.
 - Today, we have 2 normative changes to propose to eliminate surprising behaviour in edge cases.
 
 ---
 
-## Test conformance as of January 2026 (TODO to measure again before plenary)
+## Test conformance as of January 2026
 
 <div class="chart">
   <canvas id="conformance-chart"></canvas>
@@ -59,15 +59,15 @@ TC39 January 2026
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'SM': { Temporal: 9853, Monthcode: 2648 },
-    'V8': { Temporal: 9837, Monthcode: 2928 },
-    'Kiesel': { Temporal: 9630, Monthcode: 2514 },
-    'Boa': { Temporal: 9622, Monthcode: 2486 },
-    'Ladybird': { Temporal: 9572, Monthcode: 464 },
-    'GraalJS': { Temporal: 9422, Monthcode: 800 },
-    'JSC': { Temporal: 5834, Monthcode: 80 },
+    'V8': { Temporal: 9882, Monthcode: 2930 },
+    'SM': { Temporal: 9888, Monthcode: 2652 },
+    'Kiesel': { Temporal: 9648, Monthcode: 2514 },
+    'Boa': { Temporal: 9628, Monthcode: 2488 },
+    'GraalJS': { Temporal: 9418, Monthcode: 800 },
+    'Ladybird': { Temporal: 9590, Monthcode: 464 },
+    'JSC': { Temporal: 5828, Monthcode: 80 },
   };
-  const totalTests = { Temporal: 9888, Monthcode: 2984 };
+  const totalTests = { Temporal: 9912, Monthcode: 2986 };
   // test/staging/sm tests have noStrict flag. it's too much hassle to
   // keep track of whether an implementation fails the noStrict tests,
   // so we just count strict mode and default as two separate tests,
@@ -94,13 +94,21 @@ TC39 January 2026
       }, {
         label: 'Intl Era/Month Code',
         data: barData.Monthcode,
-        backgroundColor: pattern.draw('diagonal', '#4e9a06'),
+        backgroundColor: pattern.draw('diagonal', '#204a87'),
       }],
     },
     options: {
       aspectRatio: 1.4,
       label: '% of test262 passing',
       indexAxis: 'y',
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: '% test conformance',
+          },
+        },
+      },
     },
   });
 </script>
