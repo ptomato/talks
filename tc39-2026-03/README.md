@@ -48,7 +48,7 @@ TC39 March 2026
 
 ---
 
-## Two Compatible Implementations Passing Tests
+## Two Implementations Passing Tests
 
 - Test262 covers every feature, and all the edge cases we've encountered
 - We have 2 implementations at ~100% test conformance
@@ -68,15 +68,15 @@ TC39 March 2026
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'V8': { Temporal: 9882, Monthcode: 2930 },
-    'SM': { Temporal: 9888, Monthcode: 2652 },
-    'Kiesel': { Temporal: 9648, Monthcode: 2514 },
-    'Boa': { Temporal: 9628, Monthcode: 2488 },
-    'GraalJS': { Temporal: 9418, Monthcode: 800 },
-    'Ladybird': { Temporal: 9590, Monthcode: 464 },
-    'JSC': { Temporal: 5828, Monthcode: 80 },
+    'SM': { Temporal: 9952, Monthcode: 3054 },
+    'V8': { Temporal: 9932, Monthcode: 3048 },
+    'Kiesel': { Temporal: 9684, Monthcode: 2690 },
+    'Ladybird': { Temporal: 9658, Monthcode: 462 },
+    'Boa': { Temporal: 9618, Monthcode: 2464 },
+    'GraalJS': { Temporal: 9408, Monthcode: 796 },
+    'JSC': { Temporal: 5814, Monthcode: 78 },
   };
-  const totalTests = { Temporal: 9912, Monthcode: 2986 };
+  const totalTests = { Temporal: 9970, Monthcode: 3056 };
   // test/staging/sm tests have noStrict flag. it's too much hassle to
   // keep track of whether an implementation fails the noStrict tests,
   // so we just count strict mode and default as two separate tests,
@@ -125,8 +125,8 @@ TC39 March 2026
 <!--
 npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal --fe Intl.Era-monthcode "test/**/*.js"
 npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Intl.Era-monthcode "test/**/*.js"
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe Intl.Era-monthcode --hostArgs=--harmony-temporal -- "test/**/*.js"
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Intl.Era-monthcode --hostArgs=--harmony-temporal -- "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe Intl.Era-monthcode -- "test/**/*.js"
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Intl.Era-monthcode -- "test/**/*.js"
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --fe Intl.Era-monthcode --hostArgs=--use-test262-global -- "test/**/*.js"
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Intl.Era-monthcode --hostArgs=--use-test262-global -- "test/**/*.js"
 npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --fe Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
@@ -146,21 +146,21 @@ npx test262-harness --hostType=hermes --hostPath=$(which deno) -f Temporal --hos
 ## In-the-field Experience
 
 2 browser-based implementations have been shipping Temporal unflagged for several months.
-- SpiderMonkey: May 2025
-- V8: January 2026
+- **SpiderMonkey**: May 2025
+- **V8**: January 2026
 
-Other non-browser engines shipping unflagged Temporal implementations: Boa, Kiesel, LibJS.
+Non-browser engines shipping unflagged implementations: **Boa**, **Kiesel**, **Ladybird**.
 
-GraalJS has a Temporal implementation, scheduled to be unflagged in 25.1 (no public release date)
+**GraalJS** has an implementation, scheduled to be unflagged in 25.1 (no public release date)
 
 ---
 
 ## In-the-field Experience
 
-Several polyfills exist (figures are ~~size and~~ weekly downloads):
-- https://github.com/fullcalendar/temporal-polyfill (891k)
-- https://github.com/js-temporal/temporal-polyfill (618k)
-- https://github.com/fabon-f/temporal-polyfill-lite (3k)
+Several polyfills exist (figures are gzipped size and weekly downloads):
+- https://github.com/fullcalendar/temporal-polyfill (20kB, 891k)
+- https://github.com/js-temporal/temporal-polyfill (47kB, 618k)
+- https://github.com/fabon-f/temporal-polyfill-lite (19kB, 3k)
 
 ---
 
@@ -226,6 +226,29 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 <!-- _class: lead -->
 
 ## Requesting consensus for Stage 4
+
+---
+
+## Finally, Some Statistics
+
+* Lines of spec text in ECMA-262: **12k**
+* Lines of spec text in ECMA-402: **1.6k**
+* Current and former proposal champions: **9?**
+* Total word count of champions meeting minutes: **212k**
+  * That is, number of average-sized novels: **2** to **3**
+
+---
+
+## Finally, Some Statistics
+
+How many years since [Maggie's kickoff blog post](https://maggiepint.com/2017/04/09/fixing-javascript-date-getting-started/)?
+```js
+Temporal.PlainDate.from('2017-04-09')
+  .until(Temporal.Now.plainDateISO(), { smallestUnit: 'months', largestUnit: 'years' })
+  .toLocaleString()
+```
+
+* ## '8 yrs, 11 mos'
 
 ---
 

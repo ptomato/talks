@@ -33,7 +33,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" class="invert lead" data-marpit-pagination="1" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--class:invert lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h1 id="%E2%8C%9A-temporal-for-stage-4-%F0%9F%8E%89"><img class="emoji" draggable="false" alt="⌚" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/231a.svg" data-marp-twemoji=""/> <strong>Temporal for Stage 4</strong> <img class="emoji" draggable="false" alt="🎉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f389.svg" data-marp-twemoji=""/></h1>
 <p><strong>Philip Chimento</strong><br />
 Igalia, in partnership with Bloomberg<br />
@@ -60,7 +60,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="2" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="stage-4-entrance-criteria">Stage 4 Entrance Criteria</h2>
 <ul>
 <li>Two compatible implementations which pass the Test262 acceptance tests</li>
@@ -89,8 +89,8 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="3" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
-<h2 id="two-compatible-implementations-passing-tests">Two Compatible Implementations Passing Tests</h2>
+;" data-marpit-pagination-total="17">
+<h2 id="two-implementations-passing-tests">Two Implementations Passing Tests</h2>
 <ul>
 <li>Test262 covers every feature, and all the edge cases we've encountered</li>
 <li>We have 2 implementations at ~100% test conformance</li>
@@ -116,7 +116,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="4" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="test-conformance-as-of-march-2026">Test conformance as of March 2026</h2>
 <div class="chart">
   <canvas id="conformance-chart"></canvas>
@@ -127,15 +127,15 @@ marp-pre code, marp-pre { background-color: #042029; }
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'V8': { Temporal: 9882, Monthcode: 2930 },
-    'SM': { Temporal: 9888, Monthcode: 2652 },
-    'Kiesel': { Temporal: 9648, Monthcode: 2514 },
-    'Boa': { Temporal: 9628, Monthcode: 2488 },
-    'GraalJS': { Temporal: 9418, Monthcode: 800 },
-    'Ladybird': { Temporal: 9590, Monthcode: 464 },
-    'JSC': { Temporal: 5828, Monthcode: 80 },
+    'SM': { Temporal: 9952, Monthcode: 3054 },
+    'V8': { Temporal: 9932, Monthcode: 3048 },
+    'Kiesel': { Temporal: 9684, Monthcode: 2690 },
+    'Ladybird': { Temporal: 9658, Monthcode: 462 },
+    'Boa': { Temporal: 9618, Monthcode: 2464 },
+    'GraalJS': { Temporal: 9408, Monthcode: 796 },
+    'JSC': { Temporal: 5814, Monthcode: 78 },
   };
-  const totalTests = { Temporal: 9912, Monthcode: 2986 };
+  const totalTests = { Temporal: 9970, Monthcode: 3056 };
   // test/staging/sm tests have noStrict flag. it's too much hassle to
   // keep track of whether an implementation fails the noStrict tests,
   // so we just count strict mode and default as two separate tests,
@@ -201,15 +201,15 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="5" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="in-the-field-experience">In-the-field Experience</h2>
 <p>2 browser-based implementations have been shipping Temporal unflagged for several months.</p>
 <ul>
-<li>SpiderMonkey: May 2025</li>
-<li>V8: January 2026</li>
+<li><strong>SpiderMonkey</strong>: May 2025</li>
+<li><strong>V8</strong>: January 2026</li>
 </ul>
-<p>Other non-browser engines shipping unflagged Temporal implementations: Boa, Kiesel, LibJS.</p>
-<p>GraalJS has a Temporal implementation, scheduled to be unflagged in 25.1 (no public release date)</p>
+<p>Non-browser engines shipping unflagged implementations: <strong>Boa</strong>, <strong>Kiesel</strong>, <strong>Ladybird</strong>.</p>
+<p><strong>GraalJS</strong> has an implementation, scheduled to be unflagged in 25.1 (no public release date)</p>
 <footer><b>DRAFT</b></footer>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-footer="&lt;b&gt;DRAFT&lt;/b&gt;" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
@@ -231,13 +231,13 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="6" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="in-the-field-experience-1">In-the-field Experience</h2>
-<p>Several polyfills exist (figures are <s>size and</s> weekly downloads):</p>
+<p>Several polyfills exist (figures are gzipped size and weekly downloads):</p>
 <ul>
-<li><a href="https://github.com/fullcalendar/temporal-polyfill">https://github.com/fullcalendar/temporal-polyfill</a> (891k)</li>
-<li><a href="https://github.com/js-temporal/temporal-polyfill">https://github.com/js-temporal/temporal-polyfill</a> (618k)</li>
-<li><a href="https://github.com/fabon-f/temporal-polyfill-lite">https://github.com/fabon-f/temporal-polyfill-lite</a> (3k)</li>
+<li><a href="https://github.com/fullcalendar/temporal-polyfill">https://github.com/fullcalendar/temporal-polyfill</a> (20kB, 891k)</li>
+<li><a href="https://github.com/js-temporal/temporal-polyfill">https://github.com/js-temporal/temporal-polyfill</a> (47kB, 618k)</li>
+<li><a href="https://github.com/fabon-f/temporal-polyfill-lite">https://github.com/fabon-f/temporal-polyfill-lite</a> (19kB, 3k)</li>
 </ul>
 <footer><b>DRAFT</b></footer>
 </section>
@@ -260,7 +260,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="7" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="in-the-field-experience-2">In-the-field Experience</h2>
 <p>Shipping Temporal to the web, and having community-authored polyfills, has led to tangible improvements to the proposal during the 5 years of stage 3.</p>
 <ul>
@@ -290,7 +290,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="8" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="in-the-field-experience-3">In-the-field Experience</h2>
 <p>Shipping Temporal to the web has also enabled automated detection of edge cases and divergences between implementations, by testing each implementation with millions of inputs against snapshots.</p>
 <ul>
@@ -323,7 +323,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="9" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="pull-request-to-the-spec">Pull request to the spec</h2>
 <ul>
 <li>ECMA-262: <a href="https://github.com/tc39/ecma262/pull/3759">https://github.com/tc39/ecma262/pull/3759</a></li>
@@ -354,7 +354,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="10" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="editor-signoff">Editor signoff</h2>
 <ul>
 <li>
@@ -392,7 +392,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="11" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="form-in-which-to-publish-temporal">Form in which to Publish Temporal</h2>
 <ul>
 <li>Stick it in ECMA-262 like any other proposal</li>
@@ -420,7 +420,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="12" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="todo-slides-for-pros-and-cons">TODO: Slides for pros and cons</h2>
 <footer><b>DRAFT</b></footer>
 </section>
@@ -443,7 +443,7 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" class="lead" data-marpit-pagination="13" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--class:lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="questions">Questions?</h2>
 <footer><b>DRAFT</b></footer>
 </section>
@@ -466,11 +466,11 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" class="lead" data-marpit-pagination="14" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--class:lead;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
 <h2 id="requesting-consensus-for-stage-4">Requesting consensus for Stage 4</h2>
 <footer><b>DRAFT</b></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-footer="&lt;b&gt;DRAFT&lt;/b&gt;" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-marpit-fragments="5" data-paginate="true" data-footer="&lt;b&gt;DRAFT&lt;/b&gt;" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
 code { font-family: Hack; }
 section { font-family: Rubik, sans-serif; letter-spacing: 0; }
@@ -489,15 +489,81 @@ marp-pre code, marp-pre { background-color: #042029; }
 /* .hljs-comment, .hljs-regexp, .hljs-symbol */
 .chart { max-width: 60%; margin: 0 auto; }
 " lang="en-CA" data-marpit-pagination="15" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
-;" data-marpit-pagination-total="15">
+;" data-marpit-pagination-total="17">
+<h2 id="finally-some-statistics">Finally, Some Statistics</h2>
+<ul>
+<li data-marpit-fragment="1">Lines of spec text in ECMA-262: <strong>12k</strong></li>
+<li data-marpit-fragment="2">Lines of spec text in ECMA-402: <strong>1.6k</strong></li>
+<li data-marpit-fragment="3">Current and former proposal champions: <strong>9?</strong></li>
+<li data-marpit-fragment="4">Total word count of champions meeting minutes: <strong>212k</strong>
+<ul>
+<li data-marpit-fragment="5">That is, number of average-sized novels: <strong>2</strong> to <strong>3</strong></li>
+</ul>
+</li>
+</ul>
+<footer><b>DRAFT</b></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-marpit-fragments="1" data-paginate="true" data-footer="&lt;b&gt;DRAFT&lt;/b&gt;" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+section.smaller-type li { font-size: 85% }
+marp-pre code, marp-pre { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number, .hljs-literal { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-title.class_ { color: #fce94f; text-decoration: none; font-weight: bold; }
+.hljs-title.function_ { color: #c8a8c4; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+.chart { max-width: 60%; margin: 0 auto; }
+" lang="en-CA" data-marpit-pagination="16" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="17">
+<h2 id="finally-some-statistics-1">Finally, Some Statistics</h2>
+<p>How many years since <a href="https://maggiepint.com/2017/04/09/fixing-javascript-date-getting-started/">Maggie's kickoff blog post</a>?</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-js"><span class="hljs-title class_">Temporal</span>.<span class="hljs-property">PlainDate</span>.<span class="hljs-title function_">from</span>(<span class="hljs-string">&#x27;2017-04-09&#x27;</span>)
+  .<span class="hljs-title function_">until</span>(<span class="hljs-title class_">Temporal</span>.<span class="hljs-property">Now</span>.<span class="hljs-title function_">plainDateISO</span>(), { <span class="hljs-attr">smallestUnit</span>: <span class="hljs-string">&#x27;months&#x27;</span>, <span class="hljs-attr">largestUnit</span>: <span class="hljs-string">&#x27;years&#x27;</span> })
+  .<span class="hljs-title function_">toLocaleString</span>()
+</code></pre>
+<ul>
+<li data-marpit-fragment="1">
+<h2 id="8-yrs-11-mos">'8 yrs, 11 mos'</h2>
+</li>
+</ul>
+<footer><b>DRAFT</b></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-paginate="true" data-footer="&lt;b&gt;DRAFT&lt;/b&gt;" data-theme="gaia" data-style="@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap');
+code { font-family: Hack; }
+section { font-family: Rubik, sans-serif; letter-spacing: 0; }
+section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
+section.smaller-type li { font-size: 85% }
+marp-pre code, marp-pre { background-color: #042029; }
+.hljs-string { color: #8ae234; }
+.hljs-number, .hljs-literal { color: #729fcf; }
+.hljs-params { color: #e9b96e; font-style: italic; }
+.hljs-built_in { color: #fce94f; font-weight: bold; }
+.hljs-title.class_ { color: #fce94f; text-decoration: none; font-weight: bold; }
+.hljs-title.function_ { color: #c8a8c4; }
+.hljs-keyword { color: #fcaf3e; font-weight: bold; }
+.hljs-attr { color: #e9b96e; }
+.hljs-variable { color: red; font-weight: bold; }
+/* .hljs-comment, .hljs-regexp, .hljs-symbol */
+.chart { max-width: 60%; margin: 0 auto; }
+" lang="en-CA" data-marpit-pagination="17" style="--paginate:true;--footer:&lt;b&gt;DRAFT&lt;/b&gt;;--theme:gaia;--style:@import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css')
+;" data-marpit-pagination-total="17">
 <h1 id="proposed-summary-for-notes">Proposed summary for notes</h1>
 <footer><b>DRAFT</b></footer>
 </section>
 <script>!function(){"use strict";const t={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},e="data-marp-auto-scaling-wrapper",i="data-marp-auto-scaling-svg",n="data-marp-auto-scaling-container";class s extends HTMLElement{container;containerSize;containerObserver;svg;svgComputedStyle;svgPreserveAspectRatio="xMinYMid meet";wrapper;wrapperSize;wrapperObserver;constructor(){super();const t=t=>([e])=>{const{width:i,height:n}=e.contentRect;this[t]={width:i,height:n},this.updateSVGRect()};this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(t("containerSize")),this.wrapperObserver=new ResizeObserver((...e)=>{t("wrapperSize")(...e),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){this.shadowRoot.innerHTML=`\n<style>\n  svg[${i}] { display: block; width: 100%; height: auto; vertical-align: top; }\n  span[${n}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }\n</style>\n<div ${e}>\n  <svg part="svg" ${i}>\n    <foreignObject><span ${n}><slot></slot></span></foreignObject>\n  </svg>\n</div>\n    `.split(/\n\s*/).join(""),this.wrapper=this.shadowRoot.querySelector(`div[${e}]`)??void 0;const t=this.svg;this.svg=this.wrapper?.querySelector(`svg[${i}]`)??void 0,this.svg!==t&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=this.svg?.querySelector(`span[${n}]`)??void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:t}=this;t&&(t.style.display="inline",requestAnimationFrame(()=>{t.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(t){const e=()=>{const i=(()=>{const e=t.getPropertyValue("--preserve-aspect-ratio");if(e)return e.trim();return`x${(({textAlign:t,direction:e})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if("start"===t||"end"===t){let i="rtl"===e;return"end"===t&&(i=!i),i?"Max":"Min"}return"Mid"})(t)}YMid meet`})();i!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=i,this.updateSVGRect()),t===this.svgComputedStyle&&requestAnimationFrame(e)};e()}updateSVGRect(){let t=Math.ceil(this.containerSize?.width??0);const e=Math.ceil(this.containerSize?.height??0);void 0!==this.dataset.downscaleOnly&&(t=Math.max(t,this.wrapperSize?.width??0));const i=this.svg?.querySelector(":scope > foreignObject");if(i?.setAttribute("width",`${t}`),i?.setAttribute("height",`${e}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${t} ${e}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=t<=0||e<=0?"0":""),this.container){const t=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=t.startsWith("xmid")||t.startsWith("xmax")?"auto":"0",this.container.style.marginRight=t.startsWith("xmi")?"auto":"0"}}}const r=(t,{attrs:e={},style:i})=>class extends t{constructor(...t){super(...t);for(const[t,i]of Object.entries(e))this.hasAttribute(t)||this.setAttribute(t,i);this._shadow()}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_shadow(){if(!this.shadowRoot)try{this.attachShadow({mode:"open"})}catch(t){if(!(t instanceof Error&&"NotSupportedError"===t.name))throw t}return this.shadowRoot}_update(){const t=this._shadow();if(t){const e=i?`<style>:host { ${i} }</style>`:"";let n="<slot></slot>";const{autoScaling:s}=this.dataset;if(void 0!==s){n=`<marp-auto-scaling exportparts="svg:auto-scaling" ${"downscale-only"===s?"data-downscale-only":""}>${n}</marp-auto-scaling>`}t.innerHTML=e+n}}};let o;const a=Symbol(),l=()=>o??(o=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is"),o);let c;const d="marpitSVGPolyfill:setZoomFactor,",h=Symbol(),g=Symbol();const p=()=>{const t="Apple Computer, Inc."===navigator.vendor,e=t?[v]:[],i={then:e=>(t?(async()=>{if(void 0===c){const t=document.createElement("canvas");t.width=10,t.height=10;const e=t.getContext("2d"),i=new Image(10,10),n=new Promise(t=>{i.addEventListener("load",()=>t())});i.crossOrigin="anonymous",i.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await n,e.drawImage(i,0,0),c=e.getImageData(5,5,1,1).data[3]<128}return c})().then(t=>{null==e||e(t?[v]:[])}):null==e||e([]),i)};return Object.assign(e,i)};let m,u;function v(t){const e="object"==typeof t&&t.target||document,i="object"==typeof t?t.zoom:t;window[g]||(Object.defineProperty(window,g,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:t,origin:e})=>{if(e===window.origin)try{if(t&&"string"==typeof t&&t.startsWith(d)){const[,e]=t.split(","),i=Number.parseFloat(e);Number.isNaN(i)||(u=i)}}catch(t){console.error(t)}}));let n=!1;Array.from(e.querySelectorAll("svg[data-marpit-svg]"),t=>{var e,s,r,o;t.style.transform||(t.style.transform="translateZ(0)");const a=i||u||t.currentScale||1;m!==a&&(m=a,n=a);const l=t.getBoundingClientRect(),{length:c}=t.children;for(let i=0;i<c;i+=1){const n=t.children[i];if(n.getScreenCTM){const t=n.getScreenCTM();if(t){const i=null!==(s=null===(e=n.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==s?s:0,c=null!==(o=null===(r=n.y)||void 0===r?void 0:r.baseVal.value)&&void 0!==o?o:0,d=n.children.length;for(let e=0;e<d;e+=1){const s=n.children[e];if("SECTION"===s.tagName){const{style:e}=s;e.transformOrigin||(e.transformOrigin=`${-i}px ${-c}px`),e.transform=`scale(${a}) matrix(${t.a}, ${t.b}, ${t.c}, ${t.d}, ${t.e-l.left}, ${t.f-l.top}) translateZ(0.0001px)`;break}}}}}}),!1!==n&&Array.from(e.querySelectorAll("iframe"),({contentWindow:t})=>{null==t||t.postMessage(`${d}${n}`,"null"===window.origin?"*":window.origin)})}function w({once:t=!1,target:e=document}={}){const i=function(t=document){if(t[h])return t[h];let e=!0;const i=()=>{e=!1,delete t[h]};Object.defineProperty(t,h,{configurable:!0,value:i});let n=[],s=!1;(async()=>{try{n=await p()}finally{s=!0}})();const r=()=>{for(const e of n)e({target:t});s&&0===n.length||e&&window.requestAnimationFrame(r)};return r(),i}(e);return t?(i(),()=>{}):i}m=1,u=void 0;const b=Symbol(),y=(e=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const i=window[a];i||customElements.define("marp-auto-scaling",s);for(const n of Object.keys(t)){const s=`marp-${n}`,o=t[n].proto();l()&&o!==HTMLElement?i||customElements.define(s,r(o,{style:t[n].style}),{extends:n}):(i||customElements.define(s,r(HTMLElement,t[n])),e.querySelectorAll(`${n}[is="${s}"]`).forEach(t=>{t.outerHTML=t.outerHTML.replace(new RegExp(`^<${n}`,"i"),`<${s}`).replace(new RegExp(`</${n}>$`,"i"),`</${s}>`)}))}window[a]=!0})(e),e[b])return e[b];const i=w({target:e}),n=()=>{i(),delete e[b]},o=Object.assign(n,{cleanup:n,update:()=>y(e)});return Object.defineProperty(e,b,{configurable:!0,value:o}),o},f=document.currentScript;y(f?f.getRootNode():document)}();
 </script></foreignObject></svg></div><div class="bespoke-marp-note" data-index="3" tabindex="0"><p>npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal --fe Intl.Era-monthcode &quot;test/**/*.js&quot;
 npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Intl.Era-monthcode &quot;test/**/*.js&quot;
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe Intl.Era-monthcode --hostArgs=--harmony-temporal -- &quot;test/**/*.js&quot;
-npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Intl.Era-monthcode --hostArgs=--harmony-temporal -- &quot;test/**/*.js&quot;
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe Intl.Era-monthcode -- &quot;test/**/*.js&quot;
+npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Intl.Era-monthcode -- &quot;test/**/*.js&quot;
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --fe Intl.Era-monthcode --hostArgs=--use-test262-global -- &quot;test/**/*.js&quot;
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Intl.Era-monthcode --hostArgs=--use-test262-global -- &quot;test/**/*.js&quot;
 npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --fe Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- &quot;test/**/*.js&quot;
