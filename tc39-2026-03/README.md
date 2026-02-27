@@ -186,6 +186,17 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 
 ---
 
+## Aside: Web Platform Integration
+
+- Structured Clone support: https://github.com/whatwg/html/pull/6284
+- Other integration ideas: https://github.com/tc39/proposal-temporal/issues/3075
+- WHATWG process requires user stories and implementor interest
+- We are not considering this a requirement for stage 4
+
+**If you want to see this move forward, please express your interest and give use cases on the WHATWG issues!**
+
+---
+
 ## Pull request to the spec
 
 - ECMA-262: https://github.com/tc39/ecma262/pull/3759
