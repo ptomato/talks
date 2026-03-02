@@ -216,7 +216,7 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 
 ---
 
-## Form in which to Publish Temporal
+## Form in which to publish Temporal
 
 - Stick it in ECMA-262 like any other proposal
 - Give it a separate page in ECMA-262 (would be ECMA-262-2)
@@ -224,7 +224,36 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 
 ---
 
-## TODO: Slides for pros and cons
+### Separate standard, TG, editor group
+
+- arguments in favour of combining
+  - discoverability by practitioners
+  - 1-time cost of establishing a new Ecma standard
+- arguments in favour of separating
+  - doesn't require 262 editor group to maintain expertise
+  - having a dedicated TG ensures we maintain experts
+  - like with Intl, most of TG1 doesn't care to discuss Temporal details
+  - mostly different sets of readers
+  - other specs may want to reference just Temporal bits
+
+---
+
+## Separate documents / git repository
+
+- arguments in favour of combining
+  - easier to maintain editorial consistency
+  - no obvious place to put shared "infra" AOs
+  - shared AOs will prompt normative consistency considerations
+  - reduced overhead: 1 CI system, 1 dependency list, etc.
+- arguments in favour of separating
+  - reduced single-page load time
+
+---
+
+## ECMA-262 editor group preference
+
+- strong preference for separate standard and maintainers' groups
+- above implies having separate documents, even though that argument is not as strong on its own
 
 ---
 
