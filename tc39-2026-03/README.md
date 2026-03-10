@@ -22,7 +22,6 @@ style: |
   .hljs-variable { color: red; font-weight: bold; }
   /* .hljs-comment, .hljs-regexp, .hljs-symbol */
   .chart { max-width: 60%; margin: 0 auto; }
-footer: <b>DRAFT</b>
 ---
 
 <!--
@@ -36,6 +35,12 @@ Igalia, in partnership with Bloomberg
 TC39 March 2026
 
 ![w:200](igalia.svg)
+
+---
+
+## Just in time for Stage 4...
+
+![bg left](cbc-bc-dst.png)
 
 ---
 
@@ -71,7 +76,7 @@ TC39 March 2026
     'SM': { Temporal: 9952, Monthcode: 3054 },
     'V8': { Temporal: 9932, Monthcode: 3048 },
     'Kiesel': { Temporal: 9684, Monthcode: 2690 },
-    'Ladybird': { Temporal: 9658, Monthcode: 462 },
+    ' Ladybird': { Temporal: 9658, Monthcode: 462 },
     'Boa': { Temporal: 9618, Monthcode: 2464 },
     'GraalJS': { Temporal: 9408, Monthcode: 796 },
     'JSC': { Temporal: 5814, Monthcode: 78 },
@@ -178,7 +183,7 @@ Shipping Temporal to the web, and having community-authored polyfills, has led t
 ## In-the-field Experience
 
 Shipping Temporal to the web has also enabled automated detection of edge cases and divergences between implementations, by testing each implementation with millions of inputs against snapshots.
-- This has led to filing 16+ bug reports in implementations
+- This has led to filing 19+ bug reports in implementations
   - (and also fixing some of them)
 - Identified many cases for more targeted test262 coverage
 
@@ -216,11 +221,24 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 
 ---
 
-## Form in which to publish Temporal
+## Future development
+
+- How should the spec text get integrated into the current 262 spec?
+- How should Temporal API & spec text evolve in the future?
+
+---
+
+## How should the spec text get integrated?
 
 - Stick it in ECMA-262 like any other proposal
 - Give it a separate page in ECMA-262 (would be ECMA-262-2)
 - Make a separate standard (would be "ECMA-430-ish")
+
+---
+
+<!-- _class: lead -->
+
+# ECMA-262 Editors' Slides
 
 ---
 
@@ -232,7 +250,7 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 - arguments in favour of separating
   - doesn't require 262 editor group to maintain expertise
   - having a dedicated TG ensures we maintain experts
-  - like with Intl, most of TG1 doesn't care to discuss Temporal details
+  - as with Intl, most of TG1 doesn't care to discuss Temporal details
   - mostly different sets of readers
   - other specs may want to reference just Temporal bits
 
@@ -273,7 +291,8 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 
 * Lines of spec text in ECMA-262: **12k**
 * Lines of spec text in ECMA-402: **1.6k**
-* Current and former proposal champions: **9?**
+* Number of merged pull requests: **1.8k**
+* Number of champions meetings: **almost 200**
 * Total word count of champions meeting minutes: **212k**
   * That is, number of average-sized novels: **2** to **3**
 
