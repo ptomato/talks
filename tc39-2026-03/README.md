@@ -9,7 +9,7 @@ style: |
   code { font-family: Hack; }
   section { font-family: Rubik, sans-serif; letter-spacing: 0; }
   section.lead.invert { text-shadow: 0 0 10px black, 0 0 20px black; }
-  section.smaller-type li { font-size: 85% }
+  .smaller-type li { font-size: 90% }
   marp-pre code, marp-pre { background-color: #042029; }
   .hljs-string { color: #8ae234; }
   .hljs-number, .hljs-literal { color: #729fcf; }
@@ -73,15 +73,15 @@ TC39 March 2026
   const ctx = document.getElementById('conformance-chart');
 
   const results = {
-    'SM': { Temporal: 9952, Monthcode: 3054 },
-    'V8': { Temporal: 9932, Monthcode: 3048 },
-    'Kiesel': { Temporal: 9684, Monthcode: 2690 },
-    ' Ladybird': { Temporal: 9658, Monthcode: 462 },
-    'Boa': { Temporal: 9618, Monthcode: 2464 },
-    'GraalJS': { Temporal: 9408, Monthcode: 796 },
-    'JSC': { Temporal: 5814, Monthcode: 78 },
+    ' Ladybird': { Temporal: 10238, Monthcode: 3062 },
+    'SM': { Temporal: 10210, Monthcode: 3078 },
+    'V8': { Temporal: 10128, Monthcode: 3078 },
+    'GraalJS': { Temporal: 10024, Monthcode: 2173 },
+    'Kiesel': { Temporal: 9876, Monthcode: 2712 },
+    'Boa': { Temporal: 9852, Monthcode: 2688 },
+    'JSC': { Temporal: 5942, Monthcode: 82 },
   };
-  const totalTests = { Temporal: 9970, Monthcode: 3056 };
+  const totalTests = { Temporal: 10248, Monthcode: 3086 };
   // test/staging/sm tests have noStrict flag. it's too much hassle to
   // keep track of whether an implementation fails the noStrict tests,
   // so we just count strict mode and default as two separate tests,
@@ -128,14 +128,19 @@ TC39 March 2026
 </script>
 
 <!--
+Firefox nonconformances: two bugs around extreme dates. one around toLocaleString dateStyle formatting in Temporal. In Intl Era, CLDR bug around islamic calendar era names, and bug around East Asian lunisolar reference years
+Chrome nonconformances: one bug on rounding, one around extreme dates, one on parsing allowing >9 decimal places. a couple around toLocaleString formatting in Temporal. on Intl Era, same CLDR bug, and islamic fallback not handled properly
+-->
+
+<!--
 npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Temporal --fe Intl.Era-monthcode "test/**/*.js"
 npx test262-harness --hostType=sm --hostPath=$HOME/.esvu/bin/sm -f Intl.Era-monthcode "test/**/*.js"
 npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Temporal --fe Intl.Era-monthcode -- "test/**/*.js"
 npx test262-harness --hostType=v8 --hostPath=$HOME/.esvu/bin/v8 -f Intl.Era-monthcode -- "test/**/*.js"
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Temporal --fe Intl.Era-monthcode --hostArgs=--use-test262-global -- "test/**/*.js"
 npx test262-harness --hostType=libjs --hostPath=$HOME/.esvu/bin/ladybird-js -f Intl.Era-monthcode --hostArgs=--use-test262-global -- "test/**/*.js"
-npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Temporal --fe Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
-npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs -f Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
+npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs-nightly -f Temporal --fe Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
+npx test262-harness --hostType=graaljs --hostPath=$HOME/.esvu/bin/graaljs-nightly -f Intl.Era-monthcode --hostArgs='--experimental-options --js.temporal' -- "test/**/*.js"
 npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Temporal --fe Intl.Era-monthcode --hostArgs=--useTemporal=1 -- "test/**/*.js"
 npx test262-harness --hostType=jsc --hostPath=$HOME/.esvu/bin/jsc -f Intl.Era-monthcode --hostArgs=--useTemporal=1 -- "test/**/*.js"
 npx test262-harness --hostType=boa --hostPath=$HOME/.esvu/bin/boa-nightly -f Temporal --fe Intl.Era-monthcode -- "test/**/*.js"  # requires https://github.com/tc39/eshost/pull/147 and https://github.com/devsnek/esvu/pull/66
@@ -221,10 +226,33 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 
 ---
 
-## Future development
+## What's next?
 
-- How should the spec text get integrated into the current 262 spec?
 - How should Temporal API & spec text evolve in the future?
+- How should the spec text get integrated into the current 262 spec?
+
+---
+
+## How should Temporal evolve in the future?
+
+- 5 years of collecting ideas in ["Temporal V2"](https://github.com/js-temporal/proposal-temporal-v2) repo
+  - 36 ideas, almost all incremental and narrowly scoped
+  - Not huge like Temporal
+- Existing champions not eager to run a new TG, but we're happy to:
+  - Review/support any follow-up proposals
+  - Support fixes to issues found with existing Temporal
+
+<!--
+e.g., `epochMicroseconds` and `Array.sumPrecise` are not fundamentally different
+
+An analogy could be the relatively recent decision to have a separate TG for Source Maps, which made sense because:
+
+	* There was a whole new domain that needed better specification
+	* There was needed coordination with many tools vendors who don't normally participate on TG1
+	* There were fundamental questions about scope
+
+The same could have been said about Temporal in 2018, but not anymore. There's no major blank space in the date/time domain remaining that's not covered with APIs. We did string serialization. We did time zones. We did calendars. We did arithmetic. We did a tree of interrelated types. There's no needed external specifications required now that RFC 9557 is ratified. And so on. We had a big job to do, we did it, and now it's time to handle off incremental work to well-established TG1/TG2 committees with well-established processes for handling incremental language changes.
+-->
 
 ---
 
@@ -279,11 +307,19 @@ Shipping Temporal to the web has also enabled automated detection of edge cases 
 
 ## Questions?
 
+Let's discuss topics related to the substance of the proposal before any publishing topics
+
 ---
 
 <!-- _class: lead -->
 
 ## Requesting consensus for Stage 4
+
+---
+
+<!-- _class: lead -->
+
+## Requesting consensus on ___
 
 ---
 
