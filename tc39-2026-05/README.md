@@ -20,8 +20,6 @@ style: |
   .hljs-keyword { color: #fcaf3e; font-weight: bold; }
   .hljs-attr { color: #e9b96e; }
   .hljs-variable { color: red; font-weight: bold; }
-  /* .hljs-comment, .hljs-regexp, .hljs-symbol */
-  .chart { max-width: 60%; margin: 0 auto; }
 ---
 
 <!--
@@ -77,6 +75,18 @@ All three of these concern weird, rare edge cases in the time zone database.
 We are investigating these issues, and the fixes may need to be normative changes. If that's the case, we'll add the fixes to the agenda when we have them.
 
 If that is after the agenda deadline and there wasn't enough time for delegates to review, we'll re-propose the fix in the following plenary.
+
+---
+
+## Proposed fix for issue [#3312](https://github.com/tc39/proposal-temporal/issues/3312)
+
+(in [Temporal.ZonedDateTime.prototype.round](https://github.com/tc39/ecma262/pull/3759/changes#diff-b8366cd022bbec4ef320cc231afb079be7c3a6f58dea21997292583187680e94R618))
+
+![Set thisNs to min(thisNs, endNs - 1).](fix3312.png)
+
+---
+
+![Diagram of UTC shift](casey.png)
 
 ---
 
