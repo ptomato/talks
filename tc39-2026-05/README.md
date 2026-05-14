@@ -70,9 +70,15 @@ All three of these concern weird, rare edge cases in the time zone database.
 
 ---
 
+## Subsequent issue found
+
+While investigating the assertion failures we found a further edge case that shows up in duration rounding with non-default rounding modes, while rounding and balancing: [#3316](https://github.com/tc39/proposal-temporal/issues/3316)
+
+---
+
 ## Resolution plan
 
-We are investigating these issues, and the fixes may need to be normative changes. If that's the case, we'll add the fixes to the agenda when we have them.
+We are investigating these issues, and the fixes may need to be needs-consensus PRs. If that's the case, we'll add the fixes to the agenda when we have them.
 
 If that is after the agenda deadline and there wasn't enough time for delegates to review, we'll re-propose the fix in the following plenary.
 
@@ -90,7 +96,16 @@ If that is after the agenda deadline and there wasn't enough time for delegates 
 
 ---
 
+## Proposed fix for issue [#3316](https://github.com/tc39/proposal-temporal/issues/3316)
+
+(in [ComputeNudgeWindow](https://github.com/tc39/ecma262/pull/3759/changes#diff-46da5350aa773fc90f84b2843468b534a32866793a1e346dca2b4d1f29c24a01R1170))
+
+![If DateDurationSign(startDateDuration) = 0](fix3316.png)
+
+---
+
 # Proposed summary for notes
 
 - Temporal is at Stage 4. Spec integration PRs are open in [ECMA-262](https://github.com/tc39/ecma262/pull/3759) and [ECMA-402](https://github.com/tc39/ecma402/pull/1044), awaiting editor review.
-- Three assertion failures found via Firefox fuzzing ([#3310](https://github.com/tc39/proposal-temporal/issues/3310), [#3311](https://github.com/tc39/proposal-temporal/issues/3311), [#3312](https://github.com/tc39/proposal-temporal/issues/3312)) concern rare time zone edge cases. Fixes are under investigation and may require normative changes.
+- Three assertion failures found via Firefox fuzzing ([#3310](https://github.com/tc39/proposal-temporal/issues/3310), [#3311](https://github.com/tc39/proposal-temporal/issues/3311), [#3312](https://github.com/tc39/proposal-temporal/issues/3312)) concern rare time zone edge cases. Fixes are under investigation and may require needs-consensus PRs.
+- A further edge case ([#3316](https://github.com/tc39/proposal-temporal/issues/3316)) was found in duration rounding with non-default rounding modes; a fix is proposed.
